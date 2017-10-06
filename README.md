@@ -1,1 +1,1 @@
-# InstantDine
+# InstaDine
