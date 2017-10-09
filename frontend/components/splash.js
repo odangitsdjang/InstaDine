@@ -1,15 +1,25 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 // create a component
 export default class Splash extends Component {
-  render() {
-    // const {navigate} = this.props.navigation;
+  constructor(props) {
+    super(props);
+    this.loginBtn = this.loginBtn.bind(this);
+  }
 
+  loginBtn() {
+    this.props.navigation.dispatch({ type: 'Login' });
+  }
+
+  render() {
     return (
       <View style={styles.container}>
-        <Text>Splash</Text>
+        <Text>Welcome to InstaDine</Text>
+        <Button 
+          onPress={this.loginBtn}
+          title='Log In'/>
       </View>
     );
   }
