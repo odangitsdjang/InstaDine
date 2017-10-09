@@ -9,7 +9,8 @@ class Splash extends Component {
   };
 
   render() {
-    const { navigate }
+    const {navigate} = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <Text>Splash</Text>

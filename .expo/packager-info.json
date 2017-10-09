@@ -1,8 +1,16 @@
 {
   "expoServerPort": 19000,
+<<<<<<< HEAD
   "packagerPort": 19001,
   "packagerPid": 28332,
   "expoServerNgrokUrl": "https://zi-i8e.addriv.flex.exp.direct",
   "packagerNgrokUrl": "https://packager.zi-i8e.addriv.flex.exp.direct",
   "ngrokPid": 28344
+=======
+  "packagerPort": 19002,
+  "packagerPid": 20439,
+  "expoServerNgrokUrl": "https://zi-i8e.odangitsdjang.flexproject.exp.direct",
+  "packagerNgrokUrl": "https://packager.zi-i8e.odangitsdjang.flexproject.exp.direct",
+  "ngrokPid": 20416
+>>>>>>> d775c57045b44b0d6bd41c591bdfd6489ef6f894
 }
