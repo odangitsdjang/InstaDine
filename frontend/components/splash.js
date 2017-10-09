@@ -5,7 +5,7 @@ import { View, Text, StyleSheet } from 'react-native';
 // create a component
 export default class Splash extends Component {
   render() {
-    const {navigate} = this.props.navigation;
+    // const {navigate} = this.props.navigation;
 
     return (
       <View style={styles.container}>
@@ -24,6 +24,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#2c3e50',
   },
 });
-
-//make this component available to the app
-export default Splash;

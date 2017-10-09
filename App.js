@@ -1,23 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
-import Main from './frontend/main';
+// import Main from './frontend/main';
 import { configureStore } from './frontend/store/store';
-import { StackNavigator } from 'react-navigation';
+import AppWithNavigationState from './frontend/navigators/AppNavigator';
+import { AppRegistry } from 'react-native';
 
-class Main extends React.Component {
+class Root extends React.Component {
   render() {
     return (
       <Provider store={configureStore()}>
-        <Main/>
+        <AppWithNavigationState />
       </Provider>
     );
   }
 }
-
-const Navigation = StackNavigator({
-  Splash: { screen: Main }
-});
 
 const styles = StyleSheet.create({
   container: {
@@ -27,3 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+AppRegistry.registerComponent('InstaDine', () => Root);
+
+export default Root;
