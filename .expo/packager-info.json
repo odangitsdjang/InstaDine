@@ -1,8 +1,8 @@
 {
-  "expoServerPort": null,
+  "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://eu-mya.addriv.flex.exp.direct",
   "packagerNgrokUrl": "https://packager.eu-mya.addriv.flex.exp.direct",
-  "ngrokPid": 32356,
-  "packagerPort": null,
-  "packagerPid": null
+  "ngrokPid": 33606,
+  "packagerPort": 19002,
+  "packagerPid": 33594
 }

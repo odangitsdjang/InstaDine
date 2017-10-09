@@ -1,11 +1,18 @@
-const _initialState = {
-  index: 0
-};
+import { AppNavigator } from '../navigators/AppNavigator';
+import { NavigationActions } from 'react-navigation';
 
-const navReducer = (state = _initialState, action) => {
+// Start with two routes
+const firstAction = AppNavigator.router.getActionForPathAndParams('Login');
+const tempNavState = AppNavigator.router.getStateForAction(firstAction);
+const secondAction = AppNavigator.router.getActionForPathAndParams('Splash');
+const initialNavState = (secondAction, tempNavState);
+
+const navReducer = (state = initialNavState, action) => {
   Object.freeze(state);
   switch (action.type) {
     default: 
-      return state;
+      return AppNavigator.router.getStateForAction(action, state);
   }
 };
+
+export default navReducer;

@@ -4,10 +4,22 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import Splash from '../components/Splash';
+import Login from '../components/Login';
 
-const AppNavigator = StackNavigator({
-  Splash: { screen: Splash }
-});
+const routeConfig = {
+  Splash: { screen: Splash },
+  Login: { screen: Login }
+};
+
+const stackNavigatorConfig = {
+  headerMode: 'none',
+  initialRouteName: 'Splash'
+};
+
+export const AppNavigator = StackNavigator(
+  routeConfig,
+  stackNavigatorConfig
+);
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
