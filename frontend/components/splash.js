@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 // create a component
-class Splash extends Component {
-  static navigationOptions = {
-    title: 'InstaDine'
-  };
-
+export default class Splash extends Component {
   render() {
     const {navigate} = this.props.navigation;
 

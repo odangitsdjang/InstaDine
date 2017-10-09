@@ -9,7 +9,6 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 
 const mapStateToProps = (state) => ({
   todos: state.todos
