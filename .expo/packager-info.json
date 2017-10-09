@@ -1,8 +1,8 @@
 {
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 55071,
-  "expoServerNgrokUrl": "https://zi-i8e.jerryzlau.instadine.exp.direct",
-  "packagerNgrokUrl": "https://packager.zi-i8e.jerryzlau.instadine.exp.direct",
-  "ngrokPid": 55083
+  "packagerPort": 19002,
+  "packagerPid": 20439,
+  "expoServerNgrokUrl": "https://zi-i8e.odangitsdjang.flexproject.exp.direct",
+  "packagerNgrokUrl": "https://packager.zi-i8e.odangitsdjang.flexproject.exp.direct",
+  "ngrokPid": 20416
 }
