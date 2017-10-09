@@ -1,8 +1,8 @@
 {
   "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://eu-mya.addriv.flex.exp.direct",
+  "packagerNgrokUrl": "https://packager.eu-mya.addriv.flex.exp.direct",
+  "ngrokPid": 33606,
   "packagerPort": 19002,
-  "packagerPid": 20439,
-  "expoServerNgrokUrl": "https://zi-i8e.odangitsdjang.flexproject.exp.direct",
-  "packagerNgrokUrl": "https://packager.zi-i8e.odangitsdjang.flexproject.exp.direct",
-  "ngrokPid": 20416
+  "packagerPid": 33594
 }

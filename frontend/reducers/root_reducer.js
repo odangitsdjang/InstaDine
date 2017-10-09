@@ -1,10 +1,9 @@
-const rootReducer = (state = {}, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
+import { combineReducers } from 'redux';
+import navReducer from './nav_reducer';
 
-};
+const rootReducer = combineReducers({
+  nav: navReducer
+});
 
 export default rootReducer;
 
