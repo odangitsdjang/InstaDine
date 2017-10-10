@@ -14,7 +14,7 @@ const routeConfig = {
 };
 
 const stackNavigatorConfig = {
-  // headerMode: 'none',
+  navigationOptions: { tabBarVisible: false },
   initialRouteName: 'Splash'
 };
 
@@ -23,20 +23,9 @@ export const AppNavigator = TabNavigator(
   stackNavigatorConfig
 );
 
-// const AppWithNavigationState = ({ dispatch, nav }) => (
-//   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
-// );
-
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
 );
-
-
-// COMMENTED THIS OUT BECAUSE OF REDUX-THUNK
-// AppWithNavigationState.PropTypes = {
-//   dispatch: PropTypes.func.isRequired,
-//   nav: PropTypes.object.isRequired
-// };
 
 const mapStateToProps = state => ({
   nav: state.nav
