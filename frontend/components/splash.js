@@ -8,6 +8,7 @@ class Splash extends Component {
     super(props);
     this.redirectLogin = this.redirectLogin.bind(this);
     this.redirectSignup = this.redirectSignup.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   redirectLogin() {
@@ -18,16 +19,29 @@ class Splash extends Component {
     this.props.navigation.dispatch({ type: 'Signup' });
   }
 
+  handleDemo() {
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Welcome to InstaDine</Text>
+        <Text style={styles.title}>InstaDine</Text>
+        <View style={styles.authButtons}>
         <Button 
           onPress={this.redirectLogin}
-          title='Log In'/>
+          title='Log In'
+          style={styles.button}/>
         <Button
           onPress={this.redirectSignup}
-          title='Sign Up'/>
+          title='Sign Up'
+          style={styles.button}/>
+        </View>
+
+        <Button
+          onPress={this.handleDemo}
+          title='Demo'
+          style={styles.button}/>
       </View>
     );
   }
@@ -37,10 +51,25 @@ class Splash extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center', 
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    backgroundColor: 'white',
   },
+  title: {
+    fontSize: 24,
+    flex: 1
+  },
+  authButtons: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  button: {
+    flex: 1,
+    padding: 10,
+    fontSize: 12
+  }
 });
 
 export default Splash;

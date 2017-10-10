@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.backBtn = this.backBtn.bind(this);
+    this.redirectBack = this.redirectBack.bind(this);
   }
 
   redirectBack() {

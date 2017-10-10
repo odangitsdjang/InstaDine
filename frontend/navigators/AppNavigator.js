@@ -10,7 +10,7 @@ import Signup from '../components/Auth/Signup';
 const routeConfig = {
   Splash: { screen: Splash },
   Login: { screen: Login },
-  Signup: { scree: Signup }
+  Signup: { screen: Signup }
 };
 
 const stackNavigatorConfig = {

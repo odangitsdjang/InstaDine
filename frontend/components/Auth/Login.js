@@ -1,12 +1,12 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 // create a component
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.backBtn = this.backBtn.bind(this);
+    this.redirectBack = this.redirectBack.bind(this);
   }
 
   redirectBack() {
