@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 
@@ -15,14 +14,14 @@ const routeConfig = {
   HomePage: { screen: HomePage }
 };
 
-const stackNavigatorConfig = {
-  navigationOptions: { tabBarVisible: false },
+const appNavigatorConfig = {
+  navigationOptions: { tabBarVisible: true },
   initialRouteName: 'Splash'
 };
 
 export const AppNavigator = TabNavigator(
   routeConfig,
-  stackNavigatorConfig
+  appNavigatorConfig
 );
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
@@ -30,7 +29,7 @@ const AppWithNavigationState = ({ dispatch, nav }) => (
 );
 
 const mapStateToProps = state => ({
-  nav: state.nav
+  nav: state.nav.app
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);

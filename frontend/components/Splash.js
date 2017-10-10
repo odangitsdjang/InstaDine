@@ -43,13 +43,17 @@ class Splash extends Component {
             onPress={this.redirectLogin}
             style={styles.button}
             raised={true}>
-            <Text>Login</Text>
+            <View>
+              <Text style={styles.text}>Login</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={this.redirectLogin}
+            onPress={this.redirectSignup}
             style={styles.button}
             raised={true}>
-            <Text>Login</Text>
+            <View>
+              <Text style={styles.text}>Signup</Text>
+            </View>
           </TouchableOpacity>
         </View>
 
@@ -81,7 +85,15 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#2c3e50'
+  },
+  text: {
+    color: 'white'
   }
 });
 
