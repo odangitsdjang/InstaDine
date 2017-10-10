@@ -1,12 +1,32 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button,
+         TextInput } from 'react-native';
 
 // create a component
 class Signup extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      email: "",
+      password: "",
+      phoneNumber: "",
+      username: ""
+    };
+
     this.redirectBack = this.redirectBack.bind(this);
+    this.update = this.update.bind(this);
+    this.onSignUp = this.onSignUp.bind(this);
+  }
+
+  update(field) {
+    return e => this.setState({
+      [field]: e.nativeEvent.text
+    });
+  }
+
+  onSignUp() {
+    console.log("this is sign up");
   }
 
   redirectBack() {
@@ -14,9 +34,49 @@ class Signup extends Component {
   }
 
   render() {
+    let {email, password, phoneNumber, username} = this.state;
     return (
       <View style={styles.container}>
-        <Text>This is the Signup page</Text>
+        <Text style={styles.fieldTitle}>Email:</Text>
+        <View style={styles.field}>
+          <TextInput 
+            onChange={this.update('email')}
+            style={styles.textInput}
+            value={email}
+            placeholder="Email"/>
+        </View>
+
+        <Text style={styles.fieldTitle}>Username:</Text>
+        <View style={styles.field}>
+          <TextInput
+            onChange={this.update('username')}
+            style={styles.textInput}
+            value={username}
+            placeholder="Username" />
+        </View>
+
+        <Text style={styles.fieldTitle}>Password:</Text>
+        <View style={styles.field}>
+          <TextInput 
+            onChange={this.update('password')}
+            style={styles.textInput}
+            value={password}
+            secureTextEntry={true}
+            placeholder="Password"/>
+        </View>
+
+        <Text style={styles.fieldTitle}>Phone Number:</Text>
+        <View style={styles.field}>
+          <TextInput
+            onChange={this.update('phoneNumber')}
+            style={styles.textInput}
+            value={phoneNumber}
+            placeholder="Phone Number" />
+        </View>
+
+        <Button
+          onPress={this.onSignUp}
+          title='Sign Up' />
         <Button
           onPress={this.redirectBack}
           title='Back' />
@@ -31,8 +91,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    backgroundColor: '#2c3e50'
   },
+  field: {
+    borderRadius: 5,
+    padding: 5,
+    paddingLeft: 8,
+    margin: 7,
+    width: 200,
+    marginTop: 0,
+    backgroundColor: 'white'
+  },
+  textInput: {
+    height: 26
+  },
+  fieldTitle: {
+    padding: 6,
+    fontSize: 20,
+    color: 'white'
+  }
 });
 
 //make this component available to the app
