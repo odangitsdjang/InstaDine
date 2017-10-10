@@ -8,7 +8,7 @@ const initialState = AppNavigator.router.getStateForAction(
 const navReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case 'NAVIGATION/Back':
+    case 'NAVIGATION/BACK':
       return AppNavigator.router.getStateForAction(
         NavigationActions.back(),
         state

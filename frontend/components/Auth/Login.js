@@ -7,12 +7,17 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.redirectBack = this.redirectBack.bind(this);
+    this.redirectHomePage = this.redirectHomePage.bind(this);
   }
 
   redirectBack() {
     this.props.navigation.dispatch({ type: 'NAVIGATION/BACK' });
   }
-  
+
+  redirectHomePage() {
+    this.props.navigation.dispatch({ type: 'HomePage' });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -20,6 +25,9 @@ class Login extends Component {
         <Button
           onPress={this.redirectBack}
           title='Back' />
+        <Button
+          onPress={this.redirectHomePage}
+          title='Home' />
       </View>
     );
   }
