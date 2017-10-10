@@ -11,7 +11,15 @@ const navReducer = (state = initialNavState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case 'Back':
-      return ;
+      return AppNavigator.router.getStateForAction(
+        NavigationActions.back(),
+        state
+      );
+    case 'Signup':
+      return AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'Signup' }),
+        state
+      );
     case 'Login':
       return AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'Login' }),

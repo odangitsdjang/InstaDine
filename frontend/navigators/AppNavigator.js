@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import Splash from '../components/Splash';
-import Login from '../components/Login';
+import Login from '../components/Auth/Login';
+import Signup from '../components/Auth/Signup';
 
 const routeConfig = {
   Splash: { screen: Splash },
-  Login: { screen: Login }
+  Login: { screen: Login },
+  Signup: { scree: Signup }
 };
 
 const stackNavigatorConfig = {
@@ -25,10 +27,12 @@ const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
 );
 
-AppWithNavigationState.PropTypes = {
-  dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.object.isRequired
-};
+
+// COMMENTED THIS OUT BECAUSE OF REDUX-THUNK
+// AppWithNavigationState.PropTypes = {
+//   dispatch: PropTypes.func.isRequired,
+//   nav: PropTypes.object.isRequired
+// };
 
 const mapStateToProps = state => ({
   nav: state.nav

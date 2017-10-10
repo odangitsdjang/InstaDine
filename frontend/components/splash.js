@@ -3,14 +3,19 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
 // create a component
-export default class Splash extends Component {
+class Splash extends Component {
   constructor(props) {
     super(props);
-    this.loginBtn = this.loginBtn.bind(this);
+    this.redirectLogin = this.redirectLogin.bind(this);
+    this.redirectSignup = this.redirectSignup.bind(this);
   }
 
-  loginBtn() {
+  redirectLogin() {
     this.props.navigation.dispatch({ type: 'Login' });
+  }
+
+  redirectSignup() {
+    this.props.navigation.dispatch({ type: 'Signup' });
   }
 
   render() {
@@ -18,8 +23,11 @@ export default class Splash extends Component {
       <View style={styles.container}>
         <Text>Welcome to InstaDine</Text>
         <Button 
-          onPress={this.loginBtn}
+          onPress={this.redirectLogin}
           title='Log In'/>
+        <Button
+          onPress={this.redirectSignup}
+          title='Sign Up'/>
       </View>
     );
   }
@@ -34,3 +42,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#2c3e50',
   },
 });
+
+export default Splash;
