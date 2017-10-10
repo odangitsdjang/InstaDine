@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 
 import Splash from '../components/Splash';
 import Login from '../components/auth/Login';
 import Signup from '../components/auth/Signup';
+<<<<<<< HEAD
+=======
 import HomePage from '../components/home/HomePage';
+>>>>>>> cf8ce53b7a2bf097ec61181f7e7b4fa5be41c8b7
 
 const routeConfig = {
   Splash: { screen: Splash },
@@ -16,11 +19,11 @@ const routeConfig = {
 };
 
 const stackNavigatorConfig = {
-  headerMode: 'none',
+  navigationOptions: { tabBarVisible: false },
   initialRouteName: 'Splash'
 };
 
-export const AppNavigator = StackNavigator(
+export const AppNavigator = TabNavigator(
   routeConfig,
   stackNavigatorConfig
 );
@@ -28,13 +31,6 @@ export const AppNavigator = StackNavigator(
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
 );
-
-
-// COMMENTED THIS OUT BECAUSE OF REDUX-THUNK
-// AppWithNavigationState.PropTypes = {
-//   dispatch: PropTypes.func.isRequired,
-//   nav: PropTypes.object.isRequired
-// };
 
 const mapStateToProps = state => ({
   nav: state.nav

@@ -10,7 +10,7 @@ class Signup extends Component {
   }
 
   redirectBack() {
-    this.props.navigation.dispatch({ type: 'Back' });
+    this.props.navigation.dispatch({ type: 'NAVIGATION/BACK' });
   }
 
   render() {
