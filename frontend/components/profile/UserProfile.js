@@ -1,13 +1,14 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import HomeWithNavigationState from '../../navigators/HomeNavigator';
 
 // create a component
-class HomePage extends Component {
+class UserProfile extends Component {
   render() {
     return (
-      <HomeWithNavigationState />
+      <View style={styles.container}>
+        <Text>UserProfile</Text>
+      </View>
     );
   }
 }
@@ -23,4 +24,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default HomePage;
+export default UserProfile;

@@ -43,13 +43,17 @@ class Splash extends Component {
             onPress={this.redirectLogin}
             style={styles.button}
             raised={true}>
-            <Text style={styles.text}>Login</Text>
+            <View>
+              <Text style={styles.text}>Login</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={this.redirectSignup}
             style={styles.button}
             raised={true}>
-            <Text style={styles.text}>Signup</Text>
+            <View>
+              <Text style={styles.text}>Signup</Text>
+            </View>
           </TouchableOpacity>
         </View>
 

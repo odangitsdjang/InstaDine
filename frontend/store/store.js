@@ -3,19 +3,25 @@ import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 
 import { AsyncStorage } from 'react-native';
-import { persistStore, autoRehydrate } from 'redux-persist';
+import { persistStore, autoRehydrate, purgeStoredState } from 'redux-persist';
 import rootReducer from '../reducers/root_reducer';
 
 var _defaultState = {
   nav: {
-    index: 0,
-    routes: [{ key: 'Splash', routeName: 'Splash'}]
+    app: {
+      index: 0,
+      routes: [{ key: 'Splash', routeName: 'Splash'}]
+    },
+    home: {
+      index: 0,
+      routes: [{ key: 'MapItem', routeName: 'MapItem' }]      
+    }
   }
 };
 
-export const configureStore = (initialState = _defaultState) => {
+export const configureStore = (initialState = {}) => {
   const store = createStore(rootReducer, initialState, compose(
-    applyMiddleware(thunk, logger),
+    applyMiddleware(thunk, logger), 
     autoRehydrate()
   ));
   persistStore(store, { storage: AsyncStorage });

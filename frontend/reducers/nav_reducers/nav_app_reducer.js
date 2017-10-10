@@ -1,11 +1,13 @@
-import { AppNavigator } from '../navigators/AppNavigator';
+import { AppNavigator } from '../../navigators/AppNavigator';
 import { NavigationActions } from 'react-navigation';
 
 const initialState = AppNavigator.router.getStateForAction(
   AppNavigator.router.getActionForPathAndParams('Splash')
 );
 
-const navReducer = (state = initialState, action) => {
+const routes = ['Signup', 'Login', 'HomePage', 'Splash'];
+
+const navAppReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case 'NAVIGATION/BACK':
@@ -13,6 +15,13 @@ const navReducer = (state = initialState, action) => {
         NavigationActions.back(),
         state
       );
+    case 'Navigation/NAVIGATE':
+      if (routes.includes(action.routeName)){
+        return AppNavigator.router.getStateForAction(
+          AppNavigator.router.getActionForPathAndParams(action.routeName)
+        );
+      }
+      else { return state; }
     case 'Signup':
       return AppNavigator.router.getStateForAction(
         AppNavigator.router.getActionForPathAndParams('Signup')
@@ -26,9 +35,9 @@ const navReducer = (state = initialState, action) => {
         NavigationActions.navigate({ routeName: 'HomePage' }),
         state
       );
-    default: 
-      return initialState;
+    default:
+      return state;
   }
 };
 
-export default navReducer;
+export default navAppReducer;
