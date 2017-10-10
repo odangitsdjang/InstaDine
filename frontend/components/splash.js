@@ -1,15 +1,47 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 // create a component
-export default class Splash extends Component {
-  render() {
-    // const {navigate} = this.props.navigation;
+class Splash extends Component {
+  constructor(props) {
+    super(props);
+    this.redirectLogin = this.redirectLogin.bind(this);
+    this.redirectSignup = this.redirectSignup.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
+  }
 
+  redirectLogin() {
+    this.props.navigation.dispatch({ type: 'Login' });
+  }
+
+  redirectSignup() {
+    this.props.navigation.dispatch({ type: 'Signup' });
+  }
+
+  handleDemo() {
+
+  }
+
+  render() {
     return (
       <View style={styles.container}>
-        <Text>Splash</Text>
+        <Text style={styles.title}>InstaDine</Text>
+        <View style={styles.authButtons}>
+        <Button 
+          onPress={this.redirectLogin}
+          title='Log In'
+          style={styles.button}/>
+        <Button
+          onPress={this.redirectSignup}
+          title='Sign Up'
+          style={styles.button}/>
+        </View>
+
+        <Button
+          onPress={this.handleDemo}
+          title='Demo'
+          style={styles.button}/>
       </View>
     );
   }
@@ -19,8 +51,25 @@ export default class Splash extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center', 
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    backgroundColor: 'white',
   },
+  title: {
+    fontSize: 24,
+    flex: 1
+  },
+  authButtons: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  button: {
+    flex: 1,
+    padding: 10,
+    fontSize: 12
+  }
 });
+
+export default Splash;
