@@ -13,6 +13,7 @@ class Splash extends Component {
     super(props);
     this.redirectLogin = this.redirectLogin.bind(this);
     this.redirectSignup = this.redirectSignup.bind(this);
+    this.redirectHome = this.redirectHome.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
   }
 
@@ -22,6 +23,11 @@ class Splash extends Component {
 
   redirectSignup() {
     this.props.navigation.dispatch({ type: 'Signup' });
+    
+  }
+
+  redirectHome() { 
+    this.props.navigation.dispatch({ type: 'HomePage' });
   }
 
   handleDemo() {
@@ -40,9 +46,9 @@ class Splash extends Component {
             <Text>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
-          onPress={this.redirectLogin}
-          style={styles.button}
-          raised={true}>
+            onPress={this.redirectLogin}
+            style={styles.button}
+            raised={true}>
             <Text>Login</Text>
           </TouchableOpacity>
         </View>

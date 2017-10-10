@@ -10,6 +10,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+
 const mapStateToProps = (state) => ({
   todos: state.todos
 });
@@ -24,7 +25,7 @@ class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
-       
+
       </View>
     );
   }
