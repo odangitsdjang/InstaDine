@@ -1,14 +1,19 @@
 import { MapView } from 'expo';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-
+import { View, Text, StyleSheet, Button, Dimensions } from 'react-native';
 /* current todos :
- 1. pop up thing on click of marker
  2. selectedMarker doesnt reset when clicking outside the marker after clicking it once
- 3. move map up a little when clicking on the marker near the top or bottom
  4. load only the markers in the given region 
 */
 // Change initialRegion to this.props.user.region
+const { width, height } = Dimensions.get('window'); // dimension are half of the pixels of the phone specification
+
+const ASPECT_RATIO = width / height;
+const LATITUDE = 0;
+const LONGITUDE = 0;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
 const SAMPLE_MARKERS = [
   {
     latlng: { latitude: 37.777728, longitude: -122.408806 },
@@ -41,64 +46,100 @@ class MapItem extends Component {
       },
       markers: SAMPLE_MARKERS,
       selectedMarker: 0,
-      loaded: 0, 
-      mapDimensions: [300,300]  // used for moving pins up
+      loaded: 0
     };
+    this.map = 0;
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
   }
 
   componentDidMount() {
-    
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }
+        });
+      },
+      (error) => console.log(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+    // make markers into components
     this.setState({
       markers: this.state.markers.map((marker, i) => (
           <MapView.Marker
             key={i}
-            onPress={() => this.setState({ selectedMarker: marker })}
+            onPress={() => this.markerClick(marker)}
             coordinate={marker.latlng}
             title={marker.title}
-            description={marker.description}
-          />
+            
+          >
+            <MapView.Callout>
+              <View>
+                <Text>
+                  {marker.title}
+                </Text>
+                <Text>
+                  {marker.description}
+                </Text>
+              </View>
+            </MapView.Callout>
+          </MapView.Marker>
       )), loaded: 1
     });
   }
 
-  onRegionChange(region) {
-    
-  }
-  
-  markerOpen() {
-    return 1;
+  markerClick(marker) {
+    this.setState({
+      selectedMarker: marker, region: {
+        latitude: marker.latlng.latitude, longitude: marker.latlng.longitude,
+        latitudeDelta: this.state.region.latitudeDelta, 
+        longitudeDelta: this.state.region.longitudeDelta, 
+      }
+    });
+    // move to coordinate with duration
+    this.map.animateToCoordinate(marker.latlng, 300);  
+
   }
 
+  onRegionChange(region) {
+    console.log(this.state);
+  }
+  
   renderMarkers() {
     if (this.state.loaded) return this.state.markers;
   }
 
   onRegionChangeComplete(region) {
     this.setState({ region });
-    console.log(this.state.region);
-
     // this.setState({ markers: this.state.markers.map(marker => (
-    //   <Button>
     //     <MapView.Marker
     //       coordinate={marker.latlng}
     //       title={marker.title}
     //       description={marker.description}
     //     />
-    //   </Button>
     // ))});
     // should eventually calculate area within the map area, update state, which should hopefully re render markers
 
   }
 
   render() {
+    console.log(this.state);
     return (
       <View style={styles.container}>
         <MapView style={styles.mapInitial} 
+          showsMyLocationButton={true}
+          ref={ (map)=> { this.map = map; } }
           provider="google"
           initialRegion={this.state.region}
+          loadingEnabled={true}
+          showsUserLocation={true}
            onRegionChangeComplete={this.onRegionChangeComplete}
            >
             { this.renderMarkers()  }
@@ -124,3 +165,7 @@ const styles = StyleSheet.create({
 });
 
 export default MapItem;
+/*
+
+
+ */
