@@ -5,7 +5,7 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import Splash from '../components/Splash';
 import Login from '../components/Auth/Login';
-import Signup from '../components/Auth/Signup';
+import Signup from '../components/Auth/SignupContainer';
 
 const routeConfig = {
   Splash: { screen: Splash },

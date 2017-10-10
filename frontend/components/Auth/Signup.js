@@ -26,7 +26,7 @@ class Signup extends Component {
   }
 
   onSignUp() {
-    console.log("this is sign up");
+    this.props.signupUser(this.state);
   }
 
   redirectBack() {
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     height: 26
   },
   fieldTitle: {
+    paddingLeft: 0,
     padding: 6,
     fontSize: 20,
     color: 'white'
