@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
-import Splash from '../components/Splash';
+import Splash from '../components/splash';
 import Login from '../components/Login';
 
 const routeConfig = {
