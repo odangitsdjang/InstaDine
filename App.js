@@ -9,7 +9,7 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={configureStore()}>
-        <HomePage />
+        <AppWithNavigationState />
       </Provider>
     );
   }

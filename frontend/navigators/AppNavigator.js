@@ -3,19 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
-<<<<<<< HEAD
-import Splash from '../components/splash';
-import Login from '../components/Login';
-=======
 import Splash from '../components/Splash';
-import Login from '../components/Auth/Login';
-import Signup from '../components/Auth/Signup';
->>>>>>> 06caecf72d370d84b35f42e9e3e8af845c29d4be
+import Login from '../components/auth/Login';
+import Signup from '../components/auth/Signup';
+import HomePage from '../components/home/HomePage';
 
 const routeConfig = {
   Splash: { screen: Splash },
   Login: { screen: Login },
-  Signup: { screen: Signup }
+  Signup: { screen: Signup },
+  HomePage: { screen: HomePage }
 };
 
 const stackNavigatorConfig = {
