@@ -43,17 +43,13 @@ class Splash extends Component {
             onPress={this.redirectLogin}
             style={styles.button}
             raised={true}>
-            <View>
-              <Text style={styles.text}>Login</Text>
-            </View>
+            <Text style={styles.text}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={this.redirectSignup}
             style={styles.button}
             raised={true}>
-            <View>
-              <Text style={styles.text}>Signup</Text>
-            </View>
+            <Text style={styles.text}>Signup</Text>
           </TouchableOpacity>
         </View>
 
@@ -76,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     padding: 30
   },
   authButtons: {
