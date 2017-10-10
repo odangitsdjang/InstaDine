@@ -5,5 +5,9 @@
   "strict": false,
   "minify": false,
   "urlType": "exp",
+<<<<<<< HEAD
   "urlRandomness": "kc-egc"
+=======
+  "urlRandomness": "k7-t64"
+>>>>>>> dda059137e5c881da3f7250e408462fce2cad80d
 }
