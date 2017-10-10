@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 
 import Splash from '../components/Splash';
 import Login from '../components/auth/Login';
@@ -14,14 +14,18 @@ const routeConfig = {
 };
 
 const stackNavigatorConfig = {
-  headerMode: 'none',
+  // headerMode: 'none',
   initialRouteName: 'Splash'
 };
 
-export const AppNavigator = StackNavigator(
+export const AppNavigator = TabNavigator(
   routeConfig,
   stackNavigatorConfig
 );
+
+// const AppWithNavigationState = ({ dispatch, nav }) => (
+//   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
+// );
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>

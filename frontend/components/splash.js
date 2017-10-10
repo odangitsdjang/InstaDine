@@ -1,6 +1,11 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, 
+  Text, 
+  StyleSheet, 
+  Button,
+  TouchableOpacity
+} from 'react-native';
 
 // create a component
 class Splash extends Component {
@@ -28,14 +33,18 @@ class Splash extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>InstaDine</Text>
         <View style={styles.authButtons}>
-        <Button 
+          <TouchableOpacity
+            onPress={this.redirectLogin}
+            style={styles.button}
+            raised={true}>
+            <Text>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
           onPress={this.redirectLogin}
-          title='Log In'
-          style={styles.button}/>
-        <Button
-          onPress={this.redirectSignup}
-          title='Sign Up'
-          style={styles.button}/>
+          style={styles.button}
+          raised={true}>
+            <Text>Login</Text>
+          </TouchableOpacity>
         </View>
 
         <Button
@@ -54,21 +63,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center',
     backgroundColor: 'white',
+    flexDirection: 'column'
   },
   title: {
     fontSize: 24,
-    flex: 1
+    padding: 30
   },
   authButtons: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center'
+    justifyContent: 'space-around',
+    flexDirection: 'row'
   },
   button: {
-    flex: 1,
     padding: 10,
-    fontSize: 12
+    backgroundColor: '#2c3e50'
   }
 });
 
