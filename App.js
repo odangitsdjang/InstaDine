@@ -1,12 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { configureStore } from './frontend/store/store';
+import AppWithNavigationState from './frontend/navigators/AppNavigator';
+import { AppRegistry } from 'react-native';
 
-export default class App extends React.Component {
+class Root extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <Provider store={configureStore()}>
+        <AppWithNavigationState />
+      </Provider>
     );
   }
 }
@@ -19,3 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+AppRegistry.registerComponent('InstaDine', () => Root);
+
+export default Root;

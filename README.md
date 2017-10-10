@@ -33,6 +33,8 @@ BONUS:
 1. Restaurant views
    * Sign up
    * Reservations
+2. Push Notifications
+
 
 ## Wireframes
 
@@ -64,6 +66,35 @@ BONUS:
 ### User Profile
 ![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/user-show.png)
 
+### Implementation Timeline 
+- DAY 1:
+  - Jerry: Implement user auth backend and start login/signup frontend forms.
+  - Adrian: Finish splash page, and add nav bar
+  - David: Implement Google Maps API  
+    - Button to go to main page with googlemaps
+- DAY 2: 
+  - All: Seed restaurants.
+  - Jerry: Finish user auth frontend.
+  - Adrian: Implement restaurants backend, start user profile page
+  - David: Continue google maps API.
+- DAY 3:
+  - Jerry: Do restaurants show page
+  - Adrian: Add filter functionality, start desktop site 
+  - David: Finish google maps API, including pins for restaurants.
+- DAY 4:
+  - Jerry:   Search function on the map, help others 
+  - Adrian: Finish desktop site with styling
+  - David: Begin reservation backend
+- DAY 5: 
+  - Jerry: Try to break app, list all bugs, assign bugs to whoever wrote them
+  - Adrian: Add reservation portion of user profile
+  - David:  Finish reservation backend
+- DAY 6: 
+  - Everyone: polish their own components and refactor
+  - BONUS: Look into Sockets.io, and other bonus features
+- DAY 7:
+  - Jerry/David: Add emulator to the website
+  - Adrian: Do Production README
 
 
 [Sample State,](https://github.com/odangitsdjang/Instadine/blob/master/docs/sample_state.md)
