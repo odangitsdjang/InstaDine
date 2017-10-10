@@ -10,7 +10,12 @@ const SessionReducer = (state=defaultState, action) => {
   switch (action.type) {
     case 'AUTH_USER':
       return {
-        user_id: action.user_id
+        user_id: action.user_id,
+        token: action.token
+      };
+    case 'UNAUTH_USER':
+      return {
+        user_id: undefined
       };
     default:
       return state;

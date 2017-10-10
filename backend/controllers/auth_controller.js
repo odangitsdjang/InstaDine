@@ -11,17 +11,16 @@ const userToken = user => {
 };
 
 exports.login = function (req, res, next) {
-  var user = req.user;
-  // console.log(req, "-------------------------------------");
+  let user = req.user;
   res.send({ token: userToken(user), user_id: user._id });
 };
 
 exports.signup = function(req, res, next) {
   //these are same as user_params 
-  let email = req.body.email;
-  let password = req.body.password;
-  let username = req.body.username;
-  let phoneNumber = req.body.phoneNumber;
+  let { email,
+        password,
+        username,
+        phoneNumber } = req.body;
 
   User.findOne({email: email}, function(err, extistingUser) {
     if(err) { return next(err); }

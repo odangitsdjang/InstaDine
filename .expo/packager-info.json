@@ -2,7 +2,7 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://sf-i2k.jerryzlau.insta-dine.exp.direct",
   "packagerNgrokUrl": "https://packager.sf-i2k.jerryzlau.insta-dine.exp.direct",
-  "ngrokPid": 66829,
+  "ngrokPid": 69681,
   "packagerPort": 19002,
-  "packagerPid": 66811
+  "packagerPid": 69663
 }

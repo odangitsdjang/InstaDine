@@ -37,41 +37,44 @@ class Signup extends Component {
     let {email, password, phoneNumber, username} = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.fieldTitle}>Email:</Text>
-        <View style={styles.field}>
-          <TextInput 
-            onChange={this.update('email')}
-            style={styles.textInput}
-            value={email}
-            placeholder="Email"/>
-        </View>
+        <Text>This is the Sign Up page</Text>
+        <View style={styles.signUpForm}>
+          <Text style={styles.fieldTitle}>Email:</Text>
+          <View style={styles.field}>
+            <TextInput 
+              onChange={this.update('email')}
+              style={styles.textInput}
+              value={email}
+              placeholder="Email"/>
+          </View>
 
-        <Text style={styles.fieldTitle}>Username:</Text>
-        <View style={styles.field}>
-          <TextInput
-            onChange={this.update('username')}
-            style={styles.textInput}
-            value={username}
-            placeholder="Username" />
-        </View>
+          <Text style={styles.fieldTitle}>Username:</Text>
+          <View style={styles.field}>
+            <TextInput
+              onChange={this.update('username')}
+              style={styles.textInput}
+              value={username}
+              placeholder="Username" />
+          </View>
 
-        <Text style={styles.fieldTitle}>Password:</Text>
-        <View style={styles.field}>
-          <TextInput 
-            onChange={this.update('password')}
-            style={styles.textInput}
-            value={password}
-            secureTextEntry={true}
-            placeholder="Password"/>
-        </View>
+          <Text style={styles.fieldTitle}>Password:</Text>
+          <View style={styles.field}>
+            <TextInput 
+              onChange={this.update('password')}
+              style={styles.textInput}
+              value={password}
+              secureTextEntry={true}
+              placeholder="Password"/>
+          </View>
 
-        <Text style={styles.fieldTitle}>Phone Number:</Text>
-        <View style={styles.field}>
-          <TextInput
-            onChange={this.update('phoneNumber')}
-            style={styles.textInput}
-            value={phoneNumber}
-            placeholder="Phone Number" />
+          <Text style={styles.fieldTitle}>Phone Number:</Text>
+          <View style={styles.field}>
+            <TextInput
+              onChange={this.update('phoneNumber')}
+              style={styles.textInput}
+              value={phoneNumber}
+              placeholder="Phone Number" />
+          </View>
         </View>
 
         <Button
