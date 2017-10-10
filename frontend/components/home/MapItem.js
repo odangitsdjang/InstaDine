@@ -5,6 +5,7 @@ import { View, Text, StyleSheet, Button, Dimensions } from 'react-native';
  2. selectedMarker doesnt reset when clicking outside the marker after clicking it once
  4. load only the markers in the given region 
 */
+
 // Change initialRegion to this.props.user.region
 const { width, height } = Dimensions.get('window'); // dimension are half of the pixels of the phone specification
 

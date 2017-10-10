@@ -1,17 +1,8 @@
 {
-<<<<<<< HEAD
-  "expoServerPort": 19004,
-  "packagerPort": 19005,
-  "packagerPid": 48317,
-  "expoServerNgrokUrl": "https://eu-mya.odangitsdjang.flexproject.exp.direct",
-  "packagerNgrokUrl": "https://packager.eu-mya.odangitsdjang.flexproject.exp.direct",
-  "ngrokPid": 48357
-=======
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "packagerPort": 19002,
-  "packagerPid": 47806
->>>>>>> d5b02ff7ad1d4dd98601d67f8359b1f2ccf5fc61
+  "expoServerPort": 19006,
+  "packagerPort": 19007,
+  "packagerPid": 52799,
+  "expoServerNgrokUrl": "https://k7-t64.odangitsdjang.flexproject.exp.direct",
+  "packagerNgrokUrl": "https://packager.k7-t64.odangitsdjang.flexproject.exp.direct",
+  "ngrokPid": 52480
 }
