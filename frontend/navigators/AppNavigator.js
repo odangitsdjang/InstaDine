@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import Splash from '../components/Splash';
-import Login from '../components/Auth/Login';
-import Signup from '../components/Auth/Signup';
+import Login from '../components/auth/Login';
+import Signup from '../components/auth/Signup';
+import HomePage from '../components/home/HomePage';
 
 const routeConfig = {
   Splash: { screen: Splash },
   Login: { screen: Login },
-  Signup: { screen: Signup }
+  Signup: { screen: Signup },
+  HomePage: { screen: HomePage }
 };
 
 const stackNavigatorConfig = {

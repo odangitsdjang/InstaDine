@@ -8,6 +8,7 @@ class Splash extends Component {
     super(props);
     this.redirectLogin = this.redirectLogin.bind(this);
     this.redirectSignup = this.redirectSignup.bind(this);
+    this.redirectHome = this.redirectHome.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
   }
 
@@ -17,6 +18,11 @@ class Splash extends Component {
 
   redirectSignup() {
     this.props.navigation.dispatch({ type: 'Signup' });
+    
+  }
+
+  redirectHome() { 
+    this.props.navigation.dispatch({ type: 'HomePage' });
   }
 
   handleDemo() {
@@ -35,6 +41,10 @@ class Splash extends Component {
         <Button
           onPress={this.redirectSignup}
           title='Sign Up'
+          style={styles.button}/>
+        <Button
+          onPress={this.redirectHome}
+          title='Home'
           style={styles.button}/>
         </View>
 
