@@ -1,29 +1,25 @@
 import { AppNavigator } from '../navigators/AppNavigator';
 import { NavigationActions } from 'react-navigation';
 
-// Start with two routes: Splash on top of Login
-const firstAction = AppNavigator.router.getActionForPathAndParams('Login');
-const tempNavState = AppNavigator.router.getStateForAction(firstAction);
-const secondAction = AppNavigator.router.getActionForPathAndParams('Splash');
-const initialNavState = (secondAction, tempNavState);
+const initialState = AppNavigator.router.getStateForAction(
+  AppNavigator.router.getActionForPathAndParams('Splash')
+);
 
-const navReducer = (state = initialNavState, action) => {
+const navReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case 'Back':
+    case 'NAVIGATION/Back':
       return AppNavigator.router.getStateForAction(
         NavigationActions.back(),
         state
       );
     case 'Signup':
       return AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'Signup' }),
-        state
+        AppNavigator.router.getActionForPathAndParams('Signup')
       );
     case 'Login':
       return AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'Login' }),
-        state
+        AppNavigator.router.getActionForPathAndParams('Login')
       );
     case 'HomePage':
       return AppNavigator.router.getStateForAction(
@@ -31,7 +27,7 @@ const navReducer = (state = initialNavState, action) => {
         state
       );
     default: 
-      return AppNavigator.router.getStateForAction(action, state);
+      return initialState;
   }
 };
 
