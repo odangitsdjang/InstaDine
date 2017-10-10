@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 
 import Splash from '../components/Splash';
-import Login from '../components/auth/Login';
-import Signup from '../components/auth/Signup';
+import Login from '../components/Auth/Login';
+import Signup from '../components/Auth/Signup';
 import HomePage from '../components/home/HomePage';
 
 const routeConfig = {
