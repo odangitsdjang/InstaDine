@@ -11,7 +11,8 @@ const SessionReducer = (state=defaultState, action) => {
     case 'AUTH_USER':
       return {
         user_id: action.user_id,
-        token: action.token
+        token: action.token,
+        currentUser: action.currentUser
       };
     case 'UNAUTH_USER':
       return {

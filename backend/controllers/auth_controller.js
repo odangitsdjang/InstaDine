@@ -12,7 +12,26 @@ const userToken = user => {
 
 exports.login = function (req, res, next) {
   let user = req.user;
-  res.send({ token: userToken(user), user_id: user._id });
+  //find the user, if found, log that person in 
+  User.findOne({email: user.email}, function(err, Founduser){
+    if (err) { return next(err); }
+    if (Founduser) { 
+      //pull the wanted user data for session state
+      let currentUser = {
+        email: Founduser.email,
+        username: Founduser.username,
+        phoneNumber: Founduser.phoneNumber,
+        user_id: Founduser._id
+      };
+
+      //send currentUser info back to frontend 
+      return res.send({
+        currentUser: currentUser,
+        token: userToken(user),
+        user_id: currentUser._id
+      });
+    }
+  });
 };
 
 exports.signup = function(req, res, next) {
@@ -33,7 +52,11 @@ exports.signup = function(req, res, next) {
     });
     user.save(function(err) {
       if(err) { return next(err); }
-      res.json({user_id: user._id, token: userToken(user)});
+      let currentUser = { email: user.email, 
+                          username: user.username,
+                          phoneNumber: user.phoneNumber,
+                          user_id: user._id };
+      res.json({currentUser: currentUser, user_id: user._id, token: userToken(user)});
     });
   });
 };

@@ -15,12 +15,17 @@ class Login extends Component {
     this.redirectBack = this.redirectBack.bind(this);
     this.update = this.update.bind(this);
     this.onLogin = this.onLogin.bind(this);
+    this.onLogout = this.onLogout.bind(this);
   }
 
   update(field) {
     return e => this.setState({
       [field]: e.nativeEvent.text
     });
+  }
+
+  onLogout(){
+    this.props.logoutUser();
   }
 
   onLogin() {
@@ -61,6 +66,10 @@ class Login extends Component {
         <Button
           onPress={this.redirectBack}
           title='Back' />
+          
+        <Button
+          onPress={this.onLogout}
+          title='Log out' />
       </View>
     );
   }
