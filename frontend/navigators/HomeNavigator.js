@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, DrawerNavigator } from 'react-navigation';
 import UserProfile from '../components/profile/UserProfile';
 import MapItem from '../components/home/MapItem';
+import RestaurantItem from '../components/restaurant/RestaurantItem';
 
 const routeConfig = {
   MapItem: { screen: MapItem },
