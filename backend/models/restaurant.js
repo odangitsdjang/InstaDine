@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const restaurantSchema = require('../schema/restaurant_schema');
 const reservationSchema = require('../schema/reservation_schema');
 // const jwt = require('jwt-simple');
-const config = require('../config');
+// const config = require('../config');
 
 // ONLY FOR TESTING. REMEMBER TO REMOVE!!!
 // mongoose.connect('mongodb://localhost:instaDine/instaDine');
@@ -13,7 +13,7 @@ const config = require('../config');
 module.exports = mongoose.model('restaurant', restaurantSchema);
 
 // // FOR TESTING RESTAURANT CREATE
-// let restaurant = new Restaurant({
+// const restaurant = new Restaurant({
 //   name: "Elaine's Kitchen 3",
 //   address: {
 //     street: '434 Broadway St',

@@ -34,7 +34,6 @@ const reservationSchema = new Schema({
 { timestamps: true }
 );
 
-
 // After reservation saves, push res to restaurant queue & update user res
 reservationSchema.post('save', function(next){
   const reservation = this;
