@@ -89,7 +89,12 @@ class UserProfile extends Component {
           {this.upComingReservation()}
   
           <View style={[styles.boxContainer, styles.pastReservations]}>
-            <ScrollView>
+            <ScrollView
+              horizontal={true}
+              decelerationRate={0}
+              snapToInterval={200} //your element width
+              snapToAlignment={"center"}
+            >
               <Text>past rservation</Text>
               <Text>past rservation</Text>
               <Text>past rservation</Text>
@@ -118,7 +123,21 @@ class UserProfile extends Component {
         //   </View>
         // </View>
         <View style={[styles.boxContainer, styles.pastReservations]}>
-          <ScrollView>
+          <ScrollView 
+            horizontal={true}
+            decelerationRate={0}
+            snapToInterval={200} //your element width
+            snapToAlignment={"center"}
+          >
+          
+            <Text>past rservation</Text>  <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
             <Text>past rservation</Text>
             <Text>past rservation</Text>
             <Text>past rservation</Text>
