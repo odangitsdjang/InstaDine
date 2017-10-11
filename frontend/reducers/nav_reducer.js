@@ -26,6 +26,11 @@ const navReducer = (state = initialState, action) => {
         NavigationActions.navigate({ routeName: 'HomePage' }),
         state
       );
+    case 'RestaurantContainer':
+      return AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'RestaurantContainer' }),
+        state
+      );
     default: 
       return initialState;
   }

@@ -1,8 +1,7 @@
 import { MapView } from 'expo';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Button, Dimensions, TouchableOpacity } from 'react-native';
 /* current todos :
- 2. selectedMarker doesnt reset when clicking outside the marker after clicking it once
  4. load only the markers in the given region 
 */
 
@@ -53,10 +52,14 @@ class MapItem extends Component {
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
+    this.redirectRestaurant = this.redirectRestaurant.bind(this);
+    
   }
 
   componentDidMount() {
+    // Get restaurants 
 
+    // User's current location
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -71,6 +74,7 @@ class MapItem extends Component {
       (error) => console.log(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
+
     // make markers into components
     this.setState({
       markers: this.state.markers.map((marker, i) => (
@@ -78,22 +82,27 @@ class MapItem extends Component {
             key={i}
             onPress={() => this.markerClick(marker)}
             coordinate={marker.latlng}
-            title={marker.title}
-            
           >
-            <MapView.Callout>
-              <View>
-                <Text>
-                  {marker.title}
-                </Text>
-                <Text>
-                  {marker.description}
-                </Text>
-              </View>
+            <MapView.Callout onPress={this.redirectRestaurant}>
+                <View style={styles.insideBubbleStyle}>
+                  <Text>
+                    {marker.title}
+                  </Text>
+                  <Text>
+                    {marker.description}
+                  </Text>
+                </View>
             </MapView.Callout>
           </MapView.Marker>
       )), loaded: 1
     });
+  }
+
+  redirectRestaurant() {
+    //  not working
+    // <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
+    // this.props.navigation.dispatch({ type: 'Signup' });
+    this.props.goToRestaurant.dispatch( {type: 'RestaurantContainer'} );
   }
 
   markerClick(marker) {
@@ -136,6 +145,7 @@ class MapItem extends Component {
       <View style={styles.container}>
         <MapView style={styles.mapInitial} 
           showsMyLocationButton={true}
+          onPress={()=>this.setState({selectedMarker: 0})}
           ref={ (map)=> { this.map = map; } }
           provider="google"
           initialRegion={this.state.region}

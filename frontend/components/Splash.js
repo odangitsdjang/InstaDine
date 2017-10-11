@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from 'react';
 import { View, 
   Text, 
@@ -7,7 +6,6 @@ import { View,
   TouchableOpacity
 } from 'react-native';
 
-// create a component
 class Splash extends Component {
   constructor(props) {
     super(props);
