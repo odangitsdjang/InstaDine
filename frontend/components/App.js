@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import HomeWithNavigationState from '../navigators/HomeNavigator';
 import AppWithNavigationState from '../navigators/AppNavigator';
 
-
-
 // create a component
 class App extends Component {
   constructor(props) {

@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 import UserProfileContainer from '../components/profile/UserProfileContainer';
 import MapItem from '../components/home/MapItem';
+import Splash from '../components/Splash';
 
 const routeConfig = {
   MapItem: { screen: MapItem },
-  UserProfile: { screen: UserProfileContainer }
+  UserProfile: { screen: UserProfileContainer },
+  Splash: { screen: Splash }
 };
 
 const homeNavigatorConfig = {
