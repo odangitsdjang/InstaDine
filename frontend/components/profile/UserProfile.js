@@ -4,17 +4,54 @@ import { View,
          Text, 
          StyleSheet,
          Image,
-         Button } from 'react-native';
+         Button,
+         ScrollView } from 'react-native';
 
 // create a component
 class UserProfile extends Component {
   constructor(props) {
     super(props);
+    this.dummy_reservation = {
+      restaurant_id: "23123",
+      user_id: "59de505ebee09a4562550b76",
+      count: 3,
+      restaurantName: 'Omekase',
+      timestamp: new Date().toDateString(),
+      status: 'Seated'
+    };
+
     this.onLogout = this.onLogout.bind(this);
+    this.upComingReservation = this.upComingReservation.bind(this);
   }
 
   onLogout(){
     this.props.logoutUser();
+  }
+
+  upComingReservation(){
+    if(this.dummy_reservation){
+      let { restaurant_id,
+        user_id,
+        count,
+        timestamp,
+        restaurantName,
+        status } = this.dummy_reservation;
+  
+      return(
+        <View style={[styles.boxContainer, styles.reservation]}>
+          <Text style={{ fontSize: 28 }}>Upcoming Reservations</Text>
+          <Text style={{fontSize: 20}}>{restaurantName}</Text>
+          <Text style={{ fontSize: 20 }}>{timestamp}</Text>
+        </View>
+      );
+    }else{
+      return(
+        <View style={[styles.boxContainer, styles.reservation]}>
+          <Text style={{ fontSize: 28 }}>Upcoming Reservations</Text>
+          <Text>No upcoming reservation!</Text>
+        </View>
+      );
+    }
   }
 
   render() {
@@ -24,6 +61,13 @@ class UserProfile extends Component {
             profilePicture, 
             properties, 
             username } = this.props.user;
+
+      let { restaurant_id,
+        user_id,
+        restaurantName,
+        count,
+        timestamp,
+        status } = this.dummy_reservation;
   
       return (
         <View style={styles.container}>
@@ -42,12 +86,20 @@ class UserProfile extends Component {
             </View>
           </View>
   
-          <View style={[styles.boxContainer, styles.reservation]}>
-            <Text>reservation</Text>
-          </View>
+          {this.upComingReservation()}
   
           <View style={[styles.boxContainer, styles.pastReservations]}>
-            <Text>past rservation</Text>
+            <ScrollView>
+              <Text>past rservation</Text>
+              <Text>past rservation</Text>
+              <Text>past rservation</Text>
+              <Text>past rservation</Text>
+              <Text>past rservation</Text>
+              <Text>past rservation</Text>
+              <Text>past rservation</Text>
+              <Text>past rservation</Text>
+              <Text>past rservation</Text>
+            </ScrollView>
           </View>
   
           <View style={[styles.boxContainer, styles.logout]}>
@@ -59,11 +111,24 @@ class UserProfile extends Component {
       );
     }else{
       return(
-        <View style={styles.container}>
-          <View style={styles.notLoggedOnContainer}>
-            <Text style={styles.notLoggedOn}>
-              Oops! You are not logged on</Text>
-          </View>
+        // <View style={styles.container}>
+        //   <View style={styles.notLoggedOnContainer}>
+        //     <Text style={styles.notLoggedOn}>
+        //       Oops! You are not logged on</Text>
+        //   </View>
+        // </View>
+        <View style={[styles.boxContainer, styles.pastReservations]}>
+          <ScrollView>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+            <Text>past rservation</Text>
+          </ScrollView>
         </View>
       );
     }
@@ -113,7 +178,7 @@ const styles = StyleSheet.create({
   },
   reservation: {
     flex: 2,
-    backgroundColor: 'blue'
+    backgroundColor: 'green'
   },
   pastReservations: {
     flex: 3,
