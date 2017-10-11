@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "packagerPort": 19002,
-  "packagerPid": 76722
+  "expoServerPort": 19013,
+  "packagerPort": 19014,
+  "packagerPid": 78096,
+  "expoServerNgrokUrl": "https://ny-5a4.odangitsdjang.flexproject.exp.direct",
+  "packagerNgrokUrl": "https://packager.ny-5a4.odangitsdjang.flexproject.exp.direct",
+  "ngrokPid": 78120
 }

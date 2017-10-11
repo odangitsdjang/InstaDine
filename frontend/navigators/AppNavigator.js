@@ -6,12 +6,14 @@ import Splash from '../components/Splash';
 import Login from '../components/auth/LoginContainer';
 import Signup from '../components/auth/SignupContainer';
 import HomePage from '../components/home/HomePage';
+import RestaurantContainer from '../components/restaurant/RestaurantContainer';
 
 const routeConfig = {
   Splash: { screen: Splash },
   Login: { screen: Login },
   Signup: { screen: Signup },
-  HomePage: { screen: HomePage }
+  HomePage: { screen: HomePage },
+  RestaurantContainer: { screen: RestaurantContainer }
 };
 
 const appNavigatorConfig = {
