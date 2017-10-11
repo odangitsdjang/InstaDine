@@ -1,13 +1,24 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
+
 
 // create a component
 class UserProfile extends Component {
+  constructor(props){
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+  
+  handleLogout() {
+    this.props.logoutUser();
+  }
+  
   render() {
     return (
       <View style={styles.container}>
-        <Text>UserProfile</Text>
+        <Button onPress={this.handleLogout}
+        title='Logout'/>
       </View>
     );
   }

@@ -31,8 +31,6 @@ class RestaurantItem extends Component {
 
   componentDidMount() {
     // Get restaurant info somehow, put that into props talk to adrian 
-
-
   }
   // Only render 10 time frames after current time
   renderReservationTimes() {
