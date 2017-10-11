@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 const restaurantSchema = require('../schema/restaurant_schema');
 
-mongoose.connect('mongodb://localhost:instaDine/instaDine');
-
 // Post save, update current user record to add new restaurant._id
-// restaurantSchema.post('save', )
+restaurantSchema.post('save', )
 
 // FOR TESTING RESTAURANT CREATE
 // let restaurant = new Restaurant({
