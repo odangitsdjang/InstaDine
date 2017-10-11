@@ -30,12 +30,17 @@ class Login extends Component {
 
   onLogin() {
     this.props.loginUser(this.state);
+    this.redirectHomePage = this.redirectHomePage.bind(this);
   }
 
   redirectBack() {
-    this.props.navigation.dispatch({ type: 'Back' });
+    this.props.navigation.dispatch({ type: 'NAVIGATION/BACK' });
   }
-  
+
+  redirectHomePage() {
+    this.props.navigation.dispatch({ type: 'HomePage' });
+  }
+
   render() {
     let {email, password} = this.state;
 
@@ -70,6 +75,9 @@ class Login extends Component {
         <Button
           onPress={this.onLogout}
           title='Log out' />
+        <Button
+          onPress={this.redirectHomePage}
+          title='Home' />
       </View>
     );
   }

@@ -1,6 +1,11 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, 
+  Text, 
+  StyleSheet, 
+  Button,
+  TouchableOpacity
+} from 'react-native';
 
 // create a component
 class Splash extends Component {
@@ -8,6 +13,7 @@ class Splash extends Component {
     super(props);
     this.redirectLogin = this.redirectLogin.bind(this);
     this.redirectSignup = this.redirectSignup.bind(this);
+    this.redirectHome = this.redirectHome.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
   }
 
@@ -17,6 +23,11 @@ class Splash extends Component {
 
   redirectSignup() {
     this.props.navigation.dispatch({ type: 'Signup' });
+    
+  }
+
+  redirectHome() { 
+    this.props.navigation.dispatch({ type: 'HomePage' });
   }
 
   handleDemo() {
@@ -28,15 +39,22 @@ class Splash extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>InstaDine</Text>
         <View style={styles.authButtons}>
-          <Button 
+          <TouchableOpacity
             onPress={this.redirectLogin}
-            title='Log In'
-            style={styles.button}/>
-            
-          <Button
+            style={styles.button}
+            raised={true}>
+            <View>
+              <Text style={styles.text}>Login</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={this.redirectSignup}
-            title='Sign Up'
-            style={styles.button}/>
+            style={styles.button}
+            raised={true}>
+            <View>
+              <Text style={styles.text}>Signup</Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
         <Button
@@ -55,23 +73,33 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center',
     backgroundColor: 'white',
+    flexDirection: 'column'
   },
   title: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 24,
+<<<<<<< HEAD:frontend/components/splash.js
+=======
+    padding: 30
+>>>>>>> cf135a324684bf3b85a2500a6603f41d821c5232:frontend/components/Splash.js
   },
   authButtons: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center'
+    justifyContent: 'space-around',
+    flexDirection: 'row'
   },
   button: {
-    flex: 1,
     padding: 10,
-    fontSize: 12
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#2c3e50'
+  },
+  text: {
+    color: 'white'
   }
 });
 
