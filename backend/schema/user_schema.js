@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const validateEmail = email => {
+  return (/\S+@\S+\.\S+/).test(email);
+};
+
 const userSchema = new Schema({
   email: {
     type: String,
@@ -32,5 +36,22 @@ const userSchema = new Schema({
 },
   { timestamps: true }
 );
+
+// Pre save encrypt password with BCrypt
+userSchema.pre('save', function (next) {
+  let user = this;
+  if (user.isNew || user.isModified('password')) {
+    bcrypt.genSalt(10, function (err, salt) {
+      if (err) { return next(err); }
+      bcrypt.hash(user.password, salt, null, function (error, hash) {
+        if (error) { return next(error); }
+        user.password = hash;
+        next();
+      });
+    });
+  } else {
+    next();
+  }
+});
 
 module.exports = userSchema;

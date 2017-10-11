@@ -30,6 +30,7 @@
     "body-parser": "^1.18.2",
     "expo": "^21.0.0",
     "express": "^4.16.1",
+    "jwt-decode": "^2.2.0",
     "jwt-simple": "^0.5.1",
     "mongoose": "^4.12.1",
     "morgan": "^1.9.0",
