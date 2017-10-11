@@ -17,10 +17,11 @@ exports.loginUser = user => {
 exports.signupUser = user => {
   return function (dispatch) {
     return axios.post(SIGNUP_URL, user).then((response) => {
+      console.log(response);
       var { user_id, token, currentUser } = response.data;
       dispatch(authUser(user_id, token, currentUser));
     }).catch((error) => {
-      dispatch(addAlert("Could not sign up."));
+      dispatch(addAlert(error));
     });
   };
 };

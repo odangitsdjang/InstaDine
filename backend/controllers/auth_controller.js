@@ -10,8 +10,6 @@ const userToken = user => {
   }, config.secret);
 };
 
-// exports.login = () => console.log('Do nothing');
-
 exports.login = function (req, res, next) {
   console.log(req.user, "------------------------------");
   let user = req.user;
@@ -21,10 +19,12 @@ exports.login = function (req, res, next) {
     if (Founduser) { 
       //pull the wanted user data for session state
       let currentUser = {
-        email: Founduser.email,
-        username: Founduser.username,
-        phoneNumber: Founduser.phoneNumber,
-        user_id: Founduser._id
+        email: user.email,
+        username: user.username,
+        phoneNumber: user.phoneNumber,
+        user_id: user._id,
+        profilePicture: user.profilePicture,
+        properties: user.properties
       };
 
       //send currentUser info back to frontend 
@@ -53,11 +53,14 @@ exports.signup = function(req, res, next) {
       phoneNumber: phoneNumber
     });
     user.save(function(err) {
+      console.log(err);
       if(err) { return next(err); }
       let currentUser = { email: user.email, 
                           username: user.username,
                           phoneNumber: user.phoneNumber,
-                          user_id: user._id };
+                          user_id: user._id,
+                          profilePicture: user.profilePicture,
+                          properties: user.properties };
 
       res.json({currentUser: currentUser, 
                 token: userToken(user)});
