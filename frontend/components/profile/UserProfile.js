@@ -18,46 +18,55 @@ class UserProfile extends Component {
   }
 
   render() {
-    let { email, 
-          phoneNumber, 
-          profilePicture, 
-          properties, 
-          username } = this.props.user;
-
-    let image = "http://res.cloudinary.com/jerryzlau/image/upload/v1507741685/avatar-1295396_640_y2vrvm.png";
-
-    return (
-      <View style={styles.container}>
-        <View style={[styles.boxContainer, styles.profileHeader]}>
-          <Text style={styles.profileTitle}>User Profile</Text>
-        </View>
-
-        <View style={[styles.boxContainer, styles.userInfo]}>
-          <Image 
-            source={{uri: image}}
-            style={styles.userProfile}/>
-          <View style={styles.userInfoDetails}>
-            <Text style={{fontSize: 30}}>{username}</Text>
-            <Text>{email}</Text>
-            <Text>{phoneNumber}</Text>
+    if(this.props.user){
+      let { email, 
+            phoneNumber, 
+            profilePicture, 
+            properties, 
+            username } = this.props.user;
+  
+      return (
+        <View style={styles.container}>
+          <View style={[styles.boxContainer, styles.profileHeader]}>
+            <Text style={styles.profileTitle}>User Profile</Text>
+          </View>
+  
+          <View style={[styles.boxContainer, styles.userInfo]}>
+            <Image 
+              source={{uri: profilePicture}}
+              style={styles.userProfile}/>
+            <View style={styles.userInfoDetails}>
+              <Text style={{fontSize: 30}}>{username}</Text>
+              <Text>{email}</Text>
+              <Text>{phoneNumber}</Text>
+            </View>
+          </View>
+  
+          <View style={[styles.boxContainer, styles.reservation]}>
+            <Text>reservation</Text>
+          </View>
+  
+          <View style={[styles.boxContainer, styles.pastReservations]}>
+            <Text>past rservation</Text>
+          </View>
+  
+          <View style={[styles.boxContainer, styles.logout]}>
+            <Button
+              onPress={this.onLogout}
+              title='Log out' />
           </View>
         </View>
-
-        <View style={[styles.boxContainer, styles.reservation]}>
-          <Text>reservation</Text>
+      );
+    }else{
+      return(
+        <View style={styles.container}>
+          <View style={styles.notLoggedOnContainer}>
+            <Text style={styles.notLoggedOn}>
+              Oops! You are not logged on</Text>
+          </View>
         </View>
-
-        <View style={[styles.boxContainer, styles.pastReservations]}>
-          <Text>past rservation</Text>
-        </View>
-
-        <View style={[styles.boxContainer, styles.logout]}>
-          <Button
-            onPress={this.onLogout}
-            title='Log out' />
-        </View>
-      </View>
-    );
+      );
+    }
   }
 }
 
@@ -66,7 +75,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    // alignItems: 'stretch'
+  },
+  notLoggedOn: {
+    color: 'red',
+    fontSize: 40
+  },
+  notLoggedOnContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   boxContainer: {
     flex: 1,
