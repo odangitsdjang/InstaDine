@@ -35,18 +35,13 @@ const navAppReducer = (state = initialState, action) => {
         NavigationActions.navigate({ routeName: 'HomePage' }),
         state
       );
-<<<<<<< HEAD:frontend/reducers/nav_reducer.js
     case 'RestaurantContainer':
       return AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'RestaurantContainer' }),
         state
       );
     default: 
-      return initialState;
-=======
-    default:
       return state;
->>>>>>> c99f1d2e81ab927371c5210e411b91ce18c0f824:frontend/reducers/nav_reducers/nav_app_reducer.js
   }
 };
 
