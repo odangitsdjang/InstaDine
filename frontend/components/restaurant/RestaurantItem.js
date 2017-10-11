@@ -59,19 +59,19 @@ class RestaurantItem extends Component {
   reserveOrCancel() {
     return (
       <View>
+        <View style={styles.reserve}>  
+          <TouchableOpacity>
+            <Text style={styles.reserveText} >
+              Reserve
+            </Text>
+          </TouchableOpacity>
+        </View>
         <Picker selectedValue= { this.state.reservationTime }
                 style={styles.picker}
                 onValueChange= { (itemValue, itemIndex) => this.setState({ 
                   reservationTime: itemValue })}>
             {this.renderReservationTimes()}
         </Picker>
-        <View>
-          <TouchableOpacity>
-            <Text>
-              Reserve
-            </Text>
-          </TouchableOpacity>
-        </View>
       </View>
       
     );
@@ -83,7 +83,7 @@ class RestaurantItem extends Component {
         <View style={styles.header}>
           <Text style={styles.title}>{this.state.restaurant.name}</Text>
         </View>
-        <View>
+        <View >
           { this.reserveOrCancel() }
         </View>
       </View>
@@ -112,6 +112,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Chalkboard SE'
   }, 
+  reserve: {
+    paddingTop: 30,
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  reserveText: {
+    fontSize: 15,
+    fontFamily: 'Chalkboard SE'
+  },
   picker: {
     backgroundColor: 'white'
   }

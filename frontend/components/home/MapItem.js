@@ -1,6 +1,6 @@
 import { MapView } from 'expo';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Button, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -46,7 +46,8 @@ class MapItem extends Component {
       },
       markers: SAMPLE_MARKERS,
       selectedMarker: 0,
-      loaded: 0
+      loaded: 0,
+      searchText: "Search"
     };
     this.map = 0;
     this.onRegionChange = this.onRegionChange.bind(this);
@@ -155,6 +156,11 @@ class MapItem extends Component {
            >
             { this.renderMarkers()  }
         </MapView>
+        <View style={styles.searchContainer}>
+          <TextInput style={styles.search}
+            onChangeText={(searchText) => this.setState({ searchText })}
+            value={this.state.searchText} />
+        </View>
         
       </View>
       
@@ -167,11 +173,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
-    backgroundColor: '#2c3e50',
+    backgroundColor: '#2c3e50'
   }, 
   mapInitial: {
     paddingTop: 25,
     flex: 1
+  }, 
+  searchContainer: {
+    position: 'absolute',
+    top: 50,
+    alignContent: 'stretch',
+  },
+  search: {
+    backgroundColor: 'red',
+    height: 40 
   }
 });
 
