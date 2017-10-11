@@ -3,12 +3,18 @@ import React, { Component } from 'react';
 import { View, 
          Text, 
          StyleSheet,
-         Image } from 'react-native';
+         Image,
+         Button } from 'react-native';
 
 // create a component
 class UserProfile extends Component {
   constructor(props) {
     super(props);
+    this.onLogout = this.onLogout.bind(this);
+  }
+
+  onLogout(){
+    this.props.logoutUser();
   }
 
   render() {
@@ -18,12 +24,38 @@ class UserProfile extends Component {
           properties, 
           username } = this.props.user;
 
+    let image = "http://res.cloudinary.com/jerryzlau/image/upload/v1507741685/avatar-1295396_640_y2vrvm.png";
+
     return (
       <View style={styles.container}>
-        <Text>UserProfile</Text>
-        <Image 
-          source={{uri: profilePicture}}
-          style={styles.profilePicture} />
+        <View style={[styles.boxContainer, styles.profileHeader]}>
+          <Text style={styles.profileTitle}>User Profile</Text>
+        </View>
+
+        <View style={[styles.boxContainer, styles.userInfo]}>
+          <Image 
+            source={{uri: image}}
+            style={styles.userProfile}/>
+          <View style={styles.userInfoDetails}>
+            <Text style={{fontSize: 30}}>{username}</Text>
+            <Text>{email}</Text>
+            <Text>{phoneNumber}</Text>
+          </View>
+        </View>
+
+        <View style={[styles.boxContainer, styles.reservation]}>
+          <Text>reservation</Text>
+        </View>
+
+        <View style={[styles.boxContainer, styles.pastReservations]}>
+          <Text>past rservation</Text>
+        </View>
+
+        <View style={[styles.boxContainer, styles.logout]}>
+          <Button
+            onPress={this.onLogout}
+            title='Log out' />
+        </View>
       </View>
     );
   }
@@ -33,17 +65,46 @@ class UserProfile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    backgroundColor: 'white',
+    // alignItems: 'stretch'
   },
-  profilePicture: {
-    flex:1,
-    justifyContent: 'center',
+  boxContainer: {
+    flex: 1,
     alignItems: 'center',
-    width: 50,
-    height: 50
-  }
+    justifyContent: 'center'
+  },
+  userProfile: {
+    width: 120,
+    height: 120
+  },
+  userInfoDetails:{
+    flexDirection: 'column'
+  },
+  profileTitle: {
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
+  profileHeader: {
+    backgroundColor: 'orange'
+  },
+  userInfo: {
+    flex: 2,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    backgroundColor: 'red'
+  },
+  reservation: {
+    flex: 2,
+    backgroundColor: 'blue'
+  },
+  pastReservations: {
+    flex: 3,
+    backgroundColor: 'yellow'
+  },
+  logout: {
+    backgroundColor: 'black'
+  },
+
 });
 
 //make this component available to the app

@@ -16,7 +16,7 @@ class Login extends Component {
     this.redirectHomePage = this.redirectHomePage.bind(this);
     this.update = this.update.bind(this);
     this.onLogin = this.onLogin.bind(this);
-    this.onLogout = this.onLogout.bind(this);
+    // this.onLogout = this.onLogout.bind(this);
   }
 
   update(field) {
@@ -25,9 +25,9 @@ class Login extends Component {
     });
   }
 
-  onLogout(){
-    this.props.logoutUser();
-  }
+  // onLogout(){
+  //   this.props.logoutUser();
+  // }
 
   onLogin() {
     this.props.loginUser(this.state);
@@ -73,9 +73,9 @@ class Login extends Component {
           onPress={this.onLogin}
           title='Log In' />
           
-        <Button
+        {/* <Button
           onPress={this.onLogout}
-          title='Log out' />
+          title='Log out' /> */}
 
         <Button
           onPress={this.redirectBack}
