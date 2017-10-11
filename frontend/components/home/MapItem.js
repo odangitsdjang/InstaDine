@@ -1,10 +1,11 @@
 import { MapView } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
+
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, Dimensions, 
-  TouchableOpacity, TextInput, Alert, TouchableHighlight, Keyboard } 
+  TouchableOpacity, TextInput, Alert } 
          from 'react-native';
-
+import Search from './Search';
+import SearchResults from './SearchResults';
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -53,15 +54,15 @@ class MapItem extends Component {
       loaded: 0,
       searchActive: false,
       searchText: ""
+      
     };
     this.map = 0;
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
-    this.submitSearch = this.submitSearch.bind(this);
-    this.renderCancelIcon = this.renderCancelIcon.bind(this);
-    this.renderSearchIcon = this.renderSearchIcon.bind(this);
+    this.setSearchActive = this.setSearchActive.bind(this);
+    this.setSearchText = this.setSearchText.bind(this);
   }
 
   componentDidMount() {
@@ -134,10 +135,6 @@ class MapItem extends Component {
     if (this.state.loaded) return this.state.markers;
   }
 
-  submitSearch() {
-    // update results by ajax calling to the backend with this.state.searchText
-  }
-
   onRegionChangeComplete(region) {
     this.setState({ region });
     // this.setState({ markers: this.state.markers.map(marker => (
@@ -151,69 +148,43 @@ class MapItem extends Component {
 
   }
 
-  renderSearchIcon() {
+  renderMap() {
     if (!this.state.searchActive) {
-      return  <Ionicons style={styles.leftIcon} name="ios-search" size={20} />; 
-    } else {
       return (
-        <TouchableHighlight onPress={()=> {
-          Keyboard.dismiss();
-          this.setState({ searchActive: false })}} 
-          style={styles.icon}>
-          <Ionicons style={styles.leftIcon} name="ios-arrow-back" size={20} />
-        </TouchableHighlight>
-      ); 
-    }
-  }
-
-  renderCancelIcon() {
-    if(this.state.searchActive) {
-      return (
-        <TouchableHighlight onPress={() => this.setState({ searchText: "" })} style={styles.icon} >
-          <Ionicons  name="ios-close" size={20} />
-        </TouchableHighlight>
-      );
-    } else {
-      return null;
-    }
-  }
-
-  render() {
-    // console.log(this.state);
-    return (
-      <View style={styles.container}>
-        <MapView style={styles.mapInitial} 
+        <MapView style={styles.mapInitial}
           showsMyLocationButton={true}
-          onPress={()=>this.setState({selectedMarker: 0})}
-          ref={ (map)=> { this.map = map; } }
+          onPress={() => this.setState({ selectedMarker: 0 })}
+          ref={(map) => { this.map = map; }}
           provider="google"
           initialRegion={this.state.region}
           loadingEnabled={true}
           showsUserLocation={true}
-           onRegionChangeComplete={this.onRegionChangeComplete}
-           >
-            { this.renderMarkers()  }
+          onRegionChangeComplete={this.onRegionChangeComplete}
+        >
+          {this.renderMarkers()}
         </MapView>
-        <View style={styles.searchContainer}>
-          <View style={{ flex: 0.05 }}></View>
-          <View style={styles.search}>
-            {this.renderSearchIcon()}
-            <TextInput
-              placeholder="Search"
-              style={{ paddingLeft: 20, flex: 8 }}
-              onChangeText={(searchText) => this.setState({ searchText })}
-              onSubmitEditing={this.enterSearch}
-              autoCorrect={false}
-              onFocus={() => this.setState({ searchActive: true })}
-              value={this.state.searchText} 
-              />
-            {this.renderCancelIcon()}
-          </View>
-          <View style={{ flex: 0.05 }}></View>
-        </View> 
-     
+      );
+    }
+  }
+
+  setSearchActive(bool) {
+    this.setState({ searchActive: bool });
+  }
+
+  setSearchText(text) {
+    this.setState({ searchText: text });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        { this.renderMap() }
+        <Search setSearchText={this.setSearchText} 
+                searchActive={this.state.searchActive} 
+                searchText={this.state.searchText} 
+                setSearchActive={this.setSearchActive}/>
+        <SearchResults searchActive={this.state.searchActive}/>
       </View>
-      
     );
   }
 }
@@ -223,35 +194,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
-    backgroundColor: '#2c3e50'
+    backgroundColor: '#4b4b4b'
   }, 
   mapInitial: {
     paddingTop: 25,
     flex: 1
-  }, 
-  searchContainer: {
-    flexDirection: 'row',
-    position: 'absolute',
-    top: 45
-  },
-  search: {
-    backgroundColor: 'white',
-    flex: 0.9, 
-    flexDirection: 'row',
-    borderWidth: 1, 
-    alignItems: 'stretch',
-    borderColor: '#fafafa',
-    borderRadius: 5,
-    height: 50,
-  },
-  leftIcon: {
-    paddingLeft: 20,
-    alignSelf: 'center'
-  }, 
-  icon: {
-    flex: 1,
-    alignSelf: 'center',
-    justifyContent: 'center'
   }
 
 });
