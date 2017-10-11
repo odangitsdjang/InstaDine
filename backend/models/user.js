@@ -30,7 +30,7 @@ const userSchema = new Schema({
   },
   profilePicture: {
     type: String,
-    default: 'http://res.cloudinary.com/jerryzlau/image/upload/v1507574589/abstract-user-flat-2_fs7opy.svg',
+    default: 'http://res.cloudinary.com/jerryzlau/image/upload/v1507741685/avatar-1295396_640_y2vrvm.png',
     required: true
   },
   properties: [] //takes restaurant ids 
