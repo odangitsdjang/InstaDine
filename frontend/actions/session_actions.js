@@ -21,8 +21,7 @@ exports.signupUser = user => {
       var { user_id, token, currentUser } = response.data;
       dispatch(authUser(user_id, token, currentUser));
     }).catch((error) => {
-      console.log(error);
-      dispatch(addAlert("Could not sign up."));
+      dispatch(addAlert(error));
     });
   };
 };

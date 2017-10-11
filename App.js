@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { configureStore } from './frontend/store/store';
 import AppWithNavigationState from './frontend/navigators/AppNavigator';
 import { AppRegistry } from 'react-native';
+import App from './frontend/components/App';
 
 
 
@@ -11,7 +12,7 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={configureStore()}>
-        <AppWithNavigationState/>
+        <App />
       </Provider>
     );
   }
