@@ -120,7 +120,7 @@ class MapItem extends Component {
   }
 
   onRegionChange(region) {
-    console.log(this.state);
+    // console.log(this.state);
   }
   
   renderMarkers() {
@@ -141,7 +141,7 @@ class MapItem extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <View style={styles.container}>
         <MapView style={styles.mapInitial} 

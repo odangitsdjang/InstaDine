@@ -5,8 +5,11 @@ import { configureStore } from './frontend/store/store';
 import AppWithNavigationState from './frontend/navigators/AppNavigator';
 import { AppRegistry } from 'react-native';
 
+<<<<<<< HEAD
 import HomePage from './frontend/components/home/HomePage';
 import RestaurantContainer from './frontend/components/restaurant/RestaurantContainer';
+=======
+>>>>>>> c99f1d2e81ab927371c5210e411b91ce18c0f824
 class Root extends React.Component {
   render() {
     return (
