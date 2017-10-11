@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const reservationSchema = require('./reservation_schema');
 
 const validateEmail = email => {
   return (/\S+@\S+\.\S+/).test(email);
@@ -32,7 +33,8 @@ const userSchema = new Schema({
     default: 'http://res.cloudinary.com/jerryzlau/image/upload/v1507574589/abstract-user-flat-2_fs7opy.svg',
     required: true
   },
-  properties: [] //takes restaurant ids 
+  properties: [], //takes restaurant ids 
+  reservation: reservationSchema
 },
   { timestamps: true }
 );

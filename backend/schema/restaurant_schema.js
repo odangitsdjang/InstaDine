@@ -27,6 +27,11 @@ const restaurantSchema = new Schema({
       required: 'Zip code is required'
     }
   },
+  phoneNumber: {
+    type: String,
+    required: 'Phone number is required',
+    unique: 'Phone number is already registered'
+  },
   manager_id: {
     type: String,
     required: 'Manager is required'
@@ -55,34 +60,22 @@ const restaurantSchema = new Schema({
     ]
   }
 },
-  { timestamps: true }
+{ timestamps: true }
 );
 
 // Add indices
 restaurantSchema.index({ name: 1, address: 1 }, { unique: true });
 
-// Pre save
-restaurantSchema.pre('save', function (next) {
-  console.log("Pre Save");
-  next();
-});
-
 // Post save, update current user record to add new restaurant._id
 restaurantSchema.post('save', function (next) {
   const restaurant = this;
-  console.log("Post Save Function");
   User.findOneAndUpdate(
     { _id: restaurant.manager_id },
     { $push: { properties: restaurant._id } },
     function (error, updatedUser) {
-      if (error) {
-        return next(error);
-      }
-      else {
-        console.log('User Updated', '------------------------------------------');
-        console.log(updatedUser);
-      }
-    });
+      if (error) { return next(error); }
+    }
+  );
 });
 
 module.exports = restaurantSchema;
