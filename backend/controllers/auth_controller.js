@@ -10,18 +10,38 @@ const userToken = user => {
   }, config.secret);
 };
 
+// exports.login = () => console.log('Do nothing');
+
 exports.login = function (req, res, next) {
-  var user = req.user;
-  // console.log(req, "-------------------------------------");
-  res.send({ token: userToken(user), user_id: user._id });
+  console.log(req.user, "------------------------------");
+  let user = req.user;
+  //find the user, if found, log that person in 
+  User.findOne({email: user.email}, function(err, Founduser){
+    if (err) { return next(err); }
+    if (Founduser) { 
+      //pull the wanted user data for session state
+      let currentUser = {
+        email: Founduser.email,
+        username: Founduser.username,
+        phoneNumber: Founduser.phoneNumber,
+        user_id: Founduser._id
+      };
+
+      //send currentUser info back to frontend 
+      return res.send({
+        currentUser: currentUser,
+        token: userToken(user)
+      });
+    }
+  });
 };
 
 exports.signup = function(req, res, next) {
   //these are same as user_params 
-  let email = req.body.email;
-  let password = req.body.password;
-  let username = req.body.username;
-  let phoneNumber = req.body.phoneNumber;
+  let { email,
+        password,
+        username,
+        phoneNumber } = req.body;
 
   User.findOne({email: email}, function(err, extistingUser) {
     if(err) { return next(err); }
@@ -34,7 +54,13 @@ exports.signup = function(req, res, next) {
     });
     user.save(function(err) {
       if(err) { return next(err); }
-      res.json({user_id: user._id, token: userToken(user)});
+      let currentUser = { email: user.email, 
+                          username: user.username,
+                          phoneNumber: user.phoneNumber,
+                          user_id: user._id };
+
+      res.json({currentUser: currentUser, 
+                token: userToken(user)});
     });
   });
 };

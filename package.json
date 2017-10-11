@@ -25,6 +25,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "expo": "^21.0.0",
@@ -39,6 +40,7 @@
     "prop-types": "^15.6.0",
     "react": "^16.0.0-alpha.12",
     "react-native": "^0.48.4",
+    "react-native-keychain": "^1.2.1",
     "react-navigation": "^1.0.0-beta.13",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",

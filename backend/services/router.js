@@ -13,6 +13,7 @@ router.route('/signup')
 //Routes to sign in
 router.route('/login')
       .post([requireLogin, AuthenticationController.login]);
+      // .post(AuthenticationController.login);
 
 module.exports = router;
 
