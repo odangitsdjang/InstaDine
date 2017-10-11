@@ -5,6 +5,7 @@ import {addAlert} from './alerts_actions';
 exports.loginUser = user => {
   return function (dispatch) {
     return axios.post(LOGIN_URL, user).then((response) => {
+      console.log(response);
       var { user_id, token, currentUser } = response.data;
       dispatch(authUser(user_id, token, currentUser));
     }).catch((error) => {
@@ -24,13 +25,15 @@ exports.signupUser = user => {
   };
 };
 
+
 const authUser = (user_id, token, currentUser) => {
   return {
     type: 'AUTH_USER',
-    user_id
+    token,
+    currentUser
   };
 };
 
-exports.logoutUser = {
+exports.logoutUser = () => ({
   type: 'UNAUTH_USER'
-};
+});

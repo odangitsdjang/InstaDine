@@ -80,10 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 24,
-<<<<<<< HEAD:frontend/components/splash.js
-=======
     padding: 30
->>>>>>> cf135a324684bf3b85a2500a6603f41d821c5232:frontend/components/Splash.js
   },
   authButtons: {
     justifyContent: 'space-around',

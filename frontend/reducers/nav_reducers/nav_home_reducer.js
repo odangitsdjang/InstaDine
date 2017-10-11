@@ -20,7 +20,7 @@ const navHomeReducer = (state = initialState, action) => {
         const newState = HomeNavigator.router.getStateForAction(
           HomeNavigator.router.getActionForPathAndParams(action.routeName)
         );
-        console.log(newState);
+        // console.log(newState);
         return newState;
       }
       else { return state; }

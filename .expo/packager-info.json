@@ -1,8 +1,8 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://sf-i2k.jerryzlau.insta-dine.exp.direct",
-  "packagerNgrokUrl": "https://packager.sf-i2k.jerryzlau.insta-dine.exp.direct",
-  "ngrokPid": 76136,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "packagerPort": 19002,
-  "packagerPid": 76119
+  "packagerPid": 76722
 }

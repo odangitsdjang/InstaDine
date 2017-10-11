@@ -13,6 +13,7 @@ class Login extends Component {
     };
 
     this.redirectBack = this.redirectBack.bind(this);
+    this.redirectHomePage = this.redirectHomePage.bind(this);
     this.update = this.update.bind(this);
     this.onLogin = this.onLogin.bind(this);
     this.onLogout = this.onLogout.bind(this);
@@ -69,12 +70,17 @@ class Login extends Component {
         </View>
 
         <Button
-          onPress={this.redirectBack}
-          title='Back' />
+          onPress={this.onLogin}
+          title='Log In' />
           
         <Button
           onPress={this.onLogout}
           title='Log out' />
+
+        <Button
+          onPress={this.redirectBack}
+          title='Back' />
+          
         <Button
           onPress={this.redirectHomePage}
           title='Home' />
