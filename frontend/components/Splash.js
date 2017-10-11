@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   title: {
-    fontSize: 30,
+    fontSize: 40,
     padding: 30
   },
   authButtons: {

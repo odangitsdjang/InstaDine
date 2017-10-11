@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, TabNavigator } from 'react-navigation';
+import { addNavigationHelpers, DrawerNavigator } from 'react-navigation';
 import UserProfile from '../components/profile/UserProfile';
 import MapItem from '../components/home/MapItem';
-// import Splash from '../components/Splash';
 
 const routeConfig = {
   MapItem: { screen: MapItem },
@@ -14,7 +13,7 @@ const homeNavigatorConfig = {
   initialRouteName: 'MapItem'
 };
 
-export const HomeNavigator = TabNavigator(
+export const HomeNavigator = DrawerNavigator(
   routeConfig,
   homeNavigatorConfig
 );
