@@ -55,7 +55,7 @@ exports.signup = function(req, res, next) {
       phoneNumber: phoneNumber
     });
     user.save(function(err) {
-      console.log(err;
+      console.log(err);
       if(err) { return next(err); }
       let currentUser = { email: user.email, 
                           username: user.username,

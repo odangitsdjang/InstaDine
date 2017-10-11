@@ -5,6 +5,8 @@ import { configureStore } from './frontend/store/store';
 import AppWithNavigationState from './frontend/navigators/AppNavigator';
 import { AppRegistry } from 'react-native';
 
+
+
 class Root extends React.Component {
   render() {
     return (
