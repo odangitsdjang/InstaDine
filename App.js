@@ -6,6 +6,8 @@ import AppWithNavigationState from './frontend/navigators/AppNavigator';
 import { AppRegistry } from 'react-native';
 import App from './frontend/components/App';
 
+
+
 class Root extends React.Component {
   render() {
     return (
