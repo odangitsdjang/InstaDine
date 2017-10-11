@@ -1,6 +1,10 @@
 import { MapView } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, Dimensions, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, Dimensions, 
+  TouchableOpacity, TextInput, Alert, TouchableHighlight, Keyboard } 
+         from 'react-native';
+
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -47,14 +51,17 @@ class MapItem extends Component {
       markers: SAMPLE_MARKERS,
       selectedMarker: 0,
       loaded: 0,
-      searchText: "Search"
+      searchActive: false,
+      searchText: ""
     };
     this.map = 0;
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
-    
+    this.submitSearch = this.submitSearch.bind(this);
+    this.renderCancelIcon = this.renderCancelIcon.bind(this);
+    this.renderSearchIcon = this.renderSearchIcon.bind(this);
   }
 
   componentDidMount() {
@@ -127,6 +134,10 @@ class MapItem extends Component {
     if (this.state.loaded) return this.state.markers;
   }
 
+  submitSearch() {
+    // update results by ajax calling to the backend with this.state.searchText
+  }
+
   onRegionChangeComplete(region) {
     this.setState({ region });
     // this.setState({ markers: this.state.markers.map(marker => (
@@ -138,6 +149,33 @@ class MapItem extends Component {
     // ))});
     // should eventually calculate area within the map area, update state, which should hopefully re render markers
 
+  }
+
+  renderSearchIcon() {
+    if (!this.state.searchActive) {
+      return  <Ionicons style={styles.leftIcon} name="ios-search" size={20} />; 
+    } else {
+      return (
+        <TouchableHighlight onPress={()=> {
+          Keyboard.dismiss();
+          this.setState({ searchActive: false })}} 
+          style={styles.icon}>
+          <Ionicons style={styles.leftIcon} name="ios-arrow-back" size={20} />
+        </TouchableHighlight>
+      ); 
+    }
+  }
+
+  renderCancelIcon() {
+    if(this.state.searchActive) {
+      return (
+        <TouchableHighlight onPress={() => this.setState({ searchText: "" })} style={styles.icon} >
+          <Ionicons  name="ios-close" size={20} />
+        </TouchableHighlight>
+      );
+    } else {
+      return null;
+    }
   }
 
   render() {
@@ -157,11 +195,23 @@ class MapItem extends Component {
             { this.renderMarkers()  }
         </MapView>
         <View style={styles.searchContainer}>
-          <TextInput style={styles.search}
-            onChangeText={(searchText) => this.setState({ searchText })}
-            value={this.state.searchText} />
-        </View>
-        
+          <View style={{ flex: 0.05 }}></View>
+          <View style={styles.search}>
+            {this.renderSearchIcon()}
+            <TextInput
+              placeholder="Search"
+              style={{ paddingLeft: 20, flex: 8 }}
+              onChangeText={(searchText) => this.setState({ searchText })}
+              onSubmitEditing={this.enterSearch}
+              autoCorrect={false}
+              onFocus={() => this.setState({ searchActive: true })}
+              value={this.state.searchText} 
+              />
+            {this.renderCancelIcon()}
+          </View>
+          <View style={{ flex: 0.05 }}></View>
+        </View> 
+     
       </View>
       
     );
@@ -180,18 +230,30 @@ const styles = StyleSheet.create({
     flex: 1
   }, 
   searchContainer: {
+    flexDirection: 'row',
     position: 'absolute',
-    top: 50,
-    alignContent: 'stretch',
+    top: 45
   },
   search: {
-    backgroundColor: 'red',
-    height: 40 
+    backgroundColor: 'white',
+    flex: 0.9, 
+    flexDirection: 'row',
+    borderWidth: 1, 
+    alignItems: 'stretch',
+    borderColor: '#fafafa',
+    borderRadius: 5,
+    height: 50,
+  },
+  leftIcon: {
+    paddingLeft: 20,
+    alignSelf: 'center'
+  }, 
+  icon: {
+    flex: 1,
+    alignSelf: 'center',
+    justifyContent: 'center'
   }
+
 });
 
 export default MapItem;
-/*
-
-
- */
