@@ -5,7 +5,7 @@ const initialState = HomeNavigator.router.getStateForAction(
   HomeNavigator.router.getActionForPathAndParams('MapItem')
 );
 
-const routes = ['MapItem', 'UserProfile'];
+const routes = ['MapItem', 'UserProfile', 'Reservation'];
 
 const navHomeReducer = (state = initialState, action) => {
   Object.freeze(state);

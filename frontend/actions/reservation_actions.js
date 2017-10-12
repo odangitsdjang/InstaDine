@@ -9,7 +9,7 @@ export const createReservation = (reservation, userToken) => {
   return dispatch => {
     return axios.post(RESV_URL, {reservation, userToken}).then(response => {
       dispatch(receiveReservation(response.data));
-    }).catch(error => dispatch(addAlert('Could not create reservation')));
+    }).catch(error => dispatch(addAlert(error)));
   };
 };
 

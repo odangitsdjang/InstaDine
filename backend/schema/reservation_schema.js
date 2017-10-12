@@ -35,22 +35,24 @@ const reservationSchema = new Schema({
 );
 
 // After reservation saves, push res to restaurant queue & update user res
-reservationSchema.post('save', function(next){
-  const reservation = this;
+reservationSchema.post('save', function(reservation){
+
   Restaurant.findOneAndUpdate(
     { _id: reservation.restaurant_id }, 
     { $push: { queue: reservation } },
     function (restaurantError, updatedRestaurant) {
-      if (restaurantError) { return next(restaurantError); }
+      if (restaurantError) { return restaurantError; }
       User.findOneAndUpdate(
         { _id: reservation.user_id },
-        { reservation: reservation },
-        function (userError, updatedUser) {
-          if (userError) { return next(userError); }
+        { $push: {reservation: reservation } },
+        function (userError, user) {
+          if (userError) { return userError; }
         }
       );
     }
   );
+
+
 });
 
 module.exports = reservationSchema;

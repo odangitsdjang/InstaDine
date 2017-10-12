@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const restaurantSchema = require('../schema/restaurant_schema');
-const reservationSchema = require('../schema/reservation_schema');
 // const jwt = require('jwt-simple');
 // const config = require('../config');
 

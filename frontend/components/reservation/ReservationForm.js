@@ -13,20 +13,24 @@ class ReservationForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      restaurant_id: null,
-      seat_count: null,
+      restaurant_id: '',
+      seat_count: '',
       datetime: Date.now()
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
   handleInput(type){
+    console.log(this.props);
+    console.log(this.state);
     return event => this.setState({[type]: event.nativeEvent.text});
   }
   
   handleSubmit(event){
     const newReservation = {
       restaurant_id: this.state.restaurant_id,
-      seat_count: parseInt(this.state.restaurant_id),
+      seat_count: parseInt(this.state.seat_count),
       datetime: this.state.datetime
     };
 
@@ -40,20 +44,20 @@ class ReservationForm extends Component {
 
         <Text>Restaurant ID</Text>
         <TextInput
-          onchange={this.handleInput('restaurant_id')}
+          onChange={this.handleInput('restaurant_id')}
           value={this.state.restaurant_id}
           placeholder='RestaurantID' />
         
         <Text>Seat Count</Text>
         <TextInput
-          onchange={this.handleInput('seat_count')}
-          value={this.state.seat_count}
+          onChange={this.handleInput('seat_count')}
+          value={this.state.seat_count.toString()}
           placeholder='Seat Count' />
 
         <Text>Datetime</Text>
         <TextInput
-          onchange={this.handleInput('datetime')}
-          value={this.state.datetime}
+          onChange={this.handleInput('datetime')}
+          value={this.state.datetime.toString()}
           placeholder='Date Time' />
 
         <Button

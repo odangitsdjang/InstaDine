@@ -19,6 +19,6 @@ router.route('/login')
 // Route to create new reservation
 router.route('/reservations')
       .post(ReservationsController.create);
-
+      
 module.exports = router;
 

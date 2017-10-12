@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const reservationSchema = require('../schema/reservation_schema');
 const User = require('../models/user');
 
 const restaurantSchema = new Schema({
@@ -36,7 +35,7 @@ const restaurantSchema = new Schema({
     type: String,
     required: 'Manager is required'
   },
-  queue: [reservationSchema],
+  queue: [],
   tables: {
     max: {
       type: Number,
@@ -46,7 +45,7 @@ const restaurantSchema = new Schema({
       {
         table_number: Number,
         user_id: Number,
-        reservation: reservationSchema,
+        reservation: [],
         timeIn: Date
       }
     ],
