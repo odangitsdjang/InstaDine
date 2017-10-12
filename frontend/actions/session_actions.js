@@ -7,8 +7,8 @@ exports.loginUser = user => {
     return axios.post(LOGIN_URL, user).then((response) => {
       var { user_id, token, currentUser } = response.data;
       dispatch(authUser(user_id, token, currentUser));
-    }).catch((error) => {
-      dispatch(addAlert("Could not log in."));
+    }).catch((errors) => {
+      dispatch(addAlert("Incorrect login or password"));
     });
   };
 };
@@ -19,12 +19,11 @@ exports.signupUser = user => {
       console.log(response);
       var { user_id, token, currentUser } = response.data;
       dispatch(authUser(user_id, token, currentUser));
-    }).catch((error) => {
-      dispatch(addAlert(error));
+    }).catch((errors) => {
+      dispatch(addAlert(errors));
     });
   };
 };
-
 
 const authUser = (user_id, token, currentUser) => {
   return {
