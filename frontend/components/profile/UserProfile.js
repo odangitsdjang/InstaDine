@@ -90,12 +90,14 @@ class UserProfile extends Component {
   
           <View style={[styles.boxContainer, styles.pastReservations]}>
             <ScrollView
-              horizontal={true}
               decelerationRate={0}
               snapToInterval={200} //your element width
               snapToAlignment={"center"}
             >
               <Text>past rservation</Text>
+              <Text>past rservation</Text>
+              <Text>past rservation</Text>
+             
             </ScrollView>
           </View>
   
