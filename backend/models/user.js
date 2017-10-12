@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
-const userSchema = require('../schema/user_schema');
 const bcrypt = require('bcrypt-nodejs');
 
 const validateEmail = email => {
   return (/\S+@\S+\.\S+/).test(email);
 };
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   email: { 
     type: String,
     lowercase: 'Email has to be lowercase',
