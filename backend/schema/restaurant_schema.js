@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const reservationSchema = require('../schema/reservation_schema');
+const User = require('../models/user');
 
-// Define restaurant schema
 const restaurantSchema = new Schema({
   name: {
     type: String,
@@ -11,6 +10,7 @@ const restaurantSchema = new Schema({
   address: {
     street: {
       type: String,
+      unique: "This address is already registered",
       required: 'Street is required'
     },
     city: {
@@ -26,21 +26,26 @@ const restaurantSchema = new Schema({
       required: 'Zip code is required'
     }
   },
-  manager: {
+  phoneNumber: {
+    type: String,
+    required: 'Phone number is required',
+    unique: 'Phone number is already registered'
+  },
+  manager_id: {
     type: String,
     required: 'Manager is required'
   },
-  queue: [reservationSchema],
+  queue: [],
   tables: {
     max: {
       type: Number,
-    required: 'Max tables is required'
+      required: 'Max tables is required'
     },
     current: [
       {
         table_number: Number,
         user_id: Number,
-        reservation: reservationSchema,
+        reservation: [],
         timeIn: Date
       }
     ],
@@ -60,4 +65,16 @@ const restaurantSchema = new Schema({
 // Add indices
 restaurantSchema.index({ name: 1, address: 1 }, { unique: true });
 
-module.exports =  restaurantSchema;
+// Post save, update current user record to add new restaurant._id
+restaurantSchema.post('save', function (next) {
+  const restaurant = this;
+  User.findOneAndUpdate(
+    { _id: restaurant.manager_id },
+    { $push: { properties: restaurant._id } },
+    function (error, updatedUser) {
+      if (error) { return next(error); }
+    }
+  );
+});
+
+module.exports = restaurantSchema;

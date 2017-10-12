@@ -5,13 +5,12 @@ const config = require('../config');
 const userToken = user => {
   let timestamp = new Date().getTime();
   return jwt.encode({
-    sub: user.id,
+    sub: user._id,
     iat: timestamp
   }, config.secret);
 };
 
 exports.login = function (req, res, next) {
-  console.log(req.user, "------------------------------");
   let user = req.user;
   //find the user, if found, log that person in 
   User.findOne({email: user.email}, function(err, Founduser){
@@ -38,6 +37,7 @@ exports.login = function (req, res, next) {
 
 exports.signup = function(req, res, next) {
   //these are same as user_params 
+
   let { email,
         password,
         username,
@@ -45,7 +45,7 @@ exports.signup = function(req, res, next) {
 
   User.findOne({email: email}, function(err, extistingUser) {
     if(err) { return next(err); }
-    if(extistingUser) { return resizeBy.status(422).json({error: "Email taken"}); }
+    if(extistingUser) { return res.status(422).json({error: "Email taken"}); }
     let user = new User({
       email: email,
       password: password,
@@ -53,7 +53,6 @@ exports.signup = function(req, res, next) {
       phoneNumber: phoneNumber
     });
     user.save(function(err) {
-      console.log(err);
       if(err) { return next(err); }
       let currentUser = { email: user.email, 
                           username: user.username,

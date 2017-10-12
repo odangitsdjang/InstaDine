@@ -4,11 +4,13 @@ import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 import UserProfileContainer from '../components/profile/UserProfileContainer';
 import MapItem from '../components/home/MapItem';
 import Splash from '../components/Splash';
+import ReservationFormContainer from '../components/reservation/ReservationFormContainer';
 
 const routeConfig = {
   MapItem: { screen: MapItem },
   UserProfile: { screen: UserProfileContainer },
-  Splash: { screen: Splash }
+  Splash: { screen: Splash },
+  Reservation: { screen: ReservationFormContainer }
 };
 
 const homeNavigatorConfig = {

@@ -1,21 +1,26 @@
 const mongoose = require('mongoose');
 const restaurantSchema = require('../schema/restaurant_schema');
+// const jwt = require('jwt-simple');
+// const config = require('../config');
 
-mongoose.connect('mongodb://localhost:instaDine/instaDine');
+// ONLY FOR TESTING. REMEMBER TO REMOVE!!!
+// mongoose.connect('mongodb://localhost:instaDine/instaDine');
+// const Restaurant = mongoose.model('restaurant', restaurantSchema);
+// ONLY FOR TESTING. REMEMBER TO REMOVE!!!
 
-// Post save, update current user record to add new restaurant._id
-// restaurantSchema.post('save', )
+// Define restaurant schema
+module.exports = mongoose.model('restaurant', restaurantSchema);
 
-// FOR TESTING RESTAURANT CREATE
-// let restaurant = new Restaurant({
-//   name: "Elaine's Kitchen",
+// // FOR TESTING RESTAURANT CREATE
+// const restaurant = new Restaurant({
+//   name: "Elaine's Kitchen 3",
 //   address: {
 //     street: '434 Broadway St',
 //     city: 'San Francisco',
 //     state: 'CA',
 //     zip: 94133
 //   },
-//   manager: "Jerry Lau",
+//   manager_id: "59de73a07c9607384f29fc5a",
 //   queue: [],
 //   tables: {
 //     max: 8,
@@ -25,11 +30,9 @@ mongoose.connect('mongodb://localhost:instaDine/instaDine');
 // });
 
 // restaurant.save((error) => {
-//   if (error) { 
+//   if (error) {
 //     console.log(error);
-//     console.log('Error occured'); 
+//     console.log('Error occured');
 //   }
-//   else { console.log('User saved');    }
+//   else { console.log('Restaurant Saved'); }
 // });
-
-module.exports = mongoose.model('restaurant', restaurantSchema);
