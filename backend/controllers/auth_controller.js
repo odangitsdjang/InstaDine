@@ -10,6 +10,8 @@ const userToken = user => {
   }, config.secret);
 };
 
+// exports.login = () => console.log('Do nothing');
+
 exports.login = function (req, res, next) {
   let user = req.user;
   //find the user, if found, log that person in 
