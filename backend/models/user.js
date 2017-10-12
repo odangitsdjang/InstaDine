@@ -34,7 +34,9 @@ const userSchema = new Schema({
     required: true
   },
   properties: [] //takes restaurant ids 
-});
+},
+{ timestamps: true }
+);
 
 
 userSchema.pre('save', function(next) {

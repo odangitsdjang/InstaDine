@@ -2,7 +2,8 @@
 // import merge from 'lodash/merge';
 
 let defaultState = {
-  user_id: undefined
+  user_id: undefined,
+  currentUser: null
 };
 
 const SessionReducer = (state=defaultState, action) => {

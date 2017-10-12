@@ -1,16 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator } from 'react-navigation';
-import UserProfile from '../components/profile/UserProfileContainer';
+import UserProfileContainer from '../components/profile/UserProfileContainer';
 import MapItem from '../components/home/MapItem';
-// import Splash from '../components/Splash';
+import Splash from '../components/Splash';
 
 const routeConfig = {
   MapItem: { screen: MapItem },
-  UserProfile: { screen: UserProfile }
+  UserProfile: { screen: UserProfileContainer },
+  Splash: { screen: Splash }
 };
 
 const homeNavigatorConfig = {
+  // navigationOptions: { tabBarVisible: true },
   initialRouteName: 'MapItem'
 };
 

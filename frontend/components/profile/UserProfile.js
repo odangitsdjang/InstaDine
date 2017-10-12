@@ -96,14 +96,6 @@ class UserProfile extends Component {
               snapToAlignment={"center"}
             >
               <Text>past rservation</Text>
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
             </ScrollView>
           </View>
   
@@ -116,38 +108,11 @@ class UserProfile extends Component {
       );
     }else{
       return(
-        // <View style={styles.container}>
-        //   <View style={styles.notLoggedOnContainer}>
-        //     <Text style={styles.notLoggedOn}>
-        //       Oops! You are not logged on</Text>
-        //   </View>
-        // </View>
-        <View style={[styles.boxContainer, styles.pastReservations]}>
-          <ScrollView 
-            horizontal={true}
-            decelerationRate={0}
-            snapToInterval={200} //your element width
-            snapToAlignment={"center"}
-          >
-          
-            <Text>past rservation</Text>  <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-            <Text>past rservation</Text>
-          </ScrollView>
+        <View style={styles.container}>
+          <View style={styles.notLoggedOnContainer}>
+            <Text style={styles.notLoggedOn}>
+              Oops! You are not logged on</Text>
+          </View>
         </View>
       );
     }

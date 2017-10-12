@@ -1,6 +1,11 @@
 import { MapView } from 'expo';
+
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, Dimensions, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, Dimensions, 
+  TouchableOpacity, TextInput, Alert } 
+         from 'react-native';
+import Search from './Search';
+import SearchResults from './SearchResults';
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -47,14 +52,17 @@ class MapItem extends Component {
       markers: SAMPLE_MARKERS,
       selectedMarker: 0,
       loaded: 0,
-      searchText: "Search"
+      searchActive: false,
+      searchText: ""
+      
     };
     this.map = 0;
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
-    
+    this.setSearchActive = this.setSearchActive.bind(this);
+    this.setSearchText = this.setSearchText.bind(this);
   }
 
   componentDidMount() {
@@ -140,30 +148,43 @@ class MapItem extends Component {
 
   }
 
-  render() {
-    // console.log(this.state);
-    return (
-      <View style={styles.container}>
-        <MapView style={styles.mapInitial} 
+  renderMap() {
+    if (!this.state.searchActive) {
+      return (
+        <MapView style={styles.mapInitial}
           showsMyLocationButton={true}
-          onPress={()=>this.setState({selectedMarker: 0})}
-          ref={ (map)=> { this.map = map; } }
+          onPress={() => this.setState({ selectedMarker: 0 })}
+          ref={(map) => { this.map = map; }}
           provider="google"
           initialRegion={this.state.region}
           loadingEnabled={true}
           showsUserLocation={true}
-           onRegionChangeComplete={this.onRegionChangeComplete}
-           >
-            { this.renderMarkers()  }
+          onRegionChangeComplete={this.onRegionChangeComplete}
+        >
+          {this.renderMarkers()}
         </MapView>
-        <View style={styles.searchContainer}>
-          <TextInput style={styles.search}
-            onChangeText={(searchText) => this.setState({ searchText })}
-            value={this.state.searchText} />
-        </View>
-        
+      );
+    }
+  }
+
+  setSearchActive(bool) {
+    this.setState({ searchActive: bool });
+  }
+
+  setSearchText(text) {
+    this.setState({ searchText: text });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        { this.renderMap() }
+        <Search setSearchText={this.setSearchText} 
+                searchActive={this.state.searchActive} 
+                searchText={this.state.searchText} 
+                setSearchActive={this.setSearchActive}/>
+        <SearchResults searchActive={this.state.searchActive}/>
       </View>
-      
     );
   }
 }
@@ -173,25 +194,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
-    backgroundColor: '#2c3e50'
+    backgroundColor: '#4b4b4b'
   }, 
   mapInitial: {
     paddingTop: 25,
     flex: 1
-  }, 
-  searchContainer: {
-    position: 'absolute',
-    top: 50,
-    alignContent: 'stretch',
-  },
-  search: {
-    backgroundColor: 'red',
-    height: 40 
   }
+
 });
 
 export default MapItem;
-/*
-
-
- */

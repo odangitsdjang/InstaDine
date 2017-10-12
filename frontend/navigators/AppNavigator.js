@@ -5,15 +5,16 @@ import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 import Splash from '../components/Splash';
 import Login from '../components/auth/LoginContainer';
 import Signup from '../components/auth/SignupContainer';
+
+// TEMPORARY REMOVE AFTER TESTING
 import HomePage from '../components/home/HomePage';
-import RestaurantContainer from '../components/restaurant/RestaurantContainer';
+// TEMPORARY REMOVE AFTER TESTING
 
 const routeConfig = {
   Splash: { screen: Splash },
   Login: { screen: Login },
   Signup: { screen: Signup },
-  HomePage: { screen: HomePage },
-  RestaurantContainer: { screen: RestaurantContainer }
+  HomePage: { screen: HomePage }
 };
 
 const appNavigatorConfig = {
