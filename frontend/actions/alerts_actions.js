@@ -1,7 +1,7 @@
-exports.addAlert = (text) => {
+exports.addAlert = error => {
   return {
     type: 'ADD_ALERT',
-    text
+    error
   };
 };
 

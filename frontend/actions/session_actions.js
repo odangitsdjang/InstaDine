@@ -9,7 +9,7 @@ exports.loginUser = user => {
       var { user_id, token, currentUser } = response.data;
       dispatch(authUser(user_id, token, currentUser));
     }).catch((error) => {
-      dispatch(addAlert("Could not log in."));
+      dispatch(addAlert("Incorrect login or password"));
     });
   };
 };

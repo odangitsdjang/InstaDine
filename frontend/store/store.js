@@ -19,6 +19,9 @@ var _defaultState = {
   },
   session: {
     currentUser: null
+  },
+  errors: {
+    session: null
   }
 };
 
