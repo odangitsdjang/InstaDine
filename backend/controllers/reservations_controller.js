@@ -35,9 +35,9 @@ exports.create = function(req, res, next) {
 };
 
 exports.update = function(req, res, next){
-  const userToken = req.body.userToken;
-  const userId = jwt.decode(userToken, config.secret).sub;
-  const userId = req.body;
+  // const userToken = req.body.userToken;
+  // const userId = jwt.decode(userToken, config.secret).sub;
+  // const userId = req.body;
 
   
 };
