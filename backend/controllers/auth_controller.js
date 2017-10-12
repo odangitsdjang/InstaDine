@@ -10,6 +10,8 @@ const userToken = user => {
   }, config.secret);
 };
 
+// exports.login = () => console.log('Do nothing');
+
 exports.login = function (req, res, next) {
   console.log(req.user, "------------------------------");
   let user = req.user;
