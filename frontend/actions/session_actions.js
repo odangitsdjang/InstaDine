@@ -26,7 +26,6 @@ exports.signupUser = user => {
   };
 };
 
-
 const authUser = (user_id, token, currentUser) => {
   return {
     type: 'AUTH_USER',

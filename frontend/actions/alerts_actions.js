@@ -7,7 +7,6 @@ exports.addAlert = errors => {
 
 exports.removeAlert = (id) => {
   return {
-    type: 'REMOVE_ALERT',
-    id
+    type: 'REMOVE_ALERT'
   };
 };

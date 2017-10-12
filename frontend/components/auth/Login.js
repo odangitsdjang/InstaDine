@@ -50,6 +50,7 @@ class Login extends Component {
       Alert.alert(
         this.errors
       );
+      this.props.removeAlert();
     }
   }
 
