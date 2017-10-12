@@ -61,6 +61,7 @@ exports.signup = function(req, res, next) {
     });
 
     user.save(function(err) {
+      console.log(err.message, "+++++++++++++");
       if(err) { 
         return res.status(400).send(err.message);
       }
