@@ -36,7 +36,7 @@ const restaurantSchema = new Schema({
     latitude: Number,
     longitude:  Number
   },
-  phoneNumber: {
+  phone_number: {
     type: String,
     required: 'Phone number is required',
     unique: 'Phone number is already registered'
@@ -67,7 +67,8 @@ const restaurantSchema = new Schema({
         timeOut: Number
       }
     ]
-  }
+  },
+  picture_url: String
 },
 { timestamps: true }
 );
