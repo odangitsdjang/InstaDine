@@ -8,7 +8,7 @@ exports.loginUser = user => {
       console.log(response);
       var { user_id, token, currentUser } = response.data;
       dispatch(authUser(user_id, token, currentUser));
-    }).catch((error) => {
+    }).catch((errors) => {
       dispatch(addAlert("Incorrect login or password"));
     });
   };
@@ -20,8 +20,8 @@ exports.signupUser = user => {
       console.log(response);
       var { user_id, token, currentUser } = response.data;
       dispatch(authUser(user_id, token, currentUser));
-    }).catch((error) => {
-      dispatch(addAlert(error));
+    }).catch((errors) => {
+      dispatch(addAlert(errors));
     });
   };
 };

@@ -1,23 +1,23 @@
 let defaultState = {
-  error: null
+  errors: null
 };
 
 const SessionErrorReducer = (state = defaultState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case 'ADD_ALERT':
-    if (typeof action.error === "string"){
+    if (typeof action.errors === "string"){
         return{
-          sessionErrors: action.error
+          errors: action.errors
         };
       }else{
         return {
-          sessionErrors: action.error.response.data
+          errors: action.errors.response.data
         };
       }
     case 'REMOVE_ALERT':
       return {
-        sessionErrors: undefined
+        errors: undefined
       };
     default:
       return state;
