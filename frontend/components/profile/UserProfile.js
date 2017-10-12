@@ -81,8 +81,8 @@ class UserProfile extends Component {
               style={styles.userProfile}/>
             <View style={styles.userInfoDetails}>
               <Text style={{fontSize: 30}}>{username}</Text>
-              <Text>{email}</Text>
-              <Text>{phoneNumber}</Text>
+              <Text style={styles.regularFont}>{email}</Text>
+              <Text style={styles.regularFont}>{phoneNumber}</Text>
             </View>
           </View>
   
@@ -127,6 +127,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  regularFont: {
+    fontFamily: 'Georgia'
+  },
   notLoggedOn: {
     color: 'red',
     fontSize: 40
@@ -151,7 +154,8 @@ const styles = StyleSheet.create({
   },
   profileTitle: {
     fontSize: 30,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontFamily: 'Chalkboard SE'
   },
   profileHeader: {
     backgroundColor: 'orange'
@@ -159,8 +163,7 @@ const styles = StyleSheet.create({
   userInfo: {
     flex: 2,
     justifyContent: 'space-around',
-    flexDirection: 'row',
-    backgroundColor: 'red'
+    flexDirection: 'row'
   },
   reservation: {
     flex: 2,
