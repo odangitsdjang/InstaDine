@@ -16,7 +16,9 @@ exports.login = function (req, res, next) {
   let user = req.user;
   //find the user, if found, log that person in 
   User.findOne({email: user.email}, function(err, Founduser){
-    if (err) { return next(err); }
+    if (err) { 
+      return next(err); 
+    }
     if (Founduser) { 
       //pull the wanted user data for session state
       let currentUser = {
@@ -46,16 +48,25 @@ exports.signup = function(req, res, next) {
         phoneNumber } = req.body;
 
   User.findOne({email: email}, function(err, extistingUser) {
-    if(err) { return next(err); }
-    if(extistingUser) { return res.status(422).json({error: "Email taken"}); }
+    if(err) { 
+      return next(err); 
+    }
+    if(extistingUser) { 
+      return resizeBy.status(422).json({error: "Email taken"}); 
+    }
+
     let user = new User({
       email: email,
       password: password,
       username: username,
       phoneNumber: phoneNumber
     });
+
     user.save(function(err) {
-      if(err) { return next(err); }
+      if(err) { 
+        return res.status(400).send(err.message);
+      }
+
       let currentUser = { email: user.email, 
                           username: user.username,
                           phoneNumber: user.phoneNumber,

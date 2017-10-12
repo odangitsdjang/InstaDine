@@ -1,7 +1,8 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button,
-         TextInput } from 'react-native';
+         TextInput,
+         Alert } from 'react-native';
 
 // create a component
 class Login extends Component {
@@ -16,17 +17,19 @@ class Login extends Component {
     this.redirectHomePage = this.redirectHomePage.bind(this);
     this.update = this.update.bind(this);
     this.onLogin = this.onLogin.bind(this);
-    this.onLogout = this.onLogout.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
+  }
+
+  componentWillReceiveProps(newProps){
+    if(this.props.errors !== newProps.errors){
+      this.errors = newProps.errors;
+    }
   }
 
   update(field) {
     return e => this.setState({
       [field]: e.nativeEvent.text
     });
-  }
-
-  onLogout(){
-    this.props.logoutUser();
   }
 
   onLogin() {
@@ -42,12 +45,22 @@ class Login extends Component {
     this.props.navigation.dispatch({ type: 'HomePage' });
   }
 
+  renderErrors(){
+    if(this.errors){
+      Alert.alert(
+        this.errors
+      );
+      this.props.removeAlert();
+    }
+  }
+
   render() {
     let {email, password} = this.state;
 
     return (
       <View style={styles.container}>
         <Text>This is the Login page</Text>
+        {this.renderErrors()}
         <View style={styles.loginForm}>
           <Text style={styles.fieldTitle}>Email:</Text>
           <View style={styles.field}>
@@ -72,10 +85,6 @@ class Login extends Component {
         <Button
           onPress={this.onLogin}
           title='Log In' />
-          
-        <Button
-          onPress={this.onLogout}
-          title='Log out' />
 
         <Button
           onPress={this.redirectBack}
@@ -96,6 +105,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#2c3e50',
+  },
+  errorText:{
+    color: 'red',
+    fontSize: 30
   },
   field: {
     borderRadius: 5,
