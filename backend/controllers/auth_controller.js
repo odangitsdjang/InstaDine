@@ -5,7 +5,7 @@ const config = require('../config');
 const userToken = user => {
   let timestamp = new Date().getTime();
   return jwt.encode({
-    sub: user.id,
+    sub: user._id,
     iat: timestamp
   }, config.secret);
 };
@@ -39,6 +39,7 @@ exports.login = function (req, res, next) {
 
 exports.signup = function(req, res, next) {
   //these are same as user_params 
+
   let { email,
         password,
         username,

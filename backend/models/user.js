@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const userSchema = require('../schema/user_schema');
 const bcrypt = require('bcrypt-nodejs');
 
 const validateEmail = email => {
