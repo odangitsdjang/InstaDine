@@ -29,7 +29,8 @@ const restaurantSchema = new Schema({
   },
   full_address: {
     type: String,
-    unique: true
+    unique: true,
+    required: 'Address is required'
   },
   geo: {
     latitude: Number,
@@ -75,7 +76,7 @@ const restaurantSchema = new Schema({
 restaurantSchema.index({ name: 1, address: 1 }, { unique: true });
 
 // Pre save, get geocoding for address
-restaurantSchema.pre('save', function(next) {
+restaurantSchema.pre('validate', function(next) {
   const restaurant = this;
   const street = restaurant.address.street.split(' ').join('+');
   const city = restaurant.address.city.split(' ').join('+');
