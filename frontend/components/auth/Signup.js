@@ -1,7 +1,8 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button,
-         TextInput } from 'react-native';
+         TextInput,
+         Alert } from 'react-native';
 
 // create a component
 class Signup extends Component {
@@ -17,6 +18,7 @@ class Signup extends Component {
     this.redirectBack = this.redirectBack.bind(this);
     this.update = this.update.bind(this);
     this.onSignUp = this.onSignUp.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
   }
 
   update(field) {
@@ -33,11 +35,28 @@ class Signup extends Component {
     this.props.navigation.dispatch({ type: 'NAVIGATION/BACK' });
   }
 
+  componentWillReceiveProps(newProps) {
+    if (this.props.errors !== newProps.errors) {
+      this.errors = newProps.errors;
+    }
+  }
+
+  renderErrors() {
+    if (this.errors) {
+      this.errors = this.errors.slice(24,-1);
+      Alert.alert(
+        this.errors
+      );
+      this.props.removeAlert();
+    }
+  }
+
   render() {
     let {email, password, phoneNumber, username} = this.state;
     return (
       <View style={styles.container}>
         <Text>This is the Sign Up page</Text>
+        {this.renderErrors()}
         <View style={styles.signUpForm}>
           <Text style={styles.fieldTitle}>Email:</Text>
           <View style={styles.field}>

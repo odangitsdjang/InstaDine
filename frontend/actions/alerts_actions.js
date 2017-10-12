@@ -1,13 +1,12 @@
-exports.addAlert = (text) => {
+exports.addAlert = errors => {
   return {
     type: 'ADD_ALERT',
-    text
+    errors
   };
 };
 
 exports.removeAlert = (id) => {
   return {
-    type: 'REMOVE_ALERT',
-    id
+    type: 'REMOVE_ALERT'
   };
 };

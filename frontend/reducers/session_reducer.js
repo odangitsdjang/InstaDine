@@ -1,6 +1,3 @@
-// import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
-// import merge from 'lodash/merge';
-
 let defaultState = {
   user_id: undefined,
   currentUser: null
