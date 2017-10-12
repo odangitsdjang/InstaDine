@@ -15,6 +15,13 @@ let router = require('./services/router');
 const devLink = 'mongodb://localhost:instaDine/instaDine';
 const productionLink = 'mongodb://heroku_xnlgzztq:2q53no3t91p0b1ep4uqln59dvh@ds117615.mlab.com:17615/heroku_xnlgzztq';
 
+<<<<<<< HEAD
+=======
+const devLink = 'mongodb://localhost:instaDine/instaDine';
+const productionLink = 'mongodb://heroku_xnlgzztq:2q53no3t91p0b1ep4uqln59dvh@ds117615.mlab.com:17615/heroku_xnlgzztq';
+
+//  if you only want to use localhost use:       mongoose.connect(devLink);
+>>>>>>> 885c17bc20aaf34913fc863931fea9dda7f63c8d
 mongoose.connect(productionLink || devLink);
 
 app.use(morgan('combined'));
@@ -25,4 +32,6 @@ let PORT = process.env.PORT || 3000;
 let HOST = process.env.HOST || '127.0.0.1';
 
 console.log('Listening on', HOST, PORT);
-app.listen(PORT, HOST);
+// might need to change this line to the following while working locally
+// app.listen(PORT, HOST)
+app.listen(PORT);
