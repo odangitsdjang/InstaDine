@@ -1,6 +1,6 @@
 
-export const productionUrl = `127.0.0.1:${process.env.PORT}`;
+export const productionUrl = `https://instadine.herokuapp.com/v1`;
 let API_URL = 'http://localhost:3000/v1';
 
-exports.SIGNUP_URL = `${API_URL}/signup`;
-exports.LOGIN_URL = `${API_URL}/login`;
+exports.SIGNUP_URL = `${productionUrl}/signup`;
+exports.LOGIN_URL = `${productionUrl}/login`;
