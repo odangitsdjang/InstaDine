@@ -6,11 +6,10 @@ const config = require('../config');
 // restaurant_id, user_id, seat_count, status, datetime, priority
 
 exports.create = function(req, res, next) {
-  // res.send("OK");
-  console.log('Create function -------------------------------------------------');
   const userToken = req.body.userToken;
   const userId = jwt.decode(userToken, config.secret).sub;
   console.log(req.body);
+  
   // Find if user already has a pending reservation
   Reservation.findOne({user_id: userId, status: 'Pending' }, 
     function(error, existingReservation){
@@ -36,5 +35,9 @@ exports.create = function(req, res, next) {
 };
 
 exports.update = function(req, res, next){
+  // const userToken = req.body.userToken;
+  // const userId = jwt.decode(userToken, config.secret).sub;
+  // const userId = req.body;
 
+  
 };

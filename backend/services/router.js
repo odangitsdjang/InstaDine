@@ -16,9 +16,12 @@ router.route('/signup')
 router.route('/login')
       .post([requireLogin, AuthenticationController.login]);
 
+router.route('/restaurants')
+      .post(RestaurantsController.create);
+
 // Route to create new reservation
 router.route('/reservations')
       .post(ReservationsController.create);
-      
+
 module.exports = router;
 
