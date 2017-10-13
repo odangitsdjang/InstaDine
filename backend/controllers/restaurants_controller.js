@@ -24,7 +24,7 @@ exports.create = function(req, res, next) {
 exports.search = function (req, res, next) {
   const searchQuery = req.query.searchQuery;
   let regex = "^" + searchQuery; 
-  var re = new RegExp(regex, "g");
+  var re = new RegExp(regex, "gi");
   
   Restaurant.find({ name: re }, function(error, restaurants) {
     if (error) { return next(error); }

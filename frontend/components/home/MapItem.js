@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, Dimensions, 
   TouchableOpacity, TextInput, Alert } 
          from 'react-native';
-import Search from './Search';
-import SearchResults from './SearchResults';
+import SearchContainer from './SearchContainer';
+import SearchResultContainer from './SearchResultContainer';
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -179,11 +179,12 @@ class MapItem extends Component {
     return (
       <View style={styles.container}>
         { this.renderMap() }
-        <Search setSearchText={this.setSearchText} 
+        <SearchContainer setSearchText={this.setSearchText} 
                 searchActive={this.state.searchActive} 
                 searchText={this.state.searchText} 
                 setSearchActive={this.setSearchActive}/>
-        <SearchResults searchActive={this.state.searchActive}/>
+        <SearchResultContainer searchActive={this.state.searchActive}
+          searchText={this.state.searchText} />
       </View>
     );
   }

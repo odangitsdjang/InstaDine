@@ -27,4 +27,4 @@ let HOST = process.env.HOST || '127.0.0.1';
 console.log('Listening on', HOST, PORT);
 // might need to change this line to the following while working locally
 // app.listen(PORT, HOST)
-app.listen(3000);
+app.listen(PORT);

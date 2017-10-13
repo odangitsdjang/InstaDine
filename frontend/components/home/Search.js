@@ -42,6 +42,7 @@ class Search extends Component {
 
   submitSearch() {
     // update results by ajax calling to the backend with this.state.searchText
+    this.props.search(this.props.searchText);
   }
 
   render() {
@@ -53,7 +54,10 @@ class Search extends Component {
           <TextInput
             placeholder="Search"
             style={{ paddingLeft: 20, flex: 8 }}
-            onChangeText={(searchText) => this.props.setSearchText(searchText)}
+            onChangeText={(searchText) => {
+              this.submitSearch(searchText);
+              this.props.setSearchText(searchText);
+            }}
             onSubmitEditing={this.enterSearch}
             autoCorrect={false}
             onFocus={() => this.props.setSearchActive(true)}
