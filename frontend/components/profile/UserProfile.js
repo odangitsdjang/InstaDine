@@ -32,6 +32,7 @@ class UserProfile extends Component {
     this.onLogout = this.onLogout.bind(this);
     this.upComingReservation = this.upComingReservation.bind(this);
     this._pickImage = this._pickImage.bind(this);
+    this.redirectHome = this.redirectHome.bind(this);
   }
 
   _pickImage = async () => {
@@ -73,6 +74,10 @@ class UserProfile extends Component {
         </View>
       );
     }
+  }
+
+  redirectHome() {
+    this.props.navigation.navigate('Map');
   }
 
   render() {
@@ -125,7 +130,7 @@ class UserProfile extends Component {
               title='Log out' />
 
             <Button
-              onPress={this.props.navigation.goBack}
+              onPress={this.redirectHome}
               title='Go Back' />
           </View>
         </View>
