@@ -7,16 +7,15 @@ let app = express();
 
 let router = require('./services/router');
 
-// if (process.env.NODE_ENV == 'production') {
-//   mongoose.connect(process.env.MONGO_URL);
-// } else {
-//   mongoose.connect('mongodb://localhost:user/user');
-// }
 const devLink = 'mongodb://localhost:instaDine/instaDine';
 const productionLink = 'mongodb://heroku_xnlgzztq:2q53no3t91p0b1ep4uqln59dvh@ds117615.mlab.com:17615/heroku_xnlgzztq';
 
-//  if you only want to use localhost use:       mongoose.connect(devLink);
-mongoose.connect(productionLink || devLink);
+mongoose.connect(productionLink);
+// if (process.env.NODE_ENV == 'production') {
+//   mongoose.connect(productionLink);
+// } else {
+//   mongoose.connect(devLink);
+// }
 
 app.use(morgan('combined'));
 app.use(bodyParser.json());

@@ -24,6 +24,10 @@ router.route('/users')
 router.route('/restaurants')
       .post(RestaurantsController.create);
 
+// Route for searching 
+router.route('/restaurants/search')
+      .get(RestaurantsController.search);
+
 // Route to create new reservation
 router.route('/reservations')
       .post(ReservationsController.create);

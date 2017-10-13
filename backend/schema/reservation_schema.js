@@ -44,6 +44,7 @@ reservationSchema.post('save', function(reservation){
       User.findOneAndUpdate(
         { _id: reservation.user_id },
         { $push: {reservation: reservation } },
+        { new: true },
         function (userError, user) {
           if (userError) { return userError; }
         }

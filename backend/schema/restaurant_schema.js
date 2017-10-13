@@ -106,6 +106,7 @@ restaurantSchema.post('save', function (restaurant) {
   User.findOneAndUpdate(
     { _id: restaurant.manager_id },
     { $push: { properties: restaurant._id } },
+    { new: true },
     function (error, updatedUser) {
       if (error) { return error; }
     }
