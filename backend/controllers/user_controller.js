@@ -7,22 +7,22 @@ exports.updateUser = function(req, res, next) {
   const userId = jwt.decode(userToken, config.secret).sub;
 
   User.findOneAndUpdate(
-<<<<<<< HEAD
-    {_id: userId},
-    req.body.user,
-    function (userError, updatedUser) {
-      console.log(updatedUser, "++++++++++++++++++++++=");
-      console.log(userError, "++++++++++++++++++++++=");
-=======
     { _id: userId},
     { $set: req.body.user },
     { new: true },
     function (userError, updatedUser) {
-      
->>>>>>> 134c2daea3eb95242230538c1a456ee6b60568e8
       if (userError) { return next(userError); }
-
-      res.json(updatedUser);
+      console.log(updatedUser, "===================");
+      let currentUser = {
+          email: updatedUser.email,
+          username: updatedUser.username,
+          phoneNumber: updatedUser.phoneNumber,
+          user_id: updatedUser._id,
+          profilePicture: updatedUser.profilePicture,
+          properties: updatedUser.properties
+      };
+      console.log(currentUser, "===================");
+      res.json({currentUser: currentUser});
     }
   );
 };
