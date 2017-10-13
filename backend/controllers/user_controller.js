@@ -11,10 +11,17 @@ exports.updateUser = function(req, res, next) {
     { $set: req.body.user },
     { new: true },
     function (userError, updatedUser) {
-      
       if (userError) { return next(userError); }
 
-      res.json(updatedUser);
+      let currentUser = {
+          email: updatedUser.email,
+          username: updatedUser.username,
+          phoneNumber: updatedUser.phoneNumber,
+          user_id: updatedUser._id,
+          profilePicture: updatedUser.profilePicture,
+          properties: updatedUser.properties
+      };
+      res.json({currentUser: currentUser, token: userToken});
     }
   );
 };

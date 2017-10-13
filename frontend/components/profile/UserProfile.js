@@ -1,12 +1,17 @@
+const CLOUDINARY_UPLOAD_PRESET = 'cginlt5t';
+const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/odangitsdjang/image/upload";
+
 //import liraries
 import React, { Component } from 'react';
+import request from 'superagent';
 import { ImagePicker } from 'expo';
 import { View, 
          Text, 
          StyleSheet,
          Image,
          Button,
-         ScrollView } from 'react-native';
+         ScrollView,
+         TouchableOpacity } from 'react-native';
 
 // create a component
 class UserProfile extends Component {
@@ -22,16 +27,22 @@ class UserProfile extends Component {
     };
 
     this.state = {
-      image: this.props.user.profilePicture,
-      email: this.props.user.email,
-      phoneNumber: this.props.user.phoneNumber,
-      properties: this.props.user.properties,
-      username: this.props.user.username
+      image: 'https://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png'
     };
 
     this.onLogout = this.onLogout.bind(this);
     this.upComingReservation = this.upComingReservation.bind(this);
     this._pickImage = this._pickImage.bind(this);
+
+    this.pastReservation = this.pastReservation.bind(this);
+  }
+
+  componentDidMount(){
+    if(this.props.user){
+      this.setState({
+        image: this.props.user.profilePicture
+      });
+    }
     this.redirectHome = this.redirectHome.bind(this);
   }
 
@@ -42,8 +53,34 @@ class UserProfile extends Component {
     });
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      // this.setState({ image: result.uri });
+
+      //upload picture to cloudinary 
+      let upload = request.post(CLOUDINARY_UPLOAD_URL)
+                          .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+                          .field('file', '../../../docs/signup.png');
+
+      upload.end((err, response) => {
+        debugger
+        if(err){
+          console.log(err);
+          return;
+        }
+
+        if(response.body.secure_url !== ''){
+          let secureUrl = response.body.secure_url;
+          this.setState({
+            image: response.body.secure_url
+          });
+        }
+      });
     }
+
+    let user = { 
+      profilePicture: 'https://res-1.cloudinary.com/cloudinary/image/asset/upload_widget_main-0d7f36bcac005868a51815763886aa65.jpg'
+    }; 
+
+    this.props.updateUser(user, this.props.userToken);
   };
 
   onLogout(){
@@ -76,8 +113,37 @@ class UserProfile extends Component {
     }
   }
 
+  pastReservation(){
+    if (this.dummy_past_reservation) {
+      let { restaurant_id,
+        user_id,
+        count,
+        timestamp,
+        restaurantName,
+        status } = this.dummy_reservation;
+
+      return (
+        <ScrollView
+          decelerationRate={0}
+          snapToInterval={200} //your element width
+          snapToAlignment={"center"}
+        >
+          <Text style={{ fontSize: 20 }}>pastReservation</Text>
+          <Text style={{ fontSize: 20 }}>pastReservation</Text>
+          <Text style={{ fontSize: 20 }}>pastReservation</Text>
+        </ScrollView>
+      );
+    } else {
+      return (
+        <Text style={{ fontSize: 20 }}>
+          No past reservations
+        </Text>
+      );
+    }
+    
   redirectHome() {
     this.props.navigation.navigate('Map');
+
   }
 
   render() {
@@ -85,54 +151,59 @@ class UserProfile extends Component {
       let { email, 
             phoneNumber, 
             properties, 
-            image, 
-            username } = this.state;
+            username } = this.props.user;
   
       return (
         <View style={styles.container}>
-          <View style={[styles.boxContainer, styles.profileHeader]}>
+          <View style={[styles.boxContainerHeader, styles.profileHeader]}>
             <Text style={styles.profileTitle}>User Profile</Text>
           </View>
   
           <View style={[styles.boxContainer, styles.userInfo]}>
-            <Image 
-              source={{uri: image}}
-              style={styles.userProfile}/>
+            <View style={styles.pictureComponent}>
+              <Image 
+                source={{uri: this.state.image}}
+                style={styles.userProfile}/>
+              <TouchableOpacity
+                style={{padding: 5, 
+                        borderWidth: 2,
+                        borderColor: '#EDF5E1',
+                        borderRadius: 5,
+                        marginTop: 10}}
+                onPress={this._pickImage}>
+                <Text style={{color: '#EDF5E1', 
+                              fontSize: 15}}>Change Profile</Text>
+              </TouchableOpacity>
+
+            </View>
             <View style={styles.userInfoDetails}>
               <Text style={{fontSize: 30}}>{username}</Text>
               <Text style={styles.regularFont}>{email}</Text>
               <Text style={styles.regularFont}>{phoneNumber}</Text>
-              <Button
-                title="Pick an image from camera roll"
-                onPress={this._pickImage}
-              />
             </View>
           </View>
   
           {this.upComingReservation()}
   
           <View style={[styles.boxContainer, styles.pastReservations]}>
-            <ScrollView
-              decelerationRate={0}
-              snapToInterval={200} //your element width
-              snapToAlignment={"center"}
-            >
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-             
-            </ScrollView>
+            <Text style={{ fontSize: 28 }}>Past Reservations</Text>
+            {this.pastReservation()}
           </View>
   
           <View style={[styles.boxContainer, styles.logout]}>
-            <Button
+            <TouchableOpacity
               onPress={this.onLogout}
+              style={styles.button}
+              raised={true}>
+              <Text style={{ color: '#EDF5E1'}}>Log Out</Text>
+            </TouchableOpacity>
               title='Log out' />
 
             <Button
               onPress={this.redirectHome}
               title='Go Back' />
           </View>
+
         </View>
       );
     }else{
@@ -152,10 +223,30 @@ class UserProfile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#5CDB95',
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#F2F2F2'
+  },
+  boxContainerHeader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 40
+  },
+  pictureComponent:{
+    flexDirection: 'column'
   },
   regularFont: {
-    fontFamily: 'Georgia'
+    fontFamily: 'Chalkboard SE',
+    fontSize: 20
   },
   notLoggedOn: {
     color: 'red',
@@ -174,7 +265,8 @@ const styles = StyleSheet.create({
   },
   userProfile: {
     width: 120,
-    height: 120
+    height: 120,
+    borderRadius: 10
   },
   userInfoDetails:{
     flexDirection: 'column'
@@ -185,7 +277,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
   profileHeader: {
-    backgroundColor: 'orange'
+    backgroundColor: '#379683'
   },
   userInfo: {
     flex: 2,
@@ -194,14 +286,14 @@ const styles = StyleSheet.create({
   },
   reservation: {
     flex: 2,
-    backgroundColor: 'green'
+    // backgroundColor: '#379683'
   },
   pastReservations: {
     flex: 3,
-    backgroundColor: 'yellow'
+    backgroundColor: '#379683'
   },
   logout: {
-    backgroundColor: 'black'
+    // backgroundColor: '#379683'
   },
 
 });

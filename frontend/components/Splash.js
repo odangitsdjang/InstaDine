@@ -29,7 +29,12 @@ class Splash extends Component {
   }
 
   handleDemo() {
+    let user = {
+      email: 't@t.com',
+      password: 't'
+    };
 
+    
   }
 
   render() {
@@ -43,6 +48,7 @@ class Splash extends Component {
             raised={true}>
             <Text style={styles.text}>Login</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={this.redirectSignup}
             style={styles.button}
@@ -51,10 +57,13 @@ class Splash extends Component {
           </TouchableOpacity>
         </View>
 
-        <Button
+        <TouchableOpacity
           onPress={this.handleDemo}
-          title='Demo'
-          style={styles.button}/>
+          style={styles.button}
+          raised={true}>
+          <Text style={styles.text}>Demo</Text>
+        </TouchableOpacity>
+
       </View>
     );
   }
@@ -66,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center', 
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#379683',
     flexDirection: 'column'
   },
   title: {
@@ -84,7 +93,8 @@ const styles = StyleSheet.create({
     width: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50'
+    borderWidth: 2,
+    borderColor: '#F2F2F2'
   },
   text: {
     color: 'white'
