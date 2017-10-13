@@ -24,14 +24,17 @@ class RestaurantItem extends Component {
     this.state = {
       restaurant: DUMMY_RESTAURANT,
       user: DUMMY_USER,
-      reservationTime: "18:15"
+      reservationTime: "18:15",
+      seat_count: 0
     };
     this.redirectHome = this.redirectHome.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     // Get restaurant info somehow, put that into props talk to adrian 
   }
+
   // Only render 10 time frames after current time
   renderReservationTimes() {
     const date = new Date;
@@ -39,20 +42,36 @@ class RestaurantItem extends Component {
     let hour = date.getHours();
     const reservationTimes = Array(10).fill(undefined);
     return reservationTimes.map((x, index)=> {
-      if (index !== 0 ) {
+      // if (index !== 0 ) { //there might be an edge case here 
         minutes += 5; 
+        minutes =  Math.ceil(minutes/5)*5;
         if (minutes >= 60) {
           hour++;
           minutes %= 60;
         }
-      } 
-      let string = `${hour%12}:` + ((minutes < 10) ? `0${minutes} ` : `${minutes} `)  + ((hour > 12) ? "PM" : "AM");
+      // } 
+      let string = `${(hour > 12) ? hour%12 : hour}:` + ((minutes < 10) ? `0${minutes} ` : `${minutes} `)  + ((hour >= 12) ? "PM" : "AM");
       return (
           <Picker.Item key={index} label={string} value={`${hour}:${minutes}`}/>
       );
     });
   }
 
+  renderSeatCount(){
+    let size = [];
+    for(let i = 1; i <= 10; i++){
+      size.push(i);
+    }
+
+    return size.map(i => {
+      return (
+        <Picker.Item
+          key={i}
+          label={i < 2 ? i + " seat" : i + " seats"}
+          value={i} />
+      );
+    });
+  }
 
   reserveOrCancel() {
     return (
@@ -70,6 +89,16 @@ class RestaurantItem extends Component {
                   reservationTime: itemValue })}>
             {this.renderReservationTimes()}
         </Picker>
+
+        <Picker 
+           selectedValue={this.state.seat_count}
+           style={styles.picker}
+           onValueChange={ (itemValue, itemIndex) => this.setState({
+             seat_count: itemValue
+           })}>
+          {this.renderSeatCount()}
+        </Picker>
+          
       </View>
       
     );
@@ -77,6 +106,16 @@ class RestaurantItem extends Component {
   
   redirectHome() {
     this.props.navigation.navigate('Map');
+  }
+
+  handleSubmit(){
+    let reservation = {
+      restaurant_id: this.state.restaurant.id,
+      seat_count: this.state.seat_count,
+      datetime: this.state.reservationTime
+    };
+
+    this.props.createReservation(reservation, this.props.userToken);
   }
 
   render() {
@@ -88,6 +127,13 @@ class RestaurantItem extends Component {
         <View >
           { this.reserveOrCancel() }
         </View>
+
+        <TouchableOpacity
+          onPress={this.handleSubmit}
+          style={styles.button}>
+          <Text style={styles.text}>Book!</Text>
+        </TouchableOpacity>
+
         <Button
           onPress={this.redirectHome}
           title='Go Back' />
