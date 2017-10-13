@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   componentDidMount(){
+    debugger;
     if (this.props.currentUser && this.props.currentUser.user_id) {
       this.setState({ loggedIn: true });
     }
@@ -20,6 +21,7 @@ class App extends Component {
   }
 
   componentWillReceiveProps(newProps) {
+    debugger
     if (newProps.currentUser && newProps.currentUser.user_id) {
       this.setState({ loggedIn: true });
     }

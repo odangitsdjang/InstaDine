@@ -18,8 +18,8 @@ router.route('/login')
       .post([requireLogin, AuthenticationController.login]);
 
 //update user info 
-// router.route('/user/')
-//       // .patch(UserController.updateUser);
+router.route('/user/')
+      .patch(UserController.updateUser);
 
 router.route('/restaurants')
       .post(RestaurantsController.create);
