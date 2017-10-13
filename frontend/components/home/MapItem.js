@@ -66,11 +66,8 @@ class MapItem extends Component {
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
     this.setSearchActive = this.setSearchActive.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
-<<<<<<< HEAD
     this.openDrawer = this.openDrawer.bind(this);
-=======
     this.typeText = this.typeText.bind(this);
->>>>>>> bc091de1e29ae4cea85d6bb162fcb063f626f5b1
   }
 
   componentDidMount() {
