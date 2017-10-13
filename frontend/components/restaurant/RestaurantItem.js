@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Picker, TouchableOpacity, Button } from 'react-native';
+import MapItem from '../home/MapItem';
 
 const DUMMY_RESTAURANT = {
   name: "Davids Best Korean BBQ",
@@ -33,6 +34,14 @@ class RestaurantItem extends Component {
 
   componentDidMount() {
     // Get restaurant info somehow, put that into props talk to adrian 
+    //assume map will feed restaurant into this component through prop
+    // this.setState({
+    //   restaurant: this.props.restaurant,
+    //   user: this.props.user,
+    //   reservationTime: '',
+    //   seat_count: 0
+    // });
+    
   }
 
   // Only render 10 time frames after current time
@@ -77,12 +86,10 @@ class RestaurantItem extends Component {
     return (
       <View>
         <View style={styles.reserve}>  
-          {/* <TouchableOpacity>
-            <Text style={styles.reserveText} >
-              Reserve
-            </Text>
-          </TouchableOpacity> */}
           <TouchableOpacity
+            style={{borderColor: 'black', 
+                    borderWidth: 2,
+                    padding: 10}}
             onPress={this.handleSubmit}>
             <Text style={styles.reserveText}>Reserve</Text>
           </TouchableOpacity>
@@ -129,17 +136,26 @@ class RestaurantItem extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
+        <TouchableOpacity
+          onPress={this.redirectHome}
+          style={{alignSelf: 'flex-start', flex: 1, marginTop: 7}}>
+          <Text style={{fontSize: 15}}>Go Back</Text>
+        </TouchableOpacity>
           <Text style={styles.title}>{this.state.restaurant.name}</Text>
         </View>
+
+        <View style={styles.restInfo}>
+          <Text style={{alignSelf: 'center', 
+                        flex: 1,
+                        fontSize: 30}}>
+            Restaurant Info goes here
+ 
+          </Text>
+        </View>
+
         <View >
           { this.reserveOrCancel() }
         </View>
-
-        <TouchableOpacity
-          onPress={this.redirectHome}
-          style={styles.button}>
-          <Text style={styles.text}>Go Back</Text>
-        </TouchableOpacity>
 
       </View>
     );
@@ -152,6 +168,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#2c3e50',
+  },
+  restInfo: {
+    flex: 1,
+    backgroundColor: 'green'
   },
   button: {
     padding: 10,
@@ -176,7 +196,9 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontSize: 20,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    alignSelf: 'center',
+    flex: 4
   }, 
   reserve: {
     paddingTop: 30,
@@ -184,7 +206,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   reserveText: {
-    fontSize: 15,
+    fontSize: 20,
     fontFamily: 'Chalkboard SE'
   },
   picker: {
