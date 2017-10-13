@@ -65,10 +65,12 @@ class MapItem extends Component {
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
     this.setSearchActive = this.setSearchActive.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
+    this.openDrawer = this.openDrawer.bind(this);
     this.typeText = this.typeText.bind(this);
   }
 
   componentDidMount() {
+    console.log(this.props);
     // Get restaurants 
     this.props.restaurantIndex();
     // User's current location
@@ -181,6 +183,10 @@ class MapItem extends Component {
     this.setState({ searchText: text });
   }
 
+  openDrawer(){
+    this.props.navigation.navigate('DrawerOpen');
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -193,6 +199,9 @@ class MapItem extends Component {
         <SearchResults searchActive={this.state.searchActive}
           results={this.props.results}
           searchText={this.state.searchText} />
+        <Button 
+          onPress={this.openDrawer}
+          title='Open Drawer' />
       </View>
     );
   }
