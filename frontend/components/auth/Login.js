@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button,
          TextInput,
-         Alert } from 'react-native';
+         Alert,
+         ScrollView,
+         TouchableOpacity } from 'react-native';
 
 // create a component
 class Login extends Component {
@@ -59,40 +61,46 @@ class Login extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>This is the Login page</Text>
-        {this.renderErrors()}
-        <View style={styles.loginForm}>
-          <Text style={styles.fieldTitle}>Email:</Text>
-          <View style={styles.field}>
-            <TextInput
-              onChange={this.update('email')}
-              style={styles.textInput}
-              value={email}
-              placeholder="Email" />
+        <ScrollView style={styles.scrollContainer}>
+          <Text style={{fontSize: 30, color: '#182628'}}>Welcome Back!</Text>
+          {this.renderErrors()}
+          <View style={styles.loginForm}>
+            <Text style={styles.fieldTitle}>Email:</Text>
+            <View style={styles.field}>
+              <TextInput
+                onChange={this.update('email')}
+                style={styles.textInput}
+                value={email}
+                placeholder="Email" />
+            </View>
+
+            <Text style={styles.fieldTitle}>Password:</Text>
+            <View style={styles.field}>
+              <TextInput
+                onChange={this.update('password')}
+                style={styles.textInput}
+                value={password}
+                secureTextEntry={true}
+                placeholder="Password" />
+            </View>
           </View>
 
-          <Text style={styles.fieldTitle}>Password:</Text>
-          <View style={styles.field}>
-            <TextInput
-              onChange={this.update('password')}
-              style={styles.textInput}
-              value={password}
-              secureTextEntry={true}
-              placeholder="Password" />
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity
+              onPress={this.onLogin}
+              style={styles.button}
+              raised={true}>
+              <Text style={styles.text}>Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={this.redirectBack}
+              style={styles.button}
+              raised={true}>
+              <Text style={styles.text}>Back</Text>
+            </TouchableOpacity>
           </View>
-        </View>
-
-        <Button
-          onPress={this.onLogin}
-          title='Log In' />
-
-        <Button
-          onPress={this.redirectBack}
-          title='Back' />
-          
-        <Button
-          onPress={this.redirectHomePage}
-          title='Home' />
+        </ScrollView>
       </View>
     );
   }
@@ -104,11 +112,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    backgroundColor: '#65CCB8'
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#F2F2F2'
   },
   errorText:{
     color: 'red',
     fontSize: 30
+  },
+  scrollContainer: {
+    paddingTop: 200
   },
   field: {
     borderRadius: 5,
@@ -126,6 +147,9 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     padding: 6,
     fontSize: 20,
+    color: 'white'
+  },
+  text: {
     color: 'white'
   }
 });

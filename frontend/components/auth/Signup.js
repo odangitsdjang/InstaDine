@@ -4,7 +4,9 @@ import { ImagePicker } from 'expo';
 import { View, Text, StyleSheet, Button,
          TextInput,
          Alert,
-         Image } from 'react-native';
+         Image,
+         ScrollView,
+         TouchableOpacity } from 'react-native';
 
 // create a component
 class Signup extends Component {
@@ -71,60 +73,72 @@ class Signup extends Component {
     let {email, password, phoneNumber, username, image} = this.state;
     return (
       <View style={styles.container}>
-        <Text>This is the Sign Up page</Text>
-        {this.renderErrors()}
-        <View style={styles.signUpForm}>
-          <Image
-            source={{ uri: image }}
-            style={styles.userProfile} />
-          <Button
-            title="Pick an image from camera roll"
-            onPress={this._pickImage}
-          />
-          <Text style={styles.fieldTitle}>Email:</Text>
-          <View style={styles.field}>
-            <TextInput 
-              onChange={this.update('email')}
-              style={styles.textInput}
-              value={email}
-              placeholder="Email"/>
+        <ScrollView style={styles.scrollContainer}>
+          <Text style={{fontSize: 30}}>Join us today!</Text>
+          {this.renderErrors()}
+          <View style={styles.signUpForm}>
+              {/* <Image
+                source={{ uri: image }}
+                style={styles.userProfile} />
+              <Button
+                title="Upload profile picture"
+                onPress={this._pickImage}
+              /> */}
+            <Text style={styles.fieldTitle}>Email:</Text>
+            <View style={styles.field}>
+              <TextInput 
+                onChange={this.update('email')}
+                style={styles.textInput}
+                value={email}
+                placeholder="Email"/>
+            </View>
+
+            <Text style={styles.fieldTitle}>Username:</Text>
+            <View style={styles.field}>
+              <TextInput
+                onChange={this.update('username')}
+                style={styles.textInput}
+                value={username}
+                placeholder="Username" />
+            </View>
+
+            <Text style={styles.fieldTitle}>Password:</Text>
+            <View style={styles.field}>
+              <TextInput 
+                onChange={this.update('password')}
+                style={styles.textInput}
+                value={password}
+                secureTextEntry={true}
+                placeholder="Password"/>
+            </View>
+
+            <Text style={styles.fieldTitle}>Phone Number:</Text>
+            <View style={styles.field}>
+              <TextInput
+                onChange={this.update('phoneNumber')}
+                style={styles.textInput}
+                value={phoneNumber}
+                placeholder="Phone Number" />
+            </View>
           </View>
 
-          <Text style={styles.fieldTitle}>Username:</Text>
-          <View style={styles.field}>
-            <TextInput
-              onChange={this.update('username')}
-              style={styles.textInput}
-              value={username}
-              placeholder="Username" />
-          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity
+              onPress={this.onSignUp}
+              style={styles.button}
+              raised={true}>
+              <Text style={styles.text}>Sign Up</Text>
+            </TouchableOpacity>
 
-          <Text style={styles.fieldTitle}>Password:</Text>
-          <View style={styles.field}>
-            <TextInput 
-              onChange={this.update('password')}
-              style={styles.textInput}
-              value={password}
-              secureTextEntry={true}
-              placeholder="Password"/>
-          </View>
+            <TouchableOpacity
+              onPress={this.redirectBack}
+              style={styles.button}
+              raised={true}>
+              <Text style={styles.text}>Back</Text>
+            </TouchableOpacity>
 
-          <Text style={styles.fieldTitle}>Phone Number:</Text>
-          <View style={styles.field}>
-            <TextInput
-              onChange={this.update('phoneNumber')}
-              style={styles.textInput}
-              value={phoneNumber}
-              placeholder="Phone Number" />
           </View>
-        </View>
-
-        <Button
-          onPress={this.onSignUp}
-          title='Sign Up' />
-        <Button
-          onPress={this.redirectBack}
-          title='Back' />
+        </ScrollView>
       </View>
     );
   }
@@ -136,7 +150,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50'
+    backgroundColor: '#65CCB8'
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#F2F2F2'
+  },
+  scrollContainer:{
+    paddingTop: 100
   },
   field: {
     borderRadius: 5,
@@ -158,6 +185,9 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     padding: 6,
     fontSize: 20,
+    color: 'white'
+  },
+  text: {
     color: 'white'
   }
 });

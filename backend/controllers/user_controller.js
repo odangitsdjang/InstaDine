@@ -12,7 +12,7 @@ exports.updateUser = function(req, res, next) {
     { new: true },
     function (userError, updatedUser) {
       if (userError) { return next(userError); }
-      console.log(updatedUser, "===================");
+
       let currentUser = {
           email: updatedUser.email,
           username: updatedUser.username,
@@ -21,8 +21,7 @@ exports.updateUser = function(req, res, next) {
           profilePicture: updatedUser.profilePicture,
           properties: updatedUser.properties
       };
-      console.log(currentUser, "===================");
-      res.json({currentUser: currentUser});
+      res.json({currentUser: currentUser, token: userToken});
     }
   );
 };

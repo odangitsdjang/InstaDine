@@ -1,6 +1,5 @@
-//cloudinary end point 
-const CLOUDINARY_UPLOAD_PRESET = 'ngvqgyti';
-const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/jerryzlau/image/upload";
+const CLOUDINARY_UPLOAD_PRESET = 'cginlt5t';
+const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/odangitsdjang/image/upload";
 
 //import liraries
 import React, { Component } from 'react';
@@ -60,8 +59,6 @@ class UserProfile extends Component {
       let upload = request.post(CLOUDINARY_UPLOAD_URL)
                           .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
                           .field('file', result.uri);
-
-      debugger
 
       upload.end((err, response) => {
         if(err){
@@ -153,22 +150,24 @@ class UserProfile extends Component {
   
       return (
         <View style={styles.container}>
-          <View style={[styles.boxContainer, styles.profileHeader]}>
+          <View style={[styles.boxContainerHeader, styles.profileHeader]}>
             <Text style={styles.profileTitle}>User Profile</Text>
           </View>
   
           <View style={[styles.boxContainer, styles.userInfo]}>
-            <Image 
-              source={{uri: this.state.image}}
-              style={styles.userProfile}/>
+            <View style={styles.pictureComponent}>
+              <Image 
+                source={{uri: this.state.image}}
+                style={styles.userProfile}/>
+              <Button
+                title="Change profile"
+                onPress={this._pickImage}
+              />
+            </View>
             <View style={styles.userInfoDetails}>
               <Text style={{fontSize: 30}}>{username}</Text>
               <Text style={styles.regularFont}>{email}</Text>
               <Text style={styles.regularFont}>{phoneNumber}</Text>
-              <Button
-                title="Update user profile picture"
-                onPress={this._pickImage}
-              />
             </View>
           </View>
   
@@ -180,10 +179,14 @@ class UserProfile extends Component {
           </View>
   
           <View style={[styles.boxContainer, styles.logout]}>
-            <Button
+            <TouchableOpacity
               onPress={this.onLogout}
-              title='Log out' />
+              style={styles.button}
+              raised={true}>
+              <Text style={styles.text}>Log Out</Text>
+            </TouchableOpacity>
           </View>
+
         </View>
       );
     }else{
@@ -203,10 +206,30 @@ class UserProfile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#5CDB95',
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#F2F2F2'
+  },
+  boxContainerHeader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 40
+  },
+  pictureComponent:{
+    flexDirection: 'column'
   },
   regularFont: {
-    fontFamily: 'Georgia'
+    fontFamily: 'Chalkboard SE',
+    fontSize: 20
   },
   notLoggedOn: {
     color: 'red',
@@ -225,7 +248,8 @@ const styles = StyleSheet.create({
   },
   userProfile: {
     width: 120,
-    height: 120
+    height: 120,
+    borderRadius: 10
   },
   userInfoDetails:{
     flexDirection: 'column'
@@ -236,7 +260,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
   profileHeader: {
-    backgroundColor: 'orange'
+    backgroundColor: '#379683'
   },
   userInfo: {
     flex: 2,
@@ -245,14 +269,14 @@ const styles = StyleSheet.create({
   },
   reservation: {
     flex: 2,
-    backgroundColor: 'green'
+    // backgroundColor: 'green'
   },
   pastReservations: {
     flex: 3,
-    backgroundColor: 'yellow'
+    // backgroundColor: 'yellow'
   },
   logout: {
-    backgroundColor: 'black'
+    // backgroundColor: 'black'
   },
 
 });

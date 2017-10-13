@@ -16,7 +16,6 @@ exports.loginUser = user => {
 exports.signupUser = user => {
   return function (dispatch) {
     return axios.post(SIGNUP_URL, user).then((response) => {
-      // console.log(response);
       let { token, currentUser } = response.data;
       dispatch(authUser(token, currentUser));
     }).catch((errors) => {
@@ -25,7 +24,7 @@ exports.signupUser = user => {
   };
 };
 
-exports.authUser = (token, currentUser) => {
+export const authUser = (token, currentUser) => {
   return {
     type: 'AUTH_USER',
     token,
