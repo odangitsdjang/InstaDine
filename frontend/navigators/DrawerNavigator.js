@@ -3,6 +3,7 @@ import { addNavigationHelpers, DrawerNavigator } from 'react-navigation';
 import ReservationFormContainer from '../components/reservation/ReservationFormContainer';
 import UserProfileContainer from '../components/profile/UserProfileContainer';
 import MapItem from '../components/home/MapItem';
+import RestaurantContainer from '../components/restaurant/RestaurantItem';
 import { connect } from 'react-redux';
 
 const map = connect(mapStateToProps)(MapItem);
@@ -14,11 +15,12 @@ const mapStateToProps = state => ({
 const routeConfig = {
   UpdateUser: { screen: UserProfileContainer },
   NewReservation: { screen: ReservationFormContainer },
-  MapItem: { screen: map }
+  Map: { screen: map },
+  Restaurant: { screen: RestaurantContainer }
 };
 
 const navigatorConfig = {
-  initialRouteName: 'MapItem'
+  initialRouteName: 'Map'
 };
 
 const Drawer = DrawerNavigator(

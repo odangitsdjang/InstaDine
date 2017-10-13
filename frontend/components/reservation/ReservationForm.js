@@ -19,11 +19,7 @@ class ReservationForm extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.redirectBack = this.redirectBack.bind(this)l
-  }
-
-  componentDidMount(){
-    console.log(this.props);
+    this.redirectHome = this.redirectHome.bind(this);
   }
 
   handleInput(type){
@@ -42,8 +38,8 @@ class ReservationForm extends Component {
     this.props.createReservation(newReservation, this.props.userToken);
   }
 
-  redirectBack(){
-    this.props.navigation.goBack('MapItem');
+  redirectHome(){
+    this.props.navigation.navigate('Map');
   }
 
   render() {
@@ -74,7 +70,7 @@ class ReservationForm extends Component {
           title='Create Reservation' />
         
         <Button
-          onPress={)}  
+          onPress={this.redirectHome}  
           title='Go Back' />
       </View>
     );
