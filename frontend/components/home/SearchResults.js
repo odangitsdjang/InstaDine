@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
 class SearchResults extends Component {
   constructor(props) {
     super(props);
@@ -14,14 +15,10 @@ class SearchResults extends Component {
      };
   }
   
-  componentDidMount() {
-    // this.setState({isLoaded: 1});
-    // set results 
-  }
 
   // implement this with backend
   goToRestaurant(restaurantName) { 
-
+    console.log(this.props.results);
   }
   
   render() {
@@ -63,7 +60,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 10,
-    fontSize: 20,
     height: 77,
     borderBottomWidth: 1,
     borderBottomRightRadius: 50,

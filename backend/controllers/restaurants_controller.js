@@ -20,3 +20,28 @@ exports.create = function(req, res, next) {
     });
   });
 };
+
+exports.search = function (req, res, next) {
+  const searchQuery = req.query.searchQuery;
+  let regex = "^" + searchQuery; 
+  var re = new RegExp(regex, "gi");
+  
+  Restaurant.find({ name: re }, function(error, restaurants) {
+    if (error) { return next(error); }
+    if (undefined || null ) {
+      return res.status(401).json({ error: 'Some other error' });
+    }
+    if (restaurants.length === 0 ) {
+      return res.json({ restaurants: "No restaurants found" });
+    }
+
+    // filter data sent back here: 
+    
+    // restaurants.map(restaurant=> {
+
+    // });
+
+    res.json({ restaurants: restaurants });
+    
+  }).limit(20);
+};
