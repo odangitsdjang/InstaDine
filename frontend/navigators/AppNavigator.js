@@ -14,11 +14,10 @@ const routeConfig = {
   Splash: { screen: Splash },
   Login: { screen: Login },
   Signup: { screen: Signup },
-  HomePage: { screen: HomePage }
 };
 
 const appNavigatorConfig = {
-  navigationOptions: { tabBarVisible: true },
+  navigationOptions: { tabBarVisible: false },
   initialRouteName: 'Splash'
 };
 

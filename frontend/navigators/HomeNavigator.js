@@ -9,12 +9,11 @@ import ReservationFormContainer from '../components/reservation/ReservationFormC
 const routeConfig = {
   MapItem: { screen: MapItem },
   UserProfile: { screen: UserProfileContainer },
-  Splash: { screen: Splash },
   Reservation: { screen: ReservationFormContainer }
 };
 
 const homeNavigatorConfig = {
-  // navigationOptions: { tabBarVisible: true },
+  navigationOptions: { tabBarVisible: false },
   initialRouteName: 'MapItem'
 };
 

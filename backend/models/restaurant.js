@@ -3,6 +3,7 @@ const restaurantSchema = require('../schema/restaurant_schema');
 // const jwt = require('jwt-simple');
 // const config = require('../config');
 
+
 // ONLY FOR TESTING. REMEMBER TO REMOVE!!!
 // mongoose.connect('mongodb://localhost:instaDine/instaDine');
 // const Restaurant = mongoose.model('restaurant', restaurantSchema);

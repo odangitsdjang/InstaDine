@@ -9,7 +9,7 @@ exports.create = function(req, res, next) {
   Restaurant.findOne({name, address}, function(error, existingRestaurant){
     if (error) { return next(error); }
     if (existingRestaurant) {
-      return resizeBy.status(422).json({error: 'Restaurant is registered'});
+      return res.status(422).json({error: 'Restaurant is registered'});
     }
 
     const newRestaurant = new Restaurant(req.body);

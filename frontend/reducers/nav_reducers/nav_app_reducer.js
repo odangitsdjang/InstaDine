@@ -5,7 +5,7 @@ const initialState = AppNavigator.router.getStateForAction(
   AppNavigator.router.getActionForPathAndParams('Splash')
 );
 
-const routes = ['Signup', 'Login', 'HomePage', 'Splash'];
+const routes = ['Signup', 'Login', 'Splash'];
 
 const navAppReducer = (state = initialState, action) => {
   Object.freeze(state);

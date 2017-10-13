@@ -29,7 +29,6 @@ const SAMPLE_MARKERS = [
     latlng: { latitude: 37.791655, longitude: -122.394488},
     title: "jerrys hood",
     description: "dont come here"
-
   },
   {
     latlng: { latitude: 37.766648, longitude: -122.419499},

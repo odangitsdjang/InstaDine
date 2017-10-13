@@ -8,7 +8,7 @@ const config = require('../config');
 exports.create = function(req, res, next) {
   const userToken = req.body.userToken;
   const userId = jwt.decode(userToken, config.secret).sub;
-  console.log(req.body);
+  // console.log(req.body);
   
   // Find if user already has a pending reservation
   Reservation.findOne({user_id: userId, status: 'Pending' }, 

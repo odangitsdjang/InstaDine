@@ -10,8 +10,6 @@ const userToken = user => {
   }, config.secret);
 };
 
-// exports.login = () => console.log('Do nothing');
-
 exports.login = function (req, res, next) {
   let user = req.user;
   //find the user, if found, log that person in 
@@ -62,10 +60,9 @@ exports.signup = function(req, res, next) {
       phoneNumber: phoneNumber
     });
 
-    user.save(function(err) {
-      console.log(err.message, "+++++++++++++");
-      if(err) { 
-        return res.status(400).send(err.message);
+    user.save(function(saveError) {
+      if (saveError) { 
+        return res.status(400).send(saveError.message);
       }
 
       let currentUser = { email: user.email, 

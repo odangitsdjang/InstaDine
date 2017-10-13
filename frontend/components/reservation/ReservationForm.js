@@ -22,8 +22,8 @@ class ReservationForm extends Component {
   }
 
   handleInput(type){
-    console.log(this.props);
-    console.log(this.state);
+    // console.log(this.props);
+    // console.log(this.state);
     return event => this.setState({[type]: event.nativeEvent.text});
   }
   
