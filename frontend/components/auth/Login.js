@@ -62,7 +62,7 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scrollContainer}>
-          <Text style={{fontSize: 30, color: '#182628'}}>Welcome Back!</Text>
+          <Text style={{fontSize: 30, color: '#182628'}}>Please Log In</Text>
           {this.renderErrors()}
           <View style={styles.loginForm}>
             <Text style={styles.fieldTitle}>Email:</Text>

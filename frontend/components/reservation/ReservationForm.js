@@ -42,7 +42,7 @@ class ReservationForm extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.infoContainer}>
-          <Text style={{fontSize: 30, marginLeft: 35}}>ReservationForm</Text>
+          <Text style={{fontSize: 30, marginLeft: 37}}>ReservationForm</Text>
 
           <Text style={[styles.title, styles.spacePad]}>Restaurant ID</Text>
           <TextInput
@@ -89,35 +89,41 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     borderRadius: 5,
-    margin: 5,
-    width: 155,
+    // margin: 5,
+    width: 180,
     marginLeft: 65,
     marginTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#F2F2F2',
-    paddingLeft: 80
+    // paddingLeft: 80
   },
   text: {
-    width: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
     color: '#F2F2F2'
   },
   infoContainer: {
     width: 300,
     height: 500,
-    alignSelf: 'center',
-    // backgroundColor: 'red'
+    alignSelf: 'center'
   },
   title: {
     fontSize: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 75
+    paddingLeft: 70
   },
   input: {
-    backgroundColor: 'white',
-    paddingLeft: 80
+    borderRadius: 5,
+    padding: 5,
+    paddingLeft: 8,
+    margin: 7,
+    width: 200,
+    marginTop: 0,
+    marginLeft: 50,
+    backgroundColor: 'white'
   },
   spacePad: {
     margin: 10,

@@ -58,9 +58,10 @@ class UserProfile extends Component {
       //upload picture to cloudinary 
       let upload = request.post(CLOUDINARY_UPLOAD_URL)
                           .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-                          .field('file', result.uri);
+                          .field('file', '../../../docs/signup.png');
 
       upload.end((err, response) => {
+        debugger
         if(err){
           console.log(err);
           return;
@@ -276,14 +277,14 @@ const styles = StyleSheet.create({
   },
   reservation: {
     flex: 2,
-    // backgroundColor: 'green'
+    // backgroundColor: '#379683'
   },
   pastReservations: {
     flex: 3,
-    // backgroundColor: 'yellow'
+    backgroundColor: '#379683'
   },
   logout: {
-    // backgroundColor: 'black'
+    // backgroundColor: '#379683'
   },
 
 });
