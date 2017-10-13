@@ -22,16 +22,21 @@ class UserProfile extends Component {
     };
 
     this.state = {
-      image: this.props.user.profilePicture,
-      email: this.props.user.email,
-      phoneNumber: this.props.user.phoneNumber,
-      properties: this.props.user.properties,
-      username: this.props.user.username
+      image: 'http://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png'
     };
 
     this.onLogout = this.onLogout.bind(this);
     this.upComingReservation = this.upComingReservation.bind(this);
     this._pickImage = this._pickImage.bind(this);
+    this.pastReservation = this.pastReservation.bind(this);
+  }
+
+  componentDidMount(){
+    if(this.props.user){
+      this.setState({
+        image: this.props.user.profilePicture
+      });
+    };
   }
 
   _pickImage = async () => {
@@ -77,13 +82,41 @@ class UserProfile extends Component {
     }
   }
 
+  pastReservation(){
+    if (this.dummy_past_reservation) {
+      let { restaurant_id,
+        user_id,
+        count,
+        timestamp,
+        restaurantName,
+        status } = this.dummy_reservation;
+
+      return (
+        <ScrollView
+          decelerationRate={0}
+          snapToInterval={200} //your element width
+          snapToAlignment={"center"}
+        >
+          <Text style={{ fontSize: 20 }}>pastReservation</Text>
+          <Text style={{ fontSize: 20 }}>pastReservation</Text>
+          <Text style={{ fontSize: 20 }}>pastReservation</Text>
+        </ScrollView>
+      );
+    } else {
+      return (
+        <Text style={{ fontSize: 20 }}>
+          No past reservations
+        </Text>
+      );
+    }
+  }
+
   render() {
     if(this.props.user){
       let { email, 
             phoneNumber, 
             properties, 
-            image, 
-            username } = this.state;
+            username } = this.props.user;
   
       return (
         <View style={styles.container}>
@@ -93,7 +126,7 @@ class UserProfile extends Component {
   
           <View style={[styles.boxContainer, styles.userInfo]}>
             <Image 
-              source={{uri: image}}
+              source={{uri: this.state.image}}
               style={styles.userProfile}/>
             <View style={styles.userInfoDetails}>
               <Text style={{fontSize: 30}}>{username}</Text>
@@ -109,16 +142,8 @@ class UserProfile extends Component {
           {this.upComingReservation()}
   
           <View style={[styles.boxContainer, styles.pastReservations]}>
-            <ScrollView
-              decelerationRate={0}
-              snapToInterval={200} //your element width
-              snapToAlignment={"center"}
-            >
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-              <Text>past rservation</Text>
-             
-            </ScrollView>
+            <Text style={{ fontSize: 28 }}>Past Reservations</Text>
+            {this.pastReservation()}
           </View>
   
           <View style={[styles.boxContainer, styles.logout]}>

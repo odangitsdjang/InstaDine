@@ -1,5 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
+import { ImagePicker } from 'expo';
 import { View, Text, StyleSheet, Button,
          TextInput,
          Alert } from 'react-native';
@@ -12,7 +13,8 @@ class Signup extends Component {
       email: "",
       password: "",
       phoneNumber: "",
-      username: ""
+      username: "",
+      image: 'http://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png'
     };
 
     this.redirectBack = this.redirectBack.bind(this);
