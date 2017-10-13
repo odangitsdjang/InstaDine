@@ -4,8 +4,12 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, Dimensions, 
   TouchableOpacity, TextInput, Alert } 
          from 'react-native';
-import SearchContainer from './SearchContainer';
-import SearchResultContainer from './SearchResultContainer';
+import { connect } from 'react-redux';
+
+import { search, restaurantIndex } from '../../actions/restaurant_actions';
+
+import Search from './Search';
+import SearchResults from './SearchResults';
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -22,18 +26,18 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const SAMPLE_MARKERS = [
   {
     latlng: { latitude: 37.777728, longitude: -122.408806 },
-    title: "davids hood",
-    description: "tight"
+    name: "davids hood",
+    full_address: "tight"
   },
   {
     latlng: { latitude: 37.791655, longitude: -122.394488},
-    title: "jerrys hood",
-    description: "dont come here"
+    name: "jerrys hood",
+    full_address: "dont come here"
   },
   {
     latlng: { latitude: 37.766648, longitude: -122.419499},
-    title: "adrians hood",
-    description: "yo..",
+    name: "adrians hood",
+    full_address: "yo..",
     
   }
 ];
@@ -56,17 +60,19 @@ class MapItem extends Component {
       
     };
     this.map = 0;
-    this.onRegionChange = this.onRegionChange.bind(this);
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
     this.setSearchActive = this.setSearchActive.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
+    this.openDrawer = this.openDrawer.bind(this);
+    this.typeText = this.typeText.bind(this);
   }
 
   componentDidMount() {
+    console.log(this.props);
     // Get restaurants 
-
+    this.props.restaurantIndex();
     // User's current location
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -84,8 +90,9 @@ class MapItem extends Component {
     );
 
     // make markers into components
+    console.log(this.props.restaurants);
     this.setState({
-      markers: this.state.markers.map((marker, i) => (
+      markers: this.props.restaurants.map((marker, i) => (
           <MapView.Marker
             key={i}
             onPress={() => this.markerClick(marker)}
@@ -94,10 +101,10 @@ class MapItem extends Component {
             <MapView.Callout onPress={this.redirectRestaurant}>
                 <View style={styles.insideBubbleStyle}>
                   <Text>
-                    {marker.title}
+                    {marker.name}
                   </Text>
                   <Text>
-                    {marker.description}
+                    {marker.full_address}
                   </Text>
                 </View>
             </MapView.Callout>
@@ -124,10 +131,6 @@ class MapItem extends Component {
     // move to coordinate with duration
     this.map.animateToCoordinate(marker.latlng, 300);  
 
-  }
-
-  onRegionChange(region) {
-    // console.log(this.state);
   }
   
   renderMarkers() {
@@ -170,20 +173,35 @@ class MapItem extends Component {
     this.setState({ searchActive: bool });
   }
 
-  setSearchText(text) {
+  typeText(text) {
+    this.props.search(text);
     this.setState({ searchText: text });
+  }
+
+  setSearchText(text) {
+    console.log(this.state.searchText);
+    this.setState({ searchText: text });
+  }
+
+  openDrawer(){
+    this.props.navigation.navigate('DrawerOpen');
   }
 
   render() {
     return (
       <View style={styles.container}>
         { this.renderMap() }
-        <SearchContainer setSearchText={this.setSearchText} 
+        <Search setSearchText={this.setSearchText} 
+                typeText={this.typeText} 
                 searchActive={this.state.searchActive} 
                 searchText={this.state.searchText} 
                 setSearchActive={this.setSearchActive}/>
-        <SearchResultContainer searchActive={this.state.searchActive}
+        <SearchResults searchActive={this.state.searchActive}
+          results={this.props.results}
           searchText={this.state.searchText} />
+        <Button 
+          onPress={this.openDrawer}
+          title='Open Drawer' />
       </View>
     );
   }
@@ -203,4 +221,15 @@ const styles = StyleSheet.create({
 
 });
 
-export default MapItem;
+
+const mapStateToProps = state => ({
+  results: state.search.restaurants,
+  restaurants: state.entities.restaurants
+});
+
+const mapDispatchToProps = dispatch => ({ 
+  search: searchText => dispatch(search(searchText)),
+  restaurantIndex: () => dispatch(restaurantIndex())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapItem);

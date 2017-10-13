@@ -33,6 +33,7 @@ class UserProfile extends Component {
     this.onLogout = this.onLogout.bind(this);
     this.upComingReservation = this.upComingReservation.bind(this);
     this._pickImage = this._pickImage.bind(this);
+
     this.pastReservation = this.pastReservation.bind(this);
   }
 
@@ -42,6 +43,7 @@ class UserProfile extends Component {
         image: this.props.user.profilePicture
       });
     }
+    this.redirectHome = this.redirectHome.bind(this);
   }
 
   _pickImage = async () => {
@@ -49,8 +51,6 @@ class UserProfile extends Component {
       allowsEditing: true,
       aspect: [4, 3],
     });
-
-    console.log(result);
 
     if (!result.cancelled) {
       // this.setState({ image: result.uri });
@@ -140,6 +140,10 @@ class UserProfile extends Component {
         </Text>
       );
     }
+    
+  redirectHome() {
+    this.props.navigation.navigate('Map');
+
   }
 
   render() {
@@ -193,6 +197,11 @@ class UserProfile extends Component {
               raised={true}>
               <Text style={{ color: '#EDF5E1'}}>Log Out</Text>
             </TouchableOpacity>
+              title='Log out' />
+
+            <Button
+              onPress={this.redirectHome}
+              title='Go Back' />
           </View>
 
         </View>

@@ -3,13 +3,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { View, Text, TextInput, StyleSheet, TouchableHighlight, Keyboard } from 'react-native';
 
 class Search extends Component {
-  
+
   constructor(props) {
     super(props);
-    this.submitSearch = this.submitSearch.bind(this);
     this.renderCancelIcon = this.renderCancelIcon.bind(this);
     this.renderSearchIcon = this.renderSearchIcon.bind(this);
-    
+
   }
 
   renderSearchIcon() {
@@ -17,11 +16,12 @@ class Search extends Component {
       return <Ionicons style={styles.leftIcon} name="ios-search" size={20} />;
     } else {
       return (
-        <TouchableHighlight style={styles.icon} 
-         onPress={() => {
+        <TouchableHighlight style={styles.icon}
+          onPress={() => {
             Keyboard.dismiss();
-            this.props.setSearchActive(false);}}
-          >
+            this.props.setSearchActive(false);
+          }}
+        >
           <Ionicons style={styles.leftIcon} name="ios-arrow-back" size={20} />
         </TouchableHighlight>
       );
@@ -31,7 +31,7 @@ class Search extends Component {
   renderCancelIcon() {
     if (this.props.searchActive) {
       return (
-        <TouchableHighlight onPress={() => this.props.setSearchText("") } style={styles.icon} >
+        <TouchableHighlight onPress={() => this.props.setSearchText("")} style={styles.icon} >
           <Ionicons name="ios-close" size={20} />
         </TouchableHighlight>
       );
@@ -40,10 +40,6 @@ class Search extends Component {
     }
   }
 
-  submitSearch() {
-    // update results by ajax calling to the backend with this.state.searchText
-    this.props.search(this.props.searchText);
-  }
 
   render() {
     return (
@@ -55,8 +51,7 @@ class Search extends Component {
             placeholder="Search"
             style={{ paddingLeft: 20, flex: 8 }}
             onChangeText={(searchText) => {
-              this.submitSearch(searchText);
-              this.props.setSearchText(searchText);
+              this.props.typeText(searchText);
             }}
             onSubmitEditing={this.enterSearch}
             autoCorrect={false}
@@ -66,14 +61,14 @@ class Search extends Component {
           {this.renderCancelIcon()}
         </View>
         <View style={{ flex: 5 }}></View>
-      </View> 
+      </View>
     );
   }
 }
 
 // define your styles
 const styles = StyleSheet.create({
-  
+
   searchContainer: {
     flexDirection: 'row',
     position: 'absolute',

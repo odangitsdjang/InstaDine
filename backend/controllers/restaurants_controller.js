@@ -21,6 +21,34 @@ exports.create = function(req, res, next) {
   });
 };
 
+exports.allRestaurants = function(req,res,next) {
+  Restaurant.find({}, function (error, restaurants) {
+    if (error) { return next(error); }
+    if (undefined || null) {
+      return res.status(401).json({ error: 'Some other error' });
+    }
+    if (restaurants.length === 0) {
+      return res.json({ restaurants: "No restaurants found" });
+    }
+    // filter data
+    restaurants = restaurants.map(restaurant=> {
+      return { 
+        id: restaurant._id,
+        full_address: restaurant.full_address,
+        name: restaurant.name,
+        phone_number: restaurant.phone_number,
+        tables: restaurant.tables,
+        queue: restaurant.queue,
+        latlng: restaurant.geo,
+        address: restaurant.address
+      };
+    });
+
+    res.json({ restaurants: restaurants });
+
+  });
+};
+
 exports.search = function (req, res, next) {
   const searchQuery = req.query.searchQuery;
   let regex = "^" + searchQuery; 

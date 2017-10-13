@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Picker, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Picker, TouchableOpacity, Button } from 'react-native';
 
 const DUMMY_RESTAURANT = {
   name: "Davids Best Korean BBQ",
@@ -26,7 +26,7 @@ class RestaurantItem extends Component {
       user: DUMMY_USER,
       reservationTime: "18:15"
     };
-
+    this.redirectHome = this.redirectHome.bind(this);
   }
 
   componentDidMount() {
@@ -75,6 +75,10 @@ class RestaurantItem extends Component {
     );
   }
   
+  redirectHome() {
+    this.props.navigation.navigate('Map');
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -84,6 +88,9 @@ class RestaurantItem extends Component {
         <View >
           { this.reserveOrCancel() }
         </View>
+        <Button
+          onPress={this.redirectHome}
+          title='Go Back' />
       </View>
     );
   }

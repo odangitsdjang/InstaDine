@@ -20,6 +20,7 @@ class ReservationForm extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.redirectHome = this.redirectHome.bind(this);
   }
 
   handleInput(type){
@@ -36,6 +37,10 @@ class ReservationForm extends Component {
     };
 
     this.props.createReservation(newReservation, this.props.userToken);
+  }
+
+  redirectHome(){
+    this.props.navigation.navigate('Map');
   }
 
   render() {
@@ -65,6 +70,7 @@ class ReservationForm extends Component {
             value={this.state.datetime.toString()}
             placeholder='Date Time' />
 
+
           <TouchableOpacity
             onPress={this.handleSubmit}
             style={styles.button}
@@ -73,6 +79,10 @@ class ReservationForm extends Component {
           </TouchableOpacity>
 
         </View>
+        
+        <Button
+          onPress={this.redirectHome}  
+          title='Go Back' />
       </View>
     );
   }
