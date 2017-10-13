@@ -6,6 +6,8 @@ import { View, Text, StyleSheet, Button, Dimensions,
          from 'react-native';
 import SearchContainer from './SearchContainer';
 import SearchResultContainer from './SearchResultContainer';
+// import { DrawerNavigator, DrawerItems } from 'react-navigation';
+import Drawer from '../../navigators/DrawerNavigator';
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -62,9 +64,11 @@ class MapItem extends Component {
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
     this.setSearchActive = this.setSearchActive.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
+    this.openDrawer = this.openDrawer.bind(this);
   }
 
   componentDidMount() {
+    console.log(this.props);
     // Get restaurants 
 
     // User's current location
@@ -174,9 +178,14 @@ class MapItem extends Component {
     this.setState({ searchText: text });
   }
 
+  openDrawer(){
+    this.props.navigation.navigate('DrawerOpen');
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <Drawer />
         { this.renderMap() }
         <SearchContainer setSearchText={this.setSearchText} 
                 searchActive={this.state.searchActive} 
@@ -184,6 +193,9 @@ class MapItem extends Component {
                 setSearchActive={this.setSearchActive}/>
         <SearchResultContainer searchActive={this.state.searchActive}
           searchText={this.state.searchText} />
+        <Button 
+          onPress={this.openDrawer}
+          title='Open Drawer' />
       </View>
     );
   }

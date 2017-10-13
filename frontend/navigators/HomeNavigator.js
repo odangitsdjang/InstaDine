@@ -5,15 +5,17 @@ import UserProfileContainer from '../components/profile/UserProfileContainer';
 import MapItem from '../components/home/MapItem';
 import Splash from '../components/Splash';
 import ReservationFormContainer from '../components/reservation/ReservationFormContainer';
+import Drawer from '../navigators/DrawerNavigator';
 
 const routeConfig = {
   MapItem: { screen: MapItem },
   UserProfile: { screen: UserProfileContainer },
-  Reservation: { screen: ReservationFormContainer }
+  Reservation: { screen: ReservationFormContainer },
+  Drawer: { screen: Drawer }
 };
 
 const homeNavigatorConfig = {
-  // navigationOptions: { tabBarVisible: false },
+  navigationOptions: { tabBarVisible: false },
   initialRouteName: 'MapItem'
 };
 

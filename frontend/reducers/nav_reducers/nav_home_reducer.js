@@ -10,6 +10,7 @@ const routes = ['MapItem', 'UserProfile', 'Reservation'];
 const navHomeReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
+    case 'Navigation/BACK':
     case 'NAVIGATION/BACK':
       return HomeNavigator.router.getStateForAction(
         NavigationActions.back(),

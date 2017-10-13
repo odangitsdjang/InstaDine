@@ -47,6 +47,11 @@ class UserProfile extends Component {
     }
   };
 
+  componentDidMount(){
+    debugger;
+    console.log(this.props);
+  }
+
   onLogout(){
     this.props.logoutUser();
   }
@@ -125,6 +130,10 @@ class UserProfile extends Component {
             <Button
               onPress={this.onLogout}
               title='Log out' />
+
+            <Button
+              onPress={this.props.navigation.goBack}
+              title='Go Back' />
           </View>
         </View>
       );
