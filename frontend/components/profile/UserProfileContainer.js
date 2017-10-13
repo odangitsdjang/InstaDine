@@ -1,13 +1,16 @@
 import { connect } from 'react-redux';
 import UserProfile from './UserProfile';
 import { logoutUser } from '../../actions/session_actions';
+import { updateUser } from '../../actions/user_actions';
 
 const mapStateToPatch = state => ({
-  user: state.session.currentUser
+  user: state.session.currentUser,
+  userToken: state.session.token
 });
 
 const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(logoutUser())
+  logoutUser: () => dispatch(logoutUser()),
+  updateUser: (user, userToken) => dispatch(updateUser(user, userToken))
 });
 
 export default connect(

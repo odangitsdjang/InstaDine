@@ -5,8 +5,8 @@ import {addAlert} from './alerts_actions';
 exports.loginUser = user => {
   return function (dispatch) {
     return axios.post(LOGIN_URL, user).then((response) => {
-      var { user_id, token, currentUser } = response.data;
-      dispatch(authUser(user_id, token, currentUser));
+      let { token, currentUser } = response.data;
+      dispatch(authUser(token, currentUser));
     }).catch((errors) => {
       dispatch(addAlert("Incorrect login or password"));
     });
@@ -16,16 +16,15 @@ exports.loginUser = user => {
 exports.signupUser = user => {
   return function (dispatch) {
     return axios.post(SIGNUP_URL, user).then((response) => {
-      // console.log(response);
-      var { user_id, token, currentUser } = response.data;
-      dispatch(authUser(user_id, token, currentUser));
+      let { token, currentUser } = response.data;
+      dispatch(authUser(token, currentUser));
     }).catch((errors) => {
-      dispatch(addAlert(errors));
+      dispatch(addAlert("Cannot Sign up with given info"));
     });
   };
 };
 
-const authUser = (user_id, token, currentUser) => {
+export const authUser = (token, currentUser) => {
   return {
     type: 'AUTH_USER',
     token,

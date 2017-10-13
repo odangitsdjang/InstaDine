@@ -50,7 +50,7 @@ exports.signup = function(req, res, next) {
       return next(err); 
     }
     if(extistingUser) { 
-      return resizeBy.status(422).json({error: "Email taken"}); 
+      return res.status(422).json({error: "Email taken"}); 
     }
 
     let user = new User({
