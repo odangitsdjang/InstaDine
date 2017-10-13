@@ -19,7 +19,7 @@ router.route('/login')
 
 //update user info 
 // router.route('/user/')
-//       .patch(UserController.updateUser);
+//       // .patch(UserController.updateUser);
 
 router.route('/restaurants')
       .post(RestaurantsController.create);

@@ -30,7 +30,7 @@ const userSchema = new Schema({
   },
   profilePicture: {
     type: String,
-    default: 'http://res.cloudinary.com/jerryzlau/image/upload/v1507741685/avatar-1295396_640_y2vrvm.png',
+    default: 'https://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png',
     required: true
   },
   properties: [],

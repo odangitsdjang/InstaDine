@@ -1,4 +1,4 @@
-import {SIGNUP_URL, LOGIN_URL} from '../util/session_api_util';
+import {SIGNUP_URL, LOGIN_URL} from '../util/api_util';
 import axios from 'axios';
 import {addAlert} from './alerts_actions';
 
