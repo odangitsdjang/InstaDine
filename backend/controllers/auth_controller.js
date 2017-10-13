@@ -60,15 +60,9 @@ exports.signup = function(req, res, next) {
       phoneNumber: phoneNumber
     });
 
-<<<<<<< HEAD
     user.save(function(saveError) {
       if (saveError) { 
         return res.status(400).send(saveError.message);
-=======
-    user.save(function(err) {
-      if(err) { 
-        return res.status(400).send(err.message);
->>>>>>> 98b2b493437e470f14669b7cc2c75baae1395374
       }
 
       let currentUser = { email: user.email, 
