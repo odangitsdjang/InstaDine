@@ -40,17 +40,10 @@ class UserProfile extends Component {
       aspect: [4, 3],
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
   };
-
-  componentDidMount(){
-    debugger;
-    console.log(this.props);
-  }
 
   onLogout(){
     this.props.logoutUser();

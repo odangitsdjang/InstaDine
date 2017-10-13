@@ -7,7 +7,7 @@ import { View, Text, StyleSheet, Button, Dimensions,
 import SearchContainer from './SearchContainer';
 import SearchResultContainer from './SearchResultContainer';
 // import { DrawerNavigator, DrawerItems } from 'react-navigation';
-import Drawer from '../../navigators/DrawerNavigator';
+// import Drawer from '../../navigators/DrawerNavigator';
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -185,7 +185,6 @@ class MapItem extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Drawer />
         { this.renderMap() }
         <SearchContainer setSearchText={this.setSearchText} 
                 searchActive={this.state.searchActive} 
