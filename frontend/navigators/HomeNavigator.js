@@ -1,22 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator } from 'react-navigation';
-import UserProfileContainer from '../components/profile/UserProfileContainer';
-import MapItem from '../components/home/MapItem';
-import Splash from '../components/Splash';
+// import UserProfileContainer from '../components/profile/UserProfileContainer';
+// import MapItem from '../components/home/MapItem';
+// import Splash from '../components/Splash';
 import ReservationFormContainer from '../components/reservation/ReservationFormContainer';
-// import Drawer from '../navigators/DrawerNavigator';
+import Drawer from '../navigators/DrawerNavigator';
 
 const routeConfig = {
-  MapItem: { screen: MapItem },
-  UserProfile: { screen: UserProfileContainer },
-  Reservation: { screen: ReservationFormContainer },
-  // Drawer: { screen: Drawer }
+  Drawer: { screen: Drawer },
+  QueueUp: { screen: ReservationFormContainer }
 };
 
 const homeNavigatorConfig = {
   navigationOptions: { tabBarVisible: false },
-  initialRouteName: 'MapItem'
+  initialRouteName: 'Drawer'
 };
 
 export const HomeNavigator = TabNavigator(

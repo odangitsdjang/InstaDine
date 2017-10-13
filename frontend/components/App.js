@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import HomeWithNavigationState from '../navigators/HomeNavigator';
 import AppWithNavigationState from '../navigators/AppNavigator';
 // import Drawer from '../navigators/DrawerNavigator';
-import Drawer from '../navigators/DrawerNavigator';
+// import Drawer from '../navigators/DrawerNavigator';
 
 // create a component
 class App extends Component {
@@ -30,7 +30,7 @@ class App extends Component {
   
   render() {
     return (
-      this.state.loggedIn ?  <Drawer /> : <AppWithNavigationState /> 
+      this.state.loggedIn ?  <HomeWithNavigationState /> : <AppWithNavigationState /> 
     );
   }
 }

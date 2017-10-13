@@ -2,10 +2,10 @@ import { HomeNavigator } from '../../navigators/HomeNavigator';
 import { NavigationActions } from 'react-navigation';
 
 const initialState = HomeNavigator.router.getStateForAction(
-  HomeNavigator.router.getActionForPathAndParams('MapItem')
+  HomeNavigator.router.getActionForPathAndParams('Drawer')
 );
 
-const routes = ['MapItem', 'UserProfile', 'Reservation'];
+const routes = ['Drawer', 'QueueUp', 'DrawerOpen', 'DrawerClose'];
 
 const navHomeReducer = (state = initialState, action) => {
   Object.freeze(state);

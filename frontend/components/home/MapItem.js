@@ -67,10 +67,10 @@ class MapItem extends Component {
     this.setSearchText = this.setSearchText.bind(this);
     this.openDrawer = this.openDrawer.bind(this);
     this.typeText = this.typeText.bind(this);
+    this.redirectRestaurant = this.redirectRestaurant.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props);
     // Get restaurants 
     this.props.restaurantIndex();
     // User's current location
@@ -114,10 +114,7 @@ class MapItem extends Component {
   }
 
   redirectRestaurant() {
-    //  not working
-    // <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
-    // this.props.navigation.dispatch({ type: 'Signup' });
-    this.props.goToRestaurant.dispatch( {type: 'RestaurantContainer'} );
+    this.props.navigation.navigate('Restaurant');
   }
 
   markerClick(marker) {
@@ -179,11 +176,11 @@ class MapItem extends Component {
   }
 
   setSearchText(text) {
-    console.log(this.state.searchText);
     this.setState({ searchText: text });
   }
 
   openDrawer(){
+    console.log(this.props);
     this.props.navigation.navigate('DrawerOpen');
   }
 
