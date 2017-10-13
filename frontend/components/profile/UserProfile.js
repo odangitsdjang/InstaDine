@@ -22,7 +22,7 @@ class UserProfile extends Component {
     };
 
     this.state = {
-      image: 'http://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png'
+      image: 'https://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png'
     };
 
     this.onLogout = this.onLogout.bind(this);
@@ -50,6 +50,12 @@ class UserProfile extends Component {
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
+
+    let user = { 
+      profilePicture: 'https://res-1.cloudinary.com/cloudinary/image/asset/upload_widget_main-0d7f36bcac005868a51815763886aa65.jpg'
+    }; 
+
+    this.props.updateUser(user, this.props.userToken);
   };
 
   onLogout(){
@@ -133,7 +139,7 @@ class UserProfile extends Component {
               <Text style={styles.regularFont}>{email}</Text>
               <Text style={styles.regularFont}>{phoneNumber}</Text>
               <Button
-                title="Pick an image from camera roll"
+                title="Update user profile picture"
                 onPress={this._pickImage}
               />
             </View>

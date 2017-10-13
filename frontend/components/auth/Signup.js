@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { ImagePicker } from 'expo';
 import { View, Text, StyleSheet, Button,
          TextInput,
-         Alert } from 'react-native';
+         Alert,
+         Image } from 'react-native';
 
 // create a component
 class Signup extends Component {
@@ -21,7 +22,21 @@ class Signup extends Component {
     this.update = this.update.bind(this);
     this.onSignUp = this.onSignUp.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+    this._pickImage = this._pickImage.bind(this);
   }
+
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
 
   update(field) {
     return e => this.setState({
@@ -45,7 +60,6 @@ class Signup extends Component {
 
   renderErrors() {
     if (this.errors) {
-      this.errors = this.errors.slice(24,-1);
       Alert.alert(
         this.errors
       );
@@ -54,12 +68,19 @@ class Signup extends Component {
   }
 
   render() {
-    let {email, password, phoneNumber, username} = this.state;
+    let {email, password, phoneNumber, username, image} = this.state;
     return (
       <View style={styles.container}>
         <Text>This is the Sign Up page</Text>
         {this.renderErrors()}
         <View style={styles.signUpForm}>
+          <Image
+            source={{ uri: image }}
+            style={styles.userProfile} />
+          <Button
+            title="Pick an image from camera roll"
+            onPress={this._pickImage}
+          />
           <Text style={styles.fieldTitle}>Email:</Text>
           <View style={styles.field}>
             <TextInput 
@@ -125,6 +146,10 @@ const styles = StyleSheet.create({
     width: 200,
     marginTop: 0,
     backgroundColor: 'white'
+  },
+  userProfile: {
+    width: 120,
+    height: 120
   },
   textInput: {
     height: 26

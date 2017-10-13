@@ -7,9 +7,11 @@ exports.updateUser = function(req, res, next) {
   const userId = jwt.decode(userToken, config.secret).sub;
 
   User.findOneAndUpdate(
-    {user_id: userId},
+    {_id: userId},
     req.body.user,
     function (userError, updatedUser) {
+      console.log(updatedUser, "++++++++++++++++++++++=");
+      console.log(userError, "++++++++++++++++++++++=");
       if (userError) { return next(userError); }
 
       res.json(updatedUser);
