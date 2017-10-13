@@ -1,5 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
+import { ImagePicker } from 'expo';
 import { View, 
          Text, 
          StyleSheet,
@@ -20,9 +21,31 @@ class UserProfile extends Component {
       status: 'Seated'
     };
 
+    this.state = {
+      image: this.props.user.profilePicture,
+      email: this.props.user.email,
+      phoneNumber: this.props.user.phoneNumber,
+      properties: this.props.user.properties,
+      username: this.props.user.username
+    };
+
     this.onLogout = this.onLogout.bind(this);
     this.upComingReservation = this.upComingReservation.bind(this);
+    this._pickImage = this._pickImage.bind(this);
   }
+
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
 
   onLogout(){
     this.props.logoutUser();
@@ -58,16 +81,9 @@ class UserProfile extends Component {
     if(this.props.user){
       let { email, 
             phoneNumber, 
-            profilePicture, 
             properties, 
-            username } = this.props.user;
-
-      let { restaurant_id,
-        user_id,
-        restaurantName,
-        count,
-        timestamp,
-        status } = this.dummy_reservation;
+            image, 
+            username } = this.state;
   
       return (
         <View style={styles.container}>
@@ -77,12 +93,16 @@ class UserProfile extends Component {
   
           <View style={[styles.boxContainer, styles.userInfo]}>
             <Image 
-              source={{uri: profilePicture}}
+              source={{uri: image}}
               style={styles.userProfile}/>
             <View style={styles.userInfoDetails}>
               <Text style={{fontSize: 30}}>{username}</Text>
               <Text style={styles.regularFont}>{email}</Text>
               <Text style={styles.regularFont}>{phoneNumber}</Text>
+              <Button
+                title="Pick an image from camera roll"
+                onPress={this._pickImage}
+              />
             </View>
           </View>
   
