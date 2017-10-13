@@ -77,27 +77,34 @@ class RestaurantItem extends Component {
     return (
       <View>
         <View style={styles.reserve}>  
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Text style={styles.reserveText} >
               Reserve
             </Text>
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            onPress={this.handleSubmit}>
+            <Text style={styles.reserveText}>Reserve</Text>
           </TouchableOpacity>
         </View>
-        <Picker selectedValue= { this.state.reservationTime }
-                style={styles.picker}
-                onValueChange= { (itemValue, itemIndex) => this.setState({ 
-                  reservationTime: itemValue })}>
-            {this.renderReservationTimes()}
-        </Picker>
 
-        <Picker 
-           selectedValue={this.state.seat_count}
-           style={styles.picker}
-           onValueChange={ (itemValue, itemIndex) => this.setState({
-             seat_count: itemValue
-           })}>
-          {this.renderSeatCount()}
-        </Picker>
+        <View style={{flexDirection: 'row'}}>
+          <Picker selectedValue= { this.state.reservationTime }
+                  style={styles.picker}
+                  onValueChange= { (itemValue, itemIndex) => this.setState({ 
+                    reservationTime: itemValue })}>
+              {this.renderReservationTimes()}
+          </Picker>
+
+          <Picker 
+            selectedValue={this.state.seat_count}
+            style={styles.picker}
+            onValueChange={ (itemValue, itemIndex) => this.setState({
+              seat_count: itemValue
+            })}>
+            {this.renderSeatCount()}
+          </Picker>
+        </View>
           
       </View>
       
@@ -129,14 +136,11 @@ class RestaurantItem extends Component {
         </View>
 
         <TouchableOpacity
-          onPress={this.handleSubmit}
+          onPress={this.redirectHome}
           style={styles.button}>
-          <Text style={styles.text}>Book!</Text>
+          <Text style={styles.text}>Go Back</Text>
         </TouchableOpacity>
 
-        <Button
-          onPress={this.redirectHome}
-          title='Go Back' />
       </View>
     );
   }
@@ -148,6 +152,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#2c3e50',
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    // borderColor: '#F2F2F2'
+    borderColor: 'black'
   },
   header: {
     padding: 16,
@@ -173,7 +188,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
   picker: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    flex: 1
   }
 });
 
