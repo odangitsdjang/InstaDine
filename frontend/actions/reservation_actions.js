@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {addAlert} from './alerts_actions';
 
+const PROD_RESV_URl = 'https://instadine.herokuapp.com/v1/reservations';
 const RESV_URL = 'http://localhost:3000/v1/reservations';
 
 export const RECEIVE_RESERVATION = 'RECEIVE_RESERVATION';

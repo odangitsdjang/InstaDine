@@ -1,4 +1,4 @@
 node_modules/*
 .expo/*
 package-lock.json
-backend/util.js
+backend/api_key.js
