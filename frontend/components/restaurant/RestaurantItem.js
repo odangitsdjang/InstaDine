@@ -2,21 +2,38 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Picker, TouchableOpacity, Button } from 'react-native';
 import MapItem from '../home/MapItem';
 
-const DUMMY_RESTAURANT = {
-  name: "Davids Best Korean BBQ",
-  address: { latitude: 37.777728, longitude: -122.408806 },
-  manager: {
-    required: 'Manager is required',
-    user: {}
-  },
-  queue: [
-    {
-      reservation: {}
-    }
-  ]
-};
-const DUMMY_USER = {
+// const DUMMY_RESTAURANT = {
+//   name: "Davids Best Korean BBQ",
+//   address: { latitude: 37.777728, longitude: -122.408806 },
+//   manager: {
+//     required: 'Manager is required',
+//     user: {}
+//   },
+//   queue: [
+//     {
+//       reservation: {}
+//     }
+//   ]
+// };
+// const DUMMY_USER = {
 
+// };
+
+const DUMMY_RESTAURANT = {
+  address: {
+    city: "San Francisco",
+    state: "CA",
+    street: "86 Carl St",
+    zip: 94117
+  },
+  full_address: "86 Carl St, San Francisco, CA 94117, USA",
+  id: "59dfe1b5914b7fbb4e787c35",
+  latlng: {
+    latitude: 37.7659667,
+    longitude: -122.4496661
+  },
+  name: "Burgermeister",
+  phone_number: "(415 566-1274"
 };
 
 class RestaurantItem extends Component {
@@ -24,7 +41,7 @@ class RestaurantItem extends Component {
     super(props);
     this.state = {
       restaurant: DUMMY_RESTAURANT,
-      user: DUMMY_USER,
+      user: '',
       reservationTime: "18:15",
       seat_count: 0
     };
@@ -41,6 +58,10 @@ class RestaurantItem extends Component {
     //   reservationTime: '',
     //   seat_count: 0
     // });
+    debugger
+    this.setState({
+      user: this.props.user
+    });
     
   }
 

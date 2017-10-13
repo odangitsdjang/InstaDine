@@ -70,7 +70,7 @@ class MapItem extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
     // Get restaurants 
     this.props.restaurantIndex();
     // User's current location
