@@ -140,10 +140,10 @@ class UserProfile extends Component {
         </Text>
       );
     }
+  }
     
   redirectHome() {
     this.props.navigation.navigate('Map');
-
   }
 
   render() {
@@ -197,7 +197,6 @@ class UserProfile extends Component {
               raised={true}>
               <Text style={{ color: '#EDF5E1'}}>Log Out</Text>
             </TouchableOpacity>
-              title='Log out' />
 
             <Button
               onPress={this.redirectHome}
