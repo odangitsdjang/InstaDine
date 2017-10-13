@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, Button, Dimensions,
          from 'react-native';
 import { connect } from 'react-redux';
 
-import { search } from '../../actions/restaurant_actions';
+import { search, restaurantIndex } from '../../actions/restaurant_actions';
 
 import Search from './Search';
 import SearchResults from './SearchResults';
@@ -60,7 +60,6 @@ class MapItem extends Component {
       
     };
     this.map = 0;
-    this.onRegionChange = this.onRegionChange.bind(this);
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
@@ -71,7 +70,7 @@ class MapItem extends Component {
 
   componentDidMount() {
     // Get restaurants 
-
+    this.props.restaurantIndex();
     // User's current location
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -89,8 +88,9 @@ class MapItem extends Component {
     );
 
     // make markers into components
+    console.log(this.props.restaurants);
     this.setState({
-      markers: this.state.markers.map((marker, i) => (
+      markers: this.props.restaurants.map((marker, i) => (
           <MapView.Marker
             key={i}
             onPress={() => this.markerClick(marker)}
@@ -129,10 +129,6 @@ class MapItem extends Component {
     // move to coordinate with duration
     this.map.animateToCoordinate(marker.latlng, 300);  
 
-  }
-
-  onRegionChange(region) {
-    // console.log(this.state);
   }
   
   renderMarkers() {
@@ -218,11 +214,13 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = state => ({
-  results: state.search.restaurants
+  results: state.search.restaurants,
+  restaurants: state.entities.restaurants
 });
 
 const mapDispatchToProps = dispatch => ({ 
-  search: searchText => dispatch(search(searchText))
+  search: searchText => dispatch(search(searchText)),
+  restaurantIndex: () => dispatch(restaurantIndex())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapItem);

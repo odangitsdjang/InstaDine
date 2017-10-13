@@ -29,7 +29,6 @@ class SearchResults extends Component {
   }
   
   render() {
-    console.log(this.state.results.length);
     if (this.props.searchActive && typeof this.state.results !== "string" ) 
       return (
         <View style={styles.container}>
