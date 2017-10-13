@@ -4,8 +4,12 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, Dimensions, 
   TouchableOpacity, TextInput, Alert } 
          from 'react-native';
-import SearchContainer from './SearchContainer';
-import SearchResultContainer from './SearchResultContainer';
+import { connect } from 'react-redux';
+
+import { search } from '../../actions/restaurant_actions';
+
+import Search from './Search';
+import SearchResults from './SearchResults';
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -62,6 +66,7 @@ class MapItem extends Component {
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
     this.setSearchActive = this.setSearchActive.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
+    this.typeText = this.typeText.bind(this);
   }
 
   componentDidMount() {
@@ -170,7 +175,13 @@ class MapItem extends Component {
     this.setState({ searchActive: bool });
   }
 
+  typeText(text) {
+    this.props.search(text);
+    this.setState({ searchText: text });
+  }
+
   setSearchText(text) {
+    console.log(this.state.searchText);
     this.setState({ searchText: text });
   }
 
@@ -178,11 +189,13 @@ class MapItem extends Component {
     return (
       <View style={styles.container}>
         { this.renderMap() }
-        <SearchContainer setSearchText={this.setSearchText} 
+        <Search setSearchText={this.setSearchText} 
+                typeText={this.typeText} 
                 searchActive={this.state.searchActive} 
                 searchText={this.state.searchText} 
                 setSearchActive={this.setSearchActive}/>
-        <SearchResultContainer searchActive={this.state.searchActive}
+        <SearchResults searchActive={this.state.searchActive}
+          results={this.props.results}
           searchText={this.state.searchText} />
       </View>
     );
@@ -203,4 +216,13 @@ const styles = StyleSheet.create({
 
 });
 
-export default MapItem;
+
+const mapStateToProps = state => ({
+  results: state.search.restaurants
+});
+
+const mapDispatchToProps = dispatch => ({ 
+  search: searchText => dispatch(search(searchText))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapItem);
