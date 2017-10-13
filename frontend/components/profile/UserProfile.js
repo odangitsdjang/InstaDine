@@ -1,12 +1,18 @@
+//cloudinary end point 
+const CLOUDINARY_UPLOAD_PRESET = 'ngvqgyti';
+const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/jerryzlau/image/upload";
+
 //import liraries
 import React, { Component } from 'react';
+import request from 'superagent';
 import { ImagePicker } from 'expo';
 import { View, 
          Text, 
          StyleSheet,
          Image,
          Button,
-         ScrollView } from 'react-native';
+         ScrollView,
+         TouchableOpacity } from 'react-native';
 
 // create a component
 class UserProfile extends Component {
@@ -36,7 +42,7 @@ class UserProfile extends Component {
       this.setState({
         image: this.props.user.profilePicture
       });
-    };
+    }
   }
 
   _pickImage = async () => {
@@ -48,7 +54,28 @@ class UserProfile extends Component {
     console.log(result);
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      // this.setState({ image: result.uri });
+
+      //upload picture to cloudinary 
+      let upload = request.post(CLOUDINARY_UPLOAD_URL)
+                          .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+                          .field('file', result.uri);
+
+      debugger
+
+      upload.end((err, response) => {
+        if(err){
+          console.log(err);
+          return;
+        }
+
+        if(response.body.secure_url !== ''){
+          let secureUrl = response.body.secure_url;
+          this.setState({
+            image: response.body.secure_url
+          });
+        }
+      });
     }
 
     let user = { 
