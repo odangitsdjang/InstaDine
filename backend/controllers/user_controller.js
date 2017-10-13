@@ -8,7 +8,7 @@ exports.updateUser = function(req, res, next) {
 
   User.findOneAndUpdate(
     {user_id: userId},
-    req.body.user,
+    { $set: req.body.user },
     function (userError, updatedUser) {
       if (userError) { return next(userError); }
 

@@ -18,7 +18,7 @@ router.route('/login')
       .post([requireLogin, AuthenticationController.login]);
 
 //update user info 
-router.route('/user/')
+router.route('/users')
       .patch(UserController.updateUser);
 
 router.route('/restaurants')

@@ -13,7 +13,7 @@ const routeConfig = {
 };
 
 const homeNavigatorConfig = {
-  navigationOptions: { tabBarVisible: false },
+  // navigationOptions: { tabBarVisible: false },
   initialRouteName: 'MapItem'
 };
 
