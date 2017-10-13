@@ -60,9 +60,9 @@ exports.signup = function(req, res, next) {
       phoneNumber: phoneNumber
     });
 
-    user.save(function(err) {
-      if(err) { 
-        return res.status(400).send(err.message);
+    user.save(function(saveError) {
+      if (saveError) { 
+        return res.status(400).send(saveError.message);
       }
 
       let currentUser = { email: user.email, 
