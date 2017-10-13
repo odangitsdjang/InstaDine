@@ -5,7 +5,8 @@ import {
   Text, 
   StyleSheet, 
   TextInput, 
-  Button 
+  Button,
+  TouchableOpacity
 } from 'react-native';
 
 // create a component
@@ -40,29 +41,38 @@ class ReservationForm extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>ReservationForm</Text>
+        <View style={styles.infoContainer}>
+          <Text style={{fontSize: 30, marginLeft: 35}}>ReservationForm</Text>
 
-        <Text>Restaurant ID</Text>
-        <TextInput
-          onChange={this.handleInput('restaurant_id')}
-          value={this.state.restaurant_id}
-          placeholder='RestaurantID' />
-        
-        <Text>Seat Count</Text>
-        <TextInput
-          onChange={this.handleInput('seat_count')}
-          value={this.state.seat_count.toString()}
-          placeholder='Seat Count' />
+          <Text style={[styles.title, styles.spacePad]}>Restaurant ID</Text>
+          <TextInput
+            style={[styles.input, styles.spacePad]}
+            onChange={this.handleInput('restaurant_id')}
+            value={this.state.restaurant_id}
+            placeholder='RestaurantID' />
+          
+          <Text style={[styles.title, styles.spacePad]}>Seat Count</Text>
+          <TextInput
+            style={[styles.input, styles.spacePad]}
+            onChange={this.handleInput('seat_count')}
+            value={this.state.seat_count.toString()}
+            placeholder='Seat Count' />
 
-        <Text>Datetime</Text>
-        <TextInput
-          onChange={this.handleInput('datetime')}
-          value={this.state.datetime.toString()}
-          placeholder='Date Time' />
+          <Text style={[styles.title, styles.spacePad]}>Datetime</Text>
+          <TextInput
+            style={[styles.input, styles.spacePad]}
+            onChange={this.handleInput('datetime')}
+            value={this.state.datetime.toString()}
+            placeholder='Date Time' />
 
-        <Button
-          onPress={this.handleSubmit}
-          title='Create Reservation' />
+          <TouchableOpacity
+            onPress={this.handleSubmit}
+            style={styles.button}
+            raised={true}>
+            <Text style={styles.text}>Create Reservation</Text>
+          </TouchableOpacity>
+
+        </View>
       </View>
     );
   }
@@ -74,8 +84,45 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    backgroundColor: '#65CCB8',
   },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 155,
+    marginLeft: 65,
+    marginTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#F2F2F2',
+    paddingLeft: 80
+  },
+  text: {
+    width: 200,
+    color: '#F2F2F2'
+  },
+  infoContainer: {
+    width: 300,
+    height: 500,
+    alignSelf: 'center',
+    // backgroundColor: 'red'
+  },
+  title: {
+    fontSize: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 75
+  },
+  input: {
+    backgroundColor: 'white',
+    paddingLeft: 80
+  },
+  spacePad: {
+    margin: 10,
+    padding: 5
+  }
 });
 
 //make this component available to the app

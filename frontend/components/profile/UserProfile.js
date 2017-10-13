@@ -159,10 +159,17 @@ class UserProfile extends Component {
               <Image 
                 source={{uri: this.state.image}}
                 style={styles.userProfile}/>
-              <Button
-                title="Change profile"
-                onPress={this._pickImage}
-              />
+              <TouchableOpacity
+                style={{padding: 5, 
+                        borderWidth: 2,
+                        borderColor: '#EDF5E1',
+                        borderRadius: 5,
+                        marginTop: 10}}
+                onPress={this._pickImage}>
+                <Text style={{color: '#EDF5E1', 
+                              fontSize: 15}}>Change Profile</Text>
+              </TouchableOpacity>
+
             </View>
             <View style={styles.userInfoDetails}>
               <Text style={{fontSize: 30}}>{username}</Text>
@@ -183,7 +190,7 @@ class UserProfile extends Component {
               onPress={this.onLogout}
               style={styles.button}
               raised={true}>
-              <Text style={styles.text}>Log Out</Text>
+              <Text style={{ color: '#EDF5E1'}}>Log Out</Text>
             </TouchableOpacity>
           </View>
 
