@@ -28,6 +28,10 @@ router.route('/restaurants')
 router.route('/restaurants/search')
       .get(RestaurantsController.search);
 
+// Route for all restaurants
+router.route('/restaurants/index')
+      .get(RestaurantsController.allRestaurants);
+
 // Route to create new reservation
 router.route('/reservations')
       .post(ReservationsController.create);

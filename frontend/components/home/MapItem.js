@@ -26,18 +26,18 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const SAMPLE_MARKERS = [
   {
     latlng: { latitude: 37.777728, longitude: -122.408806 },
-    title: "davids hood",
-    description: "tight"
+    name: "davids hood",
+    full_address: "tight"
   },
   {
     latlng: { latitude: 37.791655, longitude: -122.394488},
-    title: "jerrys hood",
-    description: "dont come here"
+    name: "jerrys hood",
+    full_address: "dont come here"
   },
   {
     latlng: { latitude: 37.766648, longitude: -122.419499},
-    title: "adrians hood",
-    description: "yo..",
+    name: "adrians hood",
+    full_address: "yo..",
     
   }
 ];
@@ -99,10 +99,10 @@ class MapItem extends Component {
             <MapView.Callout onPress={this.redirectRestaurant}>
                 <View style={styles.insideBubbleStyle}>
                   <Text>
-                    {marker.title}
+                    {marker.name}
                   </Text>
                   <Text>
-                    {marker.description}
+                    {marker.full_address}
                   </Text>
                 </View>
             </MapView.Callout>

@@ -29,7 +29,8 @@ class SearchResults extends Component {
   }
   
   render() {
-    if (this.props.searchActive) 
+    console.log(this.state.results.length);
+    if (this.props.searchActive && typeof this.state.results !== "string" ) 
       return (
         <View style={styles.container}>
             <FlatList
@@ -38,16 +39,21 @@ class SearchResults extends Component {
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={()=>this.goToRestaurant(item.name)} key={item.name} style={styles.list}>
                   <Ionicons name="ios-restaurant" style={styles.restaurantIcon} 
-                    size={20}/>
+                    size={30}/>
                   <View style={{flex: 8, alignSelf: 'stretch', alignItems: 'stretch'}}>
                     <Text style={styles.restaurantName}>{item.name}</Text>
                     <Text style={styles.restaurantAddress}>{item.full_address}</Text>
                   </View>
-                  <Ionicons name="ios-arrow-forward" style={styles.goToIcon}/>
+                  <Ionicons name="ios-arrow-forward" style={styles.goToIcon} size={30}/>
                 </TouchableOpacity>
               )}/>
         </View>
       );
+      // no restaurants found
+    else if (this.props.searchActive && typeof this.state.results === "string") return (
+      <View style={styles.container}>
+      </View>
+    );
     else return null;
   }
 }
