@@ -44,7 +44,7 @@ class RestaurantShowMap extends Component {
   }
 
   componentDidMount() {
-    debugger
+
     console.log(this.props);
 
     // User's current location

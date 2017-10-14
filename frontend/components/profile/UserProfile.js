@@ -61,7 +61,6 @@ class UserProfile extends Component {
                           .field('file', '../../../docs/signup.png');
 
       upload.end((err, response) => {
-        debugger
         if(err){
           console.log(err);
           return;

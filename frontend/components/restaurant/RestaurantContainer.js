@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 import { createReservation} from '../../actions/reservation_actions';
 import RestaurantItem from './RestaurantItem';

@@ -89,6 +89,7 @@ class MapItem extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
 
+    debugger
     // make markers into components
     console.log(this.props.restaurants);
     this.setState({

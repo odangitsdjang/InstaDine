@@ -2,23 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Picker, TouchableOpacity, Button } from 'react-native';
 import RestaurantShowMap from './RestaurantShowMap';
 
-// const DUMMY_RESTAURANT = {
-//   name: "Davids Best Korean BBQ",
-//   address: { latitude: 37.777728, longitude: -122.408806 },
-//   manager: {
-//     required: 'Manager is required',
-//     user: {}
-//   },
-//   queue: [
-//     {
-//       reservation: {}
-//     }
-//   ]
-// };
-// const DUMMY_USER = {
-
-// };
-
 const DUMMY_RESTAURANT = {
   address: {
     city: "San Francisco",
@@ -33,7 +16,7 @@ const DUMMY_RESTAURANT = {
     longitude: -122.4496661
   },
   name: "Burgermeister",
-  phone_number: "(415 566-1274"
+  phone_number: "(415) 566-1274"
 };
 
 class RestaurantItem extends Component {
@@ -58,7 +41,7 @@ class RestaurantItem extends Component {
     //   reservationTime: '',
     //   seat_count: 0
     // });
-    debugger
+  
     this.setState({
       user: this.props.user
     });
@@ -154,6 +137,9 @@ class RestaurantItem extends Component {
   }
 
   render() {
+    // debugger
+    let {name, full_address, phone_number} = this.state.restaurant;
+
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -162,18 +148,19 @@ class RestaurantItem extends Component {
           style={{alignSelf: 'flex-start', flex: 1, marginTop: 7}}>
           <Text style={{fontSize: 15}}>Go Back</Text>
         </TouchableOpacity>
-          <Text style={styles.title}>{this.state.restaurant.name}</Text>
+          <Text style={styles.title}>{name}</Text>
         </View>
 
         <View style={styles.restInfo}>
-          <Text style={{alignSelf: 'center', 
-                        flex: 1,
-                        fontSize: 30}}>
-          </Text>
+          <View style={styles.restInfoTextContainer}>
+           <Text style={styles.restInfoText}>Address: {full_address}</Text>
+           <Text style={styles.restInfoText}>Call us at {phone_number}</Text>
+          </View>
            <RestaurantShowMap
-                restaurant={[DUMMY_RESTAURANT]}/>
- 
+                style={{flex: 1}}
+                restaurant={[this.state.restaurant]}/>
         </View>
+
 
         <View >
           { this.reserveOrCancel() }
@@ -189,11 +176,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
-    backgroundColor: '#2c3e50',
+    backgroundColor: '#65CCB8'
+  },
+  restInfoTextContainer:{
+    flex: 1, 
+    flexDirection: 'column'
+  },
+  restInfoText: {
+    fontSize: 15,
+    padding: 10,
+    alignSelf: 'center'
   },
   restInfo: {
-    flex: 1,
-    backgroundColor: 'green'
+    flex: 1
   },
   button: {
     padding: 10,
@@ -220,7 +215,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Chalkboard SE',
     alignSelf: 'center',
-    flex: 3
+    flex: 2
   }, 
   reserve: {
     paddingTop: 30,
