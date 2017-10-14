@@ -31,9 +31,9 @@ exports.allRestaurants = function(req,res,next) {
       return res.json({ restaurants: "No restaurants found" });
     }
     // filter data
-    restaurants = restaurants.map(restaurant=> {
-      return {
-          [restaurant._id]: { 
+    const filtered = {};
+    restaurants.forEach(restaurant=> {
+          filtered[restaurant._id] =  { 
             id: restaurant._id,
             full_address: restaurant.full_address,
             name: restaurant.name,
@@ -42,11 +42,10 @@ exports.allRestaurants = function(req,res,next) {
             queue: restaurant.queue,
             latlng: restaurant.geo,
             address: restaurant.address
-          }
-        };
+          };
     });
-
-    res.json({ restaurants: restaurants });
+    console.assert(filtered);
+    res.json({ restaurants: filtered });
 
   });
 };
