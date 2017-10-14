@@ -9,9 +9,10 @@ class DrawerContent extends Component {
     super(props);
     this.redirectEditProfile = this.redirectEditProfile.bind(this);
   }
-  componentDidMount() {
-    console.log(this.props);
-  }
+
+  // componentDidMount() {
+  //   console.log(this.props);
+  // }
 
   redirectEditProfile() {
     this.props.navigation.navigate('Map');
@@ -23,7 +24,6 @@ class DrawerContent extends Component {
 
   
   render() {
-    console.log(this.props);
     return (
       <View style={styles.container}>
         <Text>This is the drawer</Text>

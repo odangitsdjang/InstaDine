@@ -73,7 +73,6 @@ class MapItem extends Component {
 
   componentDidMount() {
     // Get restaurants 
-    this.props.restaurantIndex();
     // User's current location
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -89,32 +88,36 @@ class MapItem extends Component {
       (error) => console.log(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
+    
+    const mapItem = this;
 
-    // make markers into components
-    this.setState({
-      markers: this.props.restaurants.map((markerObj, i) => {
-        const marker = Object.values(markerObj)[0];
-        debugger;
-        return (
-          <MapView.Marker
-            key={i}
-            onPress={() => this.markerClick(marker)}
-            coordinate={marker.latlng}
-          >
-            <MapView.Callout onPress={() => this.redirectRestaurant(marker)}>
-                <View style={styles.insideBubbleStyle}>
-                  <Text>
-                    {marker.name}
-                  </Text>
-                  <Text>
-                    {marker.full_address}
-                  </Text>
-                </View>
-            </MapView.Callout>
-          </MapView.Marker>
-        );
-      }), loaded: 1
-    });
+    this.props.restaurantIndex().then(
+      function(){
+        mapItem.setState({
+          markers: mapItem.props.restaurants.map((markerObj, i) => {
+            const marker = Object.values(markerObj)[0];
+            return (
+              <MapView.Marker
+                key={i}
+                onPress={() => mapItem.markerClick(marker)}
+                coordinate={marker.latlng}
+              >
+                <MapView.Callout onPress={() => mapItem.redirectRestaurant(marker)}>
+                  <View style={styles.insideBubbleStyle}>
+                    <Text>
+                      {marker.name}
+                    </Text>
+                    <Text>
+                      {marker.full_address}
+                    </Text>
+                  </View>
+                </MapView.Callout>
+              </MapView.Marker>
+            );
+          }), loaded: 1
+        });
+      }
+    );
   }
 
   redirectRestaurant(marker) {
