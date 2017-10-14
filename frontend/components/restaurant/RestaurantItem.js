@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Picker, TouchableOpacity, Button } from 'react-native';
-import MapItem from '../home/MapItem';
+import RestaurantShowMap from './RestaurantShowMap';
 
 // const DUMMY_RESTAURANT = {
 //   name: "Davids Best Korean BBQ",
@@ -169,9 +169,10 @@ class RestaurantItem extends Component {
           <Text style={{alignSelf: 'center', 
                         flex: 1,
                         fontSize: 30}}>
-            Restaurant Info goes here
- 
           </Text>
+           <RestaurantShowMap
+                restaurant={[DUMMY_RESTAURANT]}/>
+ 
         </View>
 
         <View >
@@ -219,7 +220,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Chalkboard SE',
     alignSelf: 'center',
-    flex: 4
+    flex: 3
   }, 
   reserve: {
     paddingTop: 30,

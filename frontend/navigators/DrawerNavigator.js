@@ -3,7 +3,7 @@ import { addNavigationHelpers, DrawerNavigator } from 'react-navigation';
 import ReservationFormContainer from '../components/reservation/ReservationFormContainer';
 import UserProfileContainer from '../components/profile/UserProfileContainer';
 import MapItem from '../components/home/MapItem';
-import RestaurantContainer from '../components/restaurant/RestaurantItem';
+import RestaurantContainer from '../components/restaurant/RestaurantContainer';
 import { connect } from 'react-redux';
 
 const map = connect(mapStateToProps)(MapItem);
