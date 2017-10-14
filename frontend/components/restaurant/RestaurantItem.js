@@ -82,7 +82,6 @@ class RestaurantItem extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.title}>{this.state.restaurant.name}</Text>
         </View>
         <View >
           { this.reserveOrCancel() }
