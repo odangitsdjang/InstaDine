@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Picker, TouchableOpacity, Button } from 'react-native';
 
-const DUMMY_RESTAURANT = {
-  name: "Davids Best Korean BBQ",
-  address: { latitude: 37.777728, longitude: -122.408806 },
-  manager: {
-    required: 'Manager is required',
-    user: {}
-  },
-  queue: [
-    {
-      reservation: {}
-    }
-  ]
-};
-const DUMMY_USER = {
-
-};
-
 class RestaurantItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      restaurant: DUMMY_RESTAURANT,
-      user: DUMMY_USER,
-      reservationTime: "18:15"
-    };
+    this.state = {};
     this.redirectHome = this.redirectHome.bind(this);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.restaurantId && newProps.restaurantId !== this.props.restaurantId) {
+      
+    //   this.setState({
+    //     name: newProps,
+    //     address: { latitude: 37.777728, longitude: -122.408806 },
+    //     manager: {
+    //       required: 'Manager is required',
+    //       user: {}
+    //     },
+    //     queue: [
+    //       {
+    //         reservation: {}
+    //       }
+    //     ]
+    //   });
+    // }
+    }
   }
 
   componentDidMount() {
