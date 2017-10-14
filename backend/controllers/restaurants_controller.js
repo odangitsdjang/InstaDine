@@ -32,16 +32,18 @@ exports.allRestaurants = function(req,res,next) {
     }
     // filter data
     restaurants = restaurants.map(restaurant=> {
-      return { 
-        id: restaurant._id,
-        full_address: restaurant.full_address,
-        name: restaurant.name,
-        phone_number: restaurant.phone_number,
-        tables: restaurant.tables,
-        queue: restaurant.queue,
-        latlng: restaurant.geo,
-        address: restaurant.address
-      };
+      return {
+          [restaurant._id]: { 
+            id: restaurant._id,
+            full_address: restaurant.full_address,
+            name: restaurant.name,
+            phone_number: restaurant.phone_number,
+            tables: restaurant.tables,
+            queue: restaurant.queue,
+            latlng: restaurant.geo,
+            address: restaurant.address
+          }
+        };
     });
 
     res.json({ restaurants: restaurants });

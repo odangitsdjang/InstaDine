@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { signupUser } from '../../actions/session_actions';
+import { loginUser, clearErrors, logoutUser } from '../../actions/session_actions';
 import { removeAlert } from '../../actions/alerts_actions';
-import Signup from './Signup';
+import Login from './Login';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -11,12 +11,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signupUser: user => dispatch(signupUser(user)),
-    removeAlert: () => dispatch(removeAlert())
+    loginUser: user => dispatch(loginUser(user)),
+    removeAlert: () => dispatch(removeAlert()),
+    logoutUser: () => dispatch(logoutUser())
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Signup);
+)(Login);
