@@ -6,10 +6,11 @@ import { View, Text, StyleSheet, Button, Dimensions,
          from 'react-native';
 import { connect } from 'react-redux';
 
-import { search, restaurantIndex } from '../../actions/restaurant_actions';
+import { search, restaurantIndex, displayRestaurant } from '../../actions/restaurant_actions';
 
 import Search from './Search';
 import SearchResults from './SearchResults';
+
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -67,12 +68,12 @@ class MapItem extends Component {
     this.setSearchText = this.setSearchText.bind(this);
     this.openDrawer = this.openDrawer.bind(this);
     this.typeText = this.typeText.bind(this);
+    this.redirectRestaurant = this.redirectRestaurant.bind(this);
   }
 
   componentDidMount() {
     // console.log(this.props);
     // Get restaurants 
-    this.props.restaurantIndex();
     // User's current location
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -89,36 +90,64 @@ class MapItem extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
 
-    debugger
+    // debugger
     // make markers into components
     console.log(this.props.restaurants);
-    this.setState({
-      markers: this.props.restaurants.map((marker, i) => (
-          <MapView.Marker
-            key={i}
-            onPress={() => this.markerClick(marker)}
-            coordinate={marker.latlng}
-          >
-            <MapView.Callout onPress={this.redirectRestaurant}>
-                <View style={styles.insideBubbleStyle}>
-                  <Text>
-                    {marker.name}
-                  </Text>
-                  <Text>
-                    {marker.full_address}
-                  </Text>
-                </View>
-            </MapView.Callout>
-          </MapView.Marker>
-      )), loaded: 1
-    });
+    // this.setState({
+    //   markers: this.props.restaurants.map((marker, i) => (
+    //       <MapView.Marker
+    //         key={i}
+    //         onPress={() => this.markerClick(marker)}
+    //         coordinate={marker.latlng}
+    //       >
+    //         <MapView.Callout onPress={this.redirectRestaurant}>
+    //             <View style={styles.insideBubbleStyle}>
+    //               <Text>
+    //                 {marker.name}
+    //               </Text>
+    //               <Text>
+    //                 {marker.full_address}
+    //               </Text>
+    //             </View>
+    //         </MapView.Callout>
+    //       </MapView.Marker>
+    //   )), loaded: 1
+    // });
+    
+    const mapItem = this;
+
+    this.props.restaurantIndex().then(
+      function(){
+        mapItem.setState({
+          markers: mapItem.props.restaurants.map((markerObj, i) => {
+            const marker = Object.values(markerObj)[0];
+            return (
+              <MapView.Marker
+                key={i}
+                onPress={() => mapItem.markerClick(marker)}
+                coordinate={marker.latlng}
+              >
+                <MapView.Callout onPress={() => mapItem.redirectRestaurant(marker)}>
+                  <View style={styles.insideBubbleStyle}>
+                    <Text>
+                      {marker.name}
+                    </Text>
+                    <Text>
+                      {marker.full_address}
+                    </Text>
+                  </View>
+                </MapView.Callout>
+              </MapView.Marker>
+            );
+          }), loaded: 1
+        });
+      }
+    );
   }
 
-  redirectRestaurant() {
-    //  not working
-    // <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
-    // this.props.navigation.dispatch({ type: 'Signup' });
-    this.props.goToRestaurant.dispatch( {type: 'RestaurantContainer'} );
+  redirectRestaurant(marker) {
+    this.props.displayRestaurant(marker.id);
+    this.props.navigation.navigate('QueueUp');
   }
 
   markerClick(marker) {
@@ -131,7 +160,6 @@ class MapItem extends Component {
     });
     // move to coordinate with duration
     this.map.animateToCoordinate(marker.latlng, 300);  
-
   }
   
   renderMarkers() {
@@ -162,8 +190,8 @@ class MapItem extends Component {
           initialRegion={this.state.region}
           loadingEnabled={true}
           showsUserLocation={true}
-          onRegionChangeComplete={this.onRegionChangeComplete}
-        >
+          onRegionChangeComplete={this.onRegionChangeComplete}>
+
           {this.renderMarkers()}
         </MapView>
       );
@@ -180,11 +208,11 @@ class MapItem extends Component {
   }
 
   setSearchText(text) {
-    console.log(this.state.searchText);
     this.setState({ searchText: text });
   }
 
   openDrawer(){
+    console.log(this.props);
     this.props.navigation.navigate('DrawerOpen');
   }
 
@@ -230,7 +258,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({ 
   search: searchText => dispatch(search(searchText)),
-  restaurantIndex: () => dispatch(restaurantIndex())
+  restaurantIndex: () => dispatch(restaurantIndex()),
+  displayRestaurant: restaurantId => dispatch(displayRestaurant(restaurantId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapItem);

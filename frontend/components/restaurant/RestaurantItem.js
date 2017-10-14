@@ -2,50 +2,41 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Picker, TouchableOpacity, Button } from 'react-native';
 import RestaurantShowMap from './RestaurantShowMap';
 
-const DUMMY_RESTAURANT = {
-  address: {
-    city: "San Francisco",
-    state: "CA",
-    street: "86 Carl St",
-    zip: 94117
-  },
-  full_address: "86 Carl St, San Francisco, CA 94117, USA",
-  id: "59dfe1b5914b7fbb4e787c35",
-  latlng: {
-    latitude: 37.7659667,
-    longitude: -122.4496661
-  },
-  name: "Burgermeister",
-  phone_number: "(415) 566-1274"
-};
-
 class RestaurantItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurant: DUMMY_RESTAURANT,
+      restaurant: '',
       user: '',
-      reservationTime: "18:15",
-      seat_count: 0
+      reservationTime: '',
+      seat_count: ''
     };
     this.redirectHome = this.redirectHome.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    if (this.props.restaurantId && newProps.restaurantId !== this.props.restaurantId) {
+      this.setState({
+        restaurant: newProps.restaurants[newProps.restaurantId],
+        user: newProps.user,
+        reservationTime: '',
+        seat_count: 0
+      });
+    }
+
+  }
+
   componentDidMount() {
     // Get restaurant info somehow, put that into props talk to adrian 
     //assume map will feed restaurant into this component through prop
-    // this.setState({
-    //   restaurant: this.props.restaurant,
-    //   user: this.props.user,
-    //   reservationTime: '',
-    //   seat_count: 0
-    // });
-  
     this.setState({
-      user: this.props.user
+      restaurant: this.props.restaurants[this.props.restaurantId],
+      user: this.props.user,
+      reservationTime: '',
+      seat_count: 0
     });
-    
+    debugger
   }
 
   // Only render 10 time frames after current time
@@ -123,7 +114,7 @@ class RestaurantItem extends Component {
   }
   
   redirectHome() {
-    this.props.navigation.navigate('Map');
+    this.props.navigation.navigate('Drawer');
   }
 
   handleSubmit(){
@@ -138,7 +129,7 @@ class RestaurantItem extends Component {
 
   render() {
     // debugger
-    let {name, full_address, phone_number} = this.state.restaurant;
+    // let {name, full_address, phone_number} = this.state.restaurant;
 
     return (
       <View style={styles.container}>
@@ -148,17 +139,17 @@ class RestaurantItem extends Component {
           style={{alignSelf: 'flex-start', flex: 1, marginTop: 7}}>
           <Text style={{fontSize: 15}}>Go Back</Text>
         </TouchableOpacity>
-          <Text style={styles.title}>{name}</Text>
+          {/* <Text style={styles.title}>{name}</Text> */}
         </View>
 
         <View style={styles.restInfo}>
           <View style={styles.restInfoTextContainer}>
-           <Text style={styles.restInfoText}>Address: {full_address}</Text>
-           <Text style={styles.restInfoText}>Call us at {phone_number}</Text>
+           {/* <Text style={styles.restInfoText}>Address: {full_address}</Text>
+           <Text style={styles.restInfoText}>Call us at {phone_number}</Text> */}
           </View>
-           <RestaurantShowMap
+           {/* <RestaurantShowMap
                 style={{flex: 1}}
-                restaurant={[this.state.restaurant]}/>
+                restaurant={[this.state.restaurant]}/> */}
         </View>
 
 
