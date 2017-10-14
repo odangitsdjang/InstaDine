@@ -1,6 +1,7 @@
 import { SEARCH_URL, INDEX_URL } from '../util/restaurant_api_util';
-export const SEARCH_RESTAURANTS = "SEARCH_RESTAURANTS";
-export const RECEIVE_RESTAURANTS = "RECEIVE_RESTAURANTS";
+export const SEARCH_RESTAURANTS = 'SEARCH_RESTAURANTS';
+export const RECEIVE_RESTAURANTS = 'RECEIVE_RESTAURANTS';
+export const DISPLAY_RESTAURANT = 'DISPLAY_RESTAURANT';
 import axios from 'axios';
 import { addAlert } from './alerts_actions';
 
@@ -10,7 +11,7 @@ exports.search = searchString => {
     return axios.get(SEARCH_URL+searchString).then((response) => {
       dispatch(receiveSearchRestaurants(response.data.restaurants));
     }).catch((errors) => {
-      dispatch(addAlert("some error"));
+      dispatch(addAlert('some error'));
     });
   };
 };
@@ -20,7 +21,7 @@ exports.restaurantIndex = () =>  {
     return axios.get(INDEX_URL).then((response) => {
       dispatch(receiveRestaurants(response.data.restaurants));
     }).catch((errors) => {
-      dispatch(addAlert("some error"));
+      dispatch(addAlert('some error'));
     });
   };
 };
@@ -31,9 +32,15 @@ const receiveSearchRestaurants = (restaurants) => {
     restaurants
   };
 };
+
 const receiveRestaurants = (restaurants) => {
   return {
     type: RECEIVE_RESTAURANTS,
     restaurants
   };
 };
+
+exports.displayRestaurant = restaurantId => ({
+  type: DISPLAY_RESTAURANT,
+  restaurantId
+});

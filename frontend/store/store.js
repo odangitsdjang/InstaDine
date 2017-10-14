@@ -30,6 +30,7 @@ export const configureStore = (initialState = {}) => {
     applyMiddleware(thunk, logger), 
     autoRehydrate()
   ));
+  // persistStore(store, { storage: AsyncStorage });
   persistStore(store, { storage: AsyncStorage });
   return store;
 };

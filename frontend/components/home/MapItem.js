@@ -6,10 +6,11 @@ import { View, Text, StyleSheet, Button, Dimensions,
          from 'react-native';
 import { connect } from 'react-redux';
 
-import { search, restaurantIndex } from '../../actions/restaurant_actions';
+import { search, restaurantIndex, displayRestaurant } from '../../actions/restaurant_actions';
 
 import Search from './Search';
 import SearchResults from './SearchResults';
+
 /* current todos :
  4. load only the markers in the given region 
 */
@@ -90,15 +91,17 @@ class MapItem extends Component {
     );
 
     // make markers into components
-    console.log(this.props.restaurants);
     this.setState({
-      markers: this.props.restaurants.map((marker, i) => (
+      markers: this.props.restaurants.map((markerObj, i) => {
+        const marker = Object.values(markerObj)[0];
+        debugger;
+        return (
           <MapView.Marker
             key={i}
             onPress={() => this.markerClick(marker)}
             coordinate={marker.latlng}
           >
-            <MapView.Callout onPress={this.redirectRestaurant}>
+            <MapView.Callout onPress={() => this.redirectRestaurant(marker)}>
                 <View style={styles.insideBubbleStyle}>
                   <Text>
                     {marker.name}
@@ -109,12 +112,14 @@ class MapItem extends Component {
                 </View>
             </MapView.Callout>
           </MapView.Marker>
-      )), loaded: 1
+        );
+      }), loaded: 1
     });
   }
 
-  redirectRestaurant() {
-    this.props.navigation.navigate('Restaurant');
+  redirectRestaurant(marker) {
+    this.props.displayRestaurant(marker.id);
+    this.props.navigation.navigate('QueueUp');
   }
 
   markerClick(marker) {
@@ -127,7 +132,6 @@ class MapItem extends Component {
     });
     // move to coordinate with duration
     this.map.animateToCoordinate(marker.latlng, 300);  
-
   }
   
   renderMarkers() {
@@ -158,8 +162,8 @@ class MapItem extends Component {
           initialRegion={this.state.region}
           loadingEnabled={true}
           showsUserLocation={true}
-          onRegionChangeComplete={this.onRegionChangeComplete}
-        >
+          onRegionChangeComplete={this.onRegionChangeComplete}>
+
           {this.renderMarkers()}
         </MapView>
       );
@@ -226,7 +230,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({ 
   search: searchText => dispatch(search(searchText)),
-  restaurantIndex: () => dispatch(restaurantIndex())
+  restaurantIndex: () => dispatch(restaurantIndex()),
+  displayRestaurant: restaurantId => dispatch(displayRestaurant(restaurantId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapItem);

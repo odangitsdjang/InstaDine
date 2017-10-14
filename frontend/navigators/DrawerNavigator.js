@@ -15,9 +15,8 @@ const mapStateToProps = state => ({
 
 const routeConfig = {
   UpdateUser: { screen: UserProfileContainer },
-  NewReservation: { screen: ReservationFormContainer },
   Map: { screen: map },
-  Restaurant: { screen: RestaurantContainer }
+
 };
 
 const navigatorConfig = {

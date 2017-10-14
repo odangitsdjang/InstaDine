@@ -24,14 +24,14 @@ const navHomeReducer = (state = initialState, action) => {
         return newState;
       }
       else { return state; }
-    case 'MapItem':
-      return HomeNavigator.router.getStateForAction(
-        HomeNavigator.router.getActionForPathAndParams('MapItem')
-      );
-    case 'UserProfile':
-      return HomeNavigator.router.getStateForAction(
-        HomeNavigator.router.getActionForPathAndParams('UserProfile')
-      );
+    // case 'QueueUp':
+    //   return HomeNavigator.router.getStateForAction(
+    //     HomeNavigator.router.getActionForPathAndParams('QueueUp')
+    //   );
+    // case 'UserProfile':
+    //   return HomeNavigator.router.getStateForAction(
+    //     HomeNavigator.router.getActionForPathAndParams('UserProfile')
+    //   );
     default:
       return state;
   }

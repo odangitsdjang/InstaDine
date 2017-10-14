@@ -76,7 +76,7 @@ class RestaurantItem extends Component {
   }
   
   redirectHome() {
-    this.props.navigation.navigate('Map');
+    this.props.navigation.navigate('Drawer');
   }
 
   render() {

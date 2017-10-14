@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import RestaurantItem from './RestaurantItem';
 
 const mapStateToProps = (state) => ({
-  // user: state.user
-  // restaurant: state.restaurant
+  // restaurantId: state.display
 });
 
 const mapDispatchToProps = ({
