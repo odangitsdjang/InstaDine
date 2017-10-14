@@ -118,22 +118,28 @@ class MapItem extends Component {
 
     this.props.restaurantIndex().then(
       function(){
+        let restaurants = Object.keys(mapItem.props.restaurants).map(restaurantId => {
+          return mapItem.props.restaurants[restaurantId];
+        });
+        console.log(restaurants);
         mapItem.setState({
-          markers: mapItem.props.restaurants.map((markerObj, i) => {
-            const marker = Object.values(markerObj)[0];
+          markers: restaurants.map((markerObj, i) => {
+            // const marker = Object.values(markerObj)[0];
+            const marker = markerObj.latlng;
+            console.log(marker);
             return (
               <MapView.Marker
                 key={i}
                 onPress={() => mapItem.markerClick(marker)}
-                coordinate={marker.latlng}
+                coordinate={marker}
               >
-                <MapView.Callout onPress={() => mapItem.redirectRestaurant(marker)}>
+                <MapView.Callout onPress={() => mapItem.redirectRestaurant(markerObj)}>
                   <View style={styles.insideBubbleStyle}>
                     <Text>
-                      {marker.name}
+                      {markerObj.name}
                     </Text>
                     <Text>
-                      {marker.full_address}
+                      {markerObj.full_address}
                     </Text>
                   </View>
                 </MapView.Callout>
@@ -153,13 +159,15 @@ class MapItem extends Component {
   markerClick(marker) {
     this.setState({
       selectedMarker: marker, region: {
-        latitude: marker.latlng.latitude, longitude: marker.latlng.longitude,
+        // latitude: marker.latlng.latitude, longitude: marker.latlng.longitude,
+        latitude: marker.latitude, longitude: marker.longitude,
         latitudeDelta: this.state.region.latitudeDelta, 
         longitudeDelta: this.state.region.longitudeDelta, 
       }
     });
     // move to coordinate with duration
-    this.map.animateToCoordinate(marker.latlng, 300);  
+    // this.map.animateToCoordinate(marker.latlng, 300);  
+    this.map.animateToCoordinate(marker, 300);  
   }
   
   renderMarkers() {
