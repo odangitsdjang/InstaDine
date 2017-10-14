@@ -134,15 +134,6 @@ class RestaurantItem extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-<<<<<<< HEAD
-        <TouchableOpacity
-          onPress={this.redirectHome}
-          style={{alignSelf: 'flex-start', flex: 1, marginTop: 7}}>
-          <Text style={{fontSize: 15}}>Go Back</Text>
-        </TouchableOpacity>
-          {/* <Text style={styles.title}>{name}</Text> */}
-=======
->>>>>>> 1696ac1f29251206db7c767f399d8fa40d5be35d
         </View>
 
         <View style={styles.restInfo}>
