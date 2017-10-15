@@ -12,7 +12,7 @@ exports.search = searchString => {
     return axios.get(SEARCH_URL+searchString).then((response) => {
       dispatch(receiveSearchRestaurants(response.data.restaurants));
     }).catch((errors) => {
-      dispatch(addAlert('some error'));
+      dispatch(addAlert('Restaurant Search Error'));
     });
   };
 };
@@ -22,7 +22,8 @@ exports.restaurantIndex = () =>  {
     return axios.get(INDEX_URL).then((response) => {
       dispatch(receiveRestaurants(response.data.restaurants));
     }).catch((errors) => {
-      dispatch(addAlert('some error'));
+      console.log(errors);
+      dispatch(addAlert('Restaurant Index Error'));
     });
   };
 };
