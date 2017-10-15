@@ -3,7 +3,8 @@ import { View,
   Text, 
   StyleSheet, 
   Button,
-  TouchableOpacity
+  TouchableOpacity, 
+  Image
 } from 'react-native';
 
 class Splash extends Component {
@@ -31,32 +32,39 @@ class Splash extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>InstaDine</Text>
-        <View style={styles.authButtons}>
-          <TouchableOpacity
-            onPress={this.redirectLogin}
-            style={styles.button}
-            raised={true}>
-            <Text style={styles.text}>Login</Text>
-          </TouchableOpacity>
+      <Image source={require('../../assets/images/splash.jpg')} style={styles.container}>
+        <View style={{flex: 7, justifyContent: 'center'}} >
+
+          <Image source={require('../../assets/images/logo.png')}
+               style={{ width: 250, height: 250, alignSelf: 'center' }}
+          />
+        </View>
+        <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'center'}}>
+          <View style={styles.authButtons}>
+            <TouchableOpacity
+              onPress={this.redirectLogin}
+              style={styles.button}
+              raised={true}>
+              <Text style={styles.text}>Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={this.redirectSignup}
+              style={styles.button}
+              raised={true}>
+              <Text style={styles.text}>Signup</Text>
+            </TouchableOpacity>
+          </View>
 
           <TouchableOpacity
-            onPress={this.redirectSignup}
+            onPress={this.handleDemo}
             style={styles.button}
             raised={true}>
-            <Text style={styles.text}>Signup</Text>
+            <Text style={styles.text}>Demo</Text>
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          onPress={this.handleDemo}
-          style={styles.button}
-          raised={true}>
-          <Text style={styles.text}>Demo</Text>
-        </TouchableOpacity>
-
-      </View>
+      </Image>
     );
   }
 }
@@ -65,10 +73,15 @@ class Splash extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center', 
-    alignItems: 'center',
-    backgroundColor: '#65CCB8',
-    flexDirection: 'column'
+    alignItems: 'stretch',
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.6)'
+  },
+  splash: {
+    top: 0,
+    left: 0,
+    position: 'absolute',
+    
   },
   title: {
     fontSize: 40,
