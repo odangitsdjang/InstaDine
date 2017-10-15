@@ -1,6 +1,7 @@
 let defaultState = {
   user_id: undefined,
-  currentUser: null
+  currentUser: null,
+  token: null
 };
 
 const SessionReducer = (state=defaultState, action) => {
@@ -12,9 +13,7 @@ const SessionReducer = (state=defaultState, action) => {
         currentUser: action.currentUser
       };
     case 'UNAUTH_USER':
-      return {
-        user_id: undefined
-      };
+      return defaultState;
     default:
       return state;
   }

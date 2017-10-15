@@ -51,7 +51,7 @@ class Signup extends Component {
   }
 
   redirectBack() {
-    this.props.navigation.dispatch({ type: 'NAVIGATION/BACK' });
+    this.props.navigation.navigate('Splash');
   }
 
   componentWillReceiveProps(newProps) {

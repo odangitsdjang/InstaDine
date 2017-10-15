@@ -26,9 +26,11 @@ class DrawerContent extends Component {
   render() {
     return (
       <View style={styles.container}>
+      <View>
         <Text>This is the drawer</Text>
-        <DrawerItems {...this.props}/>
       </View> 
+        <DrawerItems {...this.props}/>
+      </View>
     );
   }
 }

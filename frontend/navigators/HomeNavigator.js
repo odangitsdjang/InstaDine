@@ -1,14 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator } from 'react-navigation';
-// import UserProfileContainer from '../components/profile/UserProfileContainer';
-// import MapItem from '../components/home/MapItem';
-// import Splash from '../components/Splash';
 import RestaurantContainer from '../components/restaurant/RestaurantContainer';
-import Drawer from '../navigators/DrawerNavigator';
+import DrawerWithNavigationState from '../navigators/DrawerNavigator';
 
 const routeConfig = {
-  Drawer: { screen: Drawer },
+  Drawer: { screen: DrawerWithNavigationState },
   QueueUp: { screen: RestaurantContainer }
 };
 
