@@ -100,6 +100,7 @@ class MapItem extends Component {
 
         mapItem.setState({
           markers: restaurants.map((markerObj, i) => {
+            debugger;
             const marker = markerObj.latlng;
             return (
               <MapView.Marker
@@ -126,6 +127,7 @@ class MapItem extends Component {
   }
 
   redirectRestaurant(marker) {
+    debugger;
     this.props.displayRestaurant(marker.id);
     this.props.navigation.navigate('QueueUp');
   }
