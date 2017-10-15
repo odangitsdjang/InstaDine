@@ -25,7 +25,8 @@ exports.login = function (req, res, next) {
         phoneNumber: user.phoneNumber,
         user_id: user._id,
         profilePicture: user.profilePicture,
-        properties: user.properties
+        properties: user.properties,
+        reservation: user.reservation
       };
 
       //send currentUser info back to frontend 
