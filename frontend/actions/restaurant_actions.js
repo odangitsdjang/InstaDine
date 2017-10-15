@@ -7,7 +7,7 @@ import { addAlert } from './alerts_actions';
 
 exports.search = searchString => {
   return function (dispatch) {
-    console.log(SEARCH_URL+searchString);
+    // console.log(SEARCH_URL+searchString);
     return axios.get(SEARCH_URL+searchString).then((response) => {
       dispatch(receiveSearchRestaurants(response.data.restaurants));
     }).catch((errors) => {

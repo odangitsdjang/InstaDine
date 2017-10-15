@@ -16,7 +16,6 @@ class Login extends Component {
     };
 
     this.redirectBack = this.redirectBack.bind(this);
-    this.redirectHomePage = this.redirectHomePage.bind(this);
     this.update = this.update.bind(this);
     this.onLogin = this.onLogin.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
@@ -36,15 +35,10 @@ class Login extends Component {
 
   onLogin() {
     this.props.loginUser(this.state);
-    this.redirectHomePage = this.redirectHomePage.bind(this);
   }
 
   redirectBack() {
-    this.props.navigation.dispatch({ type: 'NAVIGATION/BACK' });
-  }
-
-  redirectHomePage() {
-    this.props.navigation.dispatch({ type: 'HomePage' });
+    this.props.navigation.navigate('Splash');
   }
 
   renderErrors(){
