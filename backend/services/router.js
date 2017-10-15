@@ -9,32 +9,33 @@ let requireAuth = passport.authenticate('jwt', {session: false});
 let requireLogin = passport.authenticate('local', {session: false});
 let router = require('express').Router();
 
-// Routes to signup
+// Auth Routes
 router.route('/signup')
       .post(AuthenticationController.signup);
 
-// Routes to sign in
 router.route('/login')
       .post([requireLogin, AuthenticationController.login]);
 
-//update user info 
+// User Routes
 router.route('/users')
       .patch(UserController.updateUser);
 
+// Restaurant Routes
 router.route('/restaurants')
       .post(RestaurantsController.create);
 
-// Route for searching 
 router.route('/restaurants/search')
       .get(RestaurantsController.search);
 
-// Route for all restaurants
 router.route('/restaurants/index')
       .get(RestaurantsController.allRestaurants);
 
-// Route to create new reservation
+// Reservation Routes
 router.route('/reservations')
       .post(ReservationsController.create);
+
+router.route('/reservations')
+      .delete(ReservationsController.destroy);
 
 module.exports = router;
 
