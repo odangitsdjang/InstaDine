@@ -54,9 +54,10 @@ class RestaurantItem extends Component {
         if (minutes >= 60) {
           hour++;
           minutes %= 60;
+          if (hour === 24) hour = 0; 
         }
       // } 
-      let string = `${(hour > 12) ? hour%12 : hour}:` + ((minutes < 10) ? `0${minutes} ` : `${minutes} `)  + ((hour >= 12) ? "PM" : "AM");
+        let string = `${(hour === 0 ? 12 : ((hour > 12) ? hour % 12 : hour))}:` + ((minutes < 10) ? `0${minutes} ` : `${minutes} `)  + ((hour >= 12) ? "PM" : "AM");
       return (
           <Picker.Item key={index} label={string} value={`${hour}:${minutes}`}/>
       );
@@ -80,7 +81,6 @@ class RestaurantItem extends Component {
   }
 
   reserveOrCancel() {
-    // debugger
     if (this.props.user) {
       if (this.props.reservation && this.props.reservation.user_id === this.props.user.user_id) {
         let {seat_count, datetime} = this.props.reservation;
@@ -88,16 +88,28 @@ class RestaurantItem extends Component {
 
         return (
           <View style={styles.reserveContainer}>
-            <Text style={styles.restInfoText}>Reservation Reminder</Text>
-            <Text style={styles.restInfoText}>Hello! {this.props.user.username}</Text>
-            <Text style={styles.restInfoText}>Your reservation is at {datetime}</Text>
-            <Text style={styles.restInfoText}>You have {seat_count} friends coming with you</Text>
+            <Text style={styles.restInfoText}>
+              Reservation Reminder
+            </Text>
+            <Text style={styles.restInfoText}>
+              Hello {this.props.user.username}!
+            </Text>
+            <Text style={styles.restInfoText}>
+              if you wish to book this restaurant please cancel your existing reservation
+            </Text>
+            <Text style={styles.restInfoText}>
+              Your reservation is at {datetime}
+              </Text>
+            <Text style={styles.restInfoText}>
+              You have {seat_count} friends coming with you
+            </Text>
             <TouchableOpacity
               style={{
                 borderColor: 'black',
                 borderWidth: 2,
                 padding: 10
-              }}>
+              }}
+              onPress={this.handleCancel}>
               <Text style={styles.reserveText}>Cancel Reservation</Text>
             </TouchableOpacity>
           </View>
@@ -109,7 +121,6 @@ class RestaurantItem extends Component {
               <Picker selectedValue={this.state.reservationTime}
                 style={styles.picker}
                 onValueChange={(itemValue, itemIndex) => {
-                  console.log(this.state.reservationTime);
                   this.setState({
                     reservationTime: itemValue
                   });
@@ -169,19 +180,17 @@ class RestaurantItem extends Component {
     //translate time to UTC since database is in UTC
     let bookTime = this.translateTimeUTC(resTime);
 
-    console.log(resTime);
     let reservation = {
       restaurant_id: this.state.restaurant.id,
       seat_count: this.state.seat_count,
       datetime: bookTime
     };
 
-    console.log(reservation);
     this.props.createReservation(reservation, this.props.userToken);
   }
 
   handleCancel(){
-
+    this.props.destroyReservation(this.props.userToken);
   }
 
   render() {
@@ -209,23 +218,22 @@ class RestaurantItem extends Component {
                   restaurant={this.state.restaurant}/>
             </View>
           </View>
-  
 
           { this.reserveOrCancel() }
 
-  
         </View>
       );
-    }else{
-      return(
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>
-            Loading...
-          </Text>
-        </View>
-      );
+
+      }else{
+        return(
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>
+              Loading...
+            </Text>
+          </View>
+        );
+      }
     }
-  }
 }
 
 const styles = StyleSheet.create({
@@ -271,7 +279,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'stretch',
-    // alignItems: 'center',
     backgroundColor: 'teal'
   },
   title: {

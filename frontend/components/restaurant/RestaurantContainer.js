@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createReservation} from '../../actions/reservation_actions';
+import { createReservation, destroyReservation} from '../../actions/reservation_actions';
 import RestaurantItem from './RestaurantItem';
 
 const mapStateToProps = (state) => ({
@@ -13,7 +13,8 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  createReservation: (reservation, userToken) => dispatch(createReservation(reservation, userToken))
+  createReservation: (reservation, userToken) => dispatch(createReservation(reservation, userToken)),
+  destroyReservation: userToken => dispatch(destroyReservation(userToken))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RestaurantItem);
