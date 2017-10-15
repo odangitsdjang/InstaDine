@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { search, restaurantIndex, displayRestaurant } from '../../actions/restaurant_actions';
-import Modal from 'react-native-modal';
+import FilterModal from '../filter/Filter';
 
 import Search from './Search';
 import SearchResults from './SearchResults';
@@ -82,7 +82,7 @@ class MapItem extends Component {
     this.openDrawer = this.openDrawer.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
-    this.closeFilter = this.closeFilter.bind(this);
+    this.setFilter = this.setFilter.bind(this);
   }
 
   componentDidMount() {
@@ -209,13 +209,17 @@ class MapItem extends Component {
     this.props.navigation.navigate('DrawerOpen');
   }
   
-  toggleFilter(){
-    this.setState({isFilterOpen: !this.state.isFilterOpen});
+  toggleFilter(type){
+    if (type === 'close') {
+      return () => this.setState({isFilterOpen: false});
+    } 
+    else {
+      return () => this.setState({ isFilterOpen: !this.state.isFilterOpen });
+    }
   }
 
-
-  closeFilter(){
-    this.setState({isFilterOpen: false});
+  setFilter(){
+    console.log('hello');
   }
 
   render() {
@@ -233,15 +237,16 @@ class MapItem extends Component {
           searchText={this.state.searchText} 
           redirectRestaurant={this.redirectRestaurant}/>
         <TouchableOpacity
-          onPress={this.redirectLogin}
+          onPress={this.toggleFilter()}
           style={styles.button}
           raised={true}>
           <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
 
-        <Button onPress={this.toggleFilter} title='Filter'/>
-
-        { this.filterModal() }
+        <FilterModal 
+          isOpen={this.state.isFilterOpen} 
+          toggleFilter={this.toggleFilter}
+          setFilter={this.setFilter}/>
       </View>
     );
   }
@@ -274,23 +279,6 @@ const styles = StyleSheet.create({
   menuIcon: {
     width: 50,
     height: 50
-  },
-  filterContent: {
-    backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  picker: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  seatsButton: {
-    width: 50,
-    borderColor: 'gray'
   }
 });
 
