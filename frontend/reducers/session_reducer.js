@@ -1,5 +1,4 @@
 let defaultState = {
-  user_id: undefined,
   currentUser: null,
   token: null
 };

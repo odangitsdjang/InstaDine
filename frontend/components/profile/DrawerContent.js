@@ -1,33 +1,30 @@
-//import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { DrawerItems } from 'react-navigation';
 
-// create a component
 class DrawerContent extends Component {
   constructor(props) {
     super(props);
-    this.redirectEditProfile = this.redirectEditProfile.bind(this);
+    this.state = { 
+      profilePicture: 'https://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png'
+    };
   }
-
-  // componentDidMount() {
-  //   console.log(this.props);
-  // }
-
-  redirectEditProfile() {
-    this.props.navigation.navigate('Map');
-  }
-
-  redirectHistory() {
-    // this.props.navigation.navigate('');
-  }
-
   
+  componentWillReceiveProps(newProps) {
+    if (newProps.session.token && (!this.props.session.token) || 
+      (newProps.session.token !== this.props.session.token)){
+        this.setState({profilePicture: newProps.session.currentUser.profilePicture});
+    }
+  }
+
   render() {
+    console.log(this.state.profilePicture);
     return (
       <View style={styles.container}>
       <View>
-        <Text>This is the drawer</Text>
+        <Image
+          source={{uri: this.state.profilePicture}}
+          style={{width:50, height: 50}}/>
       </View> 
         <DrawerItems {...this.props}/>
       </View>
@@ -35,7 +32,6 @@ class DrawerContent extends Component {
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -45,5 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//make this component available to the app
 export default DrawerContent;

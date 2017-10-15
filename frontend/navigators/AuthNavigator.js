@@ -17,7 +17,7 @@ const routeConfig = {
 
 const appNavigatorConfig = {
   navigationOptions: { tabBarVisible: false },
-  initialRouteName: 'Splash'
+  initialRouteName: 'Blank'
 };
 
 export const AuthNavigator = TabNavigator(
