@@ -215,11 +215,23 @@ class MapItem extends Component {
   }
 
   filterModal(){
+    const pickerOptions = [];
+    for (let i = 0; i < 4; i++){
+      pickerOptions.push(
+        <TouchableOpacity 
+          key={i}
+          style={styles.seatsButton}
+          >
+          <Text>{i}</Text>
+        </TouchableOpacity>
+      );
+    }
+    
     return (
       <Modal 
         isVisible={this.state.isFilterOpen}
         backdropColor={'black'}
-        backdropOpacity={1}
+        backdropOpacity={.7}
         animationIn={'zoomInDown'}
         animationOut={'zoomOutUp'}
         animationInTiming={1000}
@@ -230,6 +242,9 @@ class MapItem extends Component {
       >
         <View style={styles.filterContent}>
           <Text>FILTER MODAL</Text>
+          <View style={styles.picker}>
+            { pickerOptions }     
+          </View>
         </View>
         
       </Modal>
@@ -300,6 +315,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 4,
     borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  picker: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  seatsButton: {
+    width: 50,
+    borderColor: 'gray'
   }
 });
 
