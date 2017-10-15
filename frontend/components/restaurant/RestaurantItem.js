@@ -24,7 +24,6 @@ class RestaurantItem extends Component {
         seat_count: 0
       });
     }
-
   }
 
   componentDidMount() {
@@ -81,16 +80,6 @@ class RestaurantItem extends Component {
   reserveOrCancel() {
     return (
       <View>
-        <View style={styles.reserve}>  
-          <TouchableOpacity
-            style={{borderColor: 'black', 
-                    borderWidth: 2,
-                    padding: 10}}
-            onPress={this.handleSubmit}>
-            <Text style={styles.reserveText}>Reserve</Text>
-          </TouchableOpacity>
-        </View>
-
         <View style={{flexDirection: 'row'}}>
           <Picker selectedValue= { this.state.reservationTime }
                   style={styles.picker}
@@ -107,6 +96,18 @@ class RestaurantItem extends Component {
             })}>
             {this.renderSeatCount()}
           </Picker>
+        </View>
+
+        <View style={styles.reserve}>
+          <TouchableOpacity
+            style={{
+              borderColor: 'black',
+              borderWidth: 2,
+              padding: 10
+            }}
+            onPress={this.handleSubmit}>
+            <Text style={styles.reserveText}>Reserve</Text>
+          </TouchableOpacity>
         </View>
           
       </View>
@@ -130,30 +131,46 @@ class RestaurantItem extends Component {
 
   render() {
     // debugger
-    // let {name, full_address, phone_number} = this.state.restaurant;
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-        </View>
-
-        <View style={styles.restInfo}>
-          <View style={styles.restInfoTextContainer}>
-           {/* <Text style={styles.restInfoText}>Address: {full_address}</Text>
-           <Text style={styles.restInfoText}>Call us at {phone_number}</Text> */}
+    if(this.state.restaurant){
+      let {name, full_address, phone_number} = this.state.restaurant;
+  
+      return (
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={styles.title}>{name}</Text>
+            <TouchableOpacity
+              style={{marginTop:5}}
+              onPress={this.redirectHome}>
+              <Text style={{color: 'black'}}>Back</Text>
+            </TouchableOpacity>
           </View>
-           {/* <RestaurantShowMap
-                style={{flex: 1}}
-                restaurant={[this.state.restaurant]}/> */}
+  
+          <View style={styles.restInfo}>
+            <View style={styles.restInfoTextContainer}>
+             <Text style={styles.restInfoText}>Address: {full_address}</Text>
+             <Text style={styles.restInfoText}>Call us at {phone_number}</Text>
+            </View>
+             <RestaurantShowMap
+                  style={{flex: 1}}
+                  restaurant={this.state.restaurant}/>
+          </View>
+  
+  
+          <View >
+            { this.reserveOrCancel() }
+          </View>
+  
         </View>
-
-
-        <View >
-          { this.reserveOrCancel() }
+      );
+    }else{
+      return(
+        <View style={styles.container}>
+          <Text>
+            Loading...
+          </Text>
         </View>
-
-      </View>
-    );
+      );
+    }
   }
 }
 
@@ -192,16 +209,15 @@ const styles = StyleSheet.create({
     paddingTop: 28,
     paddingBottom: 8,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-around',
+    // alignItems: 'center',
     backgroundColor: 'teal'
   },
   title: {
     color: 'white',
     fontSize: 20,
     fontFamily: 'Chalkboard SE',
-    alignSelf: 'center',
-    flex: 2
+    flex: 1
   }, 
   reserve: {
     paddingTop: 30,
