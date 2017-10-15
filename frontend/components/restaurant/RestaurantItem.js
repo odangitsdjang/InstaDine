@@ -5,12 +5,17 @@ import RestaurantShowMap from './RestaurantShowMap';
 class RestaurantItem extends Component {
   constructor(props) {
     super(props);
+    const date = new Date;
+    let minutes = date.getMinutes();
+    let hour = date.getHours();
+
     this.state = {
       restaurant: '',
       user: '',
-      reservationTime: '',
-      seat_count: ''
+      reservationTime: `${hour}:${minutes}`,
+      seat_count: 1
     };
+
     this.redirectHome = this.redirectHome.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -19,9 +24,7 @@ class RestaurantItem extends Component {
     if (this.props.restaurantId && newProps.restaurantId !== this.props.restaurantId) {
       this.setState({
         restaurant: newProps.restaurants[newProps.restaurantId],
-        user: newProps.user,
-        reservationTime: '',
-        seat_count: 0
+        user: newProps.user
       });
     }
   }
@@ -32,9 +35,7 @@ class RestaurantItem extends Component {
     if (this.props.restaurants){
       this.setState({
         restaurant: this.props.restaurants[this.props.restaurantId],
-        user: this.props.user,
-        reservationTime: '',
-        seat_count: 0
+        user: this.props.user
       });
     }
   }
@@ -78,41 +79,53 @@ class RestaurantItem extends Component {
   }
 
   reserveOrCancel() {
-    return (
-      <View>
-        <View style={{flexDirection: 'row'}}>
-          <Picker selectedValue= { this.state.reservationTime }
-                  style={styles.picker}
-                  onValueChange= { (itemValue, itemIndex) => this.setState({ 
-                    reservationTime: itemValue })}>
-              {this.renderReservationTimes()}
-          </Picker>
-
-          <Picker 
-            selectedValue={this.state.seat_count}
-            style={styles.picker}
-            onValueChange={ (itemValue, itemIndex) => this.setState({
-              seat_count: itemValue
-            })}>
-            {this.renderSeatCount()}
-          </Picker>
+    debugger
+    if (this.props.reservation && this.props.reservation.user_id === this.props.user.id){
+      return (
+        <View style={styles.reserveContainer}>
+          <View style={{flexDirection: 'row'}}>
+            <Picker selectedValue= { this.state.reservationTime }
+                    style={styles.picker}
+                    onValueChange= { (itemValue, itemIndex) => {
+                      console.log(this.state.reservationTime);
+                      this.setState({
+                        reservationTime: itemValue});
+                    }}>
+                {this.renderReservationTimes()}
+            </Picker>
+  
+            <Picker 
+              selectedValue={this.state.seat_count}
+              style={styles.picker}
+              onValueChange={ (itemValue, itemIndex) => this.setState({
+                seat_count: itemValue
+              })}>
+              {this.renderSeatCount()}
+            </Picker>
+          </View>
+  
+          <View style={styles.reserve}>
+            <TouchableOpacity
+              style={{
+                borderColor: 'black',
+                borderWidth: 2,
+                padding: 10
+              }}
+              onPress={this.handleSubmit}>
+              <Text style={styles.reserveText}>Reserve</Text>
+            </TouchableOpacity>
+          </View>       
+        </View>    
+      );
+    }else{
+      return(
+        <View>
+          <Text>
+            You have reservation already
+          </Text>
         </View>
-
-        <View style={styles.reserve}>
-          <TouchableOpacity
-            style={{
-              borderColor: 'black',
-              borderWidth: 2,
-              padding: 10
-            }}
-            onPress={this.handleSubmit}>
-            <Text style={styles.reserveText}>Reserve</Text>
-          </TouchableOpacity>
-        </View>
-          
-      </View>
-      
-    );
+      );
+    }
   }
   
   redirectHome() {
@@ -120,12 +133,18 @@ class RestaurantItem extends Component {
   }
 
   handleSubmit(){
+    let resTime = new Date();
+    resTime.setHours(this.state.reservationTime.split(":")[0]);
+    resTime.setMinutes(this.state.reservationTime.split(":")[1]);
+
+    console.log(resTime);
     let reservation = {
       restaurant_id: this.state.restaurant.id,
       seat_count: this.state.seat_count,
-      datetime: this.state.reservationTime
+      datetime: Date.parse(resTime)
     };
 
+    console.log(reservation);
     this.props.createReservation(reservation, this.props.userToken);
   }
 
@@ -155,7 +174,6 @@ class RestaurantItem extends Component {
                   restaurant={this.state.restaurant}/>
           </View>
   
-  
           <View >
             { this.reserveOrCancel() }
           </View>
@@ -164,7 +182,7 @@ class RestaurantItem extends Component {
       );
     }else{
       return(
-        <View style={styles.container}>
+        <View>
           <Text>
             Loading...
           </Text>
@@ -181,6 +199,10 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: '#65CCB8'
   },
+  reserveContainer: {
+    backgroundColor: 'white',
+    paddingBottom: 20
+  },
   restInfoTextContainer:{
     flex: 1, 
     flexDirection: 'column'
@@ -191,7 +213,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   restInfo: {
-    flex: 1
+    flex: 4,
   },
   button: {
     padding: 10,
