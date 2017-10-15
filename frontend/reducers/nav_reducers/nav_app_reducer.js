@@ -2,19 +2,14 @@ import { AppNavigator } from '../../navigators/AppNavigator';
 import { NavigationActions } from 'react-navigation';
 
 const initialState = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams('Splash')
+  AppNavigator.router.getActionForPathAndParams('Blank')
 );
 
-const routes = ['Signup', 'Login', 'Splash'];
+const routes = ['Blank', 'AuthTab', 'HomeTab'];
 
 const navAppReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case 'NAVIGATION/BACK':
-      return AppNavigator.router.getStateForAction(
-        NavigationActions.back(),
-        state
-      );
     case 'Navigation/NAVIGATE':
       if (routes.includes(action.routeName)){
         return AppNavigator.router.getStateForAction(
@@ -22,23 +17,13 @@ const navAppReducer = (state = initialState, action) => {
         );
       }
       else { return state; }
-    case 'Signup':
+    case 'AUTH_USER':
       return AppNavigator.router.getStateForAction(
-        AppNavigator.router.getActionForPathAndParams('Signup')
+        AppNavigator.router.getActionForPathAndParams('HomeTab')
       );
-    case 'Login':
+    case 'UNAUTH_USER':
       return AppNavigator.router.getStateForAction(
-        AppNavigator.router.getActionForPathAndParams('Login')
-      );
-    case 'HomePage':
-      return AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'HomePage' }),
-        state
-      );
-    case 'RestaurantContainer':
-      return AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'RestaurantContainer' }),
-        state
+        AppNavigator.router.getActionForPathAndParams('AuthTab')
       );
     default: 
       return state;
