@@ -2,6 +2,7 @@ import { SEARCH_URL, INDEX_URL } from '../util/restaurant_api_util';
 export const SEARCH_RESTAURANTS = 'SEARCH_RESTAURANTS';
 export const RECEIVE_RESTAURANTS = 'RECEIVE_RESTAURANTS';
 export const DISPLAY_RESTAURANT = 'DISPLAY_RESTAURANT';
+export const DISPLAY_MAP = 'DISPLAY_MAP';
 import axios from 'axios';
 import { addAlert } from './alerts_actions';
 
@@ -44,3 +45,7 @@ exports.displayRestaurant = restaurantId => ({
   type: DISPLAY_RESTAURANT,
   restaurantId
 });
+
+exports.displayMap = () => ({
+  type: DISPLAY_MAP
+})

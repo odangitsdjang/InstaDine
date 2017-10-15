@@ -10,6 +10,8 @@ class Blank extends Component {
       this.props.navigation.navigate('HomeTab');
     }
     else { this.props.navigation.navigate('AuthTab'); }
+
+    this.props.navigation.navigate('Splash');
   }
 
   render() {

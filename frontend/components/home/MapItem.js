@@ -74,6 +74,7 @@ class MapItem extends Component {
   componentDidMount() {
     // Get restaurants 
     // User's current location
+
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -126,7 +127,6 @@ class MapItem extends Component {
 
   redirectRestaurant(marker) {
     this.props.displayRestaurant(marker.id);
-    this.props.navigation.navigate('QueueUp');
   }
 
   markerClick(marker) {
@@ -193,7 +193,6 @@ class MapItem extends Component {
   }
 
   openDrawer(){
-    console.log(this.props);
     this.props.navigation.navigate('DrawerOpen');
   }
 

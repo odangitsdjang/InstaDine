@@ -18,7 +18,7 @@ const navigatorConfig = {
   drawerWidth: Dimensions.get('window').width * 0.6
 };
 
-export const Drawer = DrawerNavigator(
+const Drawer = DrawerNavigator(
   routeConfig,
   navigatorConfig
 );
@@ -35,3 +35,4 @@ const mapStateToProps = state => ({
 connect(mapStateToProps)(DrawerComponent);
 
 export default DrawerComponent;
+
