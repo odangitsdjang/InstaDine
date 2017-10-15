@@ -28,7 +28,7 @@ exports.create = function(req, res, next) {
       newReservation.save(function(saveError){
         if (saveError) { return next(saveError); }
 
-        res.json({reservation: newReservation});
+        res.json(newReservation);
       });
     }
   );
