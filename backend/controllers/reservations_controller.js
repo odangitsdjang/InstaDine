@@ -9,8 +9,8 @@ const config = require('../config');
 
 exports.create = function(req, res, next) {
   const userToken = req.body.userToken;
+  console.log(req.body);
   const userId = jwt.decode(userToken, config.secret).sub;
-  // console.log(req.body);
   
   // Find if user already has a pending reservation
   Reservation.findOne({user_id: userId, status: 'Pending' }, 
@@ -37,7 +37,7 @@ exports.create = function(req, res, next) {
 };
 
 exports.destroy = function(req, res, next){
-  const userToken = req.body;
+  const userToken = req.body.userToken;
   const userId = jwt.decode(userToken, config.secret).sub;
 
   // Find the reservation and update to Cancel
@@ -59,8 +59,10 @@ exports.destroy = function(req, res, next){
         }
         if (restaurant) {
           // Remove reservation from restaurant queue
-          restaurant.queue = restaurant.queue
-            .filter(reservation => reservation._id !== reservationId)
+          const newQueue = restaurant.queue
+            .filter(reservation => reservation._id.toString() !== reservationId.toString());
+
+          restaurant.queue = newQueue;
 
           restaurant.save(function(restSaveError) {
             if (restSaveError) { 

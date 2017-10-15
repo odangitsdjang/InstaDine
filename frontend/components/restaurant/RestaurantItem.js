@@ -22,7 +22,7 @@ class RestaurantItem extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.props.restaurantId && newProps.restaurantId !== this.props.restaurantId) {
+    if (newProps.restaurantId && newProps.restaurantId !== this.props.restaurantId) {
       this.setState({
         restaurant: newProps.restaurants[newProps.restaurantId],
         user: newProps.user
