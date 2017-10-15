@@ -162,7 +162,7 @@ for (let i = 0; i < seedArray.length; i++){
   const tables = {
     max: getRandomInt(15, 30)
   };
-  const available = getRandomInt(0,1);
+  const available = getRandomInt(0,2);
 
   const wait_time = available ? getRandomInt(15, 35) : 0;
 
@@ -176,7 +176,7 @@ for (let i = 0; i < seedArray.length; i++){
   };
 
   // console.log(restaurant);
-  axios.post('http://localhost:3000/v1/restaurants', restaurant).then(res =>{
+  axios.post('https://instadine.herokuapp.com/v1/restaurants', restaurant).then(res =>{
     console.log(res);
   })
     .catch(error => {
@@ -189,3 +189,15 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
+
+
+// MLab Table View
+// {
+//   "_id": "id",
+//   "name": "name",
+//   "addres": "full_address",
+//   "phone": "phone_number",
+//   "lat": "geo.latitude",
+//   "long": "geo.longitude",
+//   "wait": "wait_time"
+// }
