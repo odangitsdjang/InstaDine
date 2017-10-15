@@ -35,7 +35,6 @@ class Login extends Component {
 
   onLogin() {
     this.props.loginUser(this.state).then(response => {
-      debugger;
       if (response === 'success') {
         () => this.setState(_defaultState);
       }

@@ -52,6 +52,7 @@ exports.destroy = function(req, res, next){
       const reservationId = updatedResv._id;
       const restaurantId = updatedResv.restaurant_id;
 
+      console.log(restaurantId);
       // Find the restaurant and update
       Restaurant.findOne({ _id: restaurantId }, function(restError, restaurant) {
         if (restError) { 
@@ -59,8 +60,10 @@ exports.destroy = function(req, res, next){
         }
         if (restaurant) {
           // Remove reservation from restaurant queue
-          restaurant.queue = restaurant.queue
-            .filter(reservation => reservation._id !== reservationId)
+          const newQueue = restaurant.queue
+            .filter(reservation => reservation._id.toString() !== reservationId.toString());
+
+          restaurant.queue = newQueue;
 
           restaurant.save(function(restSaveError) {
             if (restSaveError) { 
