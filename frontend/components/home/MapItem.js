@@ -1,12 +1,21 @@
 import { MapView } from 'expo';
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, 
-  TouchableOpacity, TextInput, Alert, Image } 
-         from 'react-native';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Dimensions, 
+  TouchableOpacity, 
+  TextInput, 
+  Alert, 
+  Image, 
+  Button,
+  TouchableWithoutFeedback 
+} from 'react-native';
 import { connect } from 'react-redux';
-import { Ionicons } from '@expo/vector-icons';
 import { search, restaurantIndex, displayRestaurant } from '../../actions/restaurant_actions';
+import Modal from 'react-native-modal';
 
 import Search from './Search';
 import SearchResults from './SearchResults';
@@ -61,8 +70,8 @@ class MapItem extends Component {
       selectedMarker: 0,
       loaded: 0,
       searchActive: false,
-      searchText: ""
-      
+      searchText: "",
+      isFilterOpen: false
     };
     this.map = 0;
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
@@ -74,12 +83,13 @@ class MapItem extends Component {
     this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
+    this.closeFilter = this.closeFilter.bind(this);
   }
 
   componentDidMount() {
     // Get restaurants 
     // User's current location
-
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -205,6 +215,51 @@ class MapItem extends Component {
 
   }
 
+  toggleFilter(){
+    this.setState({isFilterOpen: !this.state.isFilterOpen});
+  }
+
+  filterModal(){
+    const pickerOptions = [];
+    for (let i = 0; i < 4; i++){
+      pickerOptions.push(
+        <TouchableOpacity 
+          key={i}
+          style={styles.seatsButton}
+          >
+          <Text>{i}</Text>
+        </TouchableOpacity>
+      );
+    }
+    
+    return (
+      <Modal 
+        isVisible={this.state.isFilterOpen}
+        backdropColor={'black'}
+        backdropOpacity={.7}
+        animationIn={'zoomInDown'}
+        animationOut={'zoomOutUp'}
+        animationInTiming={1000}
+        animationInTiming={1000}
+        backdropTransitionInTiming={1000}
+        backdropTransitionOutTiming={1000}
+        onBackdropPress={this.closeFilter}
+      >
+        <View style={styles.filterContent}>
+          <Text>FILTER MODAL</Text>
+          <View style={styles.picker}>
+            { pickerOptions }     
+          </View>
+        </View>
+        
+      </Modal>
+    );
+  }
+
+  closeFilter(){
+    this.setState({isFilterOpen: false});
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -225,9 +280,15 @@ class MapItem extends Component {
           <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
 
+<<<<<<< HEAD
           
           
        
+=======
+        <Button onPress={this.toggleFilter} title='Filter'/>
+
+        { this.filterModal() }
+>>>>>>> be5aa52132ad50557c7cbee5109a8c291e91cf25
       </View>
     );
   }
@@ -257,9 +318,32 @@ const styles = StyleSheet.create({
     borderColor: 'rgb(240,240,240)',
     backgroundColor: 'rgba(230,230,230,0.99)'
   },
+<<<<<<< HEAD
   filter: {
     backgroundColor: 'transparent',
     color: 'rgb(80,80,80)'
+=======
+  menuIcon: {
+    width: 50,
+    height: 50
+  },
+  filterContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  picker: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  seatsButton: {
+    width: 50,
+    borderColor: 'gray'
+>>>>>>> be5aa52132ad50557c7cbee5109a8c291e91cf25
   }
 });
 

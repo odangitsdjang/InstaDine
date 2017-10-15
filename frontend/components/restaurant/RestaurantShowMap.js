@@ -17,7 +17,7 @@ const { width, height } = Dimensions.get('window'); // dimension are half of the
 const ASPECT_RATIO = width / height;
 const LATITUDE = 0;
 const LONGITUDE = 0;
-const LATITUDE_DELTA = 0.6;
+const LATITUDE_DELTA = 0.005;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 class RestaurantShowMap extends Component {
@@ -61,7 +61,7 @@ class RestaurantShowMap extends Component {
     // make markers into components
 
     if (this.props.restaurant.id && newProps.restaurant.id !== this.props.restaurant.id) {
-      console.log("Got in!");
+      // console.log("Got in!");
       this.setState({
         markers: this.makeMarker(newProps.restaurant),
         loaded: 1
@@ -71,7 +71,7 @@ class RestaurantShowMap extends Component {
 
   componentDidMount() {
     // User's current location
-    console.log("Did Mount", this.props.restaurant);
+    // console.log("Did Mount", this.props.restaurant);
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({

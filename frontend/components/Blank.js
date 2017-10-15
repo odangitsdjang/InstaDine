@@ -12,7 +12,7 @@ class Blank extends Component {
     else { 
       this.props.navigation.navigate('AuthTab'); 
     }
-    this.props.navigation.navigate('Splash')
+    this.props.navigation.navigate('Splash');
   }
 
   render() {
