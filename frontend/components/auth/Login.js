@@ -34,9 +34,12 @@ class Login extends Component {
   }
 
   onLogin() {
-    this.props.loginUser(this.state).then(
-      () => this.setState(_defaultState)      
-    ).catch(error => console.log(error));
+    this.props.loginUser(this.state).then(response => {
+      debugger;
+      if (response === 'success') {
+        () => this.setState(_defaultState);
+      }
+    });
   }
 
   redirectBack() {
