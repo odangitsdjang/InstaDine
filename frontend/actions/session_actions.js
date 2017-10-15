@@ -1,4 +1,5 @@
 import {SIGNUP_URL, LOGIN_URL} from '../util/api_util';
+import { fetchReservations } from './reservation_actions';
 import axios from 'axios';
 import {addAlert} from './alerts_actions';
 
@@ -7,6 +8,7 @@ exports.loginUser = user => {
     return axios.post(LOGIN_URL, user).then((response) => {
       let { token, currentUser } = response.data;
       dispatch(authUser(token, currentUser));
+      dispatch()
     }).catch((errors) => {
       dispatch(addAlert("Incorrect login or password"));
     });
@@ -18,7 +20,7 @@ exports.signupUser = user => {
     return axios.post(SIGNUP_URL, user).then((response) => {
       let { token, currentUser } = response.data;
       dispatch(authUser(token, currentUser));
-      return 'success';
+      fetchReservations(token);
     }).catch((errors) => {
       dispatch(addAlert("Cannot Sign up with given info"));
       return 'error';

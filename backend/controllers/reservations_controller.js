@@ -36,11 +36,19 @@ exports.create = function(req, res, next) {
   );
 };
 
-exports.fetch = function(req, res, next){
-  const userToken = req.params.userToken;
+exports.fetch = function(req, res, next) {
+  const userToken = req.query.userToken;
   const userId = jwt.decode(userToken, config.secret).sub;
-
-  
+  console.log(userId);
+  Reservation.findOne({user_id: userId, status: 'Pending'},
+  function(error, reservation){
+    console.log("I am here!!!!!!!!!", error, reservation);
+      if(error) {return next(error);}
+      if(reservation){
+          res.json(reservation);
+      }
+    }
+  );
 };
 
 exports.destroy = function(req, res, next){
