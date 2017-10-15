@@ -91,7 +91,7 @@ class MapItem extends Component {
     );
     
     const mapItem = this;
-  
+    
     this.props.restaurantIndex().then(
       function(){
         let restaurants = Object.keys(mapItem.props.restaurants).map(restaurantId => {
