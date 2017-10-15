@@ -2,20 +2,38 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 
-const FilterModal = ({...props}) => {
-  const pickerOptions = [];
-  for (let i = 0; i < 4; i++) {
-    pickerOptions.push(
+const Filter = ({...props}) => {
+  const seatLabels = ['0-2', '3-4', '5-6', '7-8'];
+  const seatsOptions = seatLabels.map((label, i) => {
+    return (
       <TouchableOpacity
         key={i}
-        /* style={styles.seatsButton} */
-      >
-        <Text>{i}</Text>
+        style={styles.button}
+        onPress={props.setFilter('filterSeats', i)}
+        style={props.seatsFilter === i ? styles.selectedButton : styles.button}>
+
+        <Text style={props.seatsFilter === i ? styles.selectedText : styles.buttonText}>
+          {label}
+        </Text>
       </TouchableOpacity>
     );
-  }
+  });
   
-  console.log(props);
+  const waitLabels =['0', '5-15', '15-25', '25-35' ];
+  waitOptions = waitLabels.map((label, i) => {
+    return (
+      <TouchableOpacity
+        key={i}
+        style={styles.button}
+        onPress={props.setFilter('filterWait', i)}
+        style={props.waitFilter === i ? styles.selectedButton : styles.button}>
+
+        <Text style={props.waitFilter === i ? styles.selectedText : styles.buttonText}>
+          {label}
+        </Text>
+      </TouchableOpacity>
+    );
+  });
 
   return (
     <Modal
@@ -31,9 +49,18 @@ const FilterModal = ({...props}) => {
       onBackdropPress={props.toggleFilter('close')}
     >
       <View style={styles.filterContent}>
-        <Text>FILTER MODAL</Text>
-        <View style={styles.picker}>
-          {pickerOptions}
+        <View style={styles.filterGroups}>
+          <Text style={styles.label}>Number of Seats Available</Text>
+          <View style={styles.options}>
+            {seatsOptions}
+          </View>
+        </View>
+
+        <View style={styles.filterGroups}>
+          <Text style={styles.label}>Wait Times (minutes)</Text>
+          <View style={styles.options}>
+            {waitOptions}
+          </View>
         </View>
       </View>
 
@@ -42,11 +69,9 @@ const FilterModal = ({...props}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  modal: {
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    alignItems: 'center'
   },
   filterContent: {
     backgroundColor: 'white',
@@ -56,15 +81,48 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: 'rgba(0, 0, 0, 0.1)',
   },
-  picker: {
+  options: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  seatsButton: {
-    width: 50,
-    borderColor: 'gray'
-  }
+  label: {
+    padding: 10,
+    fontSize: 18
+  },
+  filterGroups: {
+    margin: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  selectedButton: {
+    backgroundColor: '#1392B5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderColor: 'rgb(166, 166, 167)',
+    borderWidth: 1,
+    padding: 10,
+    margin: 3,
+    width: 70
+  },
+  button: {
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderColor: 'rgb(166, 166, 167)',
+    borderWidth: 1,
+    padding: 10,
+    margin: 3,
+    width: 70
+  },
+  selectedText: {
+    color: 'white'
+  },
+  buttonText: {
+    color: 'black'
+  },
 });
 
-export default FilterModal;
+export default Filter;

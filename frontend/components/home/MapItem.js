@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { search, restaurantIndex, displayRestaurant } from '../../actions/restaurant_actions';
-import FilterModal from '../filter/Filter';
+import FilterContainer from '../filter/Filter';
 
 import Search from './Search';
 import SearchResults from './SearchResults';
@@ -71,7 +71,9 @@ class MapItem extends Component {
       loaded: 0,
       searchActive: false,
       searchText: "",
-      isFilterOpen: false
+      isFilterOpen: false,
+      filterSeats: -1,
+      filterWait: -1
     };
     this.map = 0;
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
@@ -162,15 +164,6 @@ class MapItem extends Component {
 
   onRegionChangeComplete(region) {
     this.setState({ region });
-    // this.setState({ markers: this.state.markers.map(marker => (
-    //     <MapView.Marker
-    //       coordinate={marker.latlng}
-    //       title={marker.title}
-    //       description={marker.description}
-    //     />
-    // ))});
-    // should eventually calculate area within the map area, update state, which should hopefully re render markers
-
   }
 
   renderMap() {
@@ -218,8 +211,9 @@ class MapItem extends Component {
     }
   }
 
-  setFilter(){
-    console.log('hello');
+  setFilter(type, value){
+    return () => this.setState({[type]: value});
+
   }
 
   render() {
@@ -243,9 +237,11 @@ class MapItem extends Component {
           <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
 
-        <FilterModal 
+        <FilterContainer 
           isOpen={this.state.isFilterOpen} 
           toggleFilter={this.toggleFilter}
+          seatsFilter={this.state.filterSeats}
+          waitFilter={this.state.filterWait}
           setFilter={this.setFilter}/>
       </View>
     );
