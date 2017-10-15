@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Picker, TouchableOpacity, Button } from 'react-native';
+import { View, Text, StyleSheet, Picker, TouchableOpacity, Button, WebView } from 'react-native';
 import RestaurantShowMap from './RestaurantShowMap';
 
 class RestaurantItem extends Component {
   constructor(props) {
     super(props);
+    const date = new Date;
+    let minutes = date.getMinutes();
+    let hour = date.getHours();
+
     this.state = {
       restaurant: '',
       user: '',
-      reservationTime: '',
-      seat_count: ''
+      reservationTime: `${hour}:${minutes}`,
+      seat_count: 1
     };
+
     this.redirectHome = this.redirectHome.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReservation = this.handleReservation.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     if (this.props.restaurantId && newProps.restaurantId !== this.props.restaurantId) {
       this.setState({
         restaurant: newProps.restaurants[newProps.restaurantId],
-        user: newProps.user,
-        reservationTime: '',
-        seat_count: 0
+        user: newProps.user
       });
     }
   }
@@ -32,9 +36,7 @@ class RestaurantItem extends Component {
     if (this.props.restaurants){
       this.setState({
         restaurant: this.props.restaurants[this.props.restaurantId],
-        user: this.props.user,
-        reservationTime: '',
-        seat_count: 0
+        user: this.props.user
       });
     }
   }
@@ -78,93 +80,145 @@ class RestaurantItem extends Component {
   }
 
   reserveOrCancel() {
-    return (
-      <View>
-        <View style={{flexDirection: 'row'}}>
-          <Picker selectedValue= { this.state.reservationTime }
-                  style={styles.picker}
-                  onValueChange= { (itemValue, itemIndex) => this.setState({ 
-                    reservationTime: itemValue })}>
-              {this.renderReservationTimes()}
-          </Picker>
+    // debugger
+    if (this.props.user) {
+      if (this.props.reservation && this.props.reservation.user_id === this.props.user.user_id) {
+        let {seat_count, datetime} = this.props.reservation;
+        datetime = datetime.slice(11,16);
 
-          <Picker 
-            selectedValue={this.state.seat_count}
-            style={styles.picker}
-            onValueChange={ (itemValue, itemIndex) => this.setState({
-              seat_count: itemValue
-            })}>
-            {this.renderSeatCount()}
-          </Picker>
-        </View>
+        return (
+          <View style={styles.reserveContainer}>
+            <Text style={styles.restInfoText}>Reservation Reminder</Text>
+            <Text style={styles.restInfoText}>Hello! {this.props.user.username}</Text>
+            <Text style={styles.restInfoText}>Your reservation is at {datetime}</Text>
+            <Text style={styles.restInfoText}>You have {seat_count} friends coming with you</Text>
+            <TouchableOpacity
+              style={{
+                borderColor: 'black',
+                borderWidth: 2,
+                padding: 10
+              }}>
+              <Text style={styles.reserveText}>Cancel Reservation</Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }else{
+        return (
+          <View style={styles.reserveContainer}>
+            <View style={{ flexDirection: 'row' }}>
+              <Picker selectedValue={this.state.reservationTime}
+                style={styles.picker}
+                onValueChange={(itemValue, itemIndex) => {
+                  console.log(this.state.reservationTime);
+                  this.setState({
+                    reservationTime: itemValue
+                  });
+                }}>
+                {this.renderReservationTimes()}
+              </Picker>
 
-        <View style={styles.reserve}>
-          <TouchableOpacity
-            style={{
-              borderColor: 'black',
-              borderWidth: 2,
-              padding: 10
-            }}
-            onPress={this.handleSubmit}>
-            <Text style={styles.reserveText}>Reserve</Text>
-          </TouchableOpacity>
-        </View>
-          
-      </View>
-      
-    );
+              <Picker
+                selectedValue={this.state.seat_count}
+                style={styles.picker}
+                onValueChange={(itemValue, itemIndex) => this.setState({
+                  seat_count: itemValue
+                })}>
+                {this.renderSeatCount()}
+              </Picker>
+            </View>
+
+            <View style={styles.reserve}>
+              <TouchableOpacity
+                style={{
+                  borderColor: 'black',
+                  borderWidth: 2,
+                  padding: 10
+                }}
+                onPress={this.handleReservation}>
+                <Text style={styles.reserveText}>Reserve</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        );
+     }
+    }
   }
   
   redirectHome() {
     this.props.navigation.navigate('Drawer');
   }
 
-  handleSubmit(){
+  translateTimeUTC(time){
+    let fullYear = time.getFullYear();
+    let month = time.getMonth();
+    let day = time.getDay();
+    let hour = time.getHours();
+    let min = time.getMinutes();
+    let sec = time.getMinutes();
+
+    return Date.UTC(fullYear, month, day, hour, min, sec);
+  }
+
+  handleReservation(){
+    let resTime = new Date();
+
+    //set time to the user's time choice 
+    resTime.setHours(this.state.reservationTime.split(":")[0]);
+    resTime.setMinutes(this.state.reservationTime.split(":")[1]);
+
+    //translate time to UTC since database is in UTC
+    let bookTime = this.translateTimeUTC(resTime);
+
+    console.log(resTime);
     let reservation = {
       restaurant_id: this.state.restaurant.id,
       seat_count: this.state.seat_count,
-      datetime: this.state.reservationTime
+      datetime: bookTime
     };
 
+    console.log(reservation);
     this.props.createReservation(reservation, this.props.userToken);
   }
 
+  handleCancel(){
+
+  }
+
   render() {
-    // debugger
     if(this.state.restaurant){
       let {name, full_address, phone_number} = this.state.restaurant;
   
       return (
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.title}>{name}</Text>
             <TouchableOpacity
               style={{marginTop:5}}
               onPress={this.redirectHome}>
               <Text style={{color: 'black'}}>Back</Text>
             </TouchableOpacity>
+            <Text style={styles.title}>{name}</Text>
           </View>
   
           <View style={styles.restInfo}>
             <View style={styles.restInfoTextContainer}>
              <Text style={styles.restInfoText}>Address: {full_address}</Text>
-             <Text style={styles.restInfoText}>Call us at {phone_number}</Text>
+             <Text style={styles.restInfoText}>Call us at: {phone_number}</Text>
             </View>
+            <View style={{flex: 2}}>
              <RestaurantShowMap
-                  style={{flex: 1}}
                   restaurant={this.state.restaurant}/>
+            </View>
           </View>
   
-  
-          <View >
-            { this.reserveOrCancel() }
-          </View>
+
+          { this.reserveOrCancel() }
+
   
         </View>
       );
     }else{
       return(
-        <View style={styles.container}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text>
             Loading...
           </Text>
@@ -181,17 +235,23 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: '#65CCB8'
   },
+  reserveContainer: {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    paddingBottom: 20,
+    flex: 4
+  },
   restInfoTextContainer:{
     flex: 1, 
     flexDirection: 'column'
   },
   restInfoText: {
-    fontSize: 15,
+    fontSize: 20,
     padding: 10,
     alignSelf: 'center'
   },
   restInfo: {
-    flex: 1
+    flex: 4,
   },
   button: {
     padding: 10,
@@ -210,6 +270,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'stretch',
     // alignItems: 'center',
     backgroundColor: 'teal'
   },
