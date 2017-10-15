@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
   userToken: state.session.token,
   restaurants: state.entities.restaurants,
   restaurantId: state.display,
-  reservation: state.entities.reservation.reservation
+  reservation: state.entities.reservation
 });
 
 
