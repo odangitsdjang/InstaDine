@@ -30,13 +30,14 @@ class RestaurantItem extends Component {
   componentDidMount() {
     // Get restaurant info somehow, put that into props talk to adrian 
     //assume map will feed restaurant into this component through prop
-    this.setState({
-      restaurant: this.props.restaurants[this.props.restaurantId],
-      user: this.props.user,
-      reservationTime: '',
-      seat_count: 0
-    });
-    debugger
+    if (this.props.restaurants){
+      this.setState({
+        restaurant: this.props.restaurants[this.props.restaurantId],
+        user: this.props.user,
+        reservationTime: '',
+        seat_count: 0
+      });
+    }
   }
 
   // Only render 10 time frames after current time

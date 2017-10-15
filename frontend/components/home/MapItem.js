@@ -75,6 +75,7 @@ class MapItem extends Component {
     // console.log(this.props);
     // Get restaurants 
     // User's current location
+
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -92,7 +93,6 @@ class MapItem extends Component {
 
     // debugger
     // make markers into components
-    console.log(this.props.restaurants);
     // this.setState({
     //   markers: this.props.restaurants.map((marker, i) => (
     //       <MapView.Marker
@@ -115,7 +115,7 @@ class MapItem extends Component {
     // });
     
     const mapItem = this;
-
+  
     this.props.restaurantIndex().then(
       function(){
         mapItem.setState({
@@ -212,7 +212,6 @@ class MapItem extends Component {
   }
 
   openDrawer(){
-    console.log(this.props);
     this.props.navigation.navigate('DrawerOpen');
   }
 
