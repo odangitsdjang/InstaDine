@@ -12,7 +12,6 @@ let localOptions = {
 
 let localStrategy = new LocalStrategy(localOptions, function(email, password, done) {
   //check username and password 
-  console.log(email, password, "---------------------");
   User.findOne({email: email.toLowerCase()}, function(err, user) {
     if (err) { return done(err); }
     if (!user) { return done(null, false); }
