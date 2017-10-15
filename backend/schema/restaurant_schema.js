@@ -46,6 +46,7 @@ const restaurantSchema = new Schema({
     required: 'Manager is required'
   },
   queue: [],
+  wait_time: Number,
   tables: {
     max: {
       type: Number,
