@@ -6,7 +6,10 @@ import { View, Text, StyleSheet, Button,
          Alert,
          Image,
          ScrollView,
-         TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
+         TouchableOpacity,
+         Keyboard, 
+         TouchableWithoutFeedback, 
+         KeyboardAvoidingView } from 'react-native';
 
 // create a component
 class Signup extends Component {
@@ -51,6 +54,7 @@ class Signup extends Component {
   }
 
   redirectBack() {
+    Keyboard.dismiss();
     this.props.navigation.navigate('Splash');
   }
 
@@ -74,12 +78,12 @@ class Signup extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-            <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }} >
-              <Text style={styles.logIn}>Log In</Text>
+            <View style={{ flex: 2, justifyContent: 'flex-end' }} >
+              <Text style={styles.signUp}>Sign Up</Text>
             </View>
             {this.renderErrors()}
             
-            <View style={{ flex: 7, justifyContent: 'flex-start', alignItems: 'center' }}>
+            <KeyboardAvoidingView behavior='padding' style={{ flex: 8, justifyContent: 'flex-start', alignItems: 'center' }}>
               <View>
                 <Text style={styles.fieldTitle}>Email:</Text>
                 <View style={styles.field}>
@@ -147,136 +151,10 @@ class Signup extends Component {
                   <Text style={styles.text}>Sign Up</Text>
                 </TouchableOpacity>
               </View>
-            </View>
-
-
-
-            <View style={styles.signUpForm}>
-              <Text style={styles.fieldTitle}>Email:</Text>
-              <View style={styles.field}>
-                <TextInput 
-                  onChange={this.update('email')}
-                  style={styles.textInput}
-                  value={email}
-                  autoCorrect={false}
-                  returnKeyType={"next"}
-                  onSubmitEditing={(e) => { this.refs.username.focus(); }}
-                  placeholder="Email"/>
-              </View>
-
-              <Text style={styles.fieldTitle}>Username:</Text>
-              <View style={styles.field}>
-                <TextInput
-                  ref='username'
-                  onChange={this.update('username')}
-                  style={styles.textInput}
-                  value={username}
-                  autoCorrect={false}
-                  returnKeyType={"next"}
-                  onSubmitEditing={(e) => { this.refs.password.focus(); }}
-                  placeholder="Username" />
-              </View>
-
-              <Text style={styles.fieldTitle}>Password:</Text>
-              <View style={styles.field}>
-                <TextInput 
-                  ref='password'
-                  onChange={this.update('password')}
-                  style={styles.textInput}
-                  value={password}
-                  returnKeyType={"next"}
-                  onSubmitEditing={(e) => { this.refs.phone.focus(); }}
-                  secureTextEntry={true}
-                  placeholder="Password"/>
-              </View>
-
-              <Text style={styles.fieldTitle}>Phone Number:</Text>
-              <View style={styles.field}>
-                <TextInput
-                  ref='phone'
-                  onChange={this.update('phoneNumber')}
-                  keyboardType='numeric'
-                  style={styles.textInput}
-                  value={phoneNumber}
-                  onSubmitEditing={(e) => this.onSignUp()}
-                  maxLength={10}
-                  placeholder="Phone Number" />
-              </View>
-            </View>
-
-            <View style={{ flexDirection: 'row' }}>
-              <TouchableOpacity
-                onPress={this.redirectBack}
-                style={styles.button}
-                raised={true}>
-                <Text style={styles.text}>Back</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={this.onSignUp}
-                style={styles.button}
-                raised={true}>
-                <Text style={styles.text}>Sign Up</Text>
-              </TouchableOpacity>
-
-
-            </View>
+          </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
     );
-
-
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }} >
-          <Text style={styles.logIn}>Log In</Text>
-        </View>
-        <View style={{ flex: 7, justifyContent: 'flex-start', alignItems: 'center' }}>
-          <View style={styles.loginForm}>
-            <Text style={styles.fieldTitle}>Email:</Text>
-            <View style={styles.field}>
-
-              <TextInput
-                onChange={this.update('email')}
-                style={styles.textInput}
-                returnKeyType={"next"}
-                autoCorrect={false}
-                onSubmitEditing={(e) => { this.refs.pw.focus(); }}
-                value={email}
-                placeholder="Email" />
-            </View>
-
-            <Text style={styles.fieldTitle}>Password:</Text>
-            <View style={styles.field}>
-              <TextInput
-                ref='pw'
-                onChange={this.update('password')}
-                style={styles.textInput}
-                onSubmitEditing={(e) => this.onLogin()}
-                value={password}
-                secureTextEntry={true}
-                placeholder="Password" />
-            </View>
-          </View>
-          <View style={styles.authButtons}>
-            <TouchableOpacity
-              onPress={this.redirectBack}
-              style={styles.button}
-              raised={true}>
-              <Text style={styles.text}>Back</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={this.onLogin}
-              style={styles.button}
-              raised={true}>
-              <Text style={styles.text}>Login</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        {this.renderErrors()}
-      </View>
-    </TouchableWithoutFeedback>
   }
 }
 
@@ -288,7 +166,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#1392B5'
   },
-  logIn: {
+  signUp: {
     fontSize: 40,
     fontFamily: 'AppleSDGothicNeo-Bold',
     color: 'white'
@@ -326,6 +204,7 @@ const styles = StyleSheet.create({
   fieldTitle: {
     paddingLeft: 0,
     padding: 6,
+    fontSize: 20,
     color: 'white'
   },
   text: {

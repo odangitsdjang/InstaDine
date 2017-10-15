@@ -82,7 +82,6 @@ class MapItem extends Component {
     this.openDrawer = this.openDrawer.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
-    this.redirectRestaurant = this.redirectRestaurant.bind(this);
     this.closeFilter = this.closeFilter.bind(this);
   }
 
@@ -140,7 +139,7 @@ class MapItem extends Component {
   }
 
   redirectRestaurant(marker) {
-    this.props.displayRestaurant(marker.id);
+    this.props.displayRestaurant(marker);
   }
 
   markerClick(marker) {
@@ -267,7 +266,8 @@ class MapItem extends Component {
                 setSearchActive={this.setSearchActive}/>
         <SearchResults searchActive={this.state.searchActive}
           results={this.props.results}
-          searchText={this.state.searchText} />
+          searchText={this.state.searchText} 
+          redirectRestaurant={this.redirectRestaurant}/>
         <TouchableOpacity
           onPress={this.redirectLogin}
           style={styles.button}
@@ -307,9 +307,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgb(240,240,240)',
     backgroundColor: 'rgba(230,230,230,0.99)'
   },
-  filter: {
-    backgroundColor: 'transparent',
-    color: 'rgb(80,80,80)',
   menuIcon: {
     width: 50,
     height: 50

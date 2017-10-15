@@ -3,7 +3,10 @@ import { View, Text, StyleSheet, Button,
          TextInput,
          Alert,
          ScrollView,
-         TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
+         TouchableOpacity, 
+         Keyboard, 
+         TouchableWithoutFeedback,
+         KeyboardAvoidingView } from 'react-native';
 
 const _defaultState = {
   email: '',
@@ -63,11 +66,11 @@ class Login extends Component {
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-            <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }} >
+            <View style={{ flex: 3, justifyContent: 'flex-end' }} >
               <Text style={styles.logIn}>Log In</Text>
             </View>
-            <View style={{ flex: 7, justifyContent: 'flex-start', alignItems: 'center' }}>
-              <View style={styles.loginForm}>
+            <KeyboardAvoidingView behavior='padding' style={{ flex: 7, justifyContent: 'flex-start', alignItems: 'center' }}>
+              <View>
                 <Text style={styles.fieldTitle}>Email:</Text>
                 <View style={styles.field}>
 
@@ -108,7 +111,7 @@ class Login extends Component {
                   <Text style={styles.text}>Login</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </KeyboardAvoidingView>
             {this.renderErrors()}
           </View>
       </TouchableWithoutFeedback>
@@ -120,7 +123,8 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'stretch',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#1392B5'
   },
   logIn: {
