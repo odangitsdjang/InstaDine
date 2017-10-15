@@ -78,7 +78,6 @@ class Signup extends Component {
               <Text style={styles.logIn}>Log In</Text>
             </View>
             {this.renderErrors()}
-            start changing down here
             <View style={styles.signUpForm}>
               <Text style={styles.fieldTitle}>Email:</Text>
               <View style={styles.field}>
