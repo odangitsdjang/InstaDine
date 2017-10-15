@@ -84,7 +84,7 @@ exports.destroy = function(req, res, next){
           );
         }
       }
-    }
-  );
+    );
+  });
 };
 
