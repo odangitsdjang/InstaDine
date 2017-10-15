@@ -18,8 +18,10 @@ exports.signupUser = user => {
     return axios.post(SIGNUP_URL, user).then((response) => {
       let { token, currentUser } = response.data;
       dispatch(authUser(token, currentUser));
+      return 'success';
     }).catch((errors) => {
       dispatch(addAlert("Cannot Sign up with given info"));
+      return 'error';
     });
   };
 };

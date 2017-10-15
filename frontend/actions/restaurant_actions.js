@@ -49,4 +49,4 @@ exports.displayRestaurant = restaurantId => ({
 
 exports.displayMap = () => ({
   type: DISPLAY_MAP
-})
+});

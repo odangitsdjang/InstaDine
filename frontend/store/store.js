@@ -12,6 +12,6 @@ export const configureStore = (initialState = {}) => {
     autoRehydrate()
   ));
   // persistStore(store, { storage: AsyncStorage });
-  persistStore(store, { storage: AsyncStorage }).purge();
+  persistStore(store, { storage: AsyncStorage });
   return store;
 };

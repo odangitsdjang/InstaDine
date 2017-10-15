@@ -1,4 +1,6 @@
 const Reservation = require('../models/reservation');
+const User = require('../models/user');
+const Restaurant = require('../models/restaurant');
 const jwt = require('jwt-simple');
 const config = require('../config');
 
@@ -7,8 +9,8 @@ const config = require('../config');
 
 exports.create = function(req, res, next) {
   const userToken = req.body.userToken;
+  console.log(req.body);
   const userId = jwt.decode(userToken, config.secret).sub;
-  // console.log(req.body);
   
   // Find if user already has a pending reservation
   Reservation.findOne({user_id: userId, status: 'Pending' }, 
@@ -28,17 +30,63 @@ exports.create = function(req, res, next) {
       newReservation.save(function(saveError){
         if (saveError) { return next(saveError); }
 
-        res.json({reservation: newReservation});
+        res.json(newReservation);
       });
     }
   );
 };
 
-exports.update = function(req, res, next){
-  // const userToken = req.body.userToken;
-  // const userId = jwt.decode(userToken, config.secret).sub;
-  // const userId = req.body;
+exports.destroy = function(req, res, next){
+  const userToken = req.body.userToken;
+  const userId = jwt.decode(userToken, config.secret).sub;
 
-  
+  // Find the reservation and update to Cancel
+  Reservation.findOneAndUpdate(
+    { user_id: userId, status: 'Pending' },
+    { $set: { status: 'Canceled ' } },
+    { new: true },
+    function (resvError, updatedResv) {
+      if (resvError) { 
+        return res.status(404).json('Error: Unable to update Reservation'); 
+      }
+      const reservationId = updatedResv._id;
+      const restaurantId = updatedResv.restaurant_id;
+
+      // Find the restaurant and update
+      Restaurant.findOne({ _id: restaurantId }, function(restError, restaurant) {
+        if (restError) { 
+          return res.status(404).json('Error updating restaurant'); 
+        }
+        if (restaurant) {
+          // Remove reservation from restaurant queue
+          const newQueue = restaurant.queue
+            .filter(reservation => reservation._id.toString() !== reservationId.toString());
+
+          restaurant.queue = newQueue;
+
+          restaurant.save(function(restSaveError) {
+            if (restSaveError) { 
+              return res.status(404).json('Error updating restaurant'); 
+            }
+          });
+
+          // Find the user and update reservation
+          User.findOneAndUpdate(
+            { _id: userId },
+            { $set: { reservation: [] } },
+            { new: true },
+            function (error, updatedUser) {
+              if (error) { 
+                return res.status(404).json('Error updating user'); 
+              }
+              
+              // Return updated user for redux store
+              return res.json(updatedUser);
+            }
+          );
+        }
+      }
+    );
+  });
 };
 

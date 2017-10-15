@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import { Dimensions } from 'react-native';
 import { addNavigationHelpers, DrawerNavigator } from 'react-navigation';
 
+// Import screens
 import UserProfileContainer from '../components/profile/UserProfileContainer';
 import MapItem from '../components/home/MapItem';
 import DrawerContentContainer from '../components/profile/DrawerContentContainer';
+import HistoryContainer from '../components/profile/HistoryContainer';
 
 const routeConfig = {
   UpdateUser: { screen: UserProfileContainer },
+  QueueHistory: { screen: HistoryContainer },
   Map: { screen: MapItem },
 };
 
