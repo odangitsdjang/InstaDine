@@ -18,20 +18,20 @@ const navigatorConfig = {
   drawerWidth: Dimensions.get('window').width * 0.6
 };
 
-export const Drawer = DrawerNavigator(
+const Drawer = DrawerNavigator(
   routeConfig,
   navigatorConfig
 );
 
 // Drawer DOES NOT work with Redux
-const DrawerComponent = () => (
-  <Drawer />
-);
+// const DrawerComponent = () => (
+//   <Drawer />
+// );
 
 const mapStateToProps = state => ({
   state: state,
 });
 
-connect(mapStateToProps)(DrawerComponent);
+connect(mapStateToProps)(Drawer);
 
-export default DrawerComponent;
+export default Drawer;
