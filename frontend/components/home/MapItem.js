@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, Dimensions,
   TouchableOpacity, TextInput, Alert, Image } 
          from 'react-native';
 import { connect } from 'react-redux';
-
+import { Ionicons } from '@expo/vector-icons';
 import { search, restaurantIndex, displayRestaurant } from '../../actions/restaurant_actions';
 
 import Search from './Search';
@@ -71,6 +71,7 @@ class MapItem extends Component {
     this.setSearchActive = this.setSearchActive.bind(this);
     this.setSearchText = this.setSearchText.bind(this);
     this.openDrawer = this.openDrawer.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
   }
@@ -199,6 +200,10 @@ class MapItem extends Component {
   openDrawer(){
     this.props.navigation.navigate('DrawerOpen');
   }
+  
+  toggleFilter() {
+
+  }
 
   render() {
     return (
@@ -206,23 +211,23 @@ class MapItem extends Component {
         { this.renderMap() }
         <Search setSearchText={this.setSearchText} 
                 typeText={this.typeText} 
+                openDrawer={this.openDrawer}
                 searchActive={this.state.searchActive} 
                 searchText={this.state.searchText} 
                 setSearchActive={this.setSearchActive}/>
         <SearchResults searchActive={this.state.searchActive}
           results={this.props.results}
           searchText={this.state.searchText} />
-          
-          
         <TouchableOpacity
-          onPress={this.openDrawer}
-          style={styles.drawerButton}
-          title='Open Drawer'>
-
-          <Image 
-            style={styles.menuIcon}
-            source={require('../../../assets/images/menu_icon.png')}/>
+          onPress={this.redirectLogin}
+          style={styles.button}
+          raised={true}>
+          <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
+
+          
+          
+       
       </View>
     );
   }
@@ -239,15 +244,22 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     flex: 1
   },
-  drawerButton: {
+  button: {
+    padding: 18,
+    borderRadius: 15,
+    margin: 5,
+    width: 85,
     position: 'absolute',
-    zIndex: 1,
-    top: 45,
-    backgroundColor: 'white'
+    bottom: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgb(240,240,240)',
+    backgroundColor: 'rgba(230,230,230,0.99)'
   },
-  menuIcon: {
-    width: 50,
-    height: 50
+  filter: {
+    backgroundColor: 'transparent',
+    color: 'rgb(80,80,80)'
   }
 });
 

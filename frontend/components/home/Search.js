@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { View, Text, TextInput, StyleSheet, TouchableHighlight, Keyboard } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, Text, TextInput, StyleSheet, TouchableHighlight, TouchableOpacity, Keyboard } from 'react-native';
 
 class Search extends Component {
 
   constructor(props) {
     super(props);
-    this.renderCancelIcon = this.renderCancelIcon.bind(this);
-    this.renderSearchIcon = this.renderSearchIcon.bind(this);
+    this.renderRightIcon = this.renderRightIcon.bind(this);
+    this.renderLeftIcon = this.renderLeftIcon.bind(this);
 
   }
 
-  renderSearchIcon() {
+  renderLeftIcon() {
     if (!this.props.searchActive) {
-      return <Ionicons style={styles.leftIcon} name="ios-search" size={20} />;
+      return (
+        <TouchableOpacity
+          style={styles.icon}
+          onPress={this.props.openDrawer}
+          title='Open Drawer'>
+          <Ionicons style={styles.leftIcon} name="ios-menu" size={35} />
+        </TouchableOpacity>
+        
+      );
     } else {
       return (
         <TouchableHighlight style={styles.icon}
@@ -22,21 +31,21 @@ class Search extends Component {
             this.props.setSearchActive(false);
           }}
         >
-          <Ionicons style={styles.leftIcon} name="ios-arrow-back" size={20} />
+          <Ionicons style={styles.leftIcon} name="ios-arrow-back" size={30} />
         </TouchableHighlight>
       );
     }
   }
 
-  renderCancelIcon() {
-    if (this.props.searchActive) {
-      return (
+  renderRightIcon() {
+    if (!this.props.searchActive) {
+      return null;
+    } else {
+      return(
         <TouchableHighlight onPress={() => this.props.setSearchText("")} style={styles.icon} >
-          <Ionicons name="ios-close" size={20} />
+          <Ionicons name="ios-close" size={30} />
         </TouchableHighlight>
       );
-    } else {
-      return null;
     }
   }
 
@@ -46,7 +55,7 @@ class Search extends Component {
       <View style={styles.searchContainer}>
         <View style={{ flex: 5 }}></View>
         <View style={styles.search}>
-          {this.renderSearchIcon()}
+          {this.renderLeftIcon()}
           <TextInput
             placeholder="Search"
             style={{ paddingLeft: 20, flex: 8 }}
@@ -58,7 +67,7 @@ class Search extends Component {
             onFocus={() => this.props.setSearchActive(true)}
             value={this.props.searchText}
           />
-          {this.renderCancelIcon()}
+          {this.renderRightIcon()}
         </View>
         <View style={{ flex: 5 }}></View>
       </View>
@@ -86,7 +95,7 @@ const styles = StyleSheet.create({
   },
   leftIcon: {
     paddingLeft: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   icon: {
     flex: 1,

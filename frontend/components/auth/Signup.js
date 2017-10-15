@@ -74,7 +74,7 @@ class Signup extends Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scrollContainer}>
-          <Text style={{fontSize: 30}}>Join us today!</Text>
+          <Text style={{ fontSize: 30}}>Join us today!</Text>
           {this.renderErrors()}
           <View style={styles.signUpForm}>
               {/* <Image
@@ -124,18 +124,19 @@ class Signup extends Component {
 
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity
+              onPress={this.redirectBack}
+              style={styles.button}
+              raised={true}>
+              <Text style={styles.text}>Back</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
               onPress={this.onSignUp}
               style={styles.button}
               raised={true}>
               <Text style={styles.text}>Sign Up</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={this.redirectBack}
-              style={styles.button}
-              raised={true}>
-              <Text style={styles.text}>Back</Text>
-            </TouchableOpacity>
 
           </View>
         </ScrollView>
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#65CCB8'
+    backgroundColor: '#1392B5'
   },
   button: {
     padding: 10,
@@ -179,12 +180,12 @@ const styles = StyleSheet.create({
     height: 120
   },
   textInput: {
-    height: 26
+    height: 26,
+
   },
   fieldTitle: {
     paddingLeft: 0,
     padding: 6,
-    fontSize: 20,
     color: 'white'
   },
   text: {

@@ -60,48 +60,50 @@ class Login extends Component {
     let {email, password} = this.state;
 
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.scrollContainer}>
-          <Text style={{fontSize: 30, color: '#182628'}}>Please Log In</Text>
-          {this.renderErrors()}
-          <View style={styles.loginForm}>
-            <Text style={styles.fieldTitle}>Email:</Text>
-            <View style={styles.field}>
-              <TextInput
-                onChange={this.update('email')}
-                style={styles.textInput}
-                value={email}
-                placeholder="Email" />
-            </View>
+      <ScrollView style={styles.container}>
+          <View style={{ flex: 3, justifyContent: 'center' }} >
+            <Text style={{ fontSize: 30, color: '#182628' }}>Log In</Text>
+            {this.renderErrors()}
+          </View>
+          <View style={{ flex: 7, justifyContent: 'flex-start', alignItems: 'center' }}>
+            <View style={styles.loginForm}>
+              <Text style={styles.fieldTitle}>Email:</Text>
+              <View style={styles.field}>
+                <TextInput
+                  onChange={this.update('email')}
+                  style={styles.textInput}
+                  value={email}
+                  placeholder="Email" />
+              </View>
 
-            <Text style={styles.fieldTitle}>Password:</Text>
-            <View style={styles.field}>
-              <TextInput
-                onChange={this.update('password')}
-                style={styles.textInput}
-                value={password}
-                secureTextEntry={true}
-                placeholder="Password" />
+              <Text style={styles.fieldTitle}>Password:</Text>
+              <View style={styles.field}>
+                <TextInput
+                  onChange={this.update('password')}
+                  style={styles.textInput}
+                  value={password}
+                  secureTextEntry={true}
+                  placeholder="Password" />
+              </View>
+            </View>
+            <View style={styles.authButtons}>
+              <TouchableOpacity
+                onPress={this.redirectBack}
+                style={styles.button}
+                raised={true}>
+                <Text style={styles.text}>Back</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={this.onLogin}
+                style={styles.button}
+                raised={true}>
+                <Text style={styles.text}>Login</Text>
+              </TouchableOpacity>
             </View>
           </View>
 
-          <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity
-              onPress={this.onLogin}
-              style={styles.button}
-              raised={true}>
-              <Text style={styles.text}>Login</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={this.redirectBack}
-              style={styles.button}
-              raised={true}>
-              <Text style={styles.text}>Back</Text>
-            </TouchableOpacity>
-          </View>
         </ScrollView>
-      </View>
     );
   }
 }
@@ -110,9 +112,8 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#65CCB8'
+    alignItems: 'stretch',
+    backgroundColor: '#1392B5'
   },
   button: {
     padding: 10,
@@ -127,9 +128,6 @@ const styles = StyleSheet.create({
   errorText:{
     color: 'red',
     fontSize: 30
-  },
-  scrollContainer: {
-    paddingTop: 200
   },
   field: {
     borderRadius: 5,
