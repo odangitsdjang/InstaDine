@@ -17,7 +17,7 @@ const { width, height } = Dimensions.get('window'); // dimension are half of the
 const ASPECT_RATIO = width / height;
 const LATITUDE = 0;
 const LONGITUDE = 0;
-const LATITUDE_DELTA = 0.0922;
+const LATITUDE_DELTA = 0.6;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 class RestaurantShowMap extends Component {
@@ -27,8 +27,8 @@ class RestaurantShowMap extends Component {
       region: {
         latitude: 37.78825,   // selected region
         longitude: -122.4324,
-        latitudeDelta: 0.03,
-        longitudeDelta: 0.0221,
+        latitudeDelta: 0.05,
+        longitudeDelta: 0.0421,
       },
       selectedMarker: 0,
       loaded: 0,
