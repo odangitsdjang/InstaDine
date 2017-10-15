@@ -280,15 +280,9 @@ class MapItem extends Component {
           <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
 
-<<<<<<< HEAD
-          
-          
-       
-=======
         <Button onPress={this.toggleFilter} title='Filter'/>
 
         { this.filterModal() }
->>>>>>> be5aa52132ad50557c7cbee5109a8c291e91cf25
       </View>
     );
   }
@@ -318,11 +312,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgb(240,240,240)',
     backgroundColor: 'rgba(230,230,230,0.99)'
   },
-<<<<<<< HEAD
-  filter: {
-    backgroundColor: 'transparent',
-    color: 'rgb(80,80,80)'
-=======
   menuIcon: {
     width: 50,
     height: 50
@@ -343,7 +332,6 @@ const styles = StyleSheet.create({
   seatsButton: {
     width: 50,
     borderColor: 'gray'
->>>>>>> be5aa52132ad50557c7cbee5109a8c291e91cf25
   }
 });
 
