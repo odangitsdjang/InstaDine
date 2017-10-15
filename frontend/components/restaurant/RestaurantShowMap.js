@@ -6,13 +6,10 @@ import {
   TouchableOpacity, TextInput, Alert
 }
   from 'react-native';
-import { connect } from 'react-redux';
 
 /* current todos :
  4. load only the markers in the given region 
 */
-
-
 
 // Change initialRegion to this.props.user.region
 const { width, height } = Dimensions.get('window'); // dimension are half of the pixels of the phone specification
@@ -30,8 +27,8 @@ class RestaurantShowMap extends Component {
       region: {
         latitude: 37.78825,   // selected region
         longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitudeDelta: 0.03,
+        longitudeDelta: 0.0221,
       },
       selectedMarker: 0,
       loaded: 0,
@@ -41,19 +38,17 @@ class RestaurantShowMap extends Component {
     };
     this.map = 0;
     this.renderMarkers = this.renderMarkers.bind(this);
+    this.makeMarker = this.makeMarker.bind(this);
   }
 
-  componentDidMount() {
-
-    console.log(this.props);
-
+  componentWillReceiveProps(newProps) {
     // User's current location
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
           region: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
+            latitude: newProps.restaurant.latlng.latitude,
+            longitude: newProps.restaurant.latlng.longitude,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }
@@ -64,26 +59,57 @@ class RestaurantShowMap extends Component {
     );
 
     // make markers into components
-    console.log(this.props.restaurant);
+
+    if (this.props.restaurant.id && newProps.restaurant.id !== this.props.restaurant.id) {
+      console.log("Got in!");
+      this.setState({
+        markers: this.makeMarker(newProps.restaurant),
+        loaded: 1
+      });
+    }
+  }
+
+  componentDidMount() {
+    // User's current location
+    console.log("Did Mount", this.props.restaurant);
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          region: {
+            latitude: this.props.restaurant.latlng.latitude,
+            longitude: this.props.restaurant.latlng.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }
+        });
+      },
+      (error) => console.log(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+
+    // make markers into components
+
     this.setState({
-      markers: this.props.restaurant.map((marker, i) => (
-        <MapView.Marker
-          key={i}
-          coordinate={marker.latlng}
-        >
-          <MapView.Callout onPress={this.redirectRestaurant}>
-            <View style={styles.insideBubbleStyle}>
-              <Text>
-                {marker.name}
-              </Text>
-              <Text>
-                {marker.full_address}
-              </Text>
-            </View>
-          </MapView.Callout>
-        </MapView.Marker>
-      )), loaded: 1
+      markers: this.makeMarker(this.props.restaurant), 
+      loaded: 1
     });
+  }
+
+  makeMarker(marker){
+    return(
+      <MapView.Marker
+        key={marker.id}
+        coordinate={marker.latlng}
+      >
+        <MapView.Callout onPress={this.redirectRestaurant}>
+          <View style={styles.insideBubbleStyle}>
+            <Text>
+              {marker.name}
+            </Text>
+          </View>
+        </MapView.Callout>
+      </MapView.Marker>
+    );
   }
 
   markerClick(marker) {
@@ -109,10 +135,9 @@ class RestaurantShowMap extends Component {
         onPress={() => this.setState({ selectedMarker: 0 })}
         ref={(map) => { this.map = map; }}
         provider="google"
-        initialRegion={this.state.region}
+        region={this.state.region}
         loadingEnabled={true}
         showsUserLocation={true}
-        onRegionChangeComplete={this.onRegionChangeComplete}
       >
         {this.renderMarkers()}
       </MapView>
@@ -120,11 +145,21 @@ class RestaurantShowMap extends Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        {this.renderMap()}
-      </View>
-    );
+    if(this.props.restaurant){
+      return (
+        <View style={styles.container}>
+          {this.renderMap()}
+        </View>
+      );
+    }else{
+      return(
+        <View style={styles.container}>
+          <Text>
+            Loading...
+          </Text>
+        </View>
+      );
+    }
   }
 }
 
@@ -143,16 +178,3 @@ const styles = StyleSheet.create({
 });
 
 export default RestaurantShowMap;
-
-
-// const mapStateToProps = state => ({
-//   results: state.search.restaurants,
-//   restaurants: state.entities.restaurants
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   search: searchText => dispatch(search(searchText)),
-//   restaurantIndex: () => dispatch(restaurantIndex())
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(RestaurantShowMap);

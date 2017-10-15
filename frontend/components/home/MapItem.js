@@ -72,7 +72,6 @@ class MapItem extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.props);
     // Get restaurants 
     // User's current location
     navigator.geolocation.getCurrentPosition(
@@ -89,30 +88,6 @@ class MapItem extends Component {
       (error) => console.log(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
-
-    // debugger
-    // make markers into components
-    console.log(this.props.restaurants);
-    // this.setState({
-    //   markers: this.props.restaurants.map((marker, i) => (
-    //       <MapView.Marker
-    //         key={i}
-    //         onPress={() => this.markerClick(marker)}
-    //         coordinate={marker.latlng}
-    //       >
-    //         <MapView.Callout onPress={this.redirectRestaurant}>
-    //             <View style={styles.insideBubbleStyle}>
-    //               <Text>
-    //                 {marker.name}
-    //               </Text>
-    //               <Text>
-    //                 {marker.full_address}
-    //               </Text>
-    //             </View>
-    //         </MapView.Callout>
-    //       </MapView.Marker>
-    //   )), loaded: 1
-    // });
     
     const mapItem = this;
 
@@ -121,12 +96,10 @@ class MapItem extends Component {
         let restaurants = Object.keys(mapItem.props.restaurants).map(restaurantId => {
           return mapItem.props.restaurants[restaurantId];
         });
-        console.log(restaurants);
+
         mapItem.setState({
           markers: restaurants.map((markerObj, i) => {
-            // const marker = Object.values(markerObj)[0];
             const marker = markerObj.latlng;
-            console.log(marker);
             return (
               <MapView.Marker
                 key={i}
