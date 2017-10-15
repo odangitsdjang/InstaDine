@@ -211,50 +211,10 @@ class MapItem extends Component {
     this.props.navigation.navigate('DrawerOpen');
   }
   
-  toggleFilter() {
-
-  }
-
   toggleFilter(){
     this.setState({isFilterOpen: !this.state.isFilterOpen});
   }
 
-  filterModal(){
-    const pickerOptions = [];
-    for (let i = 0; i < 4; i++){
-      pickerOptions.push(
-        <TouchableOpacity 
-          key={i}
-          style={styles.seatsButton}
-          >
-          <Text>{i}</Text>
-        </TouchableOpacity>
-      );
-    }
-    
-    return (
-      <Modal 
-        isVisible={this.state.isFilterOpen}
-        backdropColor={'black'}
-        backdropOpacity={.7}
-        animationIn={'zoomInDown'}
-        animationOut={'zoomOutUp'}
-        animationInTiming={1000}
-        animationInTiming={1000}
-        backdropTransitionInTiming={1000}
-        backdropTransitionOutTiming={1000}
-        onBackdropPress={this.closeFilter}
-      >
-        <View style={styles.filterContent}>
-          <Text>FILTER MODAL</Text>
-          <View style={styles.picker}>
-            { pickerOptions }     
-          </View>
-        </View>
-        
-      </Modal>
-    );
-  }
 
   closeFilter(){
     this.setState({isFilterOpen: false});
