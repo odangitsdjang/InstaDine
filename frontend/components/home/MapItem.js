@@ -90,11 +90,15 @@ class MapItem extends Component {
     );
     
     const mapItem = this;
-
+    
     this.props.restaurantIndex().then(
       function(){
+        const restaurants = Object.keys(mapItem.props.restaurants).map(restaurantId=> 
+          mapItem.props.restaurants[restaurantId]
+        );
+        console.log(restaurants);
         mapItem.setState({
-          markers: mapItem.props.restaurants.map((markerObj, i) => {
+          markers: restaurants.map((markerObj, i) => {
             const marker = Object.values(markerObj)[0];
             return (
               <MapView.Marker
