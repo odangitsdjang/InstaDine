@@ -61,7 +61,6 @@ class UserProfile extends Component {
                           .field('file', '../../../docs/signup.png');
 
       upload.end((err, response) => {
-        debugger
         if(err){
           console.log(err);
           return;
@@ -168,11 +167,11 @@ class UserProfile extends Component {
               <TouchableOpacity
                 style={{padding: 5, 
                         borderWidth: 2,
-                        borderColor: '#EDF5E1',
+                        borderColor: 'black',
                         borderRadius: 5,
                         marginTop: 10}}
                 onPress={this._pickImage}>
-                <Text style={{color: '#EDF5E1', 
+                <Text style={{color: 'black', 
                               fontSize: 15}}>Change Profile</Text>
               </TouchableOpacity>
 
@@ -196,12 +195,16 @@ class UserProfile extends Component {
               onPress={this.onLogout}
               style={styles.button}
               raised={true}>
-              <Text style={{ color: '#EDF5E1'}}>Log Out</Text>
+              <Text style={{ color: 'black'}}>Log Out</Text>
             </TouchableOpacity>
 
-            <Button
+            <TouchableOpacity
               onPress={this.redirectHome}
-              title='Go Back' />
+              style={styles.button}
+              raised={true}>
+              <Text style={{ color: 'black' }}>Back</Text>
+            </TouchableOpacity>
+
           </View>
 
         </View>
@@ -223,7 +226,8 @@ class UserProfile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#5CDB95',
+    // backgroundColor: '#5CDB95',
+    backgroundColor: 'white',
   },
   button: {
     padding: 10,
@@ -233,13 +237,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#F2F2F2'
+    // borderColor: '#F2F2F2'
+    borderColor: 'black'
   },
   boxContainerHeader: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 40
+    // marginBottom: 30
   },
   pictureComponent:{
     flexDirection: 'column'
@@ -290,7 +295,7 @@ const styles = StyleSheet.create({
   },
   pastReservations: {
     flex: 3,
-    backgroundColor: '#379683'
+    // backgroundColor: '#379683'
   },
   logout: {
     // backgroundColor: '#379683'

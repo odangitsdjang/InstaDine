@@ -1,0 +1,54 @@
+
+html,
+body {
+	height: 100%;
+}
+
+.img-centered {
+	margin: 0 auto;
+}
+
+.content-row {
+	margin-top: 30px;
+}
+
+section {
+    padding: 100px 0;
+}
+
+.bg-gray {
+	background-color: darken(white, 4%)
+}
+
+.bg-dark {
+	color: white;
+	background-color: @themeDark;
+}
+
+@media(max-width:767px) {
+	section {
+		padding: 75px 0;
+	}
+}
+
+.owl-theme .owl-controls .owl-page span {
+	background: fade(@themeDark, 50%);
+}
+
+input.form-control {
+	border-radius: 0 !important;
+	&:focus {
+		border-color: @themePrimary;
+		box-shadow: none;
+	}
+}
+
+.btn,
+.input-group-btn {
+	border-radius: 0 !important;
+	.transition-all;
+}
+
+.btn-primary {
+	.button-variant(white; @themePrimary; @themePrimary);
+}
