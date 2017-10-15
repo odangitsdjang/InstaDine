@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button,
          TextInput,
@@ -6,14 +5,15 @@ import { View, Text, StyleSheet, Button,
          ScrollView,
          TouchableOpacity } from 'react-native';
 
-// create a component
+const _defaultState = {
+  email: '',
+  password: ''
+};
+
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: "",
-      password: ""
-    };
+    this.state = _defaultState;
 
     this.redirectBack = this.redirectBack.bind(this);
     this.update = this.update.bind(this);
@@ -34,11 +34,17 @@ class Login extends Component {
   }
 
   onLogin() {
-    this.props.loginUser(this.state);
+    this.props.loginUser(this.state).then(response => {
+      debugger;
+      if (response === 'success') {
+        () => this.setState(_defaultState);
+      }
+    });
   }
 
   redirectBack() {
     this.props.navigation.navigate('Splash');
+    this.setState(_defaultState);
   }
 
   renderErrors(){
@@ -148,5 +154,4 @@ const styles = StyleSheet.create({
   }
 });
 
-//make this component available to the app
 export default Login;
