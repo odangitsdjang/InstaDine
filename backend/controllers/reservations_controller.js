@@ -36,6 +36,13 @@ exports.create = function(req, res, next) {
   );
 };
 
+exports.fetch = function(req, res, next){
+  const userToken = req.params.userToken;
+  const userId = jwt.decode(userToken, config.secret).sub;
+
+  
+};
+
 exports.destroy = function(req, res, next){
   const userToken = req.body.userToken;
   const userId = jwt.decode(userToken, config.secret).sub;

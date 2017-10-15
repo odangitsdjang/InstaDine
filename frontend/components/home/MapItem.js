@@ -120,7 +120,7 @@ class MapItem extends Component {
                 onPress={() => mapItem.markerClick(marker)}
                 coordinate={marker}
               >
-                <MapView.Callout onPress={() => mapItem.redirectRestaurant(markerObj)}>
+                <MapView.Callout onPress={() => mapItem.redirectRestaurant(markerObj.id)}>
                   <View style={styles.insideBubbleStyle}>
                     <Text>
                       {markerObj.name}
@@ -138,8 +138,8 @@ class MapItem extends Component {
     );
   }
 
-  redirectRestaurant(marker) {
-    this.props.displayRestaurant(marker);
+  redirectRestaurant(markerId) {
+    this.props.displayRestaurant(markerId);
   }
 
   markerClick(marker) {

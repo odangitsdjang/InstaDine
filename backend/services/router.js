@@ -37,5 +37,8 @@ router.route('/reservations')
 router.route('/reservations')
       .delete(ReservationsController.destroy);
 
+router.route('/reservations')
+      .get(ReservationsController.fetch);
+
 module.exports = router;
 

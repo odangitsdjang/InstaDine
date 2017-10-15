@@ -16,6 +16,16 @@ export const createReservation = (reservation, userToken) => {
   };
 };
 
+export const fetchReservations = userToken => {
+  return dispatch =>{
+    return axios.get(RESERVATION_URL, {params: {userToken}}).then(response => {
+      dispatch(receiveReservation(response.data));
+    }).catch(error => {
+      dispatch(addAlert("Cannot fetch reservation"));
+    });
+  };
+};
+
 export const destroyReservation = userToken => {
   return dispatch => {
     return axios.delete(RESERVATION_URL, {data: {userToken}}).then(response => {
