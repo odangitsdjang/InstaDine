@@ -4,6 +4,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 // create a component
 class History extends Component {
+  static navigationOptions = {
+    drawerLabel: 'View Queue History'
+  };
+
   constructor(props){
     super(props);
     this.redirectMap = this.redirectMap.bind(this);
