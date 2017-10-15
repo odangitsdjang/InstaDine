@@ -24,14 +24,15 @@ const Drawer = DrawerNavigator(
 );
 
 // Drawer DOES NOT work with Redux
-// const DrawerComponent = () => (
-//   <Drawer />
-// );
+const DrawerComponent = () => (
+  <Drawer />
+);
 
 const mapStateToProps = state => ({
   state: state,
 });
 
-connect(mapStateToProps)(Drawer);
+connect(mapStateToProps)(DrawerComponent);
 
-export default Drawer;
+export default DrawerComponent;
+
