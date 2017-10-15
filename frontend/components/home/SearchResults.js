@@ -24,19 +24,25 @@ class SearchResults extends Component {
   }
 
   // implement this with backend
-  goToRestaurant(restaurantName) { 
+  goToRestaurant(restaurantId) { 
     // console.log(this.props.results);
+    this.props.redirectRestaurant(restaurantId);
   }
   
   render() {
-    if (this.props.searchActive && typeof this.state.results !== "string" ) 
+    if (this.props.searchActive && typeof this.state.results !== "string" ){ 
+      // console.log(this.state.results)
+      // debugger
       return (
         <View style={styles.container}>
             <FlatList
               styles={styles.actualList}
               data={this.state.results}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={()=>this.goToRestaurant(item.name)} key={item.name} style={styles.list}>
+                <TouchableOpacity onPress={()=>{
+                  console.log(item);
+                    this.goToRestaurant(item._id);
+                  }} key={item.name} style={styles.list}>
                   <Ionicons name="ios-restaurant" style={styles.restaurantIcon} 
                     size={30}/>
                   <View style={{flex: 8, alignSelf: 'stretch', alignItems: 'stretch'}}>
@@ -49,7 +55,7 @@ class SearchResults extends Component {
         </View>
       );
       // no restaurants found
-    else if (this.props.searchActive && typeof this.state.results === "string") return (
+    }else if (this.props.searchActive && typeof this.state.results === "string") return (
       <View style={styles.container}>
       </View>
     );

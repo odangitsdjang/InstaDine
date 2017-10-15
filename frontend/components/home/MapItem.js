@@ -82,8 +82,6 @@ class MapItem extends Component {
     this.openDrawer = this.openDrawer.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
-    this.redirectRestaurant = this.redirectRestaurant.bind(this);
-    this.toggleFilter = this.toggleFilter.bind(this);
     this.closeFilter = this.closeFilter.bind(this);
   }
 
@@ -141,7 +139,7 @@ class MapItem extends Component {
   }
 
   redirectRestaurant(marker) {
-    this.props.displayRestaurant(marker.id);
+    this.props.displayRestaurant(marker);
   }
 
   markerClick(marker) {
@@ -272,7 +270,8 @@ class MapItem extends Component {
                 setSearchActive={this.setSearchActive}/>
         <SearchResults searchActive={this.state.searchActive}
           results={this.props.results}
-          searchText={this.state.searchText} />
+          searchText={this.state.searchText} 
+          redirectRestaurant={this.redirectRestaurant}/>
         <TouchableOpacity
           onPress={this.redirectLogin}
           style={styles.button}
@@ -280,15 +279,9 @@ class MapItem extends Component {
           <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
 
-<<<<<<< HEAD
-          
-          
-       
-=======
         <Button onPress={this.toggleFilter} title='Filter'/>
 
         { this.filterModal() }
->>>>>>> be5aa52132ad50557c7cbee5109a8c291e91cf25
       </View>
     );
   }
@@ -318,11 +311,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgb(240,240,240)',
     backgroundColor: 'rgba(230,230,230,0.99)'
   },
-<<<<<<< HEAD
-  filter: {
-    backgroundColor: 'transparent',
-    color: 'rgb(80,80,80)'
-=======
   menuIcon: {
     width: 50,
     height: 50
@@ -343,7 +331,6 @@ const styles = StyleSheet.create({
   seatsButton: {
     width: 50,
     borderColor: 'gray'
->>>>>>> be5aa52132ad50557c7cbee5109a8c291e91cf25
   }
 });
 
