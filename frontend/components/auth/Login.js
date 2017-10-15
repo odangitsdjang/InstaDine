@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button,
          TextInput,
          Alert,
          ScrollView,
-         TouchableOpacity } from 'react-native';
+         TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 const _defaultState = {
   email: '',
@@ -42,6 +42,7 @@ class Login extends Component {
   }
 
   redirectBack() {
+    Keyboard.dismiss();
     this.props.navigation.navigate('Splash');
     this.setState(_defaultState);
   }
@@ -59,48 +60,58 @@ class Login extends Component {
     let {email, password} = this.state;
 
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.scrollContainer}>
-          <Text style={{fontSize: 30, color: '#182628'}}>Please Log In</Text>
-          {this.renderErrors()}
-          <View style={styles.loginForm}>
-            <Text style={styles.fieldTitle}>Email:</Text>
-            <View style={styles.field}>
-              <TextInput
-                onChange={this.update('email')}
-                style={styles.textInput}
-                value={email}
-                placeholder="Email" />
+
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+            <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }} >
+              <Text style={styles.logIn}>Log In</Text>
             </View>
+            <View style={{ flex: 7, justifyContent: 'flex-start', alignItems: 'center' }}>
+              <View style={styles.loginForm}>
+                <Text style={styles.fieldTitle}>Email:</Text>
+                <View style={styles.field}>
 
-            <Text style={styles.fieldTitle}>Password:</Text>
-            <View style={styles.field}>
-              <TextInput
-                onChange={this.update('password')}
-                style={styles.textInput}
-                value={password}
-                secureTextEntry={true}
-                placeholder="Password" />
+                  <TextInput
+                    onChange={this.update('email')}
+                    style={styles.textInput}
+                    returnKeyType={"next"}
+                    autoCorrect={false}
+                    onSubmitEditing={(e) => { this.refs.pw.focus(); }}
+                    value={email}
+                    placeholder="Email" />
+                </View>
+
+                <Text style={styles.fieldTitle}>Password:</Text>
+                <View style={styles.field}>
+                  <TextInput
+                    ref='pw'
+                    onChange={this.update('password')}
+                    style={styles.textInput}
+                    onSubmitEditing={(e)=> this.onLogin() }
+                    value={password}
+                    secureTextEntry={true}
+                    placeholder="Password" />
+                </View>
+              </View>
+              <View style={styles.authButtons}>
+                <TouchableOpacity
+                  onPress={this.redirectBack}
+                  style={styles.button}
+                  raised={true}>
+                  <Text style={styles.text}>Back</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={this.onLogin}
+                  style={styles.button}
+                  raised={true}>
+                  <Text style={styles.text}>Login</Text>
+                </TouchableOpacity>
+              </View>
             </View>
+            {this.renderErrors()}
           </View>
-
-          <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity
-              onPress={this.onLogin}
-              style={styles.button}
-              raised={true}>
-              <Text style={styles.text}>Login</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={this.redirectBack}
-              style={styles.button}
-              raised={true}>
-              <Text style={styles.text}>Back</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -109,9 +120,13 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#65CCB8'
+    alignItems: 'stretch',
+    backgroundColor: '#1392B5'
+  },
+  logIn: {
+    fontSize: 40, 
+    fontFamily: 'AppleSDGothicNeo-Bold', 
+    color: 'white'
   },
   button: {
     padding: 10,
@@ -123,12 +138,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#F2F2F2'
   },
+  authButtons: {
+    justifyContent: 'space-around',
+    flexDirection: 'row'
+  },
   errorText:{
     color: 'red',
     fontSize: 30
-  },
-  scrollContainer: {
-    paddingTop: 200
   },
   field: {
     borderRadius: 5,
