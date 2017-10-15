@@ -11,21 +11,15 @@ class Splash extends Component {
     super(props);
     this.redirectLogin = this.redirectLogin.bind(this);
     this.redirectSignup = this.redirectSignup.bind(this);
-    this.redirectHome = this.redirectHome.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
   }
 
   redirectLogin() {
-    this.props.navigation.dispatch({ type: 'Login' });
+    this.props.navigation.navigate('Login');
   }
 
   redirectSignup() {
-    this.props.navigation.dispatch({ type: 'Signup' });
-    
-  }
-
-  redirectHome() { 
-    this.props.navigation.dispatch({ type: 'HomePage' });
+    this.props.navigation.navigate('Signup');    
   }
 
   handleDemo() {
@@ -33,8 +27,6 @@ class Splash extends Component {
       email: 't@t.com',
       password: 't'
     };
-
-    
   }
 
   render() {

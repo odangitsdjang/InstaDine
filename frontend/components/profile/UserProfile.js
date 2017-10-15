@@ -85,6 +85,7 @@ class UserProfile extends Component {
 
   onLogout(){
     this.props.logoutUser();
+    this.props.navigation.navigate('Map');
   }
 
   upComingReservation(){

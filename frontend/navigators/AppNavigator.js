@@ -2,23 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 
-import Splash from '../components/Splash';
-import Login from '../components/auth/LoginContainer';
-import Signup from '../components/auth/SignupContainer';
-
-// TEMPORARY REMOVE AFTER TESTING
-import HomePage from '../components/home/HomePage';
-// TEMPORARY REMOVE AFTER TESTING
+// Import screens
+import Blank from '../components/Blank';
+import AuthWithNavigationState from './AuthNavigator';
+import HomeWithNavigationState from './HomeNavigator';
 
 const routeConfig = {
-  Splash: { screen: Splash },
-  Login: { screen: Login },
-  Signup: { screen: Signup },
+  Blank: { screen: Blank },
+  AuthTab: { screen: AuthWithNavigationState },
+  HomeTab: { screen: HomeWithNavigationState }
 };
 
 const appNavigatorConfig = {
   navigationOptions: { tabBarVisible: false },
-  initialRouteName: 'Splash'
+  initialRouteName: 'Blank'
 };
 
 export const AppNavigator = TabNavigator(

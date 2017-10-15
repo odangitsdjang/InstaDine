@@ -10,12 +10,6 @@ const routes = ['Drawer', 'QueueUp', 'DrawerOpen', 'DrawerClose'];
 const navHomeReducer = (state = initialState, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case 'Navigation/BACK':
-    case 'NAVIGATION/BACK':
-      return HomeNavigator.router.getStateForAction(
-        NavigationActions.back(),
-        state
-      );
     case 'Navigation/NAVIGATE':
       if (routes.includes(action.routeName)) {
         const newState = HomeNavigator.router.getStateForAction(
@@ -24,14 +18,11 @@ const navHomeReducer = (state = initialState, action) => {
         return newState;
       }
       else { return state; }
-    // case 'QueueUp':
-    //   return HomeNavigator.router.getStateForAction(
-    //     HomeNavigator.router.getActionForPathAndParams('QueueUp')
-    //   );
-    // case 'UserProfile':
-    //   return HomeNavigator.router.getStateForAction(
-    //     HomeNavigator.router.getActionForPathAndParams('UserProfile')
-    //   );
+    case 'UNAUTH_USER':
+    case 'AUTH_USER':
+      return HomeNavigator.router.getStateForAction(
+        HomeNavigator.router.getActionForPathAndParams('Drawer')
+      );
     default:
       return state;
   }
