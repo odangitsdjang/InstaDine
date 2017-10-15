@@ -9,8 +9,9 @@ class Blank extends Component {
     if (this.props.token) {
       this.props.navigation.navigate('HomeTab');
     }
-    else { this.props.navigation.navigate('AuthTab'); }
-
+    else { 
+      this.props.navigation.navigate('AuthTab'); 
+    }
     this.props.navigation.navigate('Splash');
   }
 
