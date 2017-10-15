@@ -83,7 +83,6 @@ class MapItem extends Component {
     this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
     this.redirectRestaurant = this.redirectRestaurant.bind(this);
-    this.toggleFilter = this.toggleFilter.bind(this);
     this.closeFilter = this.closeFilter.bind(this);
   }
 
@@ -211,10 +210,6 @@ class MapItem extends Component {
     this.props.navigation.navigate('DrawerOpen');
   }
   
-  toggleFilter() {
-
-  }
-
   toggleFilter(){
     this.setState({isFilterOpen: !this.state.isFilterOpen});
   }
@@ -280,15 +275,9 @@ class MapItem extends Component {
           <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
 
-<<<<<<< HEAD
-          
-          
-       
-=======
         <Button onPress={this.toggleFilter} title='Filter'/>
 
         { this.filterModal() }
->>>>>>> be5aa52132ad50557c7cbee5109a8c291e91cf25
       </View>
     );
   }
@@ -318,11 +307,9 @@ const styles = StyleSheet.create({
     borderColor: 'rgb(240,240,240)',
     backgroundColor: 'rgba(230,230,230,0.99)'
   },
-<<<<<<< HEAD
   filter: {
     backgroundColor: 'transparent',
-    color: 'rgb(80,80,80)'
-=======
+    color: 'rgb(80,80,80)',
   menuIcon: {
     width: 50,
     height: 50
@@ -343,7 +330,6 @@ const styles = StyleSheet.create({
   seatsButton: {
     width: 50,
     borderColor: 'gray'
->>>>>>> be5aa52132ad50557c7cbee5109a8c291e91cf25
   }
 });
 
