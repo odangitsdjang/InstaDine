@@ -1,8 +1,8 @@
 import { MapView } from 'expo';
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, Dimensions, 
-  TouchableOpacity, TextInput, Alert } 
+import { View, Text, StyleSheet, Dimensions, 
+  TouchableOpacity, TextInput, Alert, Image } 
          from 'react-native';
 import { connect } from 'react-redux';
 
@@ -212,9 +212,17 @@ class MapItem extends Component {
         <SearchResults searchActive={this.state.searchActive}
           results={this.props.results}
           searchText={this.state.searchText} />
-        <Button 
+          
+          
+        <TouchableOpacity
           onPress={this.openDrawer}
-          title='Open Drawer' />
+          style={styles.drawerButton}
+          title='Open Drawer'>
+
+          <Image 
+            style={styles.menuIcon}
+            source={require('../../../assets/images/menu_icon.png')}/>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -230,8 +238,17 @@ const styles = StyleSheet.create({
   mapInitial: {
     paddingTop: 25,
     flex: 1
+  },
+  drawerButton: {
+    position: 'absolute',
+    zIndex: 1,
+    top: 45,
+    backgroundColor: 'white'
+  },
+  menuIcon: {
+    width: 50,
+    height: 50
   }
-
 });
 
 
