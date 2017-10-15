@@ -2,7 +2,7 @@ const axios = require('axios');
 
 // ==================================================
 // Function for pulling from factual.com
-//
+
 // const factualPull = () => {
 //   const groupedData = [];
 //   const names = $('.slick-cell.l1.r1');
@@ -25,124 +25,124 @@ const axios = require('axios');
 
 const seedArray = [
   [
-    "Badlands",
-    "4121 18th St",
-    "94114",
-    "(415) 626-9320"
+    "Taylor Street Coffee Shop",
+    "375 Taylor St",
+    "94102",
+    "(415) 567-4031"
   ],
   [
-    "Zeitgeist",
-    "199 Valencia St",
-    "94103",
-    "(415) 255-7505"
+    "Le P'tit Laurent",
+    "699 Chenery St",
+    "94131",
+    "(415) 334-3235"
   ],
   [
-    "Tommy's Joynt",
-    "1101 Geary Blvd",
-    "94109",
-    "(415) 775-4216"
-  ],
-  [
-    "Hollywood Cafe",
-    "530 N Point St",
-    "94133",
-    "(415) 563-3779"
-  ],
-  [
-    "Dandelion Chocolate",
-    "740 Valencia St",
+    "Farolito Taqueria",
+    "2950 24th St",
     "94110",
-    "(415) 349-0942"
+    "(415) 641-0758"
   ],
   [
-    "Toad Hall",
-    "4146 18th St",
-    "94114",
-    "(415) 621-2811"
-  ],
-  [
-    "The Starlight Room",
-    "450 Powell St",
+    "Pandora Karaoke &amp; Bar",
+    "177 Eddy St",
     "94102",
-    "(415) 395-8595"
+    "(415) 359-1888"
   ],
   [
-    "Umami Burger",
-    "2184 Union St",
+    "Han Il Kwan Korean Restaurant",
+    "1802 Balboa St",
+    "94121",
+    "(415) 752-4447"
+  ],
+  [
+    "Crepes On Cole",
+    "100 Carl St",
+    "94117",
+    "(415) 664-1800"
+  ],
+  [
+    "Barney's Gourmet Hamburgers",
+    "4138 24th St",
+    "94114",
+    "(415) 282-7770"
+  ],
+  [
+    "Truly Mediterranean",
+    "3109 16th St",
+    "94103",
+    "(415) 252-7482"
+  ],
+  [
+    "Olive Garden",
+    "3251 20th Ave",
+    "94132",
+    "(415) 661-6770"
+  ],
+  [
+    "Savoy Tivoli",
+    "1434 Grant Ave",
+    "94133",
+    "(415) 362-7023"
+  ],
+  [
+    "Rocco's Cafe",
+    "1131 Folsom St",
+    "94103",
+    "(415) 554-0522"
+  ],
+  [
+    "Za Pizza",
+    "1919 Hyde St",
+    "94109",
+    "(415) 771-3100"
+  ],
+  [
+    "Golden Star Vietnamese Restaurant",
+    "11 Walter U Lum Pl",
+    "94108",
+    "(415) 398-1215"
+  ],
+  [
+    "Cafe de Casa",
+    "2701 Leavenworth St",
+    "94133",
+    "(415) 345-1055"
+  ],
+  [
+    "54 Mint",
+    "16 Mint Plz",
+    "94103",
+    "(415) 543-5100"
+  ],
+  [
+    "Uva Enoteca",
+    "568 Haight St",
+    "94117",
+    "(415) 829-2024"
+  ],
+  [
+    "Plutos Fresh Food for A Hungry Universe",
+    "3258 Scott St",
     "94123",
-    "(415) 440-8626"
+    "(415) 775-8867"
   ],
   [
-    "Punch Line Comedy Club",
-    "444 Battery St",
-    "94111",
-    "(415) 397-7573"
+    "Schubert's Bakery",
+    "521 Clement St",
+    "94118",
+    "(415) 752-1580"
   ],
   [
-    "The Armory Club",
-    "1799 Mission St",
-    "94103",
-    "(415) 431-5300"
+    "Blue &amp; Gold Fleet",
+    "39 Pier",
+    "94133",
+    "(415) 705-8200"
   ],
   [
-    "Harris Restaurant",
-    "2100 Van Ness Ave",
-    "94109",
-    "(415) 673-1888"
-  ],
-  [
-    "Honey Honey Cafe &amp; Crepery",
-    "599 Post St",
-    "94102",
-    "(415) 351-2423"
-  ],
-  [
-    "Temple Nightclub",
-    "540 Howard St",
-    "94105",
-    "(415) 978-9942"
-  ],
-  [
-    "Double Dutch",
-    "3192 16th St",
-    "94103",
-    "(415) 503-1670"
-  ],
-  [
-    "The Cheesecake Factory",
-    "251 Geary St",
-    "94102",
-    "(415) 391-4444"
-  ],
-  [
-    "Sophie's Crepes",
-    "1581 Webster St",
-    "94115",
-    "(415) 929-7732"
-  ],
-  [
-    "83 Proof",
-    "83 1st St",
-    "94105",
-    "(415) 296-8383"
-  ],
-  [
-    "The Wreck Room",
-    "1390 California St",
-    "94109",
-    "(415) 932-6715"
-  ],
-  [
-    "Duboce Park Cafe",
-    "2 Sanchez St",
-    "94114",
-    "(415) 621-1108"
-  ],
-  [
-    "Anchor &amp; Hope",
-    "83 Minna St",
-    "94105",
-    "(415) 501-9100"
+    "Mel's Drive In",
+    "2165 Lombard St",
+    "94123",
+    "(415) 921-2867"
   ]
 ];
 
