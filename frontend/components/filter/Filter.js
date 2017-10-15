@@ -2,71 +2,103 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 
-const Filter = ({...props}) => {
-  const seatLabels = ['0-2', '3-4', '5-6', '7-8'];
-  const seatsOptions = seatLabels.map((label, i) => {
+class Filter extends Component {
+  constructor(props){
+    super(props);
+    this.setFilter = this.setFilter.bind(this);
+    this.setSeats1 = this.setSeats1.bind(this);
+  }
+
+  setFilter(filterType, filter){
+    return event => {
+      const filters = this.props.uiFilter;
+      
+      let newFilter;
+      if (filters[filterType] === filter ){
+        newFilter = null;
+      }
+      else {
+        newFilter = filter;
+      }
+
+      this.props.setFilter(filterType, newFilter);
+    };
+  }
+
+  renderSeatButtons(){
+    const seatFilter = this.props.uiFilter.seats;
+
+    const seatLabels = ['0-2', '3-4', '5-6', '7-8'];
+    return seatLabels.map((label, i) => {
+      return (
+        <TouchableOpacity
+          key={i}
+          onPress={this.setFilter('seats', i)}
+          style={seatFilter === i ? styles.selectedButton : styles.button}>
+
+          <Text
+            style={seatFilter === i ? styles.selectedText : styles.buttonText}>
+
+            {label}
+          </Text>
+        </TouchableOpacity>
+      );
+    });
+  }
+
+  renderWaitButtons(){
+    const waitFilter = this.props.uiFilter.wait;
+
+    const waitLabels = ['0', '5-15', '15-25', '25-35'];
+    return waitLabels.map((label, i) => {
+      return (
+        <TouchableOpacity
+          key={i}
+          onPress={this.setFilter('wait', i)}
+          style={waitFilter === i ? styles.selectedButton : styles.button}>
+
+          <Text style={waitFilter === i ? styles.selectedText : styles.buttonText}>
+            {label}
+          </Text>
+        </TouchableOpacity>
+      );
+    });
+  }
+
+  render(){
     return (
-      <TouchableOpacity
-        key={i}
-        style={styles.button}
-        onPress={props.setFilter('filterSeats', i)}
-        style={props.seatsFilter === i ? styles.selectedButton : styles.button}>
+      <Modal
+        isVisible={this.props.isOpen}
+        backdropColor={'black'}
+        backdropOpacity={.7}
+        animationIn={'zoomInDown'}
+        animationOut={'zoomOutUp'}
+        animationInTiming={1000}
+        animationInTiming={1000}
+        backdropTransitionInTiming={1000}
+        backdropTransitionOutTiming={1000}
+        onBackdropPress={this.props.toggleFilter('close')}
+      >
+        <View style={styles.filterContent}>
+          <View style={styles.filterGroups}>
+            <Text style={styles.label}>Number of Seats Available</Text>
+            <View style={styles.options}>
+              { this.renderSeatButtons() }
+            </View>
+          </View>
 
-        <Text style={props.seatsFilter === i ? styles.selectedText : styles.buttonText}>
-          {label}
-        </Text>
-      </TouchableOpacity>
-    );
-  });
-  
-  const waitLabels =['0', '5-15', '15-25', '25-35' ];
-  waitOptions = waitLabels.map((label, i) => {
-    return (
-      <TouchableOpacity
-        key={i}
-        style={styles.button}
-        onPress={props.setFilter('filterWait', i)}
-        style={props.waitFilter === i ? styles.selectedButton : styles.button}>
-
-        <Text style={props.waitFilter === i ? styles.selectedText : styles.buttonText}>
-          {label}
-        </Text>
-      </TouchableOpacity>
-    );
-  });
-
-  return (
-    <Modal
-      isVisible={props.isOpen} 
-      backdropColor={'black'}
-      backdropOpacity={.7}
-      animationIn={'zoomInDown'}
-      animationOut={'zoomOutUp'}
-      animationInTiming={1000}
-      animationInTiming={1000}
-      backdropTransitionInTiming={1000}
-      backdropTransitionOutTiming={1000}
-      onBackdropPress={props.toggleFilter('close')}
-    >
-      <View style={styles.filterContent}>
-        <View style={styles.filterGroups}>
-          <Text style={styles.label}>Number of Seats Available</Text>
-          <View style={styles.options}>
-            {seatsOptions}
+          <View style={styles.filterGroups}>
+            <Text style={styles.label}>Wait Times (minutes)</Text>
+            <View style={styles.options}>
+              { this.renderWaitButtons() }
+            </View>
           </View>
         </View>
 
-        <View style={styles.filterGroups}>
-          <Text style={styles.label}>Wait Times (minutes)</Text>
-          <View style={styles.options}>
-            {waitOptions}
-          </View>
-        </View>
-      </View>
-
-    </Modal>
-  );
-};
+      </Modal>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   modal: {

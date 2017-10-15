@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { search, restaurantIndex, displayRestaurant } from '../../actions/restaurant_actions';
-import FilterContainer from '../filter/Filter';
+import FilterContainer from '../filter/FilterContainer';
 
 import Search from './Search';
 import SearchResults from './SearchResults';
@@ -72,8 +72,6 @@ class MapItem extends Component {
       searchActive: false,
       searchText: "",
       isFilterOpen: false,
-      filterSeats: -1,
-      filterWait: -1
     };
     this.map = 0;
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
@@ -84,7 +82,6 @@ class MapItem extends Component {
     this.openDrawer = this.openDrawer.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
-    this.setFilter = this.setFilter.bind(this);
   }
 
   componentDidMount() {
@@ -239,10 +236,7 @@ class MapItem extends Component {
 
         <FilterContainer 
           isOpen={this.state.isFilterOpen} 
-          toggleFilter={this.toggleFilter}
-          seatsFilter={this.state.filterSeats}
-          waitFilter={this.state.filterWait}
-          setFilter={this.setFilter}/>
+          toggleFilter={this.toggleFilter}/>
       </View>
     );
   }
