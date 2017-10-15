@@ -37,8 +37,7 @@ exports.create = function(req, res, next) {
 };
 
 exports.destroy = function(req, res, next){
-  console.log(req);
-  const userToken = req.body;
+  const userToken = req.body.userToken;
   const userId = jwt.decode(userToken, config.secret).sub;
 
   // Find the reservation and update to Cancel
