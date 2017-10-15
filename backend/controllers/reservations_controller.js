@@ -9,8 +9,8 @@ const config = require('../config');
 
 exports.create = function(req, res, next) {
   const userToken = req.body.userToken;
+  console.log(req.body);
   const userId = jwt.decode(userToken, config.secret).sub;
-  // console.log(req.body);
   
   // Find if user already has a pending reservation
   Reservation.findOne({user_id: userId, status: 'Pending' }, 
@@ -52,7 +52,6 @@ exports.destroy = function(req, res, next){
       const reservationId = updatedResv._id;
       const restaurantId = updatedResv.restaurant_id;
 
-      console.log(restaurantId);
       // Find the restaurant and update
       Restaurant.findOne({ _id: restaurantId }, function(restError, restaurant) {
         if (restError) { 
