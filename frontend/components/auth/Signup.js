@@ -36,8 +36,6 @@ class Signup extends Component {
       aspect: [4, 3],
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }

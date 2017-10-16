@@ -41,9 +41,7 @@ reservationSchema.post('save', function(reservation){
     { $push: { queue: reservation } },
     { new: true },
     function (restaurantError, updatedRestaurant) {
-      console.log(updatedRestaurant);
       if (restaurantError) { 
-        console.log(restaurantError);
         return restaurantError; 
       }
 
