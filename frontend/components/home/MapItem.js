@@ -54,10 +54,6 @@ const SAMPLE_MARKERS = [
 ];
 
 class MapItem extends Component {
-  static navigationOptions = {
-    drawerLabel: 'Continue Browsing'
-  };
-
   constructor(props) {
     super(props);
     this.state = {

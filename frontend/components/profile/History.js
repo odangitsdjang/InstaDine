@@ -6,10 +6,6 @@ import { fetchReservationHistory } from '../../actions/reservation_actions';
 
 // create a component
 class History extends Component {
-  static navigationOptions = {
-    drawerLabel: 'View Queue History'
-  };
-
   constructor(props){
     super(props);
     this.state = { reservations : '' };

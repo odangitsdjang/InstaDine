@@ -138,6 +138,10 @@ class RestaurantShowMap extends Component {
         region={this.state.region}
         loadingEnabled={true}
         showsUserLocation={true}
+        pitchEnables={false}
+        /* rotateEnabled={false} */
+        /* scrollEnabled={false} */
+        /* zoomEnabled={false} */
       >
         {this.renderMarkers()}
       </MapView>

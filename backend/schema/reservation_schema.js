@@ -35,7 +35,8 @@ const reservationSchema = new Schema({
 );
 
 // After reservation saves, push res to restaurant queue & update user res
-reservationSchema.post('save', function(reservation){
+reservationSchema.post('save', function(resrvError, reservation){
+  if (resrvError) { return resrvError; }
   Restaurant.findOneAndUpdate(
     { _id: reservation.restaurant_id }, 
     { $push: { queue: reservation } },
