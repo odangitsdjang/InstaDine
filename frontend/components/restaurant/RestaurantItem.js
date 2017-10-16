@@ -22,6 +22,7 @@ class RestaurantItem extends Component {
   }
 
   componentWillReceiveProps(newProps) {
+    // debugger
     if (newProps.restaurantId && newProps.restaurantId !== this.props.restaurantId) {
       this.setState({
         restaurant: newProps.restaurants[newProps.restaurantId],
@@ -33,7 +34,7 @@ class RestaurantItem extends Component {
   componentDidMount() {
     // Get restaurant info somehow, put that into props talk to adrian 
     //assume map will feed restaurant into this component through prop
-    if (this.props.restaurants){
+    if (this.props.restaurants && this.props.restaurantId){
       this.setState({
         restaurant: this.props.restaurants[this.props.restaurantId],
         user: this.props.user
@@ -48,7 +49,6 @@ class RestaurantItem extends Component {
     let hour = date.getHours();
     const reservationTimes = Array(10).fill(undefined);
     return reservationTimes.map((x, index)=> {
-      // if (index !== 0 ) { //there might be an edge case here 
         minutes += 5; 
         minutes =  Math.ceil(minutes/5)*5;
         if (minutes >= 60) {
@@ -56,7 +56,6 @@ class RestaurantItem extends Component {
           minutes %= 60;
           if (hour === 24) hour = 0; 
         }
-      // } 
         let string = `${(hour === 0 ? 12 : ((hour > 12) ? hour % 12 : hour))}:` + ((minutes < 10) ? `0${minutes} ` : `${minutes} `)  + ((hour >= 12) ? "PM" : "AM");
       return (
           <Picker.Item key={index} label={string} value={`${hour}:${minutes}`}/>
@@ -81,9 +80,9 @@ class RestaurantItem extends Component {
   }
 
   reserveOrCancel() {
-    if (this.props.user) {
-      if (this.props.reservation && this.props.reservation.user_id === this.props.user.user_id) {
+      if (this.props.reservation) {
         let {seat_count, datetime} = this.props.reservation;
+        let restaurant = this.props.restaurants[this.props.restaurantId];
         datetime = datetime.slice(11,16);
 
         return (
@@ -95,7 +94,10 @@ class RestaurantItem extends Component {
               Hello {this.props.user.username}!
             </Text>
             <Text style={styles.restInfoText}>
-              if you wish to book this restaurant please cancel your existing reservation
+              If you wish to book this restaurant
+            </Text>
+            <Text style={styles.restInfoText}>
+              Please cancel your existing reservation
             </Text>
             <Text style={styles.restInfoText}>
               Your reservation is at {datetime}
@@ -146,13 +148,12 @@ class RestaurantItem extends Component {
                   padding: 10
                 }}
                 onPress={this.handleReservation}>
-                <Text style={styles.reserveText}>Reserve</Text>
+                <Text style={styles.reserveText}>Queue Up</Text>
               </TouchableOpacity>
             </View>
           </View>
         );
-     }
-    }
+      } 
   }
   
   redirectHome() {
