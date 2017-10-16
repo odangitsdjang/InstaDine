@@ -88,9 +88,9 @@ class UserProfile extends Component {
   }
 
   upcomingReservation(){
-    console.log(this.props.reservation);
+    // console.log(this.props.reservation);
     if(this.props.reservation){
-      console.log(this.props.reservation);
+      // console.log(this.props.reservation);
       let { restaurant_id,
         user_id,
         datetime,
