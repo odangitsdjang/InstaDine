@@ -25,6 +25,7 @@ class DrawerContent extends Component {
   }
 
   signoutUser() {
+    this.props.navigation.navigate('DrawerClose');
     this.props.signout();
   }
 

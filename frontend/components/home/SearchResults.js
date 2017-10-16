@@ -8,10 +8,7 @@ class SearchResults extends Component {
     super(props);
     this.state = { isLoaded: 0,
       results: [
-        { name: "Davids hood", full_address: '221 7th Street' },
-        { name: "Adrians hood", full_address: '12th Street' },
-        { name: "jerrys gfs hood", full_address: 'Some Other address' }
-
+      
       ]
      };
   }
@@ -38,11 +35,11 @@ class SearchResults extends Component {
             <FlatList
               styles={styles.actualList}
               data={this.state.results}
+              keyExtractor={(item, index)=> index}
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={()=>{
-                  console.log(item);
                     this.goToRestaurant(item._id);
-                  }} key={item.name} style={styles.list}>
+                  }}  style={styles.list}>
                   <Ionicons name="ios-restaurant" style={styles.restaurantIcon} 
                     size={30}/>
                   <View style={{flex: 8, alignSelf: 'stretch', alignItems: 'stretch'}}>
@@ -94,12 +91,12 @@ const styles = StyleSheet.create({
   },
   restaurantName: {
     alignSelf: 'center',
-    fontSize: 20
+    fontSize: 18
 
   }, 
   restaurantAddress: {
     alignSelf: 'center', 
-    fontSize: 13
+    fontSize: 12
   },
   goToIcon: {
     flex: 1,
