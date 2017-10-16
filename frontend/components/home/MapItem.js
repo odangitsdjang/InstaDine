@@ -118,6 +118,8 @@ class MapItem extends Component {
       || newWaitFilter !== oldWaitFilter)) {
 
         let filtered;
+        console.log(this.props.restaurants);
+        console.log(Object.values(this.props.restaurants));
         const restaurants = Object.values(this.props.restaurants);
         if (newWaitFilter === null && newSeatsFilter === null) {
           filtered = restaurants;
