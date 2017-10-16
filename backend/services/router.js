@@ -37,8 +37,13 @@ router.route('/reservations')
 router.route('/reservations')
       .delete(ReservationsController.destroy);
 
+//fetch current reservation 
 router.route('/reservations/fetch')
       .get(ReservationsController.fetch);
+
+//fetch reservation history 
+router.route('/reservations/history')
+      .get(ReservationsController.fetchHistory);
 
 module.exports = router;
 

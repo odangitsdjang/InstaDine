@@ -13,7 +13,7 @@ export const configureStore = (initialState = {}) => {
   ));
   // persistStore(store, { storage: AsyncStorage });
 
-  persistStore(store, { storage: AsyncStorage });
+  persistStore(store, { storage: AsyncStorage }).purge();
 
   return store;
 };

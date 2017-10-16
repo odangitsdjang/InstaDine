@@ -8,6 +8,8 @@ import { View,
   Keyboard,
   Image
 } from 'react-native';
+import { loginUser } from '../actions/session_actions';
+import { connect } from 'react-redux';
 
 class Splash extends Component {
   constructor(props) {
@@ -27,9 +29,10 @@ class Splash extends Component {
 
   handleDemo() {
     let user = {
-      email: 't@t.com',
-      password: 't'
+      email: 'demo@demo.com',
+      password: '123456'
     };
+    this.props.loginUser(user);
   }
 
   render() {
@@ -106,4 +109,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Splash;
+// export default Splash;
+
+const mapDispatchToProps = dispatch => ({
+  loginUser: user => dispatch(loginUser(user))
+});
+
+export default connect(null, mapDispatchToProps)(Splash);
+
+
+
