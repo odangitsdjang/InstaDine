@@ -11,7 +11,6 @@ export const createReservation = (reservation, userToken) => {
     return axios.post(RESERVATION_URL, {reservation, userToken}).then(response => {
       dispatch(receiveReservation(response.data));
     }).catch((error) => {
-      console.log(error);
       dispatch(addAlert("Cannot create Reservation"));
     });
   };
@@ -32,7 +31,6 @@ export const fetchReservationHistory = userToken => {
   return axios.get(RESERVATION_HISTORY_URL+userToken).then(response => {
     return response.data;
   }).catch(error => {
-    console.log("Can't get reservation history");
   });
 };
 
@@ -41,7 +39,6 @@ export const destroyReservation = userToken => {
     return axios.delete(RESERVATION_URL, {data: {userToken}}).then(response => {
       dispatch(removeReservation());
     }).catch((error) => {
-      console.log(error);
       dispatch(addAlert("Cannot cancel Reservation"));
     });
   };

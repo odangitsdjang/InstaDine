@@ -43,7 +43,8 @@ exports.allRestaurants = function(req,res,next) {
             latlng: restaurant.geo,
             address: restaurant.address,
             wait: restaurant.wait_time,
-            seats: restaurant.seats_available
+            seats: restaurant.seats_available,
+            image: restaurant.picture_url
           };
     });
     console.assert(filtered);
