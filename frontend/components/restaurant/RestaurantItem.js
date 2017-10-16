@@ -80,8 +80,9 @@ class RestaurantItem extends Component {
   }
 
   reserveOrCancel() {
-      if (this.props.user.reservation.length !== 0) {
-        let {seat_count, datetime} = this.props.user.reservation[0];
+      if (this.props.reservation) {
+        let {seat_count, datetime} = this.props.reservation;
+        let restaurant = this.props.restaurants[this.props.restaurantId];
         datetime = datetime.slice(11,16);
 
         return (
