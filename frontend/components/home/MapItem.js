@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { search, restaurantIndex, displayRestaurant } from '../../actions/restaurant_actions';
+import { setFilter } from '../../actions/ui_actions';
 import FilterContainer from '../filter/FilterContainer';
 
 import Search from './Search';
@@ -119,16 +120,26 @@ class MapItem extends Component {
       newSeatsFilter !== oldSeatsFilter 
       || newWaitFilter !== oldWaitFilter)) {
 
-        let filteredWait;
+        let filtered;
         const restaurants = Object.values(this.props.restaurants);
-        if (newWaitFilter >= 0) {
-          filteredWait = restaurants.filter((marker, i) => {
-            return marker.wait < wait[newWaitFilter]
+        if (newWaitFilter === null && newSeatsFilter === null) {
+          filtered = restaurants;
+        }
+        else if (newSeatsFilter){
+          filtered = restaurants.filter((marker, i) => {
+            return (
+              (marker.wait === 0) && (marker.seats >= seats[newSeatsFilter])
+            )
           })
         }
-        else { filteredWait = restaurants; }
-
-        this.setState({markers: []}, () => this.setState({markers: filteredWait}));
+        else {
+          filtered = restaurants.filter((marker, i) => {
+            return (
+              marker.wait <= wait[newWaitFilter]
+            )
+          })
+        }
+        this.setState({markers: []}, () => this.setState({markers: filtered}));
     }
   }
 
@@ -225,6 +236,12 @@ class MapItem extends Component {
   }
 
   render() {
+    let filterStyle;
+    if (this.props.filter.wait !== null || this.props.filter.seats) {
+      filterStyle = styles.selectedButton;
+    }
+    else { filterStyle = styles.button; }
+
     return (
       <View style={styles.container}>
         { this.renderMap() }
@@ -241,14 +258,16 @@ class MapItem extends Component {
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={this.toggleFilter()}
-          style={styles.button}
+          style={filterStyle}
           raised={true}>
-          <Text style={styles.filter}>Filter</Text>
+          <Text style={styles.filter}>
+            Filter
+          </Text>
         </TouchableOpacity>
 
         <FilterContainer 
           isOpen={this.state.isFilterOpen} 
-          toggleFilter={this.toggleFilter}/>
+          closeFilter={this.toggleFilter('close')}/>
       </View>
     );
   }
@@ -278,6 +297,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgb(150,150,150)',
     backgroundColor: 'rgba(40,40,40,0.99)'
+  },
+  selectedButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    borderRadius: 15,
+    margin: 5,
+    width: 85,
+    position: 'absolute',
+    bottom: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgb(166, 166, 167)',
+    backgroundColor: '#1392B5',
   },
   menuIcon: {
     width: 50,
@@ -315,7 +348,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({ 
   search: searchText => dispatch(search(searchText)),
   restaurantIndex: () => dispatch(restaurantIndex()),
-  displayRestaurant: restaurantId => dispatch(displayRestaurant(restaurantId))
+  displayRestaurant: restaurantId => dispatch(displayRestaurant(restaurantId)),
+  setFilter: (type, filter) => dispatch(setFilter(type, filter))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapItem);
