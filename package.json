@@ -25,6 +25,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/vector-icons": "^5.2.0",
     "axios": "^0.16.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
@@ -54,5 +55,12 @@
     "redux-thunk": "^2.2.0",
     "superagent": "^3.6.3",
     "uuid": "^3.1.0"
+  },
+  "expo": {
+    "packagerOpts": {
+      "assetExts": [
+        "ttf"
+      ]
+    }
   }
 }

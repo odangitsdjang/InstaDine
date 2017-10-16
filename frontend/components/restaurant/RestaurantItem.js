@@ -79,8 +79,24 @@ class RestaurantItem extends Component {
     });
   }
 
+  renderUserOptions(){
+    if (this.state.restaurant.seats > 0) {
+      return (
+        <View>
+          <Text>
+
+          </Text>
+        </View>
+      );
+    }
+    else { 
+
+    }
+  }
+
   reserveOrCancel() {
-      if (this.props.reservation) {
+    debugger
+      if (this.props.reservation && this.props.user) {
         let {seat_count, datetime} = this.props.reservation;
         console.log(this.props.restaurants);
         let restaurant = this.props.restaurants[this.props.reservation.restaurant_id].name;
@@ -92,7 +108,11 @@ class RestaurantItem extends Component {
               Reservation Reminder
             </Text>
             <Text style={styles.restInfoText}>
+<<<<<<< HEAD
+              Hello {this.props.user.username}
+=======
               You currently already have a reservation booked at:
+>>>>>>> dcd573389af4f2746cc2270a1860a0dab8f84f7b
             </Text>
             <Text style={styles.restInfoText}>
               {restaurant} at {datetime}

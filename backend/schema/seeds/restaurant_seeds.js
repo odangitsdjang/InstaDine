@@ -23,6 +23,69 @@ const axios = require('axios');
 // };
 // ==================================================
 
+const images = [
+  "https://images.pexels.com/photos/262918/pexels-photo-262918.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/92090/pexels-photo-92090.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/5317/food-salad-restaurant-person.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/370984/pexels-photo-370984.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/3498/italian-pizza-restaurant-italy.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/240223/pexels-photo-240223.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/225448/pexels-photo-225448.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/62097/pexels-photo-62097.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/239975/pexels-photo-239975.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/64208/pexels-photo-64208.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/5249/bread-food-restaurant-people.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/541216/pexels-photo-541216.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/225228/pexels-photo-225228.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/104884/pexels-photo-104884.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/407293/pexels-photo-407293.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/265903/pexels-photo-265903.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/105066/pexels-photo-105066.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/324030/pexels-photo-324030.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/348517/pexels-photo-348517.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/66640/pexels-photo-66640.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/305972/pexels-photo-305972.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/374073/pexels-photo-374073.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/305832/pexels-photo-305832.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/388240/pexels-photo-388240.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/529923/pexels-photo-529923.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/169391/pexels-photo-169391.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/296888/pexels-photo-296888.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/286283/pexels-photo-286283.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/331107/pexels-photo-331107.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/159291/beer-machine-alcohol-brewery-159291.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/34112/pexels-photo.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/51115/restaurant-wine-glasses-served-51115.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/437645/pexels-photo-437645.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/221143/pexels-photo-221143.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/9708/food-pizza-restaurant-eating.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/3540/restaurant-alcohol-bar-drinks.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/110813/pexels-photo-110813.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/78086/restaurant-building-urban-architecture-78086.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/262982/pexels-photo-262982.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/9532/food-plate-restaurant-eating.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/332090/pexels-photo-332090.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/302902/pexels-photo-302902.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/280009/pexels-photo-280009.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/299348/pexels-photo-299348.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/321598/pexels-photo-321598.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/390658/pexels-photo-390658.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/4309/city-restaurant-table-pavement.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/1475/food-vegetables-italian-restaurant.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/263041/pexels-photo-263041.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/461326/pexels-photo-461326.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/3044/restaurant-love-romantic-dinner.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/296882/pexels-photo-296882.jpeg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/8844/red-lunch-green-knolling.jpg?h=350&auto=compress&cs=tinysrgb",
+  "https://images.pexels.com/photos/460537/pexels-photo-460537.jpeg?h=350&auto=compress&cs=tinysrgb"
+];
+
 const seedArray = [
   [
     "Badlands",
@@ -397,6 +460,7 @@ for (let i = 0; i < seedArray.length; i++){
     state,
     zip: seedArray[i][2]
   };
+  const picture_url = images[i];
   const phone_number = seedArray[i][3];
   const manager_id = "59dfb6061afc2ca83a97e865";
   const tables = {
@@ -421,7 +485,8 @@ for (let i = 0; i < seedArray.length; i++){
     manager_id,
     tables,
     wait_time,
-    seats_available
+    seats_available,
+    picture_url
   };
 
   // console.log(restaurant);
