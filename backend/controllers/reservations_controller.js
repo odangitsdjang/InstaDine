@@ -40,7 +40,7 @@ exports.fetch = function(req, res, next) {
   const userToken = req.query.userToken;
   const userId = jwt.decode(userToken, config.secret).sub;
  
-  Reservation.find({user_id: userId},
+  Reservation.findOne({user_id: userId, status: 'Pending'},
   function(error, reservation){
       if(error) {return next(error);}
       if(reservation){
@@ -48,8 +48,9 @@ exports.fetch = function(req, res, next) {
       }
     }
   );
-
 };
+
+
 
 exports.destroy = function(req, res, next){
   const userToken = req.body.userToken;
