@@ -402,10 +402,10 @@ for (let i = 0; i < seedArray.length; i++){
   const tables = {
     max: getRandomInt(15, 30)
   };
-  const available = getRandomInt(0,2);
+  const available = getRandomInt(0,3);
 
   let wait_time, seats_available;
-  if (available) {
+  if (available <= 1) {
     wait_time = 0;
     seats_available = getRandomInt(1,5) * 2;
   }

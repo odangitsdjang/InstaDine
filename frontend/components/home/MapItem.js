@@ -119,15 +119,20 @@ class MapItem extends Component {
       newSeatsFilter !== oldSeatsFilter 
       || newWaitFilter !== oldWaitFilter)) {
 
-        let filteredWait;
+        let filtered;
         const restaurants = Object.values(this.props.restaurants);
-        if (newWaitFilter >= 0) {
+        if (!newWaitFilter && !newSeatsFilter) {
+          filtered = restaurants;
+        }
+        else {
           filteredWait = restaurants.filter((marker, i) => {
-            return marker.wait <= wait[newWaitFilter]
+            return (
+              (marker.wait <= wait[newWaitFilter] || !wait[newWaitFilter]) &&
+              (marker.seats >= seats[newSeatsFilter] || !seats[newSeatsFilter])
+            )
           })
         }
-        else { filteredWait = restaurants; }
-
+        
         this.setState({markers: []}, () => this.setState({markers: filteredWait}));
     }
   }
