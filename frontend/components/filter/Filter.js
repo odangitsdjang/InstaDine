@@ -6,7 +6,7 @@ class Filter extends Component {
   constructor(props){
     super(props);
     this.setFilter = this.setFilter.bind(this);
-    this.setSeats1 = this.setSeats1.bind(this);
+    this.clearFilters = this.clearFilters.bind(this);
   }
 
   setFilter(filterType, filter){
@@ -65,6 +65,11 @@ class Filter extends Component {
     });
   }
 
+  clearFilters() {
+    this.props.setFilter('seats', null);
+    this.props.setFilter('wait', null);
+  }
+
   render(){
     return (
       <Modal
@@ -93,6 +98,13 @@ class Filter extends Component {
               { this.renderWaitButtons() }
             </View>
           </View>
+
+          <TouchableOpacity 
+            onPress={this.clearFilters}
+            style={styles.clearButton}>
+
+            <Text>Clear Filters</Text>
+          </TouchableOpacity>
         </View>
 
       </Modal>
@@ -155,6 +167,17 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'black'
   },
+  clearButton: {
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderColor: 'rgb(166, 166, 167)',
+    borderWidth: 1,
+    padding: 10,
+    margin: 15,
+    width: 150
+  }
 });
 
 export default Filter;

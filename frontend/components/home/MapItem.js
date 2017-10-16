@@ -101,62 +101,66 @@ class MapItem extends Component {
       (error) => console.log(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
-    
-    const mapItem = this;
-    
-    this.props.restaurantIndex().then(
-      function(){
-        let restaurants = Object.keys(mapItem.props.restaurants).map(restaurantId => {
-          return mapItem.props.restaurants[restaurantId];
-        });
 
-        mapItem.setState({
-          markers: restaurants.map((markerObj, i) => {
-            const marker = markerObj.latlng;
-            return (
-              <MapView.Marker
-                key={i}
-                onPress={() => mapItem.markerClick(marker)}
-                coordinate={marker}
-              >
-                <MapView.Callout onPress={() => mapItem.redirectRestaurant(markerObj)}>
-                  <View style={styles.insideBubbleStyle}>
-                    <Text>
-                      {markerObj.name}
-                    </Text>
-                    <Text>
-                      {markerObj.full_address}
-                    </Text>
-                  </View>
-                </MapView.Callout>
-              </MapView.Marker>
-            );
-          }), loaded: 1
-        });
-      }
+    this.props.restaurantIndex().then(
+      () => this.setState({ markers: Object.values(this.props.restaurants), loaded: 1 })
     );
   }
 
-  redirectRestaurant(marker) {
-    this.props.displayRestaurant(marker);
+  componentWillReceiveProps(newProps) {
+    // const wait = [0, 15, 25, 35]
+    // const oldWaitFilter = this.props.filter.wait;
+    // const oldSeatsFilter = this.props.filter.seat;
+    // const newWaitFilter = newProps.filter.wait;
+    // const newSeatsFilter = newProps.filter.seats;
+
+    // if (newSeatsFilter !== oldSeatsFilter || newWaitFilter !== oldWaitFilter) {
+    //   if (waitFilter >= 0) {
+    //     // Set state and filter markers
+    //   }
+    // }
   }
 
-  markerClick(marker) {
+  redirectRestaurant(markerId) {
+    this.props.displayRestaurant(markerId);
+  }
+
+  markerClick(geo) {
     this.setState({
-      selectedMarker: marker, region: {
-        // latitude: marker.latlng.latitude, longitude: marker.latlng.longitude,
-        latitude: marker.latitude, longitude: marker.longitude,
+      selectedMarker: geo, region: {
+        latitude: geo.latitude, longitude: geo.longitude,
         latitudeDelta: this.state.region.latitudeDelta, 
         longitudeDelta: this.state.region.longitudeDelta, 
       }
     });
     // move to coordinate with duration
-    // this.map.animateToCoordinate(marker.latlng, 300);  
     this.map.animateToCoordinate(marker, 300);  
   }
   
   renderMarkers() {
-    if (this.state.loaded) return this.state.markers;
+    if (this.state.loaded) { 
+      return this.state.markers.map((markerObj, i) => {
+        const geo = markerObj.latlng;
+        return (
+          <MapView.Marker
+            key={i}
+            onPress={() => this.markerClick(geo)}
+            coordinate={geo}
+          >
+            <MapView.Callout onPress={() => this.redirectRestaurant(markerObj.id)}>
+              <View style={styles.insideBubbleStyle}>
+                <Text>
+                  {markerObj.name}
+                </Text>
+                <Text>
+                  {markerObj.full_address}
+                </Text>
+              </View>
+            </MapView.Callout>
+          </MapView.Marker>
+        );
+      })
+    }
   }
 
   onRegionChangeComplete(region) {
@@ -206,11 +210,6 @@ class MapItem extends Component {
     else {
       return () => this.setState({ isFilterOpen: !this.state.isFilterOpen });
     }
-  }
-
-  setFilter(type, value){
-    return () => this.setState({[type]: value});
-
   }
 
   render() {
@@ -275,7 +274,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   results: state.search.restaurants,
-  restaurants: state.entities.restaurants
+  restaurants: state.entities.restaurants,
+  filter: state.ui.filter
 });
 
 const mapDispatchToProps = dispatch => ({ 
