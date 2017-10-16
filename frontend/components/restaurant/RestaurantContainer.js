@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { createReservation, destroyReservation} from '../../actions/reservation_actions';
 import RestaurantItem from './RestaurantItem';
 
-const mapStateToProps = (state) => ({
-  user: state.session.currentUser,
-  userToken: state.session.token,
-  restaurants: state.entities.restaurants,
-  restaurantId: state.display,
-  reservation: state.entities.reservation
-});
+const mapStateToProps = (state) => {
+  return {
+    user: state.session.currentUser,
+    userToken: state.session.token,
+    restaurants: state.entities.restaurants,
+    restaurantId: state.display,
+    reservation: state.entities.reservation
+  };
+};
 
 
 const mapDispatchToProps = dispatch => ({

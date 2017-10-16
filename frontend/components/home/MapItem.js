@@ -187,6 +187,7 @@ class MapItem extends Component {
           ref={(map) => { this.map = map; }}
           provider="google"
           initialRegion={this.state.region}
+          
           loadingEnabled={true}
           showsUserLocation={true}
           onRegionChangeComplete={this.onRegionChangeComplete}>
@@ -238,7 +239,8 @@ class MapItem extends Component {
           searchText={this.state.searchText} 
           redirectRestaurant={this.redirectRestaurant}/>
         <TouchableOpacity
-          onPress={this.toggleFilter()}
+          activeOpacity={0.9}
+          onPress={this.toggleFilter}
           style={styles.button}
           raised={true}>
           <Text style={styles.filter}>Filter</Text>
@@ -264,7 +266,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   button: {
-    padding: 18,
+    paddingVertical: 10,
+    paddingHorizontal: 18,
     borderRadius: 15,
     margin: 5,
     width: 85,
@@ -273,12 +276,32 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgb(240,240,240)',
-    backgroundColor: 'rgba(230,230,230,0.99)'
+    borderColor: 'rgb(150,150,150)',
+    backgroundColor: 'rgba(40,40,40,0.99)'
   },
   menuIcon: {
     width: 50,
     height: 50
+  },
+  filter: {
+    color: 'white'
+  },
+  filterContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  picker: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  seatsButton: {
+    width: 50,
+    borderColor: 'gray'
   }
 });
 

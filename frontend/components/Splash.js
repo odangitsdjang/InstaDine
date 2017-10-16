@@ -4,6 +4,8 @@ import { View,
   StyleSheet, 
   Button,
   TouchableOpacity, 
+  TouchableWithoutFeedback,
+  Keyboard,
   Image
 } from 'react-native';
 
@@ -33,37 +35,35 @@ class Splash extends Component {
   render() {
     return (
       <Image source={require('../../assets/images/splash.jpg')} style={styles.container}>
-        <View style={{flex: 7, justifyContent: 'center'}} >
+          <View style={{flex: 7, justifyContent: 'center'}} >
+            <Image source={require('../../assets/images/logo.png')}
+                style={{ width: 250, height: 250, alignSelf: 'center' }}
+            />
+          </View>
+          <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'center'}}>
+            <View style={styles.authButtons}>
+              <TouchableOpacity
+                onPress={this.redirectLogin}
+                style={styles.button}
+                raised={true}>
+                <Text style={styles.text}>Login</Text>
+              </TouchableOpacity>
 
-          <Image source={require('../../assets/images/logo.png')}
-               style={{ width: 250, height: 250, alignSelf: 'center' }}
-          />
-        </View>
-        <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'center'}}>
-          <View style={styles.authButtons}>
+              <TouchableOpacity
+                onPress={this.redirectSignup}
+                style={styles.button}
+                raised={true}>
+                <Text style={styles.text}>Signup</Text>
+              </TouchableOpacity>
+            </View>
+
             <TouchableOpacity
-              onPress={this.redirectLogin}
+              onPress={this.handleDemo}
               style={styles.button}
               raised={true}>
-              <Text style={styles.text}>Login</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={this.redirectSignup}
-              style={styles.button}
-              raised={true}>
-              <Text style={styles.text}>Signup</Text>
+              <Text style={styles.text}>Demo</Text>
             </TouchableOpacity>
           </View>
-
-          <TouchableOpacity
-            onPress={this.handleDemo}
-            style={styles.button}
-            raised={true}>
-            <Text style={styles.text}>Demo</Text>
-          </TouchableOpacity>
-        </View>
-
       </Image>
     );
   }
