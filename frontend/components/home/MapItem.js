@@ -83,7 +83,6 @@ class MapItem extends Component {
     this.openDrawer = this.openDrawer.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
-    this.closeFilter = this.closeFilter.bind(this);
     this.renderFilter = this.renderFilter.bind(this);
   }
 
