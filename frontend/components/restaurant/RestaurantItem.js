@@ -98,7 +98,7 @@ class RestaurantItem extends Component {
   reserveOrCancel() {
       if (this.props.reservation && this.props.user) {
         let {seat_count, datetime} = this.props.reservation;
-        console.log(this.props.restaurants);
+        // console.log(this.props.restaurants);
         let restaurant = this.props.restaurants[this.props.reservation.restaurant_id].name;
         datetime = datetime.slice(11,16);
 
@@ -108,7 +108,7 @@ class RestaurantItem extends Component {
               Reservation Reminder
             </Text>
             <Text style={styles.restInfoText}>
-              Hello {this.props.user.username}
+              You currently already have a reservation booked at:
             </Text>
             <Text style={styles.restInfoText}>
               {restaurant} at {datetime}
