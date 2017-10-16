@@ -196,6 +196,7 @@ class RestaurantItem extends Component {
       datetime: bookTime
     };
 
+    console.log(reservation, this.props.userToken);
     this.props.createReservation(reservation, this.props.userToken);
   }
 
