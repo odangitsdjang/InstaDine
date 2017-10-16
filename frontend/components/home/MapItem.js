@@ -118,8 +118,6 @@ class MapItem extends Component {
       || newWaitFilter !== oldWaitFilter)) {
 
         let filtered;
-        console.log(this.props.restaurants);
-        console.log(Object.values(this.props.restaurants));
         const restaurants = Object.values(this.props.restaurants);
         if (newWaitFilter === null && newSeatsFilter === null) {
           filtered = restaurants;
@@ -291,7 +289,7 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 10,
     paddingHorizontal: 18,
-    borderRadius: 15,
+    borderRadius: 5,
     margin: 5,
     width: 85,
     position: 'absolute',

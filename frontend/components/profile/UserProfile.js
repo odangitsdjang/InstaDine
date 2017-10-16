@@ -152,9 +152,11 @@ class UserProfile extends Component {
       let { email, 
             phoneNumber, 
             properties, 
+            profilePicture,
             username } = this.props.user;
-  
+      
       return (
+        
         <View style={styles.container}>
           <View style={[styles.boxContainerHeader, styles.profileHeader]}>
             <Text style={styles.profileTitle}>{username}</Text>
@@ -163,7 +165,7 @@ class UserProfile extends Component {
           <View style={[styles.boxContainer, styles.userInfo]}>
             <View style={styles.pictureComponent}>
               <Image 
-                source={{ uri: 'https://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png'}}
+                source={{ uri: profilePicture}}
                 style={styles.userProfile}/>
               {/* <TouchableOpacity
                 style={{padding: 5, 
@@ -271,9 +273,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   userProfile: {
-    width: 120,
-    height: 120,
-    borderRadius: 10
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: 'rgb(225, 225, 225)'
   },
   userInfoDetails:{
     flexDirection: 'column'
@@ -281,8 +285,8 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontSize: 23,
     fontWeight: 'bold',
-    fontFamily: 'Chalkboard SE',
-    color: 'white'
+    fontFamily: 'Chalkduster',
+    color: 'white',
   },
   profileHeader: {
     paddingTop: 15,

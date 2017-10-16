@@ -37,7 +37,7 @@ class Splash extends Component {
 
   render() {
     return (
-      <Image source={require('../../assets/images/splash.jpg')} style={styles.container}>
+      <Image source={{uri: 'http://res.cloudinary.com/odangitsdjang/image/upload/v1508151530/splash_gx74sa.jpg'}} style={styles.container}>
           <View style={{flex: 7, justifyContent: 'center'}} >
             <Image source={require('../../assets/images/logo.png')}
                 style={{ width: 250, height: 250, alignSelf: 'center' }}

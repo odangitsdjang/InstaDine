@@ -129,10 +129,11 @@ class RestaurantItem extends Component {
         );
       }else{
         return (
-          <View style={styles.reserveContainer}>
+          <View style={styles.pickerContainer}>
             <View style={{ flexDirection: 'row' }}>
               <Picker selectedValue={this.state.reservationTime}
                 style={styles.picker}
+                itemStyle={{ height: 150 }}
                 onValueChange={(itemValue, itemIndex) => {
                   this.setState({
                     reservationTime: itemValue
@@ -144,6 +145,7 @@ class RestaurantItem extends Component {
               <Picker
                 selectedValue={this.state.seat_count}
                 style={styles.picker}
+                itemStyle={{height: 150}}
                 onValueChange={(itemValue, itemIndex) => this.setState({
                   seat_count: itemValue
                 })}>
@@ -267,6 +269,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     paddingBottom: 20,
+    paddingTop: 40,
+    flex: 4
+  },
+  pickerContainer: {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    paddingBottom: 20,
     flex: 4
   },
   restInfoTextContainer:{
@@ -307,9 +316,7 @@ const styles = StyleSheet.create({
     top: 35,
     left: 10,
     backgroundColor: 'white',
-    borderColor: '#676565',
-    borderWidth: 1,
-    borderRadius: 3,
+    borderRadius: 5,
     padding: 10,
     alignItems: 'center'
   },
@@ -321,7 +328,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    // borderColor: '#F2F2F2'
     borderColor: 'black'
   },
   header: {

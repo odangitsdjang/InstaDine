@@ -56,7 +56,7 @@ const navigatorConfig = {
   initialRouteName: 'Map',
   // contentOptions: { style: { borderWidth: 1, borderColor: 'black'} },
   contentComponent: DrawerContentContainer,
-  drawerWidth: Dimensions.get('window').width * 0.6
+  drawerWidth: Dimensions.get('window').width * 0.7
 };
 
 const Drawer = DrawerNavigator(

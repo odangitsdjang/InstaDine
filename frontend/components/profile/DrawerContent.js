@@ -41,7 +41,7 @@ class DrawerContent extends Component {
         <View style={styles.userProfile}>
           <Image
             source={{uri: this.state.profilePicture}}
-            style={{width:100, height: 100, alignSelf: 'center'}}/>
+            style={styles.image}/>
           
           <Text style={styles.userText}>{`Hello ${username}!`}</Text>
         </View> 
@@ -69,20 +69,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    padding: 0
+    padding: 5
+  },
+  image: {
+    width: 100, 
+    height: 100, 
+    alignSelf: 'center',
+    borderRadius: 50,
+    borderColor: 'rgb(225,225,225)',
+    borderWidth: 1 
   },
   userProfile: {
     margin: 20,
     position: 'absolute',
-    top: height * 0.005,
+    top: height * 0.02,
     alignSelf: 'center'
   },
   drawerContent: {
     marginTop: 20,
     marginBottom: 20,
-    width: width * 0.55,
+    width: width * 0.65,
     justifyContent: 'center',
-    padding: 0,
     alignSelf: 'center',
     borderTopWidth: 1,
     borderColor: 'gray'

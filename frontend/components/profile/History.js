@@ -35,8 +35,8 @@ class History extends Component {
 
       return reservations.map((reservation,idx) => {
         return(
-          <View key={idx} style={{padding: 10}}>
-            <Text style={styles.info}>{reservation.restaurant_name}</Text>
+          <View key={idx} style={{padding: 10, alignItems: 'stretch'}}>
+            <Text style={styles.title}>{reservation.restaurant_name}</Text>
             <Text style={styles.info}>{reservation.status}</Text>
             <Text style={styles.info}>Seats {reservation.seat_count}</Text>
             <Text style={styles.info}>On {reservation.datetime}</Text>
@@ -51,7 +51,9 @@ class History extends Component {
       return (
         <View style={styles.container}>
           <Text style={{fontSize: 30, padding: 20}}>This is Queue History!</Text>
-            {this.historyItems()}
+          <ScrollView>
+              {this.historyItems()}
+          </ScrollView>
           <TouchableOpacity onPress={this.redirectMap}
               style={styles.button}>
             <Text>Back</Text>
@@ -62,6 +64,10 @@ class History extends Component {
       return(
         <View style={styles.container}>
           <Text>No reservation</Text>
+          <TouchableOpacity onPress={this.redirectMap}
+            style={styles.button}>
+            <Text>Back</Text>
+          </TouchableOpacity>
         </View>
       );
     }
@@ -70,8 +76,12 @@ class History extends Component {
 
 // define your styles
 const styles = StyleSheet.create({
+  title: {
+    fontWeight: '600'
+  },
   container: {
     flex: 1,
+    padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
