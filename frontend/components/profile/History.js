@@ -14,9 +14,8 @@ class History extends Component {
     this.redirectMap = this.redirectMap.bind(this);
   }
 
-  componentDidMount(){
-    this.resevations = this.props.fetchReservations(this.props.userToken, 'History');
-    console.log(this.reservations);
+  componentWillMount(){
+    this.props.fetchReservations(this.props.userToken, 'History');
   }
   
   redirectMap() {
@@ -24,7 +23,8 @@ class History extends Component {
   }
 
   historyItems(){
-    if(this.props.reservations.length === 0){
+ 
+    if(!this.props.reservations){
       return(
         <Text>You have no past reservations</Text>
       );
@@ -49,15 +49,23 @@ class History extends Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>This is Queue History!</Text>
-          {/* {this.historyItems()} */}
-        <TouchableOpacity onPress={this.redirectMap}>
-          <Text>Back</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    if(this.props.reservations){
+      return (
+        <View style={styles.container}>
+          <Text>This is Queue History!</Text>
+            {this.historyItems()}
+          <TouchableOpacity onPress={this.redirectMap}>
+            <Text>Back</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }else{
+      return(
+        <View style={styles.container}>
+          <Text>No reservation</Text>
+        </View>
+      );
+    }
   }
 }
 

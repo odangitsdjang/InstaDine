@@ -3,7 +3,8 @@ import History from './History';
 import {fetchReservations} from '../../actions/reservation_actions';
 
 const mapStateToProps = state => ({
-  userToken: state.session.token
+  userToken: state.session.token,
+  reservations: state.entities.reservation
 });
 
 const mapDispatchToProps = dispatch => ({

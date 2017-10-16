@@ -38,29 +38,18 @@ exports.create = function(req, res, next) {
 
 exports.fetch = function(req, res, next) {
   const userToken = req.query.userToken;
-  const status = req.query.status;
   const userId = jwt.decode(userToken, config.secret).sub;
   console.log(status, "=====================");
-
-  if(status === "History"){
-    Reservation.find({user_id: userId},
-    function(error, reservation){
-        if(error) {return next(error);}
-        if(reservation){
-            res.json(reservation);
-        }
-      }
-    );
-  }else{
-    Reservation.findOne({ user_id: userId, status },
-      function (error, reservation) {
-        if (error) { return next(error); }
-        if (reservation) {
+ 
+  Reservation.find({user_id: userId},
+  function(error, reservation){
+      if(error) {return next(error);}
+      if(reservation){
           res.json(reservation);
-        }
       }
-    );
-  }
+    }
+  );
+
 };
 
 exports.destroy = function(req, res, next){

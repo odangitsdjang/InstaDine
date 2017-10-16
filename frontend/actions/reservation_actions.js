@@ -16,9 +16,9 @@ export const createReservation = (reservation, userToken) => {
   };
 };
 
-export const fetchReservations = (userToken, status) => {
+export const fetchReservations = userToken => {
   return dispatch =>{
-    return axios.get(RESERVATION_FETCH_URL+userToken+`&status=${status}`).then(response => {
+    return axios.get(RESERVATION_FETCH_URL+userToken).then(response => {
       dispatch(receiveReservation(response.data));
     }).catch(error => {
       dispatch(addAlert("Cannot fetch reservation"));
