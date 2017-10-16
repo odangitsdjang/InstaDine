@@ -8,7 +8,7 @@ exports.loginUser = user => {
     return axios.post(LOGIN_URL, user).then((response) => {
       let { token, currentUser } = response.data;
       dispatch(authUser(token, currentUser));
-      dispatch()
+      dispatch(fetchReservations(token));
     }).catch((errors) => {
       dispatch(addAlert("Incorrect login or password"));
     });
@@ -20,7 +20,6 @@ exports.signupUser = user => {
     return axios.post(SIGNUP_URL, user).then((response) => {
       let { token, currentUser } = response.data;
       dispatch(authUser(token, currentUser));
-      fetchReservations(token);
     }).catch((errors) => {
       dispatch(addAlert("Cannot Sign up with given info"));
       return 'error';
