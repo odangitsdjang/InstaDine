@@ -132,7 +132,7 @@ class MapItem extends Component {
             )
           })
         }
-        
+
         this.setState({markers: []}, () => this.setState({markers: filteredWait}));
     }
   }
