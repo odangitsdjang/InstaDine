@@ -31,7 +31,7 @@ class UserProfile extends Component {
     };
 
     this.onLogout = this.onLogout.bind(this);
-    this.upComingReservation = this.upComingReservation.bind(this);
+    this.upcomingReservation = this.upcomingReservation.bind(this);
     this._pickImage = this._pickImage.bind(this);
 
     this.pastReservation = this.pastReservation.bind(this);
@@ -87,20 +87,21 @@ class UserProfile extends Component {
     this.props.navigation.navigate('Map');
   }
 
-  upComingReservation(){
-    if(this.dummy_reservation){
+  upcomingReservation(){
+    console.log(this.props.reservation);
+    if(this.props.reservation){
+      console.log(this.props.reservation);
       let { restaurant_id,
         user_id,
-        count,
-        timestamp,
-        restaurantName,
-        status } = this.dummy_reservation;
-  
+        datetime,
+        name,
+        status } = this.props.reservation;
+      const restaurant = this.props.restaurants[restaurant_id]
       return(
         <View style={[styles.boxContainer, styles.reservation]}>
           <Text style={{ fontSize: 28 }}>Upcoming Reservations</Text>
-          <Text style={{fontSize: 20}}>{restaurantName}</Text>
-          <Text style={{ fontSize: 20 }}>{timestamp}</Text>
+          <Text style={{fontSize: 20}}>{restaurant.name} @ </Text>
+          <Text style={{ fontSize: 20 }}>{datetime.slice(11, 16)}</Text>
         </View>
       );
     }else{
@@ -156,15 +157,15 @@ class UserProfile extends Component {
       return (
         <View style={styles.container}>
           <View style={[styles.boxContainerHeader, styles.profileHeader]}>
-            <Text style={styles.profileTitle}>User Profile</Text>
+            <Text style={styles.profileTitle}>{username}</Text>
           </View>
   
           <View style={[styles.boxContainer, styles.userInfo]}>
             <View style={styles.pictureComponent}>
               <Image 
-                source={{uri: this.state.image}}
+                source={{ uri: 'https://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png'}}
                 style={styles.userProfile}/>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={{padding: 5, 
                         borderWidth: 2,
                         borderColor: 'black',
@@ -173,17 +174,17 @@ class UserProfile extends Component {
                 onPress={this._pickImage}>
                 <Text style={{color: 'black', 
                               fontSize: 15}}>Change Profile</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
             </View>
             <View style={styles.userInfoDetails}>
-              <Text style={{fontSize: 30}}>{username}</Text>
+
               <Text style={styles.regularFont}>{email}</Text>
               <Text style={styles.regularFont}>{phoneNumber}</Text>
             </View>
           </View>
   
-          {this.upComingReservation()}
+          {this.upcomingReservation()}
   
           <View style={[styles.boxContainer, styles.pastReservations]}>
             <Text style={{ fontSize: 28 }}>Past Reservations</Text>
@@ -277,12 +278,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   profileTitle: {
-    fontSize: 30,
+    fontSize: 23,
     fontWeight: 'bold',
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'Chalkboard SE',
+    color: 'white'
   },
   profileHeader: {
-    backgroundColor: '#379683'
+    paddingTop: 15,
+    backgroundColor: '#4C5B61'
   },
   userInfo: {
     flex: 2,
