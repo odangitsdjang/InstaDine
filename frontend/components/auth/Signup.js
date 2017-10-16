@@ -50,6 +50,7 @@ class Signup extends Component {
   }
 
   onSignUp() {
+    Keyboard.dismiss();
     this.props.signupUser(this.state);
   }
 

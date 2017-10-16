@@ -37,6 +37,7 @@ class Login extends Component {
   }
 
   onLogin() {
+    Keyboard.dismiss();
     this.props.loginUser(this.state).then(response => {
       if (response === 'success') {
         () => this.setState(_defaultState);

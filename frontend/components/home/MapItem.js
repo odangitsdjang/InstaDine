@@ -110,7 +110,7 @@ class MapItem extends Component {
         let restaurants = Object.keys(mapItem.props.restaurants).map(restaurantId => {
           return mapItem.props.restaurants[restaurantId];
         });
-
+        this.map.animateToCoordinate(this.state.region, 1000)
         mapItem.setState({
           markers: restaurants.map((markerObj, i) => {
             const marker = markerObj.latlng;
@@ -134,7 +134,7 @@ class MapItem extends Component {
             );
           }), loaded: 1
         });
-      }
+      }.bind(this)
     );
   }
 
@@ -182,6 +182,7 @@ class MapItem extends Component {
           ref={(map) => { this.map = map; }}
           provider="google"
           initialRegion={this.state.region}
+          
           loadingEnabled={true}
           showsUserLocation={true}
           onRegionChangeComplete={this.onRegionChangeComplete}>
@@ -269,13 +270,12 @@ class MapItem extends Component {
           searchText={this.state.searchText} 
           redirectRestaurant={this.redirectRestaurant}/>
         <TouchableOpacity
-          onPress={this.redirectLogin}
+          activeOpacity={0.9}
+          onPress={this.toggleFilter}
           style={styles.button}
           raised={true}>
           <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
-
-        <Button onPress={this.toggleFilter} title='Filter'/>
 
         { this.filterModal() }
       </View>
@@ -295,7 +295,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   button: {
-    padding: 18,
+    paddingVertical: 10,
+    paddingHorizontal: 18,
     borderRadius: 15,
     margin: 5,
     width: 85,
@@ -304,12 +305,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgb(240,240,240)',
-    backgroundColor: 'rgba(230,230,230,0.99)'
+    borderColor: 'rgb(150,150,150)',
+    backgroundColor: 'rgba(40,40,40,0.99)'
   },
   menuIcon: {
     width: 50,
     height: 50
+  },
+  filter: {
+    color: 'white'
   },
   filterContent: {
     backgroundColor: 'white',

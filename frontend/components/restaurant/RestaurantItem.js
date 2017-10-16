@@ -206,6 +206,7 @@ class RestaurantItem extends Component {
               <Text style={{color: 'black'}}>Back</Text>
             </TouchableOpacity>
             <Text style={styles.title}>{name}</Text>
+            <View></View>
           </View>
   
           <View style={styles.restInfo}>
@@ -277,7 +278,7 @@ const styles = StyleSheet.create({
     paddingTop: 28,
     paddingBottom: 8,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'stretch',
     backgroundColor: 'teal'
   },
