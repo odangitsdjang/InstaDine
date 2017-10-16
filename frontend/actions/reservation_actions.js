@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addAlert } from './alerts_actions';
-import { RESERVATION_URL } from '../util/api_util';
+import { RESERVATION_URL, RESERVATION_FETCH_URL } from '../util/api_util';
 
 export const RECEIVE_RESERVATION = 'RECEIVE_RESERVATION';
 export const REMOVE_RESERVATION = 'REMOVE_RESERVATION';
