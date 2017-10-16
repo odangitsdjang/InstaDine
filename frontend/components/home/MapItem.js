@@ -123,7 +123,7 @@ class MapItem extends Component {
         const restaurants = Object.values(this.props.restaurants);
         if (newWaitFilter >= 0) {
           filteredWait = restaurants.filter((marker, i) => {
-            return marker.wait < wait[newWaitFilter]
+            return marker.wait <= wait[newWaitFilter]
           })
         }
         else { filteredWait = restaurants; }
