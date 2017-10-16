@@ -88,15 +88,15 @@ class UserProfile extends Component {
   }
 
   upcomingReservation(){
-    console.log(this.props.reservation);
+    // console.log(this.props.reservation);
     if(this.props.reservation){
-      console.log(this.props.reservation);
+      // console.log(this.props.reservation);
       let { restaurant_id,
         user_id,
         datetime,
         name,
         status } = this.props.reservation;
-      const restaurant = this.props.restaurants[restaurant_id]
+      const restaurant = this.props.restaurants[restaurant_id];
       return(
         <View style={[styles.boxContainer, styles.reservation]}>
           <Text style={{ fontSize: 28 }}>Upcoming Reservations</Text>
@@ -184,7 +184,7 @@ class UserProfile extends Component {
             </View>
           </View>
   
-          {this.upcomingReservation()}
+          {/* {this.upcomingReservation()} */}
   
           <View style={[styles.boxContainer, styles.pastReservations]}>
             <Text style={{ fontSize: 28 }}>Past Reservations</Text>
@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: '#5CDB95',
+    paddingBottom: 30,
     backgroundColor: 'white',
   },
   button: {

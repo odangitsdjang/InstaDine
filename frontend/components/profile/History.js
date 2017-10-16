@@ -29,16 +29,17 @@ class History extends Component {
       // console.log(this.state.restaurants);
       let reservations = this.state.reservations;
 
-      // reservations.map(reservation => {
-      //   return reservation['restaurant_name'] = this.props.restaurants[reservation.restaurant_id].name;
-      // });
+      reservations.map(reservation => {
+        reservation['restaurant_name'] = this.props.restaurants[reservation.restaurant_id].name;
+      });
 
       return reservations.map((reservation,idx) => {
         return(
-          <View key={idx}>
-            {/* <Text>{reservation.restaurant_name}</Text> */}
-            <Text>Seats {reservation.seat_count}</Text>
-            <Text>When {reservation.datetime}</Text>
+          <View key={idx} style={{padding: 10}}>
+            <Text style={styles.info}>{reservation.restaurant_name}</Text>
+            <Text style={styles.info}>{reservation.status}</Text>
+            <Text style={styles.info}>Seats {reservation.seat_count}</Text>
+            <Text style={styles.info}>On {reservation.datetime}</Text>
           </View>
         );
       });
@@ -49,9 +50,10 @@ class History extends Component {
     if(this.state.reservations){
       return (
         <View style={styles.container}>
-          <Text>This is Queue History!</Text>
+          <Text style={{fontSize: 30, padding: 20}}>This is Queue History!</Text>
             {this.historyItems()}
-          <TouchableOpacity onPress={this.redirectMap}>
+          <TouchableOpacity onPress={this.redirectMap}
+              style={styles.button}>
             <Text>Back</Text>
           </TouchableOpacity>
         </View>
@@ -72,8 +74,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
-  }
+    backgroundColor: 'white',
+  },
+  info: {
+    fontSize: 15
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'black'
+  },
 });
 
 //make this component available to the app
