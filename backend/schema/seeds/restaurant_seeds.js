@@ -448,5 +448,6 @@ function getRandomInt(min, max) {
 //   "phone": "phone_number",
 //   "lat": "geo.latitude",
 //   "long": "geo.longitude",
-//   "wait": "wait_time"
+//   "wait": "wait_time",
+//   "seats": "seats_available"
 // }
