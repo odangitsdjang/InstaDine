@@ -108,11 +108,7 @@ class RestaurantItem extends Component {
               Reservation Reminder
             </Text>
             <Text style={styles.restInfoText}>
-<<<<<<< HEAD
-              Hello {this.props.user.username}
-=======
               You currently already have a reservation booked at:
->>>>>>> dcd573389af4f2746cc2270a1860a0dab8f84f7b
             </Text>
             <Text style={styles.restInfoText}>
               {restaurant} at {datetime}

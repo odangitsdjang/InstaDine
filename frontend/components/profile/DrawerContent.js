@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-<<<<<<< HEAD
     backgroundColor: 'white',
     padding: 0
   },
@@ -112,10 +111,6 @@ const styles = StyleSheet.create({
   drawerItems: {
     borderWidth: 1,
     borderColor: 'black'
-=======
-    alignItems: 'center',
-    backgroundColor: '#4C5B61',
->>>>>>> dcd573389af4f2746cc2270a1860a0dab8f84f7b
   },
 });
 
