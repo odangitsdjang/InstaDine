@@ -92,7 +92,6 @@ restaurantSchema.pre('validate', function(next) {
     const fullAddress = response.data.results[0].formatted_address;
     const lat = response.data.results[0].geometry.location.lat;
     const long = response.data.results[0].geometry.location.lng;
-    console.log(fullAddress,lat,long);
 
     restaurant.full_address = fullAddress;
     restaurant.geo.latitude = lat;
