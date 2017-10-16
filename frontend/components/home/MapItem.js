@@ -83,6 +83,8 @@ class MapItem extends Component {
     this.openDrawer = this.openDrawer.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
+    this.closeFilter = this.closeFilter.bind(this);
+    this.renderFilter = this.renderFilter.bind(this);
   }
 
   componentDidMount() {
@@ -235,6 +237,19 @@ class MapItem extends Component {
     }
   }
 
+  renderFilter() {
+    if (!this.state.searchActive) {
+      return (
+      <TouchableOpacity
+        activeOpacity={0.9}
+        onPress={this.toggleFilter}
+        style={styles.button}
+        raised={true}>
+        <Text style={styles.filter}>Filter</Text>
+      </TouchableOpacity> );
+    } else return null;
+  }
+
   render() {
     let filterStyle;
     if (this.props.filter.wait !== null || this.props.filter.seats) {
@@ -255,15 +270,8 @@ class MapItem extends Component {
           results={this.props.results}
           searchText={this.state.searchText} 
           redirectRestaurant={this.redirectRestaurant}/>
-        <TouchableOpacity
-          activeOpacity={0.9}
-          onPress={this.toggleFilter()}
-          style={filterStyle}
-          raised={true}>
-          <Text style={styles.filter}>
-            Filter
-          </Text>
-        </TouchableOpacity>
+        { this.renderFilter() }
+       
 
         <FilterContainer 
           isOpen={this.state.isFilterOpen} 
@@ -278,7 +286,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
-    backgroundColor: '#4b4b4b'
+    backgroundColor: '#4C5B61'
   }, 
   mapInitial: {
     paddingTop: 25,
