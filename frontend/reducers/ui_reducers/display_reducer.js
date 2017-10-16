@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { DISPLAY_RESTAURANT } from '../actions/restaurant_actions';
+import { DISPLAY_RESTAURANT } from '../../actions/restaurant_actions';
 
 const displayReducer = (state = null, action) => {
   Object.freeze(state);

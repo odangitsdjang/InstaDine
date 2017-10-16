@@ -25,6 +25,246 @@ const axios = require('axios');
 
 const seedArray = [
   [
+    "Badlands",
+    "4121 18th St",
+    "94114",
+    "(415) 626-9320"
+  ],
+  [
+    "Zeitgeist",
+    "199 Valencia St",
+    "94103",
+    "(415) 255-7505"
+  ],
+  [
+    "Tommy's Joynt",
+    "1101 Geary Blvd",
+    "94109",
+    "(415) 775-4216"
+  ],
+  [
+    "Hollywood Cafe",
+    "530 N Point St",
+    "94133",
+    "(415) 563-3779"
+  ],
+  [
+    "Dandelion Chocolate",
+    "740 Valencia St",
+    "94110",
+    "(415) 349-0942"
+  ],
+  [
+    "Toad Hall",
+    "4146 18th St",
+    "94114",
+    "(415) 621-2811"
+  ],
+  [
+    "The Starlight Room",
+    "450 Powell St",
+    "94102",
+    "(415) 395-8595"
+  ],
+  [
+    "Umami Burger",
+    "2184 Union St",
+    "94123",
+    "(415) 440-8626"
+  ],
+  [
+    "Punch Line Comedy Club",
+    "444 Battery St",
+    "94111",
+    "(415) 397-7573"
+  ],
+  [
+    "The Armory Club",
+    "1799 Mission St",
+    "94103",
+    "(415) 431-5300"
+  ],
+  [
+    "Harris Restaurant",
+    "2100 Van Ness Ave",
+    "94109",
+    "(415) 673-1888"
+  ],
+  [
+    "Honey Honey Cafe & Crepery",
+    "599 Post St",
+    "94102",
+    "(415) 351-2423"
+  ],
+  [
+    "Temple Nightclub",
+    "540 Howard St",
+    "94105",
+    "(415) 978-9942"
+  ],
+  [
+    "Double Dutch",
+    "3192 16th St",
+    "94103",
+    "(415) 503-1670"
+  ],
+  [
+    "The Cheesecake Factory",
+    "251 Geary St",
+    "94102",
+    "(415) 391-4444"
+  ],
+  [
+    "Sophie's Crepes",
+    "1581 Webster St",
+    "94115",
+    "(415) 929-7732"
+  ],
+  [
+    "83 Proof",
+    "83 1st St",
+    "94105",
+    "(415) 296-8383"
+  ],
+  [
+    "The Wreck Room",
+    "1390 California St",
+    "94109",
+    "(415) 932-6715"
+  ],
+  [
+    "Duboce Park Cafe",
+    "2 Sanchez St",
+    "94114",
+    "(415) 621-1108"
+  ],
+  [
+    "Anchor & Hope",
+    "83 Minna St",
+    "94105",
+    "(415) 501-9100"
+  ],
+  [
+    "Yancy's Saloon",
+    "734 Irving St",
+    "94122",
+    "(415) 665-6551"
+  ],
+  [
+    "Stacks",
+    "501 Hayes St",
+    "94102",
+    "(415) 241-9011"
+  ],
+  [
+    "The Blue Light",
+    "1979 Union St",
+    "94123",
+    "(415) 922-5510"
+  ],
+  [
+    "Elixir",
+    "3200 16th St",
+    "94103",
+    "(415) 552-1633"
+  ],
+  [
+    "Tartine Bakery",
+    "600 Guerrero St",
+    "94110",
+    "(415) 487-2600"
+  ],
+  [
+    "Hunan Home's Restaurant",
+    "622 Jackson St",
+    "94133",
+    "(415) 982-2844"
+  ],
+  [
+    "Puerto Alegre",
+    "546 Valencia St",
+    "94110",
+    "(415) 255-8201"
+  ],
+  [
+    "Local Kitchen & Wine Merchant",
+    "330 1st St",
+    "94105",
+    "(415) 777-4200"
+  ],
+  [
+    "Skylark",
+    "3089 16th St",
+    "94103",
+    "(415) 621-9294"
+  ],
+  [
+    "Anthony's Cookies",
+    "1417 Valencia St",
+    "94110",
+    "(415) 655-9834"
+  ],
+  [
+    "Kara's Cupcakes",
+    "3249 Scott St",
+    "94123",
+    "(415) 563-2253"
+  ],
+  [
+    "Squat & Gobble Cafe",
+    "2263 Chestnut St",
+    "94123",
+    "(415) 441-2200"
+  ],
+  [
+    "Mr. Smith's",
+    "34 7th St",
+    "94103",
+    "(415) 355-9991"
+  ],
+  [
+    "Asha Tea House",
+    "17 Kearny St",
+    "94108",
+    "(415) 549-3688"
+  ],
+  [
+    "Regalito Rosticeria",
+    "3481 18th St",
+    "94110",
+    "(415) 503-0650"
+  ],
+  [
+    "Pizza Orgasmica",
+    "3157 Fillmore St",
+    "94123",
+    "(415) 931-5300"
+  ],
+  [
+    "The Plant Cafe Organic",
+    "3352 Steiner St",
+    "94123",
+    "(415) 931-2777"
+  ],
+  [
+    "Hogwash",
+    "582 Sutter St",
+    "94102",
+    "(415) 361-5500"
+  ],
+  [
+    "Town's End Restaurant & Bakery",
+    "2 Townsend St",
+    "94107",
+    "(415) 512-0749"
+  ],
+  [
+    "Velvet Cantina",
+    "3349 23rd St",
+    "94110",
+    "(415) 648-4142"
+  ],
+  [
     "Taylor Street Coffee Shop",
     "375 Taylor St",
     "94102",
@@ -43,7 +283,7 @@ const seedArray = [
     "(415) 641-0758"
   ],
   [
-    "Pandora Karaoke &amp; Bar",
+    "Pandora Karaoke & Bar",
     "177 Eddy St",
     "94102",
     "(415) 359-1888"
@@ -133,7 +373,7 @@ const seedArray = [
     "(415) 752-1580"
   ],
   [
-    "Blue &amp; Gold Fleet",
+    "Blue & Gold Fleet",
     "39 Pier",
     "94133",
     "(415) 705-8200"
@@ -162,9 +402,17 @@ for (let i = 0; i < seedArray.length; i++){
   const tables = {
     max: getRandomInt(15, 30)
   };
-  const available = getRandomInt(0,2);
+  const available = getRandomInt(0,3);
 
-  const wait_time = available ? getRandomInt(15, 35) : 0;
+  let wait_time, seats_available;
+  if (available <= 1) {
+    wait_time = 0;
+    seats_available = getRandomInt(1,5) * 2;
+  }
+  else { 
+    wait_time = getRandomInt(5, 35);
+    seats_available = 0;
+  }
 
   const restaurant = {
     name,
@@ -172,7 +420,8 @@ for (let i = 0; i < seedArray.length; i++){
     phone_number,
     manager_id,
     tables,
-    wait_time
+    wait_time,
+    seats_available
   };
 
   // console.log(restaurant);
@@ -199,5 +448,6 @@ function getRandomInt(min, max) {
 //   "phone": "phone_number",
 //   "lat": "geo.latitude",
 //   "long": "geo.longitude",
-//   "wait": "wait_time"
+//   "wait": "wait_time",
+//   "seats": "seats_available"
 // }

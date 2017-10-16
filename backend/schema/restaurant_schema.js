@@ -47,6 +47,7 @@ const restaurantSchema = new Schema({
   },
   queue: [],
   wait_time: Number,
+  seats_available: Number,
   tables: {
     max: {
       type: Number,
