@@ -39,7 +39,6 @@ exports.create = function(req, res, next) {
 exports.fetch = function(req, res, next) {
   const userToken = req.query.userToken;
   const userId = jwt.decode(userToken, config.secret).sub;
-  console.log(status, "=====================");
  
   Reservation.find({user_id: userId},
   function(error, reservation){
