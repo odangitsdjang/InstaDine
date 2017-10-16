@@ -73,15 +73,16 @@ exports.destroy = function(req, res, next){
     { $set: { status: 'Canceled ' } },
     { new: true },
     function (resvError, updatedResv) {
-      if (resvError) { 
+      if (resvError || !updatedResv) { 
         return res.status(404).json('Error: Unable to update Reservation'); 
       }
+
       const reservationId = updatedResv._id;
       const restaurantId = updatedResv.restaurant_id;
 
       // Find the restaurant and update
       Restaurant.findOne({ _id: restaurantId }, function(restError, restaurant) {
-        if (restError) { 
+        if (restError || !restaurant) { 
           return res.status(404).json('Error updating restaurant'); 
         }
         if (restaurant) {
@@ -103,7 +104,7 @@ exports.destroy = function(req, res, next){
             { $set: { reservation: [] } },
             { new: true },
             function (error, updatedUser) {
-              if (error) { 
+              if (error || !updatedUser) { 
                 return res.status(404).json('Error updating user'); 
               }
               

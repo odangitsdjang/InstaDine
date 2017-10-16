@@ -42,7 +42,8 @@ exports.allRestaurants = function(req,res,next) {
             queue: restaurant.queue,
             latlng: restaurant.geo,
             address: restaurant.address,
-            wait: restaurant.wait_time
+            wait: restaurant.wait_time,
+            seats: restaurant.seats_available
           };
     });
     console.assert(filtered);
