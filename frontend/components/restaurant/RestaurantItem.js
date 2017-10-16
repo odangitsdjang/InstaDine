@@ -133,6 +133,7 @@ class RestaurantItem extends Component {
             <View style={{ flexDirection: 'row' }}>
               <Picker selectedValue={this.state.reservationTime}
                 style={styles.picker}
+                itemStyle={{height: 150}}
                 onValueChange={(itemValue, itemIndex) => {
                   this.setState({
                     reservationTime: itemValue
@@ -144,6 +145,7 @@ class RestaurantItem extends Component {
               <Picker
                 selectedValue={this.state.seat_count}
                 style={styles.picker}
+                itemStyle={{ height: 150 }}
                 onValueChange={(itemValue, itemIndex) => this.setState({
                   seat_count: itemValue
                 })}>
