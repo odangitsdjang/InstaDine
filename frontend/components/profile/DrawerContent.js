@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'white',
     padding: 0
   },
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
   drawerItems: {
     borderWidth: 1,
     borderColor: 'black'
-  },
+  }
 });
 
 export default DrawerContent;
