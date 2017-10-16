@@ -108,17 +108,28 @@ class MapItem extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // const wait = [0, 15, 25, 35]
-    // const oldWaitFilter = this.props.filter.wait;
-    // const oldSeatsFilter = this.props.filter.seat;
-    // const newWaitFilter = newProps.filter.wait;
-    // const newSeatsFilter = newProps.filter.seats;
+    const wait = [0, 15, 25, 35];
+    const seats = [2, 4, 6, 8];
+    const oldWaitFilter = this.props.filter.wait;
+    const oldSeatsFilter = this.props.filter.seat;
+    const newWaitFilter = newProps.filter.wait;
+    const newSeatsFilter = newProps.filter.seats;
 
-    // if (newSeatsFilter !== oldSeatsFilter || newWaitFilter !== oldWaitFilter) {
-    //   if (waitFilter >= 0) {
-    //     // Set state and filter markers
-    //   }
-    // }
+    if (this.props.restaurants && (
+      newSeatsFilter !== oldSeatsFilter 
+      || newWaitFilter !== oldWaitFilter)) {
+
+        let filteredWait;
+        const restaurants = Object.values(this.props.restaurants);
+        if (newWaitFilter >= 0) {
+          filteredWait = restaurants.filter((marker, i) => {
+            return marker.wait < wait[newWaitFilter]
+          })
+        }
+        else { filteredWait = restaurants; }
+
+        this.setState({markers: []}, () => this.setState({markers: filteredWait}));
+    }
   }
 
   redirectRestaurant(markerId) {
@@ -134,7 +145,7 @@ class MapItem extends Component {
       }
     });
     // move to coordinate with duration
-    this.map.animateToCoordinate(marker, 300);  
+    this.map.animateToCoordinate(geo, 300);  
   }
   
   renderMarkers() {
