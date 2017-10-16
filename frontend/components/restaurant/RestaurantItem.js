@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Picker, TouchableOpacity, Button, WebView } from 'react-native';
+import { View, Text, StyleSheet, Picker, TouchableOpacity, Button, WebView, Image } from 'react-native';
 import RestaurantShowMap from './RestaurantShowMap';
 
 class RestaurantItem extends Component {
@@ -95,7 +95,6 @@ class RestaurantItem extends Component {
   }
 
   reserveOrCancel() {
-    debugger
       if (this.props.reservation && this.props.user) {
         let {seat_count, datetime} = this.props.reservation;
         console.log(this.props.restaurants);
@@ -210,6 +209,7 @@ class RestaurantItem extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
+            <Image source={{uri: this.state.restaurant.image }}></Image>
             <Text style={styles.title}>{name}</Text>
           </View>
           <View style={{flex: 2}}>
