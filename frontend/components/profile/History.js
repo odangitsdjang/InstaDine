@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity,
          ScrollView } from 'react-native';
+import { fetchReservationHistory } from '../../actions/reservation_actions';
 
 // create a component
 class History extends Component {
@@ -11,6 +12,7 @@ class History extends Component {
 
   constructor(props){
     super(props);
+    this.state = { reservations : '' };
     this.redirectMap = this.redirectMap.bind(this);
   }
   
@@ -18,15 +20,18 @@ class History extends Component {
     this.props.navigation.navigate('Map');
   }
 
+  componentDidMount(){
+    fetchReservationHistory(this.props.userToken).then((res)=> this.setState({reservations: res}));
+  }
+
   historyItems(){
- 
-    if(!this.props.reservations){
+    if(!this.state.reservations){
       return(
         <Text>You have no past reservations</Text>
       );
     }else{
-      // console.log(this.props.restaurants);
-      let reservations = this.props.reservations;
+      // console.log(this.state.restaurants);
+      let reservations = this.state.reservations;
 
       // reservations.map(reservation => {
       //   return reservation['restaurant_name'] = this.props.restaurants[reservation.restaurant_id].name;
@@ -35,7 +40,7 @@ class History extends Component {
       return reservations.map((reservation,idx) => {
         return(
           <View key={idx}>
-            <Text>{reservation.restaurant_name}</Text>
+            {/* <Text>{reservation.restaurant_name}</Text> */}
             <Text>Seats {reservation.seat_count}</Text>
             <Text>When {reservation.datetime}</Text>
           </View>
@@ -45,8 +50,7 @@ class History extends Component {
   }
 
   render() {
-    debugger
-    if(this.props.reservations){
+    if(this.state.reservations){
       return (
         <View style={styles.container}>
           <Text>This is Queue History!</Text>
