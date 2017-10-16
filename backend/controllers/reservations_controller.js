@@ -9,7 +9,6 @@ const config = require('../config');
 
 exports.create = function(req, res, next) {
   const userToken = req.body.userToken;
-  console.log(req.body);
   const userId = jwt.decode(userToken, config.secret).sub;
   
   // Find if user already has a pending reservation
@@ -30,7 +29,7 @@ exports.create = function(req, res, next) {
       newReservation.save(function(saveError){
         if (saveError) { return next(saveError); }
 
-        res.json(newReservation);
+        return res.json(newReservation);
       });
     }
   );
@@ -44,7 +43,7 @@ exports.fetch = function(req, res, next) {
   function(error, reservation){
       if(error) {return next(error);}
       if(reservation){
-          res.json(reservation);
+          return res.json(reservation);
       }
     }
   );
@@ -58,7 +57,7 @@ exports.fetchHistory = function (req, res, next) {
     function (error, reservation) {
       if (error) { return next(error); }
       if (reservation) {
-        res.json(reservation);
+        return res.json(reservation);
       }
     }
   );

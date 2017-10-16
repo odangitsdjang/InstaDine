@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Picker, TouchableOpacity, Button, WebView, Image } from 'react-native';
+import { View, Text, StyleSheet, Picker, TouchableOpacity, Button, WebView, Image,
+  Dimensions } from 'react-native';
 import RestaurantShowMap from './RestaurantShowMap';
 
 class RestaurantItem extends Component {
@@ -195,6 +196,8 @@ class RestaurantItem extends Component {
       datetime: bookTime
     };
 
+    debugger;
+
     this.props.createReservation(reservation, this.props.userToken);
   }
 
@@ -209,24 +212,21 @@ class RestaurantItem extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
-            <Image source={{uri: this.state.restaurant.image }}></Image>
-            <Text style={styles.title}>{name}</Text>
+            <View style={styles.restInfo}>
+              <Image 
+                style={styles.restImage}
+                source={{uri: this.state.restaurant.image }}></Image>
+              <View style={styles.restInfoText}>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.label}>{full_address}</Text>
+                <Text style={styles.label}>{phone_number}</Text>
+              </View>
+            </View>
+            
           </View>
           <View style={{flex: 2}}>
             <RestaurantShowMap
                 restaurant={this.state.restaurant}/>
-          </View>
-          <View style={styles.restInfo}>
-            <View>
-              <Text style={styles.label}>Name: </Text>
-              <Text style={styles.label}>Address: </Text>
-              <Text style={styles.label}>Phone: </Text>
-            </View>
-            <View>  
-              <Text>{name}</Text>
-              <Text>{full_address}</Text>
-              <Text>{phone_number}</Text>
-            </View>
           </View>
 
           { this.reserveOrCancel() }
@@ -251,12 +251,18 @@ class RestaurantItem extends Component {
     }
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#4C5B61'
+  },
+  restImage: {
+    width: width,
+    height: 200
   },
   reserveContainer: {
     backgroundColor: 'white',
@@ -270,7 +276,17 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: 'AppleSDGothicNeo-Bold',
-    fontSize: 17
+    fontSize: 17,
+    fontWeight: '100',
+    color: 'gray',
+    backgroundColor: 'white'
+  },
+  name: {
+    fontFamily: 'AppleSDGothicNeo-Bold',
+    fontSize: 24,
+    fontWeight: '400',
+    color: 'black',
+    backgroundColor: 'white'
   },
   restInfoText: {
     fontSize: 15,
@@ -279,15 +295,15 @@ const styles = StyleSheet.create({
   },
   restInfo: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#949B96'
+    alignItems: 'stretch',
+    padding: 0,
+    backgroundColor: 'white'
   },
   backButton: {
     position: 'absolute',
     top: 35,
     left: 10,
-    backgroundColor: 'transparent'
+    backgroundColor: 'white'
   },
   button: {
     padding: 10,
@@ -301,13 +317,11 @@ const styles = StyleSheet.create({
     borderColor: 'black'
   },
   header: {
-    padding: 16,
-    paddingTop: 28,
-    paddingBottom: 8,
+    padding: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#4C5B61'
+    backgroundColor: 'white'
   },
   title: {
     color: 'white',
@@ -321,7 +335,7 @@ const styles = StyleSheet.create({
   },
   reserveText: {
     fontSize: 20,
-    fontFamily: 'Chalkboard SE'
+    fontFamily: 'AppleSDGothicNeo-Bold'
   },
   picker: {
     backgroundColor: 'white',
