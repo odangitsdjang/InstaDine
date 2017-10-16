@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { search, restaurantIndex, displayRestaurant } from '../../actions/restaurant_actions';
-import Modal from 'react-native-modal';
+import FilterContainer from '../filter/FilterContainer';
 
 import Search from './Search';
 import SearchResults from './SearchResults';
@@ -71,7 +71,7 @@ class MapItem extends Component {
       loaded: 0,
       searchActive: false,
       searchText: "",
-      isFilterOpen: false
+      isFilterOpen: false,
     };
     this.map = 0;
     this.onRegionChangeComplete = this.onRegionChangeComplete.bind(this);
@@ -82,7 +82,6 @@ class MapItem extends Component {
     this.openDrawer = this.openDrawer.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.typeText = this.typeText.bind(this);
-    this.closeFilter = this.closeFilter.bind(this);
   }
 
   componentDidMount() {
@@ -102,75 +101,81 @@ class MapItem extends Component {
       (error) => console.log(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
-    
-    const mapItem = this;
-    
+
     this.props.restaurantIndex().then(
-      function(){
-        let restaurants = Object.keys(mapItem.props.restaurants).map(restaurantId => {
-          return mapItem.props.restaurants[restaurantId];
-        });
-        this.map.animateToCoordinate(this.state.region, 1000)
-        mapItem.setState({
-          markers: restaurants.map((markerObj, i) => {
-            const marker = markerObj.latlng;
-            return (
-              <MapView.Marker
-                key={i}
-                onPress={() => mapItem.markerClick(marker)}
-                coordinate={marker}
-              >
-                <MapView.Callout onPress={() => mapItem.redirectRestaurant(markerObj.id)}>
-                  <View style={styles.insideBubbleStyle}>
-                    <Text>
-                      {markerObj.name}
-                    </Text>
-                    <Text>
-                      {markerObj.full_address}
-                    </Text>
-                  </View>
-                </MapView.Callout>
-              </MapView.Marker>
-            );
-          }), loaded: 1
-        });
-      }.bind(this)
+      () => this.setState({ markers: Object.values(this.props.restaurants), loaded: 1 })
     );
+  }
+
+  componentWillReceiveProps(newProps) {
+    const wait = [0, 15, 25, 35];
+    const seats = [2, 4, 6, 8];
+    const oldWaitFilter = this.props.filter.wait;
+    const oldSeatsFilter = this.props.filter.seat;
+    const newWaitFilter = newProps.filter.wait;
+    const newSeatsFilter = newProps.filter.seats;
+
+    if (this.props.restaurants && (
+      newSeatsFilter !== oldSeatsFilter 
+      || newWaitFilter !== oldWaitFilter)) {
+
+        let filteredWait;
+        const restaurants = Object.values(this.props.restaurants);
+        if (newWaitFilter >= 0) {
+          filteredWait = restaurants.filter((marker, i) => {
+            return marker.wait < wait[newWaitFilter]
+          })
+        }
+        else { filteredWait = restaurants; }
+
+        this.setState({markers: []}, () => this.setState({markers: filteredWait}));
+    }
   }
 
   redirectRestaurant(markerId) {
     this.props.displayRestaurant(markerId);
   }
 
-  markerClick(marker) {
+  markerClick(geo) {
     this.setState({
-      selectedMarker: marker, region: {
-        // latitude: marker.latlng.latitude, longitude: marker.latlng.longitude,
-        latitude: marker.latitude, longitude: marker.longitude,
+      selectedMarker: geo, region: {
+        latitude: geo.latitude, longitude: geo.longitude,
         latitudeDelta: this.state.region.latitudeDelta, 
         longitudeDelta: this.state.region.longitudeDelta, 
       }
     });
     // move to coordinate with duration
-    // this.map.animateToCoordinate(marker.latlng, 300);  
-    this.map.animateToCoordinate(marker, 300);  
+    this.map.animateToCoordinate(geo, 300);  
   }
   
   renderMarkers() {
-    if (this.state.loaded) return this.state.markers;
+    if (this.state.loaded) { 
+      return this.state.markers.map((markerObj, i) => {
+        const geo = markerObj.latlng;
+        return (
+          <MapView.Marker
+            key={i}
+            onPress={() => this.markerClick(geo)}
+            coordinate={geo}
+          >
+            <MapView.Callout onPress={() => this.redirectRestaurant(markerObj.id)}>
+              <View style={styles.insideBubbleStyle}>
+                <Text>
+                  {markerObj.name}
+                </Text>
+                <Text>
+                  {markerObj.full_address}
+                </Text>
+              </View>
+            </MapView.Callout>
+          </MapView.Marker>
+        );
+      })
+    }
   }
 
   onRegionChangeComplete(region) {
     this.setState({ region });
-    // this.setState({ markers: this.state.markers.map(marker => (
-    //     <MapView.Marker
-    //       coordinate={marker.latlng}
-    //       title={marker.title}
-    //       description={marker.description}
-    //     />
-    // ))});
-    // should eventually calculate area within the map area, update state, which should hopefully re render markers
-
   }
 
   renderMap() {
@@ -210,49 +215,13 @@ class MapItem extends Component {
     this.props.navigation.navigate('DrawerOpen');
   }
   
-  toggleFilter(){
-    this.setState({isFilterOpen: !this.state.isFilterOpen});
-  }
-
-  filterModal(){
-    const pickerOptions = [];
-    for (let i = 0; i < 4; i++){
-      pickerOptions.push(
-        <TouchableOpacity 
-          key={i}
-          style={styles.seatsButton}
-          >
-          <Text>{i}</Text>
-        </TouchableOpacity>
-      );
+  toggleFilter(type){
+    if (type === 'close') {
+      return () => this.setState({isFilterOpen: false});
+    } 
+    else {
+      return () => this.setState({ isFilterOpen: !this.state.isFilterOpen });
     }
-    
-    return (
-      <Modal 
-        isVisible={this.state.isFilterOpen}
-        backdropColor={'black'}
-        backdropOpacity={.7}
-        animationIn={'zoomInDown'}
-        animationOut={'zoomOutUp'}
-        animationInTiming={1000}
-        animationInTiming={1000}
-        backdropTransitionInTiming={1000}
-        backdropTransitionOutTiming={1000}
-        onBackdropPress={this.closeFilter}
-      >
-        <View style={styles.filterContent}>
-          <Text>FILTER MODAL</Text>
-          <View style={styles.picker}>
-            { pickerOptions }     
-          </View>
-        </View>
-        
-      </Modal>
-    );
-  }
-
-  closeFilter(){
-    this.setState({isFilterOpen: false});
   }
 
   render() {
@@ -271,13 +240,15 @@ class MapItem extends Component {
           redirectRestaurant={this.redirectRestaurant}/>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={this.toggleFilter}
+          onPress={this.toggleFilter()}
           style={styles.button}
           raised={true}>
           <Text style={styles.filter}>Filter</Text>
         </TouchableOpacity>
 
-        { this.filterModal() }
+        <FilterContainer 
+          isOpen={this.state.isFilterOpen} 
+          toggleFilter={this.toggleFilter}/>
       </View>
     );
   }
@@ -337,7 +308,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   results: state.search.restaurants,
-  restaurants: state.entities.restaurants
+  restaurants: state.entities.restaurants,
+  filter: state.ui.filter
 });
 
 const mapDispatchToProps = dispatch => ({ 
