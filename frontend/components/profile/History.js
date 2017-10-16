@@ -13,6 +13,11 @@ class History extends Component {
     super(props);
     this.redirectMap = this.redirectMap.bind(this);
   }
+
+  componentDidMount(){
+    this.resevations = this.props.fetchReservations(this.props.userToken, 'History');
+    console.log(this.reservations);
+  }
   
   redirectMap() {
     this.props.navigation.navigate('Map');
@@ -47,7 +52,7 @@ class History extends Component {
     return (
       <View style={styles.container}>
         <Text>This is Queue History!</Text>
-          {this.historyItems()}
+          {/* {this.historyItems()} */}
         <TouchableOpacity onPress={this.redirectMap}>
           <Text>Back</Text>
         </TouchableOpacity>

@@ -8,7 +8,7 @@ exports.loginUser = user => {
     return axios.post(LOGIN_URL, user).then((response) => {
       let { token, currentUser } = response.data;
       dispatch(authUser(token, currentUser));
-      dispatch(fetchReservations(token));
+      dispatch(fetchReservations(token, 'Pending'));
     }).catch((errors) => {
       dispatch(addAlert("Incorrect login or password"));
     });

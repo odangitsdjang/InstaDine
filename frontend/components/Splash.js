@@ -29,8 +29,8 @@ class Splash extends Component {
 
   handleDemo() {
     let user = {
-      email: 't@t.com',
-      password: 't'
+      email: 'demo@demo.com',
+      password: '123456'
     };
     this.props.loginUser(user);
   }

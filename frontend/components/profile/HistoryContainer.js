@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import History from './History';
+import {fetchReservations} from '../../actions/reservation_actions';
 
 const mapStateToProps = state => ({
-  reservations: state.session.currentUser.reservation,
-  restaurants: state.entities.restaurants
+  userToken: state.session.token
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  fetchReservations: (userToken, status) => dispatch(fetchReservations(userToken, status))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(History);
