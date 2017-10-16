@@ -4,7 +4,8 @@ import {
   Text, 
   StyleSheet, 
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 import { DrawerItems } from 'react-navigation';
 
@@ -30,33 +31,86 @@ class DrawerContent extends Component {
   }
 
   render() {
-    console.log(this.state.profilePicture);
+    let username;
+    if (this.props.session.currentUser) {
+      username = this.props.session.currentUser.username;
+    }
+
     return (
       <View style={styles.container}>
-        <View>
+        <View style={styles.userProfile}>
           <Image
             source={{uri: this.state.profilePicture}}
-            style={{width:50, height: 50}}/>
+            style={{width:100, height: 100, alignSelf: 'center'}}/>
+          
+          <Text style={styles.userText}>{`Hello ${username}!`}</Text>
         </View> 
-        <View>
-          <DrawerItems {...this.props}/>
+
+        <View style={styles.drawerContent}>
+          <DrawerItems {...this.props} />
         </View>
-        <View>
+
+        <View style={styles.signout}>
           <TouchableOpacity onPress={this.signoutUser}>
-            <Text>Sign Out</Text>
+            <Text style={styles.signoutText}>Sign Out</Text>
           </TouchableOpacity>
         </View>
+        
       </View>
     );
   }
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'white',
+    padding: 0
+  },
+  userProfile: {
+    margin: 20,
+    position: 'absolute',
+    top: height * 0.005,
+    alignSelf: 'center'
+  },
+  drawerContent: {
+    marginTop: 20,
+    marginBottom: 20,
+    width: width * 0.55,
+    justifyContent: 'center',
+    padding: 0,
+    alignSelf: 'center',
+    borderTopWidth: 1,
+    borderColor: 'gray'
+  },
+  signout: {
+    margin: 20,
+    position: 'absolute',
+    backgroundColor: 'rgba(253, 39, 39, 0.71)',
+    bottom: height * 0.002,
+    padding: 10,
+    borderRadius: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderWidth: 2,
+    borderColor: '#F2F2F2'
+  },
+  signoutText: {
+    color: 'white',
+    alignSelf: 'center'
+  },
+  userText: {
+    margin: 20,
+    fontSize: 17,
+    alignSelf: 'center'
+  },
+  drawerItems: {
+    borderWidth: 1,
+    borderColor: 'black'
   },
 });
 

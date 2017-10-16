@@ -15,10 +15,6 @@ import { View,
 
 // create a component
 class UserProfile extends Component {
-  static navigationOptions = {
-    drawerLabel: 'Edit Profile'
-  };
-
   constructor(props) {
     super(props);
     this.dummy_reservation = {
