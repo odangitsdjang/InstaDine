@@ -6,6 +6,7 @@ exports.LOGIN_URL = `${productionUrl}/login`;
 exports.USER_URL = `${productionUrl}/users`;
 exports.RESERVATION_URL = `${productionUrl}/reservations`;
 exports.RESERVATION_FETCH_URL =`${productionUrl}/reservations/fetch?userToken=`;
+exports.RESERVATION_HISTORY_URL =`${productionUrl}/reservations/history?userToken=`;
 // exports.SIGNUP_URL = `${API_URL}/signup`;
 // exports.USER_URL = `${API_URL}/users`;
 // exports.LOGIN_URL = `${API_URL}/login`;

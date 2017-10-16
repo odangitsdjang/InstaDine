@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { addAlert } from './alerts_actions';
-import { RESERVATION_URL, RESERVATION_FETCH_URL } from '../util/api_util';
+import { RESERVATION_URL, RESERVATION_FETCH_URL,
+         RESERVATION_HISTORY_URL } from '../util/api_util';
 
 export const RECEIVE_RESERVATION = 'RECEIVE_RESERVATION';
 export const REMOVE_RESERVATION = 'REMOVE_RESERVATION';
@@ -24,6 +25,15 @@ export const fetchReservations = userToken => {
       dispatch(addAlert("Cannot fetch reservation"));
     });
   };
+};
+
+//get reservation history 
+export const fetchReservationHistory = userToken => {
+  return axios.get(RESERVATION_HISTORY_URL+userToken).then(response => {
+    return response.data;
+  }).catch(error => {
+    console.log("Can't get reservation history");
+  });
 };
 
 export const destroyReservation = userToken => {

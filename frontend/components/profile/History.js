@@ -13,10 +13,6 @@ class History extends Component {
     super(props);
     this.redirectMap = this.redirectMap.bind(this);
   }
-
-  componentWillMount(){
-    this.props.fetchReservations(this.props.userToken, 'History');
-  }
   
   redirectMap() {
     this.props.navigation.navigate('Map');
