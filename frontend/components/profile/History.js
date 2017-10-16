@@ -1,6 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity,
+         ScrollView } from 'react-native';
 
 // create a component
 class History extends Component {
@@ -17,10 +18,36 @@ class History extends Component {
     this.props.navigation.navigate('Map');
   }
 
+  historyItems(){
+    if(this.props.reservations.length === 0){
+      return(
+        <Text>You have no past reservations</Text>
+      );
+    }else{
+      // console.log(this.props.restaurants);
+      let reservations = this.props.reservations;
+
+      reservations.map(reservation => {
+        return reservation['restaurant_name'] = this.props.restaurants[reservation.restaurant_id].name;
+      });
+
+      return reservations.map((reservation,idx) => {
+        return(
+          <View key={idx}>
+            <Text>{reservation.restaurant_name}</Text>
+            <Text>Seats {reservation.seat_count}</Text>
+            <Text>When {reservation.datetime}</Text>
+          </View>
+        );
+      });
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text>This is Queue History!</Text>
+          {this.historyItems()}
         <TouchableOpacity onPress={this.redirectMap}>
           <Text>Back</Text>
         </TouchableOpacity>
@@ -36,7 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#2c3e50',
-  },
+  }
 });
 
 //make this component available to the app

@@ -22,6 +22,7 @@ exports.restaurantIndex = () =>  {
     return axios.get(INDEX_URL).then((response) => {
       dispatch(receiveRestaurants(response.data.restaurants));
     }).catch((errors) => {
+      console.log(errors);
       dispatch(addAlert('Restaurant Index Error'));
     });
   };
