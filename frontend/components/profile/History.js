@@ -28,9 +28,9 @@ class History extends Component {
       // console.log(this.props.restaurants);
       let reservations = this.props.reservations;
 
-      reservations.map(reservation => {
-        return reservation['restaurant_name'] = this.props.restaurants[reservation.restaurant_id].name;
-      });
+      // reservations.map(reservation => {
+      //   return reservation['restaurant_name'] = this.props.restaurants[reservation.restaurant_id].name;
+      // });
 
       return reservations.map((reservation,idx) => {
         return(
@@ -45,6 +45,7 @@ class History extends Component {
   }
 
   render() {
+    debugger
     if(this.props.reservations){
       return (
         <View style={styles.container}>
