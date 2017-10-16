@@ -82,7 +82,8 @@ class RestaurantItem extends Component {
   reserveOrCancel() {
       if (this.props.reservation) {
         let {seat_count, datetime} = this.props.reservation;
-        let restaurant = this.props.restaurants[this.props.restaurantId];
+        console.log(this.props.restaurants);
+        let restaurant = this.props.restaurants[this.props.reservation.restaurant_id].name;
         datetime = datetime.slice(11,16);
 
         return (
@@ -91,19 +92,13 @@ class RestaurantItem extends Component {
               Reservation Reminder
             </Text>
             <Text style={styles.restInfoText}>
-              Hello {this.props.user.username}!
+              You currently already have a reservation booked at:
             </Text>
             <Text style={styles.restInfoText}>
-              If you wish to book this restaurant
+              {restaurant} at {datetime}
             </Text>
             <Text style={styles.restInfoText}>
-              Please cancel your existing reservation
-            </Text>
-            <Text style={styles.restInfoText}>
-              Your reservation is at {datetime}
-              </Text>
-            <Text style={styles.restInfoText}>
-              You have {seat_count} friends coming with you
+              with a party of {seat_count} people
             </Text>
             <TouchableOpacity
               style={{
@@ -201,28 +196,32 @@ class RestaurantItem extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
-            <TouchableOpacity
-              style={{marginTop:5}}
-              onPress={this.redirectHome}>
-              <Text style={{color: 'black'}}>Back</Text>
-            </TouchableOpacity>
             <Text style={styles.title}>{name}</Text>
-            <View></View>
           </View>
-  
+          <View style={{flex: 2}}>
+            <RestaurantShowMap
+                restaurant={this.state.restaurant}/>
+          </View>
           <View style={styles.restInfo}>
-            <View style={styles.restInfoTextContainer}>
-             <Text style={styles.restInfoText}>Address: {full_address}</Text>
-             <Text style={styles.restInfoText}>Call us at: {phone_number}</Text>
+            <View>
+              <Text style={styles.label}>Name: </Text>
+              <Text style={styles.label}>Address: </Text>
+              <Text style={styles.label}>Phone: </Text>
             </View>
-            <View style={{flex: 2}}>
-             <RestaurantShowMap
-                  restaurant={this.state.restaurant}/>
+            <View>  
+              <Text>{name}</Text>
+              <Text>{full_address}</Text>
+              <Text>{phone_number}</Text>
             </View>
           </View>
 
           { this.reserveOrCancel() }
 
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={this.redirectHome}>
+            <Text style={{color:'white'}}>Back</Text>
+          </TouchableOpacity>
         </View>
       );
 
@@ -255,13 +254,26 @@ const styles = StyleSheet.create({
     flex: 1, 
     flexDirection: 'column'
   },
+  label: {
+    fontFamily: 'AppleSDGothicNeo-Bold',
+    fontSize: 17
+  },
   restInfoText: {
-    fontSize: 20,
+    fontSize: 15,
     padding: 10,
     alignSelf: 'center'
   },
   restInfo: {
-    flex: 4,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#4285F4'
+  },
+  backButton: {
+    position: 'absolute',
+    top: 36,
+    left: 10,
+    backgroundColor: 'transparent'
   },
   button: {
     padding: 10,
@@ -279,15 +291,14 @@ const styles = StyleSheet.create({
     paddingTop: 28,
     paddingBottom: 8,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'stretch',
-    backgroundColor: 'teal'
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#002E2C'
   },
   title: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 17,
     fontFamily: 'Chalkboard SE',
-    flex: 1
   }, 
   reserve: {
     paddingTop: 30,

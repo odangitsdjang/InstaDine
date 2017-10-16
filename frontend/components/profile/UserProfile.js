@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Chalkboard SE'
   },
   profileHeader: {
-    backgroundColor: '#379683'
+    backgroundColor: '#002E2C'
   },
   userInfo: {
     flex: 2,

@@ -140,14 +140,14 @@ class Signup extends Component {
               <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                 <TouchableOpacity
                   onPress={this.redirectBack}
-                  style={styles.button}
+                  style={styles.backButton}
                   raised={true}>
                   <Text style={styles.text}>Back</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={this.onSignUp}
-                  style={styles.button}
+                  style={styles.signUpButton}
                   raised={true}>
                   <Text style={styles.text}>Sign Up</Text>
                 </TouchableOpacity>
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     fontFamily: 'AppleSDGothicNeo-Bold',
     color: 'white'
   },
-  button: {
+  backButton: {
     padding: 10,
     borderRadius: 5,
     margin: 5,
@@ -180,7 +180,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#F2F2F2'
+    borderColor: '#F2F2F2',
+  },
+  signUpButton: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#F2F2F2',
+    backgroundColor: '#1CA821'
   },
   scrollContainer:{
     paddingTop: 100
