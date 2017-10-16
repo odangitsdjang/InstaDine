@@ -100,14 +100,14 @@ class Login extends Component {
               <View style={styles.authButtons}>
                 <TouchableOpacity
                   onPress={this.redirectBack}
-                  style={styles.button}
+                  style={styles.backButton}
                   raised={true}>
                   <Text style={styles.text}>Back</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={this.onLogin}
-                  style={styles.button}
+                  style={styles.logInButton}
                   raised={true}>
                   <Text style={styles.text}>Login</Text>
                 </TouchableOpacity>
@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1392B5'
+    backgroundColor: '#4C5B61'
   },
   logIn: {
     fontSize: 40, 
     fontFamily: 'AppleSDGothicNeo-Bold', 
     color: 'white'
   },
-  button: {
+  backButton: {
     padding: 10,
     borderRadius: 5,
     margin: 5,
@@ -141,7 +141,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#F2F2F2'
+    borderColor: '#F2F2F2',
+    backgroundColor: '#677573'
+  },
+  logInButton: {
+    padding: 10,
+    borderRadius: 5,
+    margin: 5,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#F2F2F2',
+    backgroundColor: '#273B38'
   },
   authButtons: {
     justifyContent: 'space-around',

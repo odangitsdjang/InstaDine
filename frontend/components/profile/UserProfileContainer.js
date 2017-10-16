@@ -5,7 +5,9 @@ import { updateUser } from '../../actions/user_actions';
 
 const mapStateToPatch = state => ({
   user: state.session.currentUser,
-  userToken: state.session.token
+  userToken: state.session.token,
+  reservation: state.entities.reservation,
+  restaurants: state.entities.restaurants
 });
 
 const mapDispatchToProps = dispatch => ({
