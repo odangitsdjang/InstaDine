@@ -267,7 +267,7 @@ class MapItem extends Component {
 
         <FilterContainer 
           isOpen={this.state.isFilterOpen} 
-          toggleFilter={this.toggleFilter}/>
+          closeFilter={this.toggleFilter('close')}/>
       </View>
     );
   }

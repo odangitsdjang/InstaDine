@@ -68,6 +68,7 @@ class Filter extends Component {
   clearFilters() {
     this.props.setFilter('seats', null);
     this.props.setFilter('wait', null);
+    this.props.closeFilter();
   }
 
   render(){
@@ -82,7 +83,7 @@ class Filter extends Component {
         animationInTiming={1000}
         backdropTransitionInTiming={1000}
         backdropTransitionOutTiming={1000}
-        onBackdropPress={this.props.toggleFilter('close')}
+        onBackdropPress={this.props.closeFilter}
       >
         <View style={styles.filterContent}>
           <View style={styles.filterGroups}>
