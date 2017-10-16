@@ -157,18 +157,16 @@ class RestaurantItem extends Component {
 
   translateTimeUTC(time){
     let fullYear = time.getFullYear();
-    let month = time.getMonth();
-    let day = time.getDay();
+    let month = time.getMonth(); 
+    let day = time.getDate();
     let hour = time.getHours();
     let min = time.getMinutes();
-    let sec = time.getMinutes();
-
+    let sec = time.getSeconds();
     return Date.UTC(fullYear, month, day, hour, min, sec);
   }
 
   handleReservation(){
     let resTime = new Date();
-
     //set time to the user's time choice 
     resTime.setHours(this.state.reservationTime.split(":")[0]);
     resTime.setMinutes(this.state.reservationTime.split(":")[1]);
@@ -242,7 +240,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
-    backgroundColor: '#65CCB8'
+    backgroundColor: '#4C5B61'
   },
   reserveContainer: {
     backgroundColor: 'white',
@@ -267,11 +265,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#4285F4'
+    backgroundColor: '#949B96'
   },
   backButton: {
     position: 'absolute',
-    top: 36,
+    top: 35,
     left: 10,
     backgroundColor: 'transparent'
   },
@@ -293,11 +291,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#002E2C'
+    backgroundColor: '#4C5B61'
   },
   title: {
     color: 'white',
-    fontSize: 17,
+    fontSize: 18,
     fontFamily: 'Chalkboard SE',
   }, 
   reserve: {

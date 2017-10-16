@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1392B5'
+    backgroundColor: '#4C5B61'
   },
   signUp: {
     fontSize: 40,
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#F2F2F2',
+    backgroundColor: '#677573'
   },
   signUpButton: {
     padding: 10,
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#F2F2F2',
-    backgroundColor: '#1CA821'
+    backgroundColor: '#273B38'
   },
   scrollContainer:{
     paddingTop: 100
