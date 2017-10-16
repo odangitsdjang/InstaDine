@@ -240,7 +240,7 @@ class MapItem extends Component {
           redirectRestaurant={this.redirectRestaurant}/>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={this.toggleFilter}
+          onPress={this.toggleFilter()}
           style={styles.button}
           raised={true}>
           <Text style={styles.filter}>Filter</Text>
