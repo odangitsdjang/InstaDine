@@ -16,6 +16,8 @@ exports.create = function(req, res, next) {
     function(error, existingReservation){
       if (error) { return next(error); }
       if (existingReservation) {
+
+        console.log(existingReservation);
         return res.status(422).json({error: 'You already have a reservation'});
       }
 
