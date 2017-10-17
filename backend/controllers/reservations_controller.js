@@ -56,20 +56,6 @@ exports.create = function(req, res, next) {
   );
 };
 
-// exports.fetch = function(req, res, next) {
-//   const userToken = req.query.userToken;
-//   const userId = jwt.decode(userToken, config.secret).sub;
- 
-//   Reservation.findOne({user_id: userId, status: 'Pending'},
-//   function(error, reservation){
-//       if(error) {return next(error);}
-//       if(reservation){
-//           return res.json(reservation);
-//       }
-//     }
-//   );
-// };
-
 exports.fetchHistory = function (req, res, next) {
   const userToken = req.params.token;
   const userId = jwt.decode(userToken, config.secret).sub;
@@ -141,7 +127,7 @@ exports.destroy = function(req, res, next){
                 reservation: updatedUser.reservation
               };
 
-              res.send({ currentUser, token: newToken(updatedUser) });
+              res.json({ currentUser, token: newToken(updatedUser) });
             }
           );
         }

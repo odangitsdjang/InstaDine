@@ -43,10 +43,5 @@ router.route('/reservations/:token')
 router.route('/reservations/history/:token')
       .get(ReservationsController.fetchHistory);
 
-      //fetch current reservation 
-// router.route('/reservations/fetch')
-//       .get(ReservationsController.fetch);
-
-
 module.exports = router;
 

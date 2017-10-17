@@ -40,7 +40,7 @@ exports.getUser = function(req, res, next) {
 
   User.findById(userId, function(error, user){
     if (error) { return(next(error)); }
-    
+
     let currentUser = {
       email: user.email,
       username: user.username,
@@ -51,6 +51,6 @@ exports.getUser = function(req, res, next) {
       reservation: user.reservation
     };
 
-    res.send({ currentUser, token: newToken(user) });
+    res.json({ currentUser, token: newToken(user) });
   });
 };

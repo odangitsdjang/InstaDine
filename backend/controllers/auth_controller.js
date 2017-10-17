@@ -30,7 +30,7 @@ exports.login = function (req, res, next) {
       };
 
       //send currentUser info back to frontend 
-      return res.send({
+      return res.json({
         currentUser: currentUser,
         token: userToken(user)
       });
