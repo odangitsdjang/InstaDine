@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     userToken: state.session.token,
     restaurants: state.entities.restaurants,
     restaurantId: state.ui.display,
-    reservation: state.entities.reservation
+    reservation: state.session.currentUser.reservation
   };
 };
 
