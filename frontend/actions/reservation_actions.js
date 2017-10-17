@@ -5,8 +5,6 @@ import { RESERVATION_URL,
 
 import { authUser } from '../actions/user_actions';
 
-export const RECEIVE_RESERVATION = 'RECEIVE_RESERVATION';
-export const REMOVE_RESERVATION = 'REMOVE_RESERVATION';
 
 export const createReservation = (reservation, userToken) => {
   return dispatch => {
@@ -35,7 +33,3 @@ export const destroyReservation = userToken => {
     });
   };
 };
-
-const removeReservation = () => ({
-  type: REMOVE_RESERVATION
-});
