@@ -3,7 +3,7 @@ import { addAlert } from './alerts_actions';
 import { RESERVATION_URL,
          RESERVATION_HISTORY_URL } from '../util/api_util';
 
-import { authUser } from '../actions/user_actions';
+import { authUser } from '../actions/session_actions';
 
 
 export const createReservation = (reservation, userToken) => {
