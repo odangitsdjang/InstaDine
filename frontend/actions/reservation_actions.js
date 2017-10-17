@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addAlert } from './alerts_actions';
-import { RESERVATION_URL, RESERVATION_FETCH_URL,
+import { RESERVATION_URL,
          RESERVATION_HISTORY_URL } from '../util/api_util';
 
 import { authUser } from '../actions/user_actions';
@@ -39,9 +39,4 @@ export const destroyReservation = userToken => {
 
 const removeReservation = () => ({
   type: REMOVE_RESERVATION
-});
-
-const receiveReservation = reservation => ({
-  type: RECEIVE_RESERVATION,
-  reservation
 });
