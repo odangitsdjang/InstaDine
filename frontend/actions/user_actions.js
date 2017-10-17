@@ -7,8 +7,7 @@ export const updateUser = (user, userToken) => {
   return dispatch => {
     return axios.patch(USER_URL, {user, userToken}).then(
       response => {
-        let { currentUser } = response.data;
-        dispatch(authUser(userToken, currentUser));
+        dispatch(authUser(response.data));
     }).catch(error => dispatch(addAlert("Can't update user")));
   };
 };
@@ -16,8 +15,7 @@ export const updateUser = (user, userToken) => {
 export const getUser = userToken => dispatch => {
   return axios.get(`${USER_URL}/${userToken}`).then(
     response => {
-      const { token, currentUser } = response.data;
-      dispatch(authUser(token, currentUser));
+      dispatch(authUser(response.data));
     }
   ).catch(errors => dispatch(addAlert('No user found')));
 };

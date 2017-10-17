@@ -11,8 +11,7 @@ export const REMOVE_RESERVATION = 'REMOVE_RESERVATION';
 export const createReservation = (reservation, userToken) => {
   return dispatch => {
     return axios.post(RESERVATION_URL, {reservation, userToken}).then(response => {
-      const { token, currentUser } = response.data;
-      dispatch(authUser(token, currentUser));
+      dispatch(authUser(response.data));
     }).catch((error) => {
       dispatch(addAlert("Cannot create Reservation"));
     });
@@ -30,7 +29,7 @@ export const fetchReservationHistory = userToken => {
 export const destroyReservation = userToken => {
   return dispatch => {
     return axios.delete(`${RESERVATION_URL}/${userToken}`).then(response => {
-      dispatch(authUser());
+      dispatch(authUser(response.data));
     }).catch((error) => {
       dispatch(addAlert("Cannot cancel Reservation"));
     });
