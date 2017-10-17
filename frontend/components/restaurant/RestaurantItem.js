@@ -23,10 +23,11 @@ class RestaurantItem extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // debugger
-    if (newProps.restaurantDisplay && newProps.restaurantDisplay !== this.props.restaurantDisplay) {
+    debugger
+    if (newProps.restaurantDisplayId && (newProps.restaurantDisplayId !== this.props.restaurantDisplayId)) {
+      const restaurant = newProps.restaurants[newProps.restaurantDisplayId];
       this.setState({
-        restaurant: newProps.restaurants[newProps.restaurantDisplay],
+        restaurant,
         user: newProps.user
       });
     }
@@ -69,26 +70,11 @@ class RestaurantItem extends Component {
     });
   }
 
-  renderUserOptions(){
-    if (this.state.restaurant.seats > 0) {
-      return (
-        <View>
-          <Text>
-
-          </Text>
-        </View>
-      );
-    }
-    else { 
-
-    }
-  }
-
   reserveOrCancel() {
-      if (this.props.reservation && this.props.user) {
-        let {seat_count, datetime} = this.props.reservation;
+      if (this.props.reservation && this.props.reservation[0] && this.props.user) {
+        let {seat_count, datetime} = this.props.reservation[0];
         // console.log(this.props.restaurants);
-        let restaurant = this.props.restaurants[this.props.reservation.restaurant_id].name;
+        let restaurant = this.props.restaurants[this.props.restaurantDisplayId].name;
         datetime = datetime.slice(11,16);
 
         return (
