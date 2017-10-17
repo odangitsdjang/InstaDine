@@ -71,7 +71,7 @@ exports.create = function(req, res, next) {
 // };
 
 exports.fetchHistory = function (req, res, next) {
-  const userToken = req.params.userToken;
+  const userToken = req.params.token;
   const userId = jwt.decode(userToken, config.secret).sub;
 
   Reservation.find({ user_id: userId},
