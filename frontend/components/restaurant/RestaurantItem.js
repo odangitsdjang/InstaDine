@@ -24,21 +24,10 @@ class RestaurantItem extends Component {
 
   componentWillReceiveProps(newProps) {
     // debugger
-    if (newProps.restaurantId && newProps.restaurantId !== this.props.restaurantId) {
+    if (newProps.restaurantDisplay && newProps.restaurantDisplay !== this.props.restaurantDisplay) {
       this.setState({
-        restaurant: newProps.restaurants[newProps.restaurantId],
+        restaurant: newProps.restaurants[newProps.restaurantDisplay],
         user: newProps.user
-      });
-    }
-  }
-
-  componentDidMount() {
-    // Get restaurant info somehow, put that into props talk to adrian 
-    //assume map will feed restaurant into this component through prop
-    if (this.props.restaurants && this.props.restaurantId){
-      this.setState({
-        restaurant: this.props.restaurants[this.props.restaurantId],
-        user: this.props.user
       });
     }
   }

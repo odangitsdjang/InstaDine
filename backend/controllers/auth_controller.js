@@ -14,6 +14,7 @@ exports.login = function (req, res, next) {
   let user = req.user;
   //find the user, if found, log that person in 
   User.findOne({email: user.email}, function(err, Founduser){
+    console.log(err);
     if (err) { 
       return next(err); 
     }
@@ -30,6 +31,7 @@ exports.login = function (req, res, next) {
       };
 
       //send currentUser info back to frontend 
+      console.log(currentUser);
       return res.json({
         currentUser: currentUser,
         token: userToken(user)

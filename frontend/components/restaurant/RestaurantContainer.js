@@ -8,11 +8,10 @@ const mapStateToProps = (state) => {
     user: state.session.currentUser,
     userToken: state.session.token,
     restaurants: state.entities.restaurants,
-    restaurantId: state.ui.display,
+    restaurantDisplay: state.entities.restaurants[state.ui.display],
     reservation: state.session.currentUser.reservation
   };
 };
-
 
 const mapDispatchToProps = dispatch => ({
   createReservation: (reservation, userToken) => dispatch(createReservation(reservation, userToken)),
