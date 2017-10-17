@@ -13,4 +13,11 @@ export const updateUser = (user, userToken) => {
   };
 };
 
-
+export const getUser = userToken => dispatch => {
+  return axios.get(`${USER_URL}/${userToken}`).then(
+    response => {
+      const { token, currentUser } = response.data;
+      dispatch(authUser(token, currentUser));
+    }
+  ).catch(errors => dispatch(addAlert('No user found')));
+};

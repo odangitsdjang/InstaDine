@@ -20,6 +20,9 @@ router.route('/login')
 router.route('/users')
       .patch(UserController.updateUser);
 
+router.route('/users/:token')
+      .get(UserController.getUser);
+
 // Restaurant Routes
 router.route('/restaurants')
       .post(RestaurantsController.create);
@@ -38,8 +41,8 @@ router.route('/reservations')
       .delete(ReservationsController.destroy);
 
 //fetch current reservation 
-router.route('/reservations/fetch')
-      .get(ReservationsController.fetch);
+// router.route('/reservations/fetch')
+//       .get(ReservationsController.fetch);
 
 //fetch reservation history 
 router.route('/reservations/history')
