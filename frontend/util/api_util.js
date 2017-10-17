@@ -3,10 +3,10 @@ let API_URL = 'http://localhost:3000/v1';
 
 exports.SIGNUP_URL = `${productionUrl}/signup`;
 exports.LOGIN_URL = `${productionUrl}/login`;
-exports.USER_URL = `${productionUrl}/users`;
-exports.RESERVATION_URL = `${productionUrl}/reservations`;
-exports.RESERVATION_FETCH_URL =`${productionUrl}/reservations/fetch?userToken=`;
-exports.RESERVATION_HISTORY_URL =`${productionUrl}/reservations/history?userToken=`;
+exports.USER_URL = `${API_URL}/users`;
+exports.RESERVATION_URL = `${API_URL}/reservations`;
+exports.RESERVATION_FETCH_URL =`${API_URL}/reservations/fetch?userToken=`;
+exports.RESERVATION_HISTORY_URL =`${API_URL}/reservations/history?userToken=`;
 // exports.RESERVATION_URL = `${API_URL}/reservations`;
 // exports.SIGNUP_URL = `${API_URL}/signup`;
 // exports.USER_URL = `${API_URL}/users`;

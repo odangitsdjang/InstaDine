@@ -1,7 +1,7 @@
 import { REMOVE_RESERVATION } from '../actions/reservation_actions'; 
 
 let defaultState = {
-  currentUser: null,
+  currentUser: {},
   token: null
 };
 
