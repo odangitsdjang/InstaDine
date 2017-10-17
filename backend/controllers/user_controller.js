@@ -29,7 +29,7 @@ exports.updateUser = function(req, res, next) {
           profilePicture: updatedUser.profilePicture,
           properties: updatedUser.properties
       };
-      res.json({currentUser: currentUser, token: newToken(updatedUser)});
+      res.json({ currentUser: currentUser, token: newToken(updatedUser) });
     }
   );
 };
