@@ -233,7 +233,7 @@ class RestaurantItem extends Component {
           <TouchableOpacity
             style={styles.backButton}
             onPress={this.redirectHome}>
-            <Text style={{color:'white'}}>Back</Text>
+            <Text style={styles.backText}>{'< Back'}</Text>
           </TouchableOpacity>
         </View>
       );
@@ -288,7 +288,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   restInfoText: {
-    fontSize: 15,
     padding: 10,
     alignSelf: 'center'
   },
@@ -298,11 +297,21 @@ const styles = StyleSheet.create({
     padding: 0,
     backgroundColor: 'white'
   },
+  backText: {
+    color: '#676565',
+    fontSize: 16,
+    fontWeight: '300'
+  },
   backButton: {
     position: 'absolute',
     top: 35,
     left: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderColor: '#676565',
+    borderWidth: 1,
+    borderRadius: 3,
+    padding: 10,
+    alignItems: 'center'
   },
   button: {
     padding: 10,
