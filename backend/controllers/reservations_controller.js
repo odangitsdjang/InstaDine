@@ -71,7 +71,7 @@ exports.create = function(req, res, next) {
 // };
 
 exports.fetchHistory = function (req, res, next) {
-  const userToken = req.query.userToken;
+  const userToken = req.params.userToken;
   const userId = jwt.decode(userToken, config.secret).sub;
 
   Reservation.find({ user_id: userId},
@@ -87,7 +87,7 @@ exports.fetchHistory = function (req, res, next) {
 
 
 exports.destroy = function(req, res, next){
-  const userToken = req.body.userToken;
+  const userToken = req.params.token;
   const userId = jwt.decode(userToken, config.secret).sub;
 
   // Find the reservation and update to Cancel

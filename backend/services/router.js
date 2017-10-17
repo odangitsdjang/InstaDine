@@ -37,16 +37,16 @@ router.route('/restaurants/index')
 router.route('/reservations')
       .post(ReservationsController.create);
 
-router.route('/reservations')
+router.route('/reservations/:token')
       .delete(ReservationsController.destroy);
 
-//fetch current reservation 
+router.route('/reservations/history/:token')
+      .get(ReservationsController.fetchHistory);
+
+      //fetch current reservation 
 // router.route('/reservations/fetch')
 //       .get(ReservationsController.fetch);
 
-//fetch reservation history 
-router.route('/reservations/history')
-      .get(ReservationsController.fetchHistory);
 
 module.exports = router;
 
