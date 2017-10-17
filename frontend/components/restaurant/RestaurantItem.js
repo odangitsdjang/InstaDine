@@ -23,7 +23,6 @@ class RestaurantItem extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    debugger
     if (newProps.restaurantDisplayId && (newProps.restaurantDisplayId !== this.props.restaurantDisplayId)) {
       const restaurant = newProps.restaurants[newProps.restaurantDisplayId];
       this.setState({
@@ -73,7 +72,6 @@ class RestaurantItem extends Component {
   reserveOrCancel() {
       if (this.props.reservation && this.props.reservation[0] && this.props.user) {
         let {seat_count, datetime} = this.props.reservation[0];
-        // console.log(this.props.restaurants);
         let restaurant = this.props.restaurants[this.props.restaurantDisplayId].name;
         datetime = datetime.slice(11,16);
 
