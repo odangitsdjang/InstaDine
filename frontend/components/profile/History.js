@@ -18,7 +18,9 @@ class History extends Component {
 
   componentWillReceiveProps(newProps) {
     if (this.newProps.currentUser.id !== newProps.currentUser.id) {
-      newProps.fetchHistory(newProps.userToken);
+      newProps.fetchHistory(newProps.userToken).then(response => {
+        this.setState({reservations: response});
+      });
     }
   }
   // componentDidMount(){

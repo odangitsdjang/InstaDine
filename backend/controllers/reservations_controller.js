@@ -61,11 +61,12 @@ exports.fetchHistory = function (req, res, next) {
   const userId = jwt.decode(userToken, config.secret).sub;
 
   Reservation.find({ user_id: userId},
-    function (error, reservation) {
+    function (error, reservations) {
       if (error) { return next(error); }
-      if (reservation) {
-        return res.json(reservation);
+      if (reservations) {
+        return res.json(reservations);
       }
+      else { res.status(404).json('No reservations found'); }
     }
   );
 };
