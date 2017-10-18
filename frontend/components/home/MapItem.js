@@ -96,7 +96,7 @@ class MapItem extends Component {
         this.setState({
           region
         });
-        this.map.animateToCoordinate(region, 1000);  
+        this.map.animateToCoordinate(region, 500);  
       },
       (error) => {},
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -181,7 +181,7 @@ class MapItem extends Component {
             </MapView.Callout>
           </MapView.Marker>
         );
-      })
+      });
     }
   }
 
