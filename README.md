@@ -1,4 +1,4 @@
-<img src="https://github.com/odangitsdjang/InstaDine/blob/master/assets/images/logo_black.png" width="100px"> InstaDine
+# <img src="https://github.com/odangitsdjang/InstaDine/blob/master/assets/images/logo_black.png" width="100px"> InstaDine
 
 Live Demo: [Instadine] (http://www.instadine.club/)
 
