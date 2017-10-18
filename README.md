@@ -37,7 +37,7 @@ Everyone has experienced going out to a restaurant only to find long wait times 
   * To further help narrow down choices, the map screen also has a filter that users can toggle to display only restaurants with a selected numbers of seats available, or filter them out by current wait times. 
   * Users can search for specific restaurants and be redirected to the detail page while using the search bar.
 
-<img align="center" src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/filter.gif" height="300px">-
+<img align="center" src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/filter.gif" height="300px"> <img align="center" src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/search.gif" height="300px">
 
 * Restaurant Detail And Queuing 
   * Pressing on restaurant markers takes users to the restaurant detail page which contains which contains information such as seat availability and also allows users to Queue Up.
