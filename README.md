@@ -31,7 +31,9 @@ Everyone has experienced going out to a restaurant only to find long wait times 
 * Map and Browsing
   * Upon opening the app, diners are taken to a map of the area at their location. From there, they are able to select markers of partner restaurants.
 
-<img align="center" height="300px" src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/map.gif">
+<p align="center">
+  <img height="300px" src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/map.gif">
+</p>
 
 * Restaurants Filter and RESTful Search
   * To further help narrow down choices, the map screen also has a filter that users can toggle to display only restaurants with a selected numbers of seats available, or filter them out by current wait times. 
