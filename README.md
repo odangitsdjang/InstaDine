@@ -54,7 +54,7 @@ Everyone has experienced going out to a restaurant only to find long wait times 
   * Users can view their profile and queue history
 
 <p align="center">
-  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/search.gif" width="300px"/>
+  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/search.gif" height="300px"/>
 </p>
 
 ## Future Development
