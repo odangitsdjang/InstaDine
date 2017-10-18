@@ -42,7 +42,7 @@ Everyone has experienced going out to a restaurant only to find long wait times 
   * Users can search for specific restaurants and be redirected to the detail page while using the search bar.
 
 <p align="center">
-  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/filter.gif" height="300px"> <img align="center" src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/search.gif" height="300px"/>
+  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/filter.gif" height="300px"/><img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/search.gif" height="300px"/>
 </p>
 
 * **Restaurant Detail And Queuing**
