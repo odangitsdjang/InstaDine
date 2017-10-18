@@ -19,7 +19,7 @@ class History extends Component {
   componentDidMount() {
     if (this.props.currentUser.user_id) {
       this.props.fetchHistory(this.props.userToken).then(response => {
-        this.setState({reservations: response.data});
+        this.setState({reservations: response.data.reverse()});
       });
     }
   }
@@ -30,7 +30,6 @@ class History extends Component {
         <Text>You have no past reservations</Text>
       );
     }else{
-      // console.log(this.state.restaurants);
       let reservations = this.state.reservations;
 
       return reservations.map((reservation, idx) => {
