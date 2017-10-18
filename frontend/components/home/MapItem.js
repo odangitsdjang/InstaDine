@@ -87,14 +87,16 @@ class MapItem extends Component {
     // User's current location
     navigator.geolocation.getCurrentPosition(
       position => {
+        let region = { 
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        };
         this.setState({
-          region: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-          }
+          region
         });
+        this.map.animateToCoordinate(region, 1000);  
       },
       (error) => {},
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -102,6 +104,7 @@ class MapItem extends Component {
 
     this.props.restaurantIndex().then(
       () => this.setState({ markers: Object.values(this.props.restaurants), loaded: 1 })
+      
     );
   }
 
