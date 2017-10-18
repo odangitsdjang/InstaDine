@@ -1,3 +1,5 @@
+![logo](https://github.com/odangitsdjang/InstaDine/blob/master/assets/images/logo_black.png) #InstaDine
+
 ## Background and Overview
 
 InstaDine is a mobile application that connects diners with restaurants to cut down wait times and give users freedom by eliminating the need to stand in line. 
