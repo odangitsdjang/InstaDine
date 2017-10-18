@@ -1,8 +1,9 @@
 <img src="https://github.com/odangitsdjang/InstaDine/blob/master/assets/images/logo_black.png" width="100px"> InstaDine
 ==
 
-Background and Overview
-==
+##Background and Overview
+
+### Background
 
 Live Demo: [Instadine] (http://www.instadine.club/)
 
