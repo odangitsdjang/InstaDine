@@ -34,10 +34,9 @@ class History extends Component {
       let reservations = this.state.reservations;
 
       return reservations.map((reservation, idx) => {
-        const restaurant = this.props.restaurants[reservation.restaurant_id]
+        const restaurant = this.props.restaurants[reservation.restaurant_id];
         const restaurantName = restaurant.name;
         const restaurantImage = restaurant.image;
-        debugger;
         return (
           <View key={idx} style={styles.restaurantItem}>
             <Image
@@ -59,7 +58,7 @@ class History extends Component {
     if(this.state.reservations){
       return (
         <View style={styles.container}>
-          <Text style={{fontSize: 30, padding: 20}}>This is Queue History!</Text>
+          <Text style={{fontSize: 30, padding: 20}}>Queue History</Text>
           <ScrollView>
               {this.historyItems()}
           </ScrollView>
@@ -89,7 +88,8 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   restaurantText: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    margin: 10
   },
   restaurantItem: {
     padding: 10,
@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 100,
-    height: 75
+    height: 75,
+    padding: 10
   }
 });
 
