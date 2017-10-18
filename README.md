@@ -49,7 +49,7 @@ Everyone has experienced going out to a restaurant only to find long wait times 
 * **User Profile**
   * Users can view their profile and queue history
 
-<kbd>
+<kbd align="center">
   <p align="center">
     <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/profile.gif" height="300px"/>
   </p>
