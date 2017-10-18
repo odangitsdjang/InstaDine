@@ -10,7 +10,6 @@ export const createReservation = (reservation, userToken) => {
     return axios.post(RESERVATION_URL, {reservation, userToken}).then(response => {
       dispatch(authUser(response.data));
     }).catch((error) => {
-      console.log(error);
       dispatch(addAlert("Cannot create Reservation"));
     });
   };

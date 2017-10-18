@@ -96,7 +96,7 @@ class RestaurantItem extends Component {
                 padding: 10
               }}
               onPress={this.handleCancel}>
-              <Text style={styles.reserveText}>Cancel Reservation</Text>
+              <Text style={styles.reserveText}>Leave Queue</Text>
             </TouchableOpacity>
           </View>
         );
