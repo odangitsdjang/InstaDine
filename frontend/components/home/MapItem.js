@@ -126,15 +126,15 @@ class MapItem extends Component {
           filtered = restaurants.filter((marker, i) => {
             return (
               (marker.wait === 0) && (marker.seats >= seats[newSeatsFilter])
-            )
-          })
+            );
+          });
         }
         else {
           filtered = restaurants.filter((marker, i) => {
             return (
               marker.wait <= wait[newWaitFilter]
-            )
-          })
+            );
+          });
         }
         this.setState({markers: []}, () => this.setState({markers: filtered}));
     }
@@ -234,11 +234,17 @@ class MapItem extends Component {
 
   renderFilter() {
     if (!this.state.searchActive) {
+      const filterState = this.props.filter;
+      let buttonStyle;
+      if (filterState.wait !== null || filterState.seats !== null) {
+        buttonStyle = styles.selectedButton;
+      }
+      else { buttonStyle = styles.button; }
       return (
       <TouchableOpacity
         activeOpacity={0.9}
         onPress={this.toggleFilter()}
-        style={styles.button}
+        style={buttonStyle}
         raised={true}>
         <Text style={styles.filter}>Filter</Text>
       </TouchableOpacity> );

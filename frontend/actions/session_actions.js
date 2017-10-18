@@ -8,7 +8,6 @@ exports.loginUser = user => {
     return axios.post(LOGIN_URL, user).then((response) => {
       dispatch(authUser(response.data));
     }).catch((errors) => {
-      console.log(errors);
       dispatch(addAlert("Incorrect login or password"));
     });
   };
