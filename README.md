@@ -1,11 +1,9 @@
 <img src="https://github.com/odangitsdjang/InstaDine/blob/master/assets/images/logo_black.png" width="100px"> InstaDine
-==
-
-##Background and Overview
-
-### Background
 
 Live Demo: [Instadine] (http://www.instadine.club/)
+
+==
+##Background and Overview
 
 InstaDine is a mobile application that connects diners with restaurants to cut down wait times and give users freedom by eliminating the need to stand in line. 
 
@@ -13,6 +11,7 @@ Everyone has experienced going out to a restaurant only to find long wait times 
 
 InstaDine is built with React Native and Redux front end and Express and MongoDB in back end. 
 
+==
 ## Design
 
 ---------------------MAIN OVERVIEW GIF HERE-----------------------------
@@ -25,6 +24,7 @@ To further help narrow down choices, the map screen also has a filter that users
 
 Instadine was designed for smooth user navigation by using various nested navigators including a drawer that contains user information and links to other pages such as the user's Queue History page.
 
+==
 ## Functionality
 
 1. User Authentication 
