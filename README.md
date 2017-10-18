@@ -31,10 +31,11 @@ Everyone has experienced going out to a restaurant only to find long wait times 
 
 ---------------------- MAP AND MARKERS GIF HERE -----------------------
 
-* Restaurants Filter
-  * To further help narrow down choices, the map screen also has a filter that users can toggle to display only restaurants with a selected numbers of seats available, or filter them out by current wait times.
+* Restaurants Filter and RESTful Search
+  * To further help narrow down choices, the map screen also has a filter that users can toggle to display only restaurants with a selected numbers of seats available, or filter them out by current wait times. 
+  * Users can search for specific restaurants and be redirected to the detail page while using the search bar.
 
----------------------- FILTER GIF HERE --------------------------------
+---------------------- FILTER AND SEARCH GIF HERE ----------------------
 
 * Restaurant Detail And Queuing 
   * Pressing on restaurant markers takes users to the restaurant detail page which contains which contains information such as seat availability and also allows users to Queue Up.
@@ -45,4 +46,12 @@ Everyone has experienced going out to a restaurant only to find long wait times 
   * Users can view their profile and queue history
 
 ---------------------- USER PROFILE AND HISTORY GIF HERE --------------
+
+## Future Development
+
+**Push Notifications:**
+Give the users options to enable push notifications for events such as when their tables are ready.
+
+**Restaurant Application Side:**
+The client side for restaurant owners to be able to integrate the application into their business. This will contain features such as reservation and queue handling, menu creation and editing, text notifications to non-app users for their tables.
 
