@@ -25,14 +25,14 @@ class Search extends Component {
       );
     } else {
       return (
-        <TouchableHighlight style={styles.icon}
+        <TouchableOpacity style={styles.icon}
           onPress={() => {
             Keyboard.dismiss();
             this.props.setSearchActive(false);
           }}
         >
           <Ionicons style={styles.leftIcon} name="ios-arrow-back" size={30} />
-        </TouchableHighlight>
+        </TouchableOpacity>
       );
     }
   }
@@ -42,9 +42,11 @@ class Search extends Component {
       return null;
     } else {
       return(
-        <TouchableHighlight onPress={() => this.props.setSearchText("")} style={styles.icon} >
+        <TouchableOpacity onPress={() => this.props.setSearchText("")} 
+          activeOpacity={1}
+          style={styles.icon} >
           <Ionicons name="ios-close" size={30} />
-        </TouchableHighlight>
+        </TouchableOpacity>
       );
     }
   }
