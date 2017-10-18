@@ -350,7 +350,7 @@ header .scroll-down .btn:hover {
   }
   header img {
     max-width: 300px;
-    max-height: 300px;
+    max-height: 500px;
   }
 }
 @media (min-width: 1025px) {
