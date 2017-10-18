@@ -1,5 +1,13 @@
 {
   "expo": {
-    "sdkVersion": "21.0.0"
+    "sdkVersion": "21.0.0",
+    "orientation": "portrait",
+    "version": "1.0.0",
+    "icon": "/Users/foppylau/programming/app_academy/full_stack/insta-dine/docs/demo_page/assets/img/logo@2x.png",
+    "loading": {
+      "icon": "/Users/foppylau/programming/app_academy/full_stack/insta-dine/docs/demo_page/assets/img/logo@2x.png",
+      "hideExponentText": "true",
+      "backgroundColor": "#000000"
+    }
   }
 }
