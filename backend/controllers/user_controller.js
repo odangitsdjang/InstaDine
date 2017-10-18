@@ -29,7 +29,7 @@ exports.updateUser = function(req, res, next) {
           profilePicture: updatedUser.profilePicture,
           properties: updatedUser.properties
       };
-      res.json({ currentUser: currentUser, token: newToken(updatedUser) });
+      return res.json({ currentUser: currentUser, token: newToken(updatedUser) });
     }
   );
 };
@@ -51,6 +51,6 @@ exports.getUser = function(req, res, next) {
       reservation: user.reservation
     };
 
-    res.json({ currentUser, token: newToken(user) });
+    return res.json({ currentUser, token: newToken(user) });
   });
 };

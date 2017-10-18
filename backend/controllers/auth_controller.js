@@ -31,12 +31,12 @@ exports.login = function (req, res, next) {
       };
 
       //send currentUser info back to frontend 
-      console.log(currentUser);
       return res.json({
         currentUser: currentUser,
         token: userToken(user)
       });
     }
+    else { res.status(404).json('No user found'); }
   });
 };
 
@@ -75,7 +75,7 @@ exports.signup = function(req, res, next) {
                           profilePicture: user.profilePicture,
                           properties: user.properties };
 
-      res.json({currentUser: currentUser, 
+      return res.json({currentUser: currentUser, 
                 token: userToken(user)});
     });
   });

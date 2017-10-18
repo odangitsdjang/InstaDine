@@ -48,7 +48,7 @@ exports.create = function(req, res, next) {
             reservation: user.reservation
           };
 
-          res.json({currentUser, token: newToken(user)});
+          return res.json({currentUser, token: newToken(user)});
         });
 
       });
@@ -128,7 +128,7 @@ exports.destroy = function(req, res, next){
                 reservation: updatedUser.reservation
               };
 
-              res.json({ currentUser, token: newToken(updatedUser) });
+              return res.json({ currentUser, token: newToken(updatedUser) });
             }
           );
         }
