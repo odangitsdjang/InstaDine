@@ -30,8 +30,9 @@ Everyone has experienced going out to a restaurant only to find long wait times 
 
 --------------- GIF OF NAVIGATION FROM SPLASH TO ALL PAGES -------------
 
-* **Map and Browsing**
+* **Browsing and Restaurant Detail**
   * Upon opening the app, diners are taken to a map of the area at their location. From there, they are able to select markers of partner restaurants.
+  * Pressing on restaurant markers takes users to the restaurant detail page which contains which contains information such as seat availability and also allows users to Queue Up.
 
 <p align="center">
   <img height="300px" src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/map.gif"/>
@@ -45,16 +46,11 @@ Everyone has experienced going out to a restaurant only to find long wait times 
   <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/filter.gif" height="300px"/><img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/search.gif" height="300px"/>
 </p>
 
-* **Restaurant Detail And Queuing**
-  * Pressing on restaurant markers takes users to the restaurant detail page which contains which contains information such as seat availability and also allows users to Queue Up.
-
----------------------- RESTAURANT SHOW AND QUEUING GIF HERE -----------
-
 * **User Profile**
   * Users can view their profile and queue history
 
 <p align="center">
-  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/search.gif" height="300px"/>
+  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/profile.gif" height="300px"/>
 </p>
 
 ## Future Development
