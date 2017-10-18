@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 // don't change this class unless you are going to test it thoroughly!!! 
 
 class SearchResults extends Component {
@@ -28,7 +28,6 @@ class SearchResults extends Component {
   
   render() {
     if (this.props.searchActive && typeof this.state.results !== "string" ){ 
-      // console.log(this.state.results)
       // debugger
       return (
         <View style={styles.container}>
@@ -52,10 +51,18 @@ class SearchResults extends Component {
         </View>
       );
       // no restaurants found
-    }else if (this.props.searchActive && typeof this.state.results === "string") return (
+    }else if (this.props.searchActive && typeof this.state.results === "string") { 
+      const fake={error: "No Results"};
+      return (
       <View style={styles.container}>
+        <View style={styles.noResult}>
+            <MaterialIcons name="not-interested" style={styles.noResultIcon}
+              size={20} />
+            <Text style={styles.noResultText}>No Results</Text>
+        </View>
       </View>
     );
+    }
     else return null;
   }
 }
@@ -81,6 +88,18 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 50,
     borderColor: 'rgb(200,200,200)'
   }, 
+  noResult: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 20,
+    height: 100,
+  },
+  noResultIcon: {
+    paddingRight: 10
+  },
+  noResultText: {
+  },
   restaurantIcon: {
     flex: 1,
     paddingLeft: 10,
