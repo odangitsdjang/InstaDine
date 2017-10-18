@@ -92,8 +92,9 @@ const styles = StyleSheet.create({
     margin: 10
   },
   restaurantItem: {
-    padding: 10,
-    alignItems: 'stretch',
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row'
   },
   container: {
