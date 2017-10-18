@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchHistory: userToken => dispatch(fetchReservationHistory(userToken))
+  fetchHistory: userToken => fetchReservationHistory(userToken)
 });
 
-export default connect(mapStateToProps, null)(History);
+export default connect(mapStateToProps, mapDispatchToProps)(History);

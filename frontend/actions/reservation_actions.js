@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { addAlert } from './alerts_actions';
-import { RESERVATION_URL,
-         RESERVATION_HISTORY_URL } from '../util/api_util';
+import { RESERVATION_URL } from '../util/api_util';
 
 import { authUser } from '../actions/session_actions';
 
@@ -18,7 +17,7 @@ export const createReservation = (reservation, userToken) => {
 };
 
 export const fetchReservationHistory = userToken => {
-  return axios.get(`${RESERVATION_HISTORY_URL}/${userToken}`);
+  return axios.get(`${RESERVATION_URL}/history/${userToken}`);
 };
 
 export const destroyReservation = userToken => {
