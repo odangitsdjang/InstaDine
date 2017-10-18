@@ -1,6 +1,6 @@
 # <img src="https://github.com/odangitsdjang/InstaDine/blob/master/assets/images/logo_black.png" width="100px"> InstaDine
 
-Live Demo: [Instadine] (http://www.instadine.club/)
+Live Demo: [Instadine](http://www.instadine.club/)
 
 Background and Overview
 ==
