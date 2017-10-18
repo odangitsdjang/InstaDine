@@ -20,7 +20,6 @@ const navHomeReducer = (state = initialState, action) => {
       }
       else { return state; }
     case 'UNAUTH_USER':
-    case 'AUTH_USER':
     case DISPLAY_MAP:
       return HomeNavigator.router.getStateForAction(
         HomeNavigator.router.getActionForPathAndParams('Drawer')

@@ -28,7 +28,7 @@ const EditProfileScreen = ({ navigation, banner }) => (
 );
 
 EditProfileScreen.navigationOptions = {
-  drawerLabel: 'Edit Profile',
+  drawerLabel: 'View Profile',
   drawerIcon: () => (
     <FontAwesome name='user' size={32} color={itemColor} />
   )
@@ -56,7 +56,7 @@ const navigatorConfig = {
   initialRouteName: 'Map',
   // contentOptions: { style: { borderWidth: 1, borderColor: 'black'} },
   contentComponent: DrawerContentContainer,
-  drawerWidth: Dimensions.get('window').width * 0.6
+  drawerWidth: Dimensions.get('window').width * 0.7
 };
 
 const Drawer = DrawerNavigator(

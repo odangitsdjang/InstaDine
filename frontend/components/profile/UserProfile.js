@@ -62,7 +62,6 @@ class UserProfile extends Component {
 
       upload.end((err, response) => {
         if(err){
-          console.log(err);
           return;
         }
 
@@ -152,9 +151,11 @@ class UserProfile extends Component {
       let { email, 
             phoneNumber, 
             properties, 
+            profilePicture,
             username } = this.props.user;
-  
+      
       return (
+        
         <View style={styles.container}>
           <View style={[styles.boxContainerHeader, styles.profileHeader]}>
             <Text style={styles.profileTitle}>{username}</Text>
@@ -163,32 +164,15 @@ class UserProfile extends Component {
           <View style={[styles.boxContainer, styles.userInfo]}>
             <View style={styles.pictureComponent}>
               <Image 
-                source={{ uri: 'https://res.cloudinary.com/jerryzlau/image/upload/v1507858335/account_friend_human_man_member_person_profile_user_users-256_ovxp2a.png'}}
+                source={{ uri: profilePicture}}
                 style={styles.userProfile}/>
-              {/* <TouchableOpacity
-                style={{padding: 5, 
-                        borderWidth: 2,
-                        borderColor: 'black',
-                        borderRadius: 5,
-                        marginTop: 10}}
-                onPress={this._pickImage}>
-                <Text style={{color: 'black', 
-                              fontSize: 15}}>Change Profile</Text>
-              </TouchableOpacity> */}
 
             </View>
             <View style={styles.userInfoDetails}>
 
-              <Text style={styles.regularFont}>{email}</Text>
-              <Text style={styles.regularFont}>{phoneNumber}</Text>
+              <Text style={styles.regularFont}>{`Email: ${email}`}</Text>
+              <Text style={styles.regularFont}>{`Phone: ${phoneNumber}`}</Text>
             </View>
-          </View>
-  
-          {/* {this.upcomingReservation()} */}
-  
-          <View style={[styles.boxContainer, styles.pastReservations]}>
-            <Text style={{ fontSize: 28 }}>Past Reservations</Text>
-            {this.pastReservation()}
           </View>
   
           <View style={[styles.boxContainer, styles.logout]}>
@@ -252,7 +236,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   regularFont: {
-    fontFamily: 'Chalkboard SE',
+    fontFamily: 'AppleSDGothicNeo-Bold',
     fontSize: 20
   },
   notLoggedOn: {
@@ -271,9 +255,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   userProfile: {
-    width: 120,
-    height: 120,
-    borderRadius: 10
+    width: 250,
+    height: 250,
+    borderRadius: 125,
+    margin: 15,
+    borderWidth: 1,
+    borderColor: 'rgb(225, 225, 225)'
   },
   userInfoDetails:{
     flexDirection: 'column'
@@ -281,8 +268,8 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontSize: 23,
     fontWeight: 'bold',
-    fontFamily: 'Chalkboard SE',
-    color: 'white'
+    fontFamily: 'AppleSDGothicNeo-Bold',
+    color: 'white',
   },
   profileHeader: {
     paddingTop: 15,
@@ -291,7 +278,7 @@ const styles = StyleSheet.create({
   userInfo: {
     flex: 2,
     justifyContent: 'space-around',
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   reservation: {
     flex: 2,

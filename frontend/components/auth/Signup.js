@@ -75,6 +75,7 @@ class Signup extends Component {
   render() {
     let {email, password, phoneNumber, username, image} = this.state;
     return (
+      <Image source={{ uri: 'http://res.cloudinary.com/odangitsdjang/image/upload/v1508151530/splash_gx74sa.jpg' }} style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
             <View style={{ flex: 2, justifyContent: 'flex-end' }} >
@@ -153,6 +154,7 @@ class Signup extends Component {
           </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
+      </Image>
     );
   }
 }
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#4C5B61'
+    backgroundColor: 'transparent'
   },
   signUp: {
     fontSize: 40,

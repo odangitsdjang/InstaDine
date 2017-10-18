@@ -96,7 +96,7 @@ class MapItem extends Component {
           }
         });
       },
-      (error) => console.log(error.message),
+      (error) => {},
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
 
@@ -118,8 +118,6 @@ class MapItem extends Component {
       || newWaitFilter !== oldWaitFilter)) {
 
         let filtered;
-        console.log(this.props.restaurants);
-        console.log(Object.values(this.props.restaurants));
         const restaurants = Object.values(this.props.restaurants);
         if (newWaitFilter === null && newSeatsFilter === null) {
           filtered = restaurants;
@@ -128,15 +126,15 @@ class MapItem extends Component {
           filtered = restaurants.filter((marker, i) => {
             return (
               (marker.wait === 0) && (marker.seats >= seats[newSeatsFilter])
-            )
-          })
+            );
+          });
         }
         else {
           filtered = restaurants.filter((marker, i) => {
             return (
               marker.wait <= wait[newWaitFilter]
-            )
-          })
+            );
+          });
         }
         this.setState({markers: []}, () => this.setState({markers: filtered}));
     }
@@ -236,11 +234,17 @@ class MapItem extends Component {
 
   renderFilter() {
     if (!this.state.searchActive) {
+      const filterState = this.props.filter;
+      let buttonStyle;
+      if (filterState.wait !== null || filterState.seats !== null) {
+        buttonStyle = styles.selectedButton;
+      }
+      else { buttonStyle = styles.button; }
       return (
       <TouchableOpacity
         activeOpacity={0.9}
         onPress={this.toggleFilter()}
-        style={styles.button}
+        style={buttonStyle}
         raised={true}>
         <Text style={styles.filter}>Filter</Text>
       </TouchableOpacity> );
@@ -291,7 +295,7 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 10,
     paddingHorizontal: 18,
-    borderRadius: 15,
+    borderRadius: 5,
     margin: 5,
     width: 85,
     position: 'absolute',
@@ -305,7 +309,7 @@ const styles = StyleSheet.create({
   selectedButton: {
     paddingVertical: 10,
     paddingHorizontal: 18,
-    borderRadius: 15,
+    borderRadius: 5,
     margin: 5,
     width: 85,
     position: 'absolute',

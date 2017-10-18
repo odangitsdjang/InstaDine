@@ -6,6 +6,7 @@ import { View, Text, StyleSheet, Button,
          TouchableOpacity, 
          Keyboard, 
          TouchableWithoutFeedback,
+         Image,
          KeyboardAvoidingView } from 'react-native';
 
 const _defaultState = {
@@ -64,7 +65,7 @@ class Login extends Component {
     let {email, password} = this.state;
 
     return (
-
+      <Image source={{ uri: 'http://res.cloudinary.com/odangitsdjang/image/upload/v1508151530/splash_gx74sa.jpg' }} style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
             <View style={{ flex: 3, justifyContent: 'flex-end' }} >
@@ -116,6 +117,7 @@ class Login extends Component {
             {this.renderErrors()}
           </View>
       </TouchableWithoutFeedback>
+      </Image>
     );
   }
 }
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#4C5B61'
+    backgroundColor: 'transparent'
   },
   logIn: {
     fontSize: 40, 

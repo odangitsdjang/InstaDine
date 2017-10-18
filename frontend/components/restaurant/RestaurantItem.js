@@ -23,22 +23,11 @@ class RestaurantItem extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // debugger
-    if (newProps.restaurantId && newProps.restaurantId !== this.props.restaurantId) {
+    if (newProps.restaurantDisplayId && (newProps.restaurantDisplayId !== this.props.restaurantDisplayId)) {
+      const restaurant = newProps.restaurants[newProps.restaurantDisplayId];
       this.setState({
-        restaurant: newProps.restaurants[newProps.restaurantId],
+        restaurant,
         user: newProps.user
-      });
-    }
-  }
-
-  componentDidMount() {
-    // Get restaurant info somehow, put that into props talk to adrian 
-    //assume map will feed restaurant into this component through prop
-    if (this.props.restaurants && this.props.restaurantId){
-      this.setState({
-        restaurant: this.props.restaurants[this.props.restaurantId],
-        user: this.props.user
       });
     }
   }
@@ -80,26 +69,10 @@ class RestaurantItem extends Component {
     });
   }
 
-  renderUserOptions(){
-    if (this.state.restaurant.seats > 0) {
-      return (
-        <View>
-          <Text>
-
-          </Text>
-        </View>
-      );
-    }
-    else { 
-
-    }
-  }
-
   reserveOrCancel() {
-      if (this.props.reservation && this.props.user) {
-        let {seat_count, datetime} = this.props.reservation;
-        // console.log(this.props.restaurants);
-        let restaurant = this.props.restaurants[this.props.reservation.restaurant_id].name;
+      if (this.props.reservation && this.props.reservation[0] && this.props.user) {
+        let {seat_count, datetime} = this.props.reservation[0];
+        let restaurant = this.props.restaurants[this.props.restaurantDisplayId].name;
         datetime = datetime.slice(11,16);
 
         return (
@@ -123,16 +96,17 @@ class RestaurantItem extends Component {
                 padding: 10
               }}
               onPress={this.handleCancel}>
-              <Text style={styles.reserveText}>Cancel Reservation</Text>
+              <Text style={styles.reserveText}>Leave Queue</Text>
             </TouchableOpacity>
           </View>
         );
       }else{
         return (
-          <View style={styles.reserveContainer}>
+          <View style={styles.pickerContainer}>
             <View style={{ flexDirection: 'row' }}>
               <Picker selectedValue={this.state.reservationTime}
                 style={styles.picker}
+                itemStyle={{ height: 150 }}
                 onValueChange={(itemValue, itemIndex) => {
                   this.setState({
                     reservationTime: itemValue
@@ -144,6 +118,7 @@ class RestaurantItem extends Component {
               <Picker
                 selectedValue={this.state.seat_count}
                 style={styles.picker}
+                itemStyle={{height: 150}}
                 onValueChange={(itemValue, itemIndex) => this.setState({
                   seat_count: itemValue
                 })}>
@@ -196,7 +171,6 @@ class RestaurantItem extends Component {
       datetime: bookTime
     };
 
-    console.log(reservation, this.props.userToken);
     this.props.createReservation(reservation, this.props.userToken);
   }
 
@@ -267,6 +241,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     paddingBottom: 20,
+    paddingTop: 40,
+    flex: 4
+  },
+  pickerContainer: {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    paddingBottom: 20,
     flex: 4
   },
   restInfoTextContainer:{
@@ -307,9 +288,7 @@ const styles = StyleSheet.create({
     top: 35,
     left: 10,
     backgroundColor: 'white',
-    borderColor: '#676565',
-    borderWidth: 1,
-    borderRadius: 3,
+    borderRadius: 5,
     padding: 10,
     alignItems: 'center'
   },
@@ -321,7 +300,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    // borderColor: '#F2F2F2'
     borderColor: 'black'
   },
   header: {
@@ -334,7 +312,7 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontSize: 18,
-    fontFamily: 'Chalkboard SE',
+    fontFamily: 'AppleSDGothicNeo-Bold',
   }, 
   reserve: {
     paddingTop: 30,

@@ -16,7 +16,7 @@ exports.create = function(req, res, next) {
     newRestaurant.save(function(saveError){
       if (saveError) { return next(saveError); }
 
-      res.json({restaurant: newRestaurant});
+      return res.json({restaurant: newRestaurant});
     });
   });
 };
@@ -47,8 +47,7 @@ exports.allRestaurants = function(req,res,next) {
             image: restaurant.picture_url
           };
     });
-    console.assert(filtered);
-    res.json({ restaurants: filtered });
+    return res.json({ restaurants: filtered });
 
   });
 };
@@ -73,7 +72,7 @@ exports.search = function (req, res, next) {
 
     // });
 
-    res.json({ restaurants: restaurants });
+    return res.json({ restaurants: restaurants });
     
   }).limit(20);
 };

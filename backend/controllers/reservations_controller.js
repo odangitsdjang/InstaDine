@@ -4,8 +4,13 @@ const Restaurant = require('../models/restaurant');
 const jwt = require('jwt-simple');
 const config = require('../config');
 
-// Schema
-// restaurant_id, user_id, seat_count, status, datetime, priority
+const newToken = user => {
+  let timestamp = new Date().getTime();
+  return jwt.encode({
+    sub: user._id,
+    iat: timestamp
+  }, config.secret);
+};
 
 exports.create = function(req, res, next) {
   const userToken = req.body.userToken;
@@ -30,36 +35,38 @@ exports.create = function(req, res, next) {
       newReservation.save(function(saveError){
         if (saveError) { return next(saveError); }
 
-        return res.json(newReservation);
+        User.findById(userId, function(userError, user){
+          if (userError) { return userError; }
+
+          let currentUser = {
+            email: user.email,
+            username: user.username,
+            phoneNumber: user.phoneNumber,
+            user_id: user._id,
+            profilePicture: user.profilePicture,
+            properties: user.properties,
+            reservation: user.reservation
+          };
+
+          return res.json({currentUser, token: newToken(user)});
+        });
+
       });
     }
   );
 };
 
-exports.fetch = function(req, res, next) {
-  const userToken = req.query.userToken;
-  const userId = jwt.decode(userToken, config.secret).sub;
- 
-  Reservation.findOne({user_id: userId, status: 'Pending'},
-  function(error, reservation){
-      if(error) {return next(error);}
-      if(reservation){
-          return res.json(reservation);
-      }
-    }
-  );
-};
-
 exports.fetchHistory = function (req, res, next) {
-  const userToken = req.query.userToken;
+  const userToken = req.params.token;
   const userId = jwt.decode(userToken, config.secret).sub;
 
   Reservation.find({ user_id: userId},
-    function (error, reservation) {
+    function (error, reservations) {
       if (error) { return next(error); }
-      if (reservation) {
-        return res.json(reservation);
+      if (reservations) {
+        return res.json(reservations);
       }
+      else { res.status(404).json('No reservations found'); }
     }
   );
 };
@@ -67,7 +74,7 @@ exports.fetchHistory = function (req, res, next) {
 
 
 exports.destroy = function(req, res, next){
-  const userToken = req.body.userToken;
+  const userToken = req.params.token;
   const userId = jwt.decode(userToken, config.secret).sub;
 
   // Find the reservation and update to Cancel
@@ -111,8 +118,17 @@ exports.destroy = function(req, res, next){
                 return res.status(404).json('Error updating user'); 
               }
               
-              // Return updated user for redux store
-              return res.json(updatedUser);
+              let currentUser = {
+                email: updatedUser.email,
+                username: updatedUser.username,
+                phoneNumber: updatedUser.phoneNumber,
+                user_id: updatedUser._id,
+                profilePicture: updatedUser.profilePicture,
+                properties: updatedUser.properties,
+                reservation: updatedUser.reservation
+              };
+
+              return res.json({ currentUser, token: newToken(updatedUser) });
             }
           );
         }
