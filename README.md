@@ -25,11 +25,6 @@ Everyone has experienced going out to a restaurant only to find long wait times 
   <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/login.gif" height="300px"/>
 </p>
 
-* **Navigation**
-  * Instadine was designed for smooth user navigation by using various nested navigators including a drawer that contains user information and links to other pages such as the user's Queue History page.
-
---------------- GIF OF NAVIGATION FROM SPLASH TO ALL PAGES -------------
-
 * **Browsing and Restaurant Detail**
   * Upon opening the app, diners are taken to a map of the area at their location. From there, they are able to select markers of partner restaurants.
   * Pressing on restaurant markers takes users to the restaurant detail page which contains which contains information such as seat availability and also allows users to Queue Up.
