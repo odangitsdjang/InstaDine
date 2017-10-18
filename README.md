@@ -1,10 +1,10 @@
 <img src="https://github.com/odangitsdjang/InstaDine/blob/master/assets/images/logo_black.png" width="100px"> InstaDine
-
-Live Demo: [Instadine] (http://www.instadine.club/)
 ==
 
 Background and Overview
 ==
+
+Live Demo: [Instadine] (http://www.instadine.club/)
 
 InstaDine is a mobile application that connects diners with restaurants to cut down wait times and give users freedom by eliminating the need to stand in line. 
 
