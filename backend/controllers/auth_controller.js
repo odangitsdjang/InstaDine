@@ -14,7 +14,6 @@ exports.login = function (req, res, next) {
   let user = req.user;
   //find the user, if found, log that person in 
   User.findOne({email: user.email}, function(err, Founduser){
-    console.log(err);
     if (err) { 
       return next(err); 
     }

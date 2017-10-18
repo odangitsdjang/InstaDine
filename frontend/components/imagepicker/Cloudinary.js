@@ -19,7 +19,6 @@ export default class Cloudinary extends React.Component {
   }
 
   resetLink() {
-    console.log("resetLink: ");
     this.setState({ uploadedFileCloudinaryUrl: "" });
   }
 
