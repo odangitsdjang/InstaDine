@@ -71,7 +71,6 @@ class RestaurantShowMap extends Component {
 
   componentDidMount() {
     // User's current location
-    // console.log("Did Mount", this.props.restaurant);
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -83,7 +82,7 @@ class RestaurantShowMap extends Component {
           }
         });
       },
-      (error) => console.log(error.message),
+      (error) => {},
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
 
