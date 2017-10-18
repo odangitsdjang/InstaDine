@@ -17,12 +17,8 @@ export const createReservation = (reservation, userToken) => {
   };
 };
 
-//get reservation history 
 export const fetchReservationHistory = userToken => {
-  return axios.get(`${RESERVATION_HISTORY_URL}/${userToken}`).then(response => {
-    return response.data;
-  }).catch(error => {
-  });
+  return axios.get(`${RESERVATION_HISTORY_URL}/${userToken}`)
 };
 
 export const destroyReservation = userToken => {

@@ -16,9 +16,14 @@ class History extends Component {
     this.props.navigation.navigate('Map');
   }
 
-  componentDidMount(){
-    fetchReservationHistory(this.props.userToken).then((res)=> this.setState({reservations: res}));
+  componentWillReceiveProps(newProps) {
+    if (this.newProps.currentUser.id !== newProps.currentUser.id) {
+      newProps.fetchHistory(newProps.userToken);
+    }
   }
+  // componentDidMount(){
+  //   fetchReservationHistory(this.props.userToken).then((res)=> this.setState({reservations: res}));
+  // }
 
   historyItems(){
     if(!this.state.reservations){
