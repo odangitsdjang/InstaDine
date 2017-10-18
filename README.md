@@ -21,7 +21,7 @@ Everyone has experienced going out to a restaurant only to find long wait times 
 * User Authentication 
   * Instadine uses BCrypt to ensure users can sign up and create secure accounts
 
-<img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/login.gif" height="100px">
+<img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/login.gif" height="300px">
 
 * Navigation
   * Instadine was designed for smooth user navigation by using various nested navigators including a drawer that contains user information and links to other pages such as the user's Queue History page.
