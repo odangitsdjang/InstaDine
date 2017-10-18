@@ -1,4 +1,4 @@
-[logo] (https://github.com/odangitsdjang/Instadine/blob/master/assets/images/logo.png) # Instadine
+[logo] (https://github.com/odangitsdjang/InstaDine/blob/master/assets/images/logo_black.png) # Instadine
 
 ## Background and Overview
 
