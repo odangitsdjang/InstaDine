@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontSize: 18,
-    fontFamily: 'Chalkboard SE',
+    fontFamily: 'AppleSDGothicNeo-Bold',
   }, 
   reserve: {
     paddingTop: 30,

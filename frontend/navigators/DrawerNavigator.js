@@ -28,7 +28,7 @@ const EditProfileScreen = ({ navigation, banner }) => (
 );
 
 EditProfileScreen.navigationOptions = {
-  drawerLabel: 'Edit Profile',
+  drawerLabel: 'View Profile',
   drawerIcon: () => (
     <FontAwesome name='user' size={32} color={itemColor} />
   )

@@ -62,7 +62,6 @@ class UserProfile extends Component {
 
       upload.end((err, response) => {
         if(err){
-          console.log(err);
           return;
         }
 
@@ -167,30 +166,13 @@ class UserProfile extends Component {
               <Image 
                 source={{ uri: profilePicture}}
                 style={styles.userProfile}/>
-              {/* <TouchableOpacity
-                style={{padding: 5, 
-                        borderWidth: 2,
-                        borderColor: 'black',
-                        borderRadius: 5,
-                        marginTop: 10}}
-                onPress={this._pickImage}>
-                <Text style={{color: 'black', 
-                              fontSize: 15}}>Change Profile</Text>
-              </TouchableOpacity> */}
 
             </View>
             <View style={styles.userInfoDetails}>
 
-              <Text style={styles.regularFont}>{email}</Text>
-              <Text style={styles.regularFont}>{phoneNumber}</Text>
+              <Text style={styles.regularFont}>{`Email: ${email}`}</Text>
+              <Text style={styles.regularFont}>{`Phone: ${phoneNumber}`}</Text>
             </View>
-          </View>
-  
-          {/* {this.upcomingReservation()} */}
-  
-          <View style={[styles.boxContainer, styles.pastReservations]}>
-            <Text style={{ fontSize: 28 }}>Past Reservations</Text>
-            {this.pastReservation()}
           </View>
   
           <View style={[styles.boxContainer, styles.logout]}>
@@ -254,7 +236,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   regularFont: {
-    fontFamily: 'Chalkboard SE',
+    fontFamily: 'AppleSDGothicNeo-Bold',
     fontSize: 20
   },
   notLoggedOn: {
@@ -273,9 +255,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   userProfile: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 250,
+    height: 250,
+    borderRadius: 125,
+    margin: 15,
     borderWidth: 1,
     borderColor: 'rgb(225, 225, 225)'
   },
@@ -285,7 +268,7 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontSize: 23,
     fontWeight: 'bold',
-    fontFamily: 'Chalkduster',
+    fontFamily: 'AppleSDGothicNeo-Bold',
     color: 'white',
   },
   profileHeader: {
@@ -295,7 +278,7 @@ const styles = StyleSheet.create({
   userInfo: {
     flex: 2,
     justifyContent: 'space-around',
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   reservation: {
     flex: 2,
