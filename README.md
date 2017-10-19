@@ -1,101 +1,58 @@
-# Instadine
+# <img src="https://github.com/odangitsdjang/InstaDine/blob/master/assets/images/logo_black.png" width="100px"> InstaDine
+
+Live Demo: [Instadine](http://www.instadine.club/)
 
 ## Background and Overview
 
-
 InstaDine is a mobile application that connects diners with restaurants to cut down wait times and give users freedom by eliminating the need to stand in line. 
 
-Everyone has experienced going out to a restaurant only to find long wait times before even getting to order, and even longer to get their first bite of dinner. With InstaDine diners have access to live data, giving them  the ability to find restaurants with available seats or queue up to be seated.
+Everyone has experienced going out to a restaurant only to find long wait times before even getting to order, and even longer to get their first bite of dinner. With InstaDine diners have access to live data, giving them the ability to find restaurants with available seats or queue up to be seated.
 
-## Minimum Viable Product
-With the above functionality in mind, the following is the minimum viable product that we plan on achieving:
+---------------------- OVERVIEW GIF HERE ------------------------------
 
-1. User Auth - Customer
-   * Sign up
-   * Sign out
-   * Login
-2. Demo website that displays the functionality of our application
-3. Map navigation
-   * GPS location on user location
-   * Browse for restaurants at map location
-4. User Profile
-   * Display user info
-   * Display reservations
-5. Reservations
-   * Create
-   * Update
-   * Delete
-6. Restaurants
-   * Show page
-7. Production README
+## Technologies
+* React Native
+* Redux
+* Node.js | Express
+* MongoDB
 
-BONUS: 
-1. Restaurant views
-   * Sign up
-   * Reservations
-2. Push Notifications
+## Functionality
 
+* **User Authentication**
+  * InstaDine uses BCrypt to ensure users can sign up and create secure accounts
 
-## Wireframes
+<p align="center">
+  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/login.gif" height="300px"/>
+</p>
 
-### Splash
-![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/splash.png)
+* **Browsing and Restaurant Detail**
+  * Upon opening the app, diners are taken to a map of the area at their location. From there, they are able to select markers of partner restaurants.
+  * Pressing on restaurant markers takes users to the restaurant detail page which contains which contains information such as seat availability and also allows users to Queue Up.
 
-### Log in 
-![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/login.png)
+<p align="center">
+  <img height="300px" src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/map.gif"/>
+</p>
 
-### Sign Up
-![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/signup.png)
+* **Restaurants Filter and RESTful Search**
+  * To further help narrow down choices, the map screen also has a filter that users can toggle to display only restaurants with a selected numbers of seats available, or filter them out by current wait times. 
+  * Users can search for specific restaurants and be redirected to the detail page while using the search bar.
 
-### On Login
-![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/onlogin.png)
+<p align="center">
+  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/filter.gif" height="300px"/><img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/search.gif" height="300px"/>
+</p>
 
+* **User Profile**
+  * Users can view their profile and queue history
 
-### Filter
-![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/filter.png)
+<p align="center">
+  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/profile.gif" height="300px"/>
+</p>
 
-### Restaurant Selected
-![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/restaurant-pin.png)
+## Future Development
 
-### Reserving a Restaurant
-![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/restaurant-reserve.png)
+**Push Notifications:**
+Give the users options to enable push notifications for events such as when their tables are ready.
 
-### Reserved Restaurant
-![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/restaurant-reserved.png)
+**Restaurant Application Side:**
+The client side for restaurant owners to be able to integrate the application into their business. This will contain features such as reservation and queue handling, menu creation and editing, text notifications to non-app users for their tables.
 
-### User Profile
-![splash](https://github.com/odangitsdjang/Instadine/blob/master/docs/user-show.png)
-
-### Implementation Timeline 
-- DAY 1:
-  - Jerry: Implement user auth backend and start login/signup frontend forms.
-  - Adrian: Finish splash page, and add nav bar
-  - David: Implement Google Maps API  
-    - Button to go to main page with googlemaps
-- DAY 2: 
-  - All: Seed restaurants.
-  - Jerry: Finish user auth frontend.
-  - Adrian: Implement restaurants backend, start user profile page
-  - David: Continue google maps API.
-- DAY 3:
-  - Jerry: Do restaurants show page
-  - Adrian: Add filter functionality, start desktop site 
-  - David: Finish google maps API, including pins for restaurants.
-- DAY 4:
-  - Jerry:   Search function on the map, help others 
-  - Adrian: Finish desktop site with styling
-  - David: Begin reservation backend
-- DAY 5: 
-  - Jerry: Try to break app, list all bugs, assign bugs to whoever wrote them
-  - Adrian: Add reservation portion of user profile
-  - David:  Finish reservation backend
-- DAY 6: 
-  - Everyone: polish their own components and refactor
-  - BONUS: Look into Sockets.io, and other bonus features
-- DAY 7:
-  - Jerry/David: Add emulator to the website
-  - Adrian: Do Production README
-
-
-[Sample State,](https://github.com/odangitsdjang/Instadine/blob/master/docs/sample_state.md)
-[Sample Schema](https://github.com/odangitsdjang/Instadine/blob/master/docs/sample_schema.md)

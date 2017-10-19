@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Picker, TouchableOpacity, Button, WebView, Image,
-  Dimensions } from 'react-native';
+  Dimensions, ScrollView } from 'react-native';
 import RestaurantShowMap from './RestaurantShowMap';
 
 class RestaurantItem extends Component {
@@ -72,14 +72,11 @@ class RestaurantItem extends Component {
   reserveOrCancel() {
       if (this.props.reservation && this.props.reservation[0] && this.props.user) {
         let {seat_count, datetime} = this.props.reservation[0];
-        let restaurant = this.props.restaurants[this.props.restaurantDisplayId].name;
+        let restaurant = this.props.restaurants[this.props.reservation[0].restaurant_id].name;
         datetime = datetime.slice(11,16);
 
         return (
           <View style={styles.reserveContainer}>
-            <Text style={styles.restInfoText}>
-              Reservation Reminder
-            </Text>
             <Text style={styles.restInfoText}>
               You currently already have a reservation booked at:
             </Text>
@@ -241,7 +238,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     paddingBottom: 20,
-    paddingTop: 40,
+    paddingTop: 10,
     flex: 4
   },
   pickerContainer: {
