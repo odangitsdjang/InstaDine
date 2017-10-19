@@ -8,7 +8,9 @@ InstaDine is a mobile application that connects diners with restaurants to cut d
 
 Everyone has experienced going out to a restaurant only to find long wait times before even getting to order, and even longer to get their first bite of dinner. With InstaDine diners have access to live data, giving them the ability to find restaurants with available seats or queue up to be seated.
 
----------------------- OVERVIEW GIF HERE ------------------------------
+<p align="center">
+  <img src="https://github.com/odangitsdjang/InstaDine/blob/master/docs/demo_page/assets/mp4/gifs/all.gif" height="400px"/>
+</p>
 
 ## Technologies
 * React Native
